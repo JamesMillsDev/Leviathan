@@ -6,7 +6,7 @@ namespace Leviathan.GameStates
 	{
 		private static readonly Logger logger = new("GameStateManager");
 
-		public static void AddState(IGameState _state)
+		public static void Add(IGameState _state)
 		{
 			if(Instance == null)
 			{
@@ -19,7 +19,7 @@ namespace Leviathan.GameStates
 				Instance.states.Add(_state.ID, _state);
 		}
 
-		public static void EnterState(string _state)
+		public static void Enter(string _state)
 		{
 			if(Instance == null)
 			{
@@ -35,7 +35,7 @@ namespace Leviathan.GameStates
 			}
 		}
 
-		public static void ExitState(string _state)
+		public static void Exit(string _state)
 		{
 			if(Instance == null)
 			{
