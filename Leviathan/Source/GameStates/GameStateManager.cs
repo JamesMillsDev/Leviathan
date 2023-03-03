@@ -1,0 +1,93 @@
+﻿using Leviathan.Debugging;
+
+namespace Leviathan.GameStates
+{
+	public class GameStateManager : Singleton<GameStateManager>
+	{
+		private static readonly Logger logger = new("GameStateManager");
+
+		public static void AddState(IGameState _state)
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+
+			if(!Instance.states.ContainsKey(_state.ID))
+				Instance.states.Add(_state.ID, _state);
+		}
+
+		public static void EnterState(string _state)
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+
+			if(Instance.states.ContainsKey(_state))
+			{
+				Instance.states[_state].Enter();
+				Instance.active.Add(Instance.states[_state]);
+			}
+		}
+
+		public static void ExitState(string _state)
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+
+			if(Instance.states.ContainsKey(_state) && Instance.active.Contains(Instance.states[_state]))
+			{
+				Instance.states[_state].Exit();
+				Instance.active.Remove(Instance.states[_state]);
+			}
+		}
+
+		internal static void Render()
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+			
+			Instance.active.ForEach(_state => _state.Render());
+		}
+
+		internal static void Tick()
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+			
+			Instance.active.ForEach(_state => _state.Tick());
+		}
+
+		internal static void OnRenderGizmos()
+		{
+			if(Instance == null)
+			{
+				logger.LogException(new NullReferenceException("Not yet initialised!"));
+
+				return;
+			}
+			
+			Instance.active.ForEach(_state => _state.OnRenderGizmos());
+		}
+
+		private readonly Dictionary<string, IGameState> states = new();
+		private readonly List<IGameState> active = new();
+	}
+}
