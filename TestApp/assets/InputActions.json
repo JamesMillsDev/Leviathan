@@ -1,0 +1,21 @@
+﻿{
+  "movement": {
+    "mappings": [
+      {
+        "Type": 5,
+        "GamepadAxis": -1,
+        "GamepadButton": -1,
+        "Key": 0,
+        "Keys": {
+          "forward": 87,
+          "back": 83,
+          "right": 0,
+          "left": 0
+        },
+        "MouseButton": -1,
+        "MouseAxis": -1
+      }
+    ],
+    "Type": 1
+  }
+}

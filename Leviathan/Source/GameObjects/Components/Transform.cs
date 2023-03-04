@@ -53,5 +53,7 @@ namespace Leviathan.GameObjects.Components
 		internal Transform() => transform = Mat3.CreateScale(Vec2.one);
 
 		public void Rotate(float _rotation) => transform.SetRotationZ(transform.GetRotationX() + _rotation);
+
+		public override string ToString() => $"\tPosition: {Position}\n\tRotation: {Rotation}\n\tScale: {Scale}";
 	}
 }

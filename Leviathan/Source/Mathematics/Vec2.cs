@@ -62,6 +62,8 @@ namespace Leviathan.Mathematics
 		public override bool Equals(object? _obj) => _obj is Vec2 other && Equals(other);
 
 		public override int GetHashCode() => HashCode.Combine(x, y);
+		
+		public override string ToString() => $"({x}, {y})";
 
 		//Normalisation - Static
 		public static Vec2 Normalise(Vec2 _vec)
@@ -107,7 +109,7 @@ namespace Leviathan.Mathematics
 		//Subtraction Operator Overload - 
 		public static Vec2 operator -(Vec2 _lhs, Vec2 _rhs) => new Vec2(_lhs.x - _rhs.x, _lhs.y - _rhs.y);
 
-		public static bool operator ==(Vec2 _lhs, Vec2 _rhs) => _lhs.Magnitude - _lhs.Magnitude < Math.EPSILON && _lhs.Magnitude - _rhs.Magnitude > -Math.EPSILON;
+		public static bool operator ==(Vec2 _lhs, Vec2 _rhs) => _lhs.Equals(_rhs);
 
 		public static bool operator !=(Vec2 _lhs, Vec2 _rhs) => !(_lhs == _rhs);
 

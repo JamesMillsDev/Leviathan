@@ -1,5 +1,7 @@
 ﻿using Leviathan.Debugging;
 
+using Raylib_CsLo;
+
 namespace Leviathan.UI
 {
 	// ReSharper disable once InconsistentNaming
@@ -54,7 +56,8 @@ namespace Leviathan.UI
 				return;
 			}
 			
-			Instance.widgets.ForEach(_widget => _widget.Tick());
+			Instance.widgets.Sort();
+			Instance.widgets.ForEach(_widget => _widget.Tick(Raylib.GetMousePosition()));
 		}
 
 		private readonly List<Widget> widgets = new();

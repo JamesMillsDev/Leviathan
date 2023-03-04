@@ -2,6 +2,7 @@
 using Leviathan.Debugging;
 using Leviathan.GameObjects;
 using Leviathan.GameStates;
+using Leviathan.Input;
 using Leviathan.Resources;
 using Leviathan.UI;
 
@@ -89,6 +90,7 @@ namespace Leviathan
 				GameObjectManager.CreateInstance();
 				GameStateManager.CreateInstance();
 				UIManager.CreateInstance();
+				InputSystem.CreateInstance();
 				ResourceManager.CreateInstance();
 				
 				// Open the game
@@ -123,6 +125,7 @@ namespace Leviathan
 			GameStateManager.DestroyInstance();
 			GameObjectManager.DestroyInstance();
 			UIManager.DestroyInstance();
+			InputSystem.DestroyInstance();
 			window?.Close();
 		}
 
@@ -144,6 +147,8 @@ namespace Leviathan
 
 				try
 				{
+					InputSystem.Tick();
+					
 					window?.Tick();
 					
 					// Tick the game state manager and object manager

@@ -1,7 +1,7 @@
 ﻿using Leviathan;
 using Leviathan.GameObjects;
-
-using Raylib_CsLo;
+using Leviathan.Input;
+using Leviathan.Mathematics;
 
 namespace TestApp.Source.GameObjects.Components
 {
@@ -9,27 +9,39 @@ namespace TestApp.Source.GameObjects.Components
 	{
 		private float speed;
 
+		private float? movement = 0;
+
 		public override void Start(params object[] _data)
 		{
 			speed = (float) _data[0];
+
+			InputAction? action = InputSystem.Find("movement");
+			if(action != null)
+			{
+				action.onPerformed += OnMovementPerformed;
+				action.onCancelled += OnMovementCancelled;
+			}
 		}
 
 		public override void Tick()
 		{
 			if(GameObject is { Transform: { } })
 			{
-				float dir = 0f;
-				if(Raylib.IsKeyDown(KeyboardKey.KEY_W))
-				{
-					dir = 1f;
-				}
-				else if(Raylib.IsKeyDown(KeyboardKey.KEY_S))
-				{
-					dir = -1f;
-				}
+				if(movement is null or 0)
+					return;
 
-				GameObject.Transform.Position += GameObject.Transform.Forward * Time.deltaTime * speed * dir;
+				GameObject.Transform.Position += GameObject.Transform.Forward * Time.deltaTime * speed * movement.Value;
 			}
+		}
+
+		private void OnMovementPerformed(InputAction? _action)
+		{
+			movement = _action?.ReadValue<Vec2>().y;
+		}
+
+		private void OnMovementCancelled(InputAction? _action)
+		{
+			movement = 0;
 		}
 	}
 }

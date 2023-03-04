@@ -51,6 +51,8 @@ namespace Leviathan.Mathematics
 
 		public override int GetHashCode() => HashCode.Combine(x, y, z);
 
+		public override string ToString() => $"({x}, {y}, {z})";
+
 		//Normalisation - Static
 		public static Vec3 Normalise(Vec3 _vec)
 		{
