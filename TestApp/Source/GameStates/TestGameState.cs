@@ -3,6 +3,7 @@ using Leviathan.GameObjects;
 using Leviathan.GameObjects.Components;
 using Leviathan.GameStates;
 using Leviathan.Mathematics;
+using Leviathan.UI;
 
 using Raylib_CsLo;
 
@@ -19,6 +20,8 @@ namespace TestApp.Source.GameStates
 		private GameObject? player;
 		private GameObject? turret;
 
+		private Button? button;
+
 		public void Enter()
 		{
 			player = new GameObject("Player");
@@ -30,7 +33,7 @@ namespace TestApp.Source.GameStates
 
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
-			player.AddComponent<RotationComponent>(5f, KeyboardKey.KEY_A, KeyboardKey.KEY_D);
+			player.AddComponent<RotationComponent>(5f, "rotateBase");
 
 			GameObjectManager.Spawn(player);
 
@@ -47,9 +50,12 @@ namespace TestApp.Source.GameStates
 				renderer.tint = new Color(255, 0, 0, 255);
 			}
 
-			turret.AddComponent<RotationComponent>(5f, KeyboardKey.KEY_Q, KeyboardKey.KEY_E);
+			turret.AddComponent<RotationComponent>(5f, "rotateTurret");
 
 			GameObjectManager.Spawn(turret);
+
+			button = new Button(Vec2.zero, "banana", new Button.RenderSettings(50, Raylib.RED));
+			UIManager.Add(button);
 		}
 
 		public void Tick() { }

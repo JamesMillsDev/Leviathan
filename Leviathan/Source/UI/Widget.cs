@@ -2,10 +2,13 @@
 
 using Raylib_CsLo;
 
+using System.Diagnostics.CodeAnalysis;
+
 using Transform = Leviathan.GameObjects.Components.Transform;
 
 namespace Leviathan.UI
 {
+	[SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
 	public abstract class Widget : IComparable<Widget>
 	{
 		public Rectangle Rect => new(Transform!.LocalPosition.x, Transform!.LocalPosition.y, Transform!.LocalScale.x, Transform!.LocalScale.y);
@@ -25,8 +28,8 @@ namespace Leviathan.UI
 
 		public abstract void Render();
 
-		public abstract void Tick(Vec2 _mousePos);
-		
+		public virtual void Tick(Vec2 _mousePos) { }
+
 		public override string ToString()
 		{
 			// Widget:
