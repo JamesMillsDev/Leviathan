@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <OutputPath>Builds\Debug\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <OutputPath>Builds\Release\</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+      <PackageReference Include="Raylib-cs" Version="4.2.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LeviathanMathematics\LeviathanMathematics.csproj" />
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)Testing\LeviathanTemplateProject\$(TargetName).dll&quot;;" />
+    </Target>
+
+</Project>
