@@ -6,6 +6,7 @@ namespace TestApp
 	{
 		public static void Main()
 		{
+			// LeviathanLoader.Load();
 			Application.Run<TestGame>();
 		}
 	}

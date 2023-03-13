@@ -22,10 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Engine\Leviathan\Leviathan.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="assets\config\application.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -38,6 +34,21 @@
       <None Update="assets\InputActions.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Builds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Engine\LeviathanMathematics\LeviathanMathematics.csproj" />
+      <ProjectReference Include="..\..\Engine\LeviathanUI\LeviathanUI.csproj" />
+      <ProjectReference Include="..\..\Engine\Leviathan\Leviathan.csproj" />
     </ItemGroup>
 
 </Project>

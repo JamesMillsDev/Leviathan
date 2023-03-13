@@ -53,6 +53,7 @@ namespace Leviathan.Debugging
 		public void LogException(Exception _exception)
 		{
 			Console.ForegroundColor = levelColors[Level.Exception];
+			Console.WriteLine(BuildMessage("", Level.Exception));
 			Console.Write($"{_exception}\n{GetStacktrace()}");
 		}
 

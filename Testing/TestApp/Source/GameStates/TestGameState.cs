@@ -1,4 +1,5 @@
 ﻿using Leviathan;
+using Leviathan.Debugging;
 using Leviathan.GameObjects;
 using Leviathan.GameObjects.Components;
 using Leviathan.GameStates;
@@ -51,6 +52,7 @@ namespace TestApp.GameStates
 			GameObjectManager.Spawn(turret);
 
 			button = new Button(Vec2.zero, "banana", new Button.RenderSettings(50, Raylib_cs.Color.RED));
+
 			UIManager.Add(button);
 		}
 

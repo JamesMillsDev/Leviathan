@@ -4,9 +4,13 @@ using Leviathan.GameObjects;
 using Leviathan.GameStates;
 using Leviathan.Input;
 using Leviathan.Resources;
-using Leviathan.UI;
 
 using Raylib_cs;
+
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Leviathan.UI"), Dependency("Leviathan.UI", LoadHint.Always)]
 
 namespace Leviathan
 {
@@ -29,10 +33,15 @@ namespace Leviathan
 		/// <typeparam name="GAME">The game's class that will automatically generated.</typeparam>
 		public static void Run<GAME>() where GAME : Game, new()
 		{
+			//4if(!LeviathanLoader.HasLoaded)
+			//	throw new ApplicationException("LeviathanLoader must run prior to starting the game");
+
 			GAME game = new();
 			instance = new Application(game);
 			instance.Run();
 		}
+
+		private readonly List<ILeviathanModule> modules = new();
 
 		/// <summary></summary>
 		private readonly Config<ApplicationConfigData>? applicationConfig;
@@ -57,7 +66,7 @@ namespace Leviathan
 			try
 			{
 				game = _game;
-				
+
 				// Create and load the application config
 				applicationConfig = new Config<ApplicationConfigData>("application");
 
@@ -72,11 +81,43 @@ namespace Leviathan
 
 				// Create the window instance
 				window = new Window(applicationConfig);
+
+				LoadModules();
 			}
 			catch(Exception e)
 			{
 				raylibLogger.LogException(e);
 			}
+		}
+
+		private void LoadModules()
+		{
+			IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsValidModule);
+
+			foreach(Assembly assembly in assemblies)
+			{
+				Type[] types = assembly.GetTypes();
+				Console.WriteLine(assembly.FullName);
+				foreach(Type type in types)
+				{
+					if(type.GetInterfaces().Contains(typeof(ILeviathanModule)))
+					{
+						object? m = Activator.CreateInstance(type);
+						if(m is ILeviathanModule module)
+							modules.Add(module);
+					}
+				}
+			}
+		}
+
+		private bool IsValidModule(Assembly _assembly)
+		{
+			string? name = _assembly.GetName().Name;
+
+			if(name == null)
+				return false;
+
+			return name.Contains("Leviathan") && name != "Leviathan";
 		}
 
 		/// <summary>Attempt to open the game and the window.</summary>
@@ -89,10 +130,11 @@ namespace Leviathan
 				window?.Open();
 				GameObjectManager.CreateInstance();
 				GameStateManager.CreateInstance();
-				UIManager.CreateInstance();
 				InputSystem.CreateInstance();
 				ResourceManager.CreateInstance();
 				
+				modules.ForEach(_module => _module.Load());
+
 				// Open the game
 				game?.Open();
 
@@ -104,6 +146,7 @@ namespace Leviathan
 			{
 				// Log out the exception that was thrown, destroy the game instance and return
 				raylibLogger.LogException(e);
+
 				return false;
 			}
 
@@ -116,15 +159,16 @@ namespace Leviathan
 			// Attempt to shut down the audio device
 			if(Raylib.IsAudioDeviceReady())
 				Raylib.CloseAudioDevice();
+
+			modules.ForEach(_module => _module.Unload());
 			
 			// Close the game
 			game?.Close();
-			
+
 			// Close the window context and cleanup the managers
 			ResourceManager.DestroyInstance();
 			GameStateManager.DestroyInstance();
 			GameObjectManager.DestroyInstance();
-			UIManager.DestroyInstance();
 			InputSystem.DestroyInstance();
 			window?.Close();
 		}
@@ -134,7 +178,7 @@ namespace Leviathan
 			// Try to open the game
 			if(!Open())
 				return;
-			
+
 			while(!Raylib.WindowShouldClose())
 			{
 				Time.Tick();
@@ -148,21 +192,23 @@ namespace Leviathan
 				try
 				{
 					InputSystem.Tick();
-					
+
 					window?.Tick();
-					
+
 					// Tick the game state manager and object manager
 					GameStateManager.Tick();
 					GameObjectManager.Tick();
-					UIManager.Tick();
+					
+					modules.ForEach(_module => _module.Tick());
 
 					window?.Render();
-					
+
 					// Render the game states and the objects 
 					GameStateManager.Render();
 					GameObjectManager.Render();
-					UIManager.Render();
 					
+					modules.ForEach(_module => _module.Render());
+
 					Gizmos.Render(applicationConfig);
 				}
 				catch(Exception e)
@@ -170,7 +216,7 @@ namespace Leviathan
 					raylibLogger.LogException(e);
 				}
 			}
-			
+
 			// Close the game
 			Close();
 		}
