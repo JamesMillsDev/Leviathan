@@ -12,20 +12,20 @@ namespace Leviathan
 		{
 			HasLoaded = true;
 
-			IEnumerable<string> modulePaths = GetModules();
+			IEnumerable<string> modulePaths = DiscoverModules();
 
 			foreach(string path in modulePaths)
 				modules.Add(Assembly.LoadFile(path));
 		}
 
-		private static IEnumerable<string> GetModules()
+		private static IEnumerable<string> DiscoverModules()
 		{
-			List<string> modules = new();
+			List<string> found = new();
 
 			foreach(string module in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll").Where(IsValidModuleFile))
-				modules.Add(module);
+				found.Add(module);
 
-			return modules;
+			return found;
 		}
 
 		private static bool IsValidModuleFile(string _id)

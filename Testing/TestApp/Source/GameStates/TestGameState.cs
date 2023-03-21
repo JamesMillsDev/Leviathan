@@ -1,5 +1,4 @@
 ﻿using Leviathan;
-using Leviathan.Debugging;
 using Leviathan.GameObjects;
 using Leviathan.GameObjects.Components;
 using Leviathan.GameStates;
@@ -44,14 +43,14 @@ namespace TestApp.GameStates
 			SpriteRenderer? renderer = turret.AddComponent<SpriteRenderer>("player");
 			if(renderer is { })
 			{
-				renderer.tint = new Color(255, 0, 0, 255);
+				renderer.tint = Color.Yellow;
 			}
 
 			turret.AddComponent<RotationComponent>(5f, "rotateTurret");
 
 			GameObjectManager.Spawn(turret);
 
-			button = new Button(Vec2.zero, "banana", new Button.RenderSettings(50, Raylib_cs.Color.RED));
+			button = new Button(Vec2.zero, "banana", new Button.RenderSettings(50, Color.Red));
 
 			UIManager.Add(button);
 		}
