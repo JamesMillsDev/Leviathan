@@ -33,8 +33,8 @@ namespace Leviathan
 		/// <typeparam name="GAME">The game's class that will automatically generated.</typeparam>
 		public static void Run<GAME>() where GAME : Game, new()
 		{
-			//4if(!LeviathanLoader.HasLoaded)
-			//	throw new ApplicationException("LeviathanLoader must run prior to starting the game");
+			if(!LeviathanLoader.HasLoaded)
+				LeviathanLoader.Load();
 
 			GAME game = new();
 			instance = new Application(game);
@@ -92,9 +92,7 @@ namespace Leviathan
 
 		private void LoadModules()
 		{
-			IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(IsValidModule);
-
-			foreach(Assembly assembly in assemblies)
+			foreach(Assembly assembly in LeviathanLoader.modules)
 			{
 				Type[] types = assembly.GetTypes();
 				Console.WriteLine(assembly.FullName);
@@ -108,16 +106,6 @@ namespace Leviathan
 					}
 				}
 			}
-		}
-
-		private bool IsValidModule(Assembly _assembly)
-		{
-			string? name = _assembly.GetName().Name;
-
-			if(name == null)
-				return false;
-
-			return name.Contains("Leviathan") && name != "Leviathan";
 		}
 
 		/// <summary>Attempt to open the game and the window.</summary>

@@ -8,14 +8,14 @@ namespace Leviathan
 
 		internal static readonly List<Assembly> modules = new();
 
-		public static void Load()
+		internal static void Load()
 		{
 			HasLoaded = true;
 
 			IEnumerable<string> modulePaths = DiscoverModules();
 
 			foreach(string path in modulePaths)
-				modules.Add(Assembly.LoadFile(path));
+				modules.Add(Assembly.LoadFrom(path));
 		}
 
 		private static IEnumerable<string> DiscoverModules()
