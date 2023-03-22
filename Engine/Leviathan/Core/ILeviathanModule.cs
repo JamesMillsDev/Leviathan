@@ -1,4 +1,10 @@
-﻿namespace Leviathan
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Leviathan.UI")]
+[assembly: InternalsVisibleTo("Leviathan.Input")]
+[assembly: InternalsVisibleTo("Leviathan.Physics")]
+
+namespace Leviathan
 {
 	internal interface ILeviathanModule
 	{

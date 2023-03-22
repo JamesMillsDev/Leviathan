@@ -23,7 +23,16 @@
 
     <ItemGroup>
       <Reference Include="Leviathan">
-        <HintPath>Leviathan.dll</HintPath>
+        <HintPath>Dependencies/Leviathan.dll</HintPath>
+      </Reference>
+      <Reference Include="LeviathanInput">
+        <HintPath>Dependencies/Leviathan.Input.dll</HintPath>
+      </Reference>
+      <Reference Include="LeviathanMathematics">
+        <HintPath>Dependencies/Leviathan.Mathematics.dll</HintPath>
+      </Reference>
+      <Reference Include="LeviathanUI">
+        <HintPath>Dependencies/Leviathan.UI.dll</HintPath>
       </Reference>
     </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿namespace Leviathan.UI
 {
 	// ReSharper disable once InconsistentNaming
-	public class UIModule : ILeviathanModule
+	internal class UIModule : ILeviathanModule
 	{
 		public void Load() => UIManager.CreateInstance();
 

@@ -1,39 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
+        <AssemblyName>Leviathan.Input</AssemblyName>
+        <RootNamespace>Leviathan.Input</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>Builds\Debug\</OutputPath>
+        <OutputPath>Builds\Debug\</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <OutputPath>Builds\Release\</OutputPath>
+        <OutputPath>Builds\Release\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="Raylib-cs" Version="4.2.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="Raylib-cs" Version="4.2.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Builds\**" />
+        <Compile Remove="Builds\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Builds\**" />
+        <EmbeddedResource Remove="Builds\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Builds\**" />
+        <None Remove="Builds\**" />
     </ItemGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\LeviathanMathematics\LeviathanMathematics.csproj" />
+        <ProjectReference Include="..\LeviathanMathematics\LeviathanMathematics.csproj" />
+        <ProjectReference Include="..\Leviathan\Leviathan.csproj" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">

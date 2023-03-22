@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)Testing\LeviathanTemplateProject\$(TargetName).dll&quot;;" />
+      <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)Testing\LeviathanTemplateProject\Dependencies\$(TargetName).dll&quot;;" />
     </Target>
 
 </Project>

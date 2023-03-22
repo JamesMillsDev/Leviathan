@@ -48,6 +48,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Engine\LeviathanMathematics\LeviathanMathematics.csproj" />
       <ProjectReference Include="..\..\Engine\LeviathanUI\LeviathanUI.csproj" />
+      <ProjectReference Include="..\..\Engine\LeviathanInput\LeviathanInput.csproj" />
+      <ProjectReference Include="..\..\Engine\LeviathanPhysics\LeviathanPhysics.csproj" />
       <ProjectReference Include="..\..\Engine\Leviathan\Leviathan.csproj" />
     </ItemGroup>
 
