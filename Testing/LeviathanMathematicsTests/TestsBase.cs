@@ -14,13 +14,13 @@ namespace LeviathanMathematics.Tests
 
 		protected static bool Compare(Color _a, Color _b) => Compare((float)_a.R, _b.R) && Compare((float)_a.G, _b.G) && Compare((float)_a.B, _b.B) && Compare((float)_a.A, _b.A);
         
-		protected static bool Compare(Vec2 _a, Vec2 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y);
+		protected static bool Compare(Vector2 _a, Vector2 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y);
 
-		protected static bool Compare(Vec3 _a, Vec3 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y) && Compare(_a.z, _b.z);
+		protected static bool Compare(Vector3 _a, Vector3 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y) && Compare(_a.z, _b.z);
 
-		protected static bool Compare(Vec4 _a, Vec4 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y) && Compare(_a.z, _b.z) && Compare(_a.w, _b.w);
+		protected static bool Compare(Vector4 _a, Vector4 _b) => Compare(_a.x, _b.x) && Compare(_a.y, _b.y) && Compare(_a.z, _b.z) && Compare(_a.w, _b.w);
 
-		protected static bool Compare(Mat3 _a, Mat3 _b)
+		protected static bool Compare(Matrix3x3 _a, Matrix3x3 _b)
 		{
 		    return
 		        Compare(_a.m1, _b.m1) && Compare(_a.m2, _b.m2) && Compare(_a.m3, _b.m3) &&
@@ -28,7 +28,7 @@ namespace LeviathanMathematics.Tests
 		        Compare(_a.m7, _b.m7) && Compare(_a.m8, _b.m8) && Compare(_a.m9, _b.m9);
 		}
 
-		protected static bool Compare(Mat4 _a, Mat4 _b)
+		protected static bool Compare(Matrix4x4 _a, Matrix4x4 _b)
 		{
 		    return
 		        Compare(_a.m1, _b.m1) &&   Compare(_a.m2, _b.m2) &&   Compare(_a.m3, _b.m3) &&   Compare(_a.m4, _b.m4)   &&
@@ -64,18 +64,18 @@ namespace LeviathanMathematics.Tests
 			_z = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
 		}
 
-		protected static Vec2 RandomVector2()
+		protected static Vector2 RandomVector2()
 		{
 			RandomXY(out float x, out float y);
 
-			return new Vec2(x, y);
+			return new Vector2(x, y);
 		}
 
-		protected static Vec3 RandomVector3()
+		protected static Vector3 RandomVector3()
 		{
 			RandomXYZ(out float x, out float y, out float z);
 
-			return new Vec3(x, y, z);
+			return new Vector3(x, y, z);
 		}
 	}
 }

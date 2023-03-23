@@ -22,12 +22,12 @@ namespace Leviathan.UI
 
 		private readonly ColorBlock colors;
 
-		protected Selectable(Vec2 _pos, Vec2 _scale, ColorBlock _colors) : base(_pos, _scale)
+		protected Selectable(Vector2 _pos, Vector2 _scale, ColorBlock _colors) : base(_pos, _scale)
 		{
 			colors = _colors;
 		}
 
-		public override void Tick(Vec2 _mousePos)
+		public override void Tick(Vector2 _mousePos)
 		{
 			bool hovered = Raylib.CheckCollisionPointRec(_mousePos, Rect);
 			bool clicked = Raylib.IsMouseButtonDown(MouseButton.MOUSE_BUTTON_LEFT);

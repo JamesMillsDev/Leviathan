@@ -20,7 +20,7 @@ namespace TestApp.GameObjects.Components
 		{
 			if(GameObject is { Transform: { } })
 			{
-				float dir = rotateAction.ReadValue<Vec2>().x;
+				float dir = rotateAction.ReadValue<Vector2>().x;
 
 				GameObject.Transform.Rotate(speed * dir * Time.deltaTime);
 			}

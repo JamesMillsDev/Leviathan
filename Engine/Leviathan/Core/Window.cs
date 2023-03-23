@@ -11,12 +11,12 @@ namespace Leviathan
 {
 	public sealed class Window
 	{
-		public ref Int2 ScreenSize => ref screenSize;
+		public ref Vector2Int ScreenSize => ref screenSize;
 		public ref Color ClearColor => ref clearColor;
 		public bool IsFullscreen { get; private set; }
 		public string? Title { get; private set; }
 
-		private Int2 screenSize;
+		private Vector2Int screenSize;
 		private Color clearColor;
 		private long frameRate;
 		private bool lockFrameRate;
@@ -50,7 +50,7 @@ namespace Leviathan
 			
 			if(IsFullscreen)
 			{
-				screenSize = new Int2
+				screenSize = new Vector2Int
 				{
 					x = Raylib.GetMonitorWidth(0),
 					y = Raylib.GetMonitorHeight(0),
@@ -93,8 +93,8 @@ namespace Leviathan
 			if(!IsFullscreen)
 				Raylib.ToggleFullscreen();
 
-			Int2 size = programConfig.GetValue("window.screenSize", Int2Converter.Instance);
-			screenSize = new Int2
+			Vector2Int size = programConfig.GetValue("window.screenSize", Int2Converter.Instance);
+			screenSize = new Vector2Int
 			{
 				x = IsFullscreen ? Raylib.GetMonitorWidth(0) : size.x,
 				y = IsFullscreen ? Raylib.GetMonitorHeight(0) : size.y,
@@ -128,7 +128,7 @@ namespace Leviathan
 			if(!wasFullscreen && IsFullscreen)
 			{
 				Raylib.ToggleFullscreen();
-				screenSize = new Int2
+				screenSize = new Vector2Int
 				{
 					x = Raylib.GetMonitorWidth(0),
 					y = Raylib.GetMonitorHeight(0),

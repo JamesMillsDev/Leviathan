@@ -43,7 +43,7 @@ namespace Leviathan.Debugging
 		/// <param name="_rotation">The rotation of the rectangle.</param>
 		public static void DrawRectangle(Rectangle _rectangle, Color _color, float _rotation = 0f)
 		{
-			Raylib.DrawRectanglePro(_rectangle, new Vec2(_rectangle.width / 2, _rectangle.height / 2), _rotation, _color);
+			Raylib.DrawRectanglePro(_rectangle, new Vector2(_rectangle.width / 2, _rectangle.height / 2), _rotation, _color);
 		}
 
 		/// <summary>Renders a hollow rectangle from the center with the specified rotation.</summary>
@@ -54,18 +54,18 @@ namespace Leviathan.Debugging
 		{
 			// Calculate the forward and right vectors of the rectangle
 			float radians = _rotation * LMath.DEG_2_RAD;
-			Vec2 forward = new(MathF.Cos(radians), MathF.Sin(radians));
-			Vec2 right = new(forward.y, -forward.x);
+			Vector2 forward = new(MathF.Cos(radians), MathF.Sin(radians));
+			Vector2 right = new(forward.y, -forward.x);
 
 			// Convert the rectangle to a position and size vector
-			Vec2 position = new(_rectangle.x, _rectangle.y);
-			Vec2 halfSize = new(_rectangle.width * .5f, _rectangle.height * .5f);
+			Vector2 position = new(_rectangle.x, _rectangle.y);
+			Vector2 halfSize = new(_rectangle.width * .5f, _rectangle.height * .5f);
 
 			// Calculate the four corners of the rectangle in oriented space
-			Vec2 topLeft = position + forward * halfSize.y - right * halfSize.x;
-			Vec2 topRight = position + forward * halfSize.y + right * halfSize.x;
-			Vec2 bottomLeft = position - forward * halfSize.y - right * halfSize.x;
-			Vec2 bottomRight = position - forward * halfSize.y + right * halfSize.x;
+			Vector2 topLeft = position + forward * halfSize.y - right * halfSize.x;
+			Vector2 topRight = position + forward * halfSize.y + right * halfSize.x;
+			Vector2 bottomLeft = position - forward * halfSize.y - right * halfSize.x;
+			Vector2 bottomRight = position - forward * halfSize.y + right * halfSize.x;
 
 			// Draw the four lines of the rectangle
 			Raylib.DrawLineV(topLeft, bottomLeft, _color);
@@ -78,7 +78,7 @@ namespace Leviathan.Debugging
 		/// <param name="_position"></param>
 		/// <param name="_radius"></param>
 		/// <param name="_color"></param>
-		public static void DrawCircle(Vec2 _position, float _radius, Color _color)
+		public static void DrawCircle(Vector2 _position, float _radius, Color _color)
 		{
 			Raylib.DrawCircleV(_position, _radius, _color);
 		}
@@ -87,7 +87,7 @@ namespace Leviathan.Debugging
 		/// <param name="_position"></param>
 		/// <param name="_radius"></param>
 		/// <param name="_color"></param>
-		public static void DrawWireCircle(Vec2 _position, float _radius, Color _color)
+		public static void DrawWireCircle(Vector2 _position, float _radius, Color _color)
 		{
 			Raylib.DrawCircleLines((int) _position.x, (int) _position.y, _radius, _color);
 		}

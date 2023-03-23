@@ -5,9 +5,9 @@ using Newtonsoft.Json.Linq;
 namespace Leviathan.Configuration.Converters.Math
 {
 	// ReSharper disable once InconsistentNaming
-	public class Mat3Converter : IConfigConverter<Mat3>
+	public class Mat3Converter : IConfigConverter<Matrix3x3>
 	{
-		public Mat3 Convert(JObject _jObject)
+		public Matrix3x3 Convert(JObject _jObject)
 		{
 			List<float> values = new();
 			JToken? trans = _jObject.Value<JToken?>("transform");
@@ -20,7 +20,7 @@ namespace Leviathan.Configuration.Converters.Math
 				}
 			}
 
-			return new Mat3(values);
+			return new Matrix3x3(values);
 		}
 	}
 }

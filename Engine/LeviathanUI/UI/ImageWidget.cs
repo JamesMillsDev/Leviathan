@@ -6,6 +6,7 @@ using Raylib_cs;
 using System.Numerics;
 
 using Color = Leviathan.Mathematics.Color;
+using Vector2 = Leviathan.Mathematics.Vector2;
 
 namespace Leviathan.UI
 {
@@ -13,7 +14,7 @@ namespace Leviathan.UI
 	{
 		private readonly TextureResource? image;
 		
-		public ImageWidget(Vec2 _position, Vec2 _size, string _imageId) : base(_position, _size)
+		public ImageWidget(Vector2 _position, Vector2 _size, string _imageId) : base(_position, _size)
 		{
 			image = ResourceManager.Find<TextureResource, Texture2D>($"Textures/{_imageId}");
 		}
@@ -23,7 +24,7 @@ namespace Leviathan.UI
 			if(image == null)
 				return;
 			
-			Raylib.DrawTexturePro(image, new Rectangle(0, 0, image.Width, image.Height), Rect, Vector2.Zero, 0, Raylib_cs.Color.WHITE);
+			Raylib.DrawTexturePro(image, new Rectangle(0, 0, image.Width, image.Height), Rect, System.Numerics.Vector2.Zero, 0, Raylib_cs.Color.WHITE);
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace Leviathan.Input
 		public Action<InputAction>? onCancelled;
 
 		private bool buttonValue;
-		private Vec2 axisValue;
+		private Vector2 axisValue;
 
 		public VALUE ReadValue<VALUE>()
 		{
@@ -71,7 +71,7 @@ namespace Leviathan.Input
 
 		private void HandleAxis(bool _changeOccured)
 		{
-			axisValue = Vec2.Zero;
+			axisValue = Vector2.Zero;
 			
 			foreach(InputMapping mapping in mappings)
 				axisValue += mapping.GetAxisValue();
@@ -80,7 +80,7 @@ namespace Leviathan.Input
 
 			if(_changeOccured)
 			{
-				if(axisValue != Vec2.Zero)
+				if(axisValue != Vector2.Zero)
 				{
 					onPerformed?.Invoke(this);
 				}

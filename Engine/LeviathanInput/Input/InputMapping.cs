@@ -37,14 +37,14 @@ namespace Leviathan.Input
 		[JsonProperty] public MouseButton MouseButton { get; set; } = MouseButton.None;
 		[JsonProperty] public MouseAxis MouseAxis { get; set; } = MouseAxis.None;
 
-		private Vec2 gamepadAxisValue;
-		private Vec2 keyAxisValue;
+		private Vector2 gamepadAxisValue;
+		private Vector2 keyAxisValue;
 		private bool gamepadButtonValue;
 		private bool keyboardKeyValue;
 		private bool mouseButtonValue;
-		private Vec2 mouseAxisValue;
+		private Vector2 mouseAxisValue;
 
-		internal Vec2 GetAxisValue() => Type switch
+		internal Vector2 GetAxisValue() => Type switch
 		{
 			MappingType.GamepadAxis => gamepadAxisValue,
 			MappingType.MouseAxis => mouseAxisValue,
@@ -65,7 +65,7 @@ namespace Leviathan.Input
 			switch(Type)
 			{
 				case MappingType.GamepadAxis:
-					Vec2 oldGamepadAxisVal = gamepadAxisValue;
+					Vector2 oldGamepadAxisVal = gamepadAxisValue;
 					
 					TickGamepadAxis(_gamepadId);
 
@@ -86,7 +86,7 @@ namespace Leviathan.Input
 					return oldMouseButtonVal != mouseButtonValue;
 				
 				case MappingType.MouseAxis:
-					Vec2 oldMouseAxisVal = mouseAxisValue;
+					Vector2 oldMouseAxisVal = mouseAxisValue;
 					
 					TickMouseAxis();
 
@@ -100,7 +100,7 @@ namespace Leviathan.Input
 					return oldKeyVal != keyboardKeyValue;
 				
 				case MappingType.KeyboardKeyAxis:
-					Vec2 oldKeyAxisVal = keyAxisValue;
+					Vector2 oldKeyAxisVal = keyAxisValue;
 					
 					TickKeyboardKeyAxis();
 
@@ -112,10 +112,10 @@ namespace Leviathan.Input
 
 		private void TickGamepadAxis(int _gamepadId) => gamepadAxisValue = GamepadAxis switch
 		{
-			GamepadAxis.RightStick => new Vec2(Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_X), Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_Y)),
-			GamepadAxis.LeftStick => new Vec2(Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_X), Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_Y)),
-			GamepadAxis.RightTrigger => new Vec2(0, Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_TRIGGER)),
-			GamepadAxis.LeftTrigger => new Vec2(0, Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_TRIGGER)),
+			GamepadAxis.RightStick => new Vector2(Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_X), Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_Y)),
+			GamepadAxis.LeftStick => new Vector2(Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_X), Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_Y)),
+			GamepadAxis.RightTrigger => new Vector2(0, Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_RIGHT_TRIGGER)),
+			GamepadAxis.LeftTrigger => new Vector2(0, Raylib.GetGamepadAxisMovement(_gamepadId, Raylib_cs.GamepadAxis.GAMEPAD_AXIS_LEFT_TRIGGER)),
 			_ => gamepadAxisValue
 		};
 
@@ -145,7 +145,7 @@ namespace Leviathan.Input
 
 		private void TickKeyboardKeyAxis()
 		{
-			keyAxisValue = new Vec2
+			keyAxisValue = new Vector2
 			{
 				x = Raylib.IsKeyDown((KeyboardKey) Keys.right) ? 1 : Raylib.IsKeyDown((KeyboardKey) Keys.left) ? -1 : 0,
 				y = Raylib.IsKeyDown((KeyboardKey) Keys.forward) ? 1 : Raylib.IsKeyDown((KeyboardKey) Keys.back) ? -1 : 0
@@ -156,9 +156,9 @@ namespace Leviathan.Input
 
 		private void TickMouseAxis() => mouseAxisValue = MouseAxis switch
 		{
-			MouseAxis.X => new Vec2(Raylib.GetMouseDelta().X, 0),
-			MouseAxis.Y => new Vec2(0, Raylib.GetMouseDelta().Y),
-			MouseAxis.Scroll => new Vec2(0, Raylib.GetMouseWheelMove()),
+			MouseAxis.X => new Vector2(Raylib.GetMouseDelta().X, 0),
+			MouseAxis.Y => new Vector2(0, Raylib.GetMouseDelta().Y),
+			MouseAxis.Scroll => new Vector2(0, Raylib.GetMouseWheelMove()),
 			_ => mouseAxisValue
 		};
 	}

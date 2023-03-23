@@ -36,7 +36,7 @@ namespace TestApp.GameObjects.Components
 
 		private void OnMovementPerformed(InputAction? _action)
 		{
-			movement = _action?.ReadValue<Vec2>().y;
+			movement = _action?.ReadValue<Vector2>().y;
 		}
 
 		private void OnMovementCancelled(InputAction? _action)

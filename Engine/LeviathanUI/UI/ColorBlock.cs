@@ -8,5 +8,13 @@ namespace Leviathan.UI
 		public Color hovered;
 		public Color selected;
 		public Color disabled;
+
+		public ColorBlock()
+		{
+			normal = 0xffffffff;
+			hovered = 0xeeeeeeff;
+			selected = 0xaaaaaaff;
+			disabled = 0xffffff99;
+		}
 	}
 }

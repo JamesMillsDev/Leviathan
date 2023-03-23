@@ -1,10 +1,11 @@
 ﻿namespace Leviathan.Mathematics
 {
-	public struct Mat4
+	// ReSharper disable once InconsistentNaming
+	public struct Matrix4x4
 	{
 		public float m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16;
 
-		public Mat4()
+		public Matrix4x4()
 		{
 			m1 = 1;
 			m2 = 0;
@@ -24,7 +25,7 @@
 			m16 = 1;
 		}
 
-		public Mat4(float _m1, float _m5, float _m9, float _m13, float _m2, float _m6, float _m10, float _m14, float _m3,
+		public Matrix4x4(float _m1, float _m5, float _m9, float _m13, float _m2, float _m6, float _m10, float _m14, float _m3,
 			float _m7, float _m11, float _m15, float _m4, float _m8, float _m12, float _m16)
 		{
 			m1 = _m1;
@@ -45,9 +46,9 @@
 			m16 = _m16;
 		}
 
-		public static Mat4 operator *(Mat4 _lhs, Mat4 _rhs)
+		public static Matrix4x4 operator *(Matrix4x4 _lhs, Matrix4x4 _rhs)
 		{
-			return new Mat4(
+			return new Matrix4x4(
 				_lhs.m1 * _rhs.m1 + _lhs.m2 * _rhs.m5 + _lhs.m3 * _rhs.m9 + _lhs.m4 * _rhs.m13,
 				_lhs.m5 * _rhs.m1 + _lhs.m6 * _rhs.m5 + _lhs.m7 * _rhs.m9 + _lhs.m8 * _rhs.m13,
 				_lhs.m9 * _rhs.m1 + _lhs.m10 * _rhs.m5 + _lhs.m11 * _rhs.m9 + _lhs.m12 * _rhs.m13,
@@ -67,9 +68,9 @@
 			);
 		}
 
-		public static Vec4 operator *(Vec4 _lhs, Mat4 _rhs)
+		public static Vector4 operator *(Vector4 _lhs, Matrix4x4 _rhs)
 		{
-			return new Vec4(
+			return new Vector4(
 				_lhs.x * _rhs.m1 + _lhs.y * _rhs.m5 + _lhs.z * _rhs.m9 + _lhs.w * _rhs.m13,
 				_lhs.x * _rhs.m2 + _lhs.y * _rhs.m6 + _lhs.z * _rhs.m10 + _lhs.w * _rhs.m14,
 				_lhs.x * _rhs.m3 + _lhs.y * _rhs.m7 + _lhs.z * _rhs.m11 + _lhs.w * _rhs.m15,
@@ -77,9 +78,9 @@
 			);
 		}
 
-		public static Vec4 operator *(Mat4 _lhs, Vec4 _rhs)
+		public static Vector4 operator *(Matrix4x4 _lhs, Vector4 _rhs)
 		{
-			return new Vec4(
+			return new Vector4(
 				_lhs.m1 * _rhs.x + _lhs.m2 * _rhs.y + _lhs.m3 * _rhs.z + _lhs.m4 * _rhs.w,
 				_lhs.m5 * _rhs.x + _lhs.m6 * _rhs.y + _lhs.m7 * _rhs.z + _lhs.m8 * _rhs.w,
 				_lhs.m9 * _rhs.x + _lhs.m10 * _rhs.y + _lhs.m11 * _rhs.z + _lhs.m12 * _rhs.w,

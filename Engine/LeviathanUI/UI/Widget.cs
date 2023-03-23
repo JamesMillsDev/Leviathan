@@ -17,7 +17,7 @@ namespace Leviathan.UI
 		
 		public int Layer { get; set; }
 
-		protected Widget(Vec2 _pos, Vec2 _scale)
+		protected Widget(Vector2 _pos, Vector2 _scale)
 		{
 			Transform = new Transform
 			{
@@ -28,7 +28,7 @@ namespace Leviathan.UI
 
 		public abstract void Render();
 
-		public virtual void Tick(Vec2 _mousePos) { }
+		public virtual void Tick(Vector2 _mousePos) { }
 
 		public override string ToString()
 		{

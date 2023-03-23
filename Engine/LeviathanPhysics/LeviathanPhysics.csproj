@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Leviathan.Physics</AssemblyName>
-        <RootNamespace>Leviathan.Physics</RootNamespace>
+        <RootNamespace>Leviathan</RootNamespace>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
