@@ -4,16 +4,44 @@ namespace Leviathan.Mathematics
 {
 	public struct Vec2
 	{
-		public static readonly Vec2 zero = new(0, 0);
-		public static readonly Vec2 half = new(0.5f, 0.5f);
-		public static readonly Vec2 one = new(1, 1);
+		public static Vec2 Zero { get; } = new(0, 0);
+		public static Vec2 Half { get; } = new(0.5f, 0.5f);
+		public static Vec2 One { get; } = new(1, 1);
+		public static Vec2 Right { get; } = new(1, 0);
+		public static Vec2 Left { get; } = new(-1, 0);
+		public static Vec2 Up { get; } = new(0, 1);
+		public static Vec2 Down { get; } = new(0, -1);
+		public static Vec2 PositiveInfinity { get; } = new(float.PositiveInfinity, float.PositiveInfinity);
+		public static Vec2 NegativeInfinity { get; } = new(float.NegativeInfinity, float.NegativeInfinity);
 
-		public float Magnitude => MathF.Sqrt(x * x + y * y);
-		
-		public float Rotation => MathF.Atan2(y, x);
-		
+		public float Magnitude => MathF.Sqrt(SqrMagnitude);
+		public float SqrMagnitude => x * x + y * y;
+		public Vec2 Normalized
+		{
+			get
+			{
+				Vec2 copy = this;
+				copy.Normalise();
+				
+				return copy;
+			}
+		}
+
+		public float this[int _index] => _index switch
+		{
+			0 => x,
+			1 => y,
+			_ => throw new IndexOutOfRangeException("Vec2 only has 2 components")
+		};
+
 		public float x = 0.0f;
 		public float y = 0.0f;
+
+		public Vec2()
+		{
+			x = 0;
+			y = 0;
+		}
 
 		public Vec2(float _x, float _y)
 		{
@@ -21,7 +49,12 @@ namespace Leviathan.Mathematics
 			y = _y;
 		}
 
-		//Normalisation - Non Static
+		public Vec2(Vector2 _vector2)
+		{
+			x = _vector2.X;
+			y = _vector2.Y;
+		}
+
 		public void Normalise()
 		{
 			float length = Magnitude;
@@ -37,24 +70,10 @@ namespace Leviathan.Mathematics
 			}
 		}
 
-		public void Rotate(float _amount)
+		public void Set(float _x, float _y)
 		{
-			float xRotated = x * MathF.Cos(_amount) - y * MathF.Sin(_amount);
-			float yRotated = x * MathF.Sin(_amount) + y * MathF.Cos(_amount);
-
-			x = xRotated;
-			y = yRotated;
-		}
-
-		public void RotateAround(Vec2 _pivotPoint, float _amount)
-		{
-			x -= _pivotPoint.x;
-			y -= _pivotPoint.y;
-
-			Rotate(_amount);
-
-			x += _pivotPoint.x;
-			y += _pivotPoint.y;
+			x = _x;
+			y = _y;
 		}
 
 		public bool Equals(Vec2 _other) => x.Equals(_other.x) && y.Equals(_other.y);
@@ -62,14 +81,19 @@ namespace Leviathan.Mathematics
 		public override bool Equals(object? _obj) => _obj is Vec2 other && Equals(other);
 
 		public override int GetHashCode() => HashCode.Combine(x, y);
-		
+
 		public override string ToString() => $"({x}, {y})";
 
-		//Normalisation - Static
-		public static Vec2 Normalise(Vec2 _vec)
+		public static float Angle(Vec2 _vector) => MathF.Atan2(_vector.y, _vector.x);
+
+		public static Vec2 ClampMagnitude(Vec2 _vector, float _maxMagnitude)
 		{
-			float len = _vec.Magnitude;
-			return len == 0 ? new Vec2(0, 0) : new Vec2(_vec.x / len, _vec.y / len);
+			if(_vector.Magnitude <= _maxMagnitude)
+				return _vector;
+
+			_vector.Normalise();
+
+			return _vector * _maxMagnitude;
 		}
 
 		//Distance
@@ -77,8 +101,26 @@ namespace Leviathan.Mathematics
 
 		public static float Dot(Vec2 _lhs, Vec2 _rhs) => _lhs.x * _rhs.x + _lhs.y * _rhs.y;
 
-		//Rotation
-		public static Vec2 CreateRotationVector(float _radians) => new Vec2(MathF.Cos(_radians), MathF.Sin(_radians));
+		public static Vec2 Lerp(Vec2 _a, Vec2 _b, float _t)
+		{
+			_t = LMath.Clamp01(_t);
+
+			return _a * (1 - _t) + _b * _t;
+		}
+
+		public static Vec2 LerpUnclamped(Vec2 _a, Vec2 _b, float _t) => _a * (1 - _t) + _b * _t;
+
+		public static Vec2 Min(Vec2 _a, Vec2 _b) => new(LMath.Min(_a.x, _b.x), LMath.Min(_a.y, _b.y));
+		public static Vec2 Max(Vec2 _a, Vec2 _b) => new(LMath.Max(_a.x, _b.x), LMath.Max(_a.y, _b.y));
+
+		public static Vec2 Reflect(Vec2 _direction, Vec2 _normal)
+		{
+			float dot = Dot(_direction, _normal);
+			
+			return _direction - (2 * dot * _normal);
+		}
+
+		public static Vec2 Perpendicular(Vec2 _vector) => new(-_vector.y, _vector.x);
 
 		public static Vec2 Rotate(Vec2 _vec, float _angle)
 		{
@@ -90,6 +132,10 @@ namespace Leviathan.Mathematics
 				y = _vec.x * MathF.Sin(angle) + _vec.y * MathF.Cos(angle)
 			};
 		}
+
+		public static Vec2 Scale(Vec2 _vec, float _scalar) => _vec * _scalar;
+
+		public static float SignedAngle(Vec2 _vector) => MathF.Atan2(_vector.y, _vector.x) - 180f;
 
 		/// <summary>
 		/// This method allows an implicit conversion from System.Numerics.Vector2 to our Vec2 class.
@@ -103,6 +149,18 @@ namespace Leviathan.Mathematics
 		/// <param name="_v"></param>
 		public static implicit operator Vector2(Vec2 _v) => new Vector2(_v.x, _v.y);
 
+		/// <summary>
+		/// This method allows an implicit conversion from our Vec2 class to System.Numerics.Vector2.
+		/// </summary>
+		/// <param name="_v"></param>
+		public static implicit operator Vec3(Vec2 _v) => new Vec3(_v.x, _v.y, 1);
+
+		/// <summary>
+		/// This method allows an implicit conversion from our Vec2 class to System.Numerics.Vector2.
+		/// </summary>
+		/// <param name="_v"></param>
+		public static implicit operator Vec2(Vec3 _v) => new Vec2(_v.x, _v.y);
+
 		//Addition Operator Overload +
 		public static Vec2 operator +(Vec2 _lhs, Vec2 _rhs) => new Vec2(_lhs.x + _rhs.x, _lhs.y + _rhs.y);
 
@@ -113,12 +171,10 @@ namespace Leviathan.Mathematics
 
 		public static bool operator !=(Vec2 _lhs, Vec2 _rhs) => !(_lhs == _rhs);
 
-		//PreScale Operator Overload 
-		public static Vec2 operator *(float _lhs, Vec2 _rhs) => new Vec2(_lhs * _rhs.x, _lhs * _rhs.y);
-
-		//PostScale Operator Overload
 		public static Vec2 operator *(Vec2 _lhs, float _rhs) => new Vec2(_lhs.x * _rhs, _lhs.y * _rhs);
 
-		public static Vec2 operator *(Vec2 _lhs, Vec2 _rhs) => new Vec2(_lhs.x * _rhs.x, _lhs.y * _rhs.y);
+		public static Vec2 operator *(float _lhs, Vec2 _rhs) => new Vec2(_lhs * _rhs.x, _lhs * _rhs.y);
+
+		public static Vec2 operator /(Vec2 _lhs, float _rhs) => new Vec2(_lhs.x / _rhs, _lhs.y / _rhs);
 	}
 }

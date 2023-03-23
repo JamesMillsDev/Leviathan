@@ -37,7 +37,7 @@ namespace TestApp.GameStates
 			if(turret is { Transform: { } } && player is { Transform: { } })
 			{
 				turret.Transform.Parent = player.Transform;
-				turret.Transform.Scale = Vec2.one * 0.5f;
+				turret.Transform.Scale = Vec2.One * 0.5f;
 			}
 
 			SpriteRenderer? renderer = turret.AddComponent<SpriteRenderer>("player");
@@ -50,7 +50,7 @@ namespace TestApp.GameStates
 
 			GameObjectManager.Spawn(turret);
 
-			button = new Button(Vec2.zero, "banana", new Button.RenderSettings(50, Color.Red));
+			button = new Button(Vec2.Zero, "banana", new Button.RenderSettings(50, Color.Red));
 
 			UIManager.Add(button);
 		}

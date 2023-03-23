@@ -3,13 +3,15 @@
 	public static class LMath
 	{
 		/// <summary> Degrees-to-radians conversion constant. Multiply a degree angle by this constant to get the radians equivalent. </summary>
-		public const float DEG_2_RAD = MathF.PI * 2f / 360f;
+		public const float DEG_2_RAD = PI * 2f / 360f;
 
 		/// <summary> Radians-to-degrees conversion constant. Multiply a radian angle by this constant to get the degrees equivalent. </summary>
 		public const float RAD_2_DEG = 1f / DEG_2_RAD;
 
 		/// <summary> The smallest possible float value greater than 0. </summary>
 		public const float EPSILON = float.Epsilon;
+
+		public const float PI = MathF.PI;
 
 		/// <summary> Finds the lower of two floats </summary>
 		public static float Min(float _a, float _b) => _a < _b ? _a : _b;
@@ -42,6 +44,24 @@
 			> 1f => 1f,
 			_ => _value
 		};
+
+		public static float Lerp(float _a, float _b, float _t)
+		{
+			_t = Clamp01(_t);
+
+			return _a * (1 - _t) + _b * _t;
+		}
+
+		public static int Lerp(int _a, int _b, float _t)
+		{
+			_t = Clamp01(_t);
+
+			return (int) (_a * (1 - _t) + _b * _t);
+		}
+
+		public static float LerpUnclamped(float _a, float _b, float _t) => _a * (1 - _t) + _b * _t;
+
+		public static int LerpUnclamped(int _a, int _b, float _t) => (int) (_a * (1 - _t) + _b * _t);
 
 		/// <summary> Checks if two floats are almost or exactly the same value </summary>
 		public static bool Approximately(float _a, float _b) => Abs(_b - _a) < Max(0.000001f * Max(Abs(_a), Abs(_b)), EPSILON * 8f);

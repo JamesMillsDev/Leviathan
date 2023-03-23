@@ -40,15 +40,15 @@ namespace Leviathan.GameObjects.Components
 			{
 				float radians = Rotation.x * LMath.DEG_2_RAD;
 
-				return Vec2.Normalise(Vec2.Rotate(new Vec2(MathF.Cos(radians), MathF.Sin(radians)), -90f));
+				return Vec2.Rotate(new Vec2(MathF.Cos(radians), MathF.Sin(radians)), -90f).Normalized;
 			}
 		}
 
-		public Vec2 Right => Vec2.Normalise(Vec2.Rotate(Forward, 90));
+		public Vec2 Right => Vec2.Rotate(Forward, 90).Normalized;
 
 		private Mat3 transform;
 
-		internal Transform() => transform = Mat3.CreateScale(Vec2.one);
+		internal Transform() => transform = Mat3.CreateScale(Vec2.One);
 
 		public void Rotate(float _rotation) => transform.SetRotationZ(transform.GetRotationX() + _rotation);
 

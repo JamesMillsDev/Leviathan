@@ -46,7 +46,7 @@ namespace Leviathan.UI
 		private OnClickEvent? onClick;
 
 		public Button(Vec2 _position, string _text, RenderSettings _settings)
-			: base(_position, Vec2.one, _settings.colors)
+			: base(_position, Vec2.One, _settings.colors)
 		{
 			roundednesss = _settings.roundedness;
 			text = _text;
@@ -98,7 +98,7 @@ namespace Leviathan.UI
 
 			Raylib.DrawRectangleRounded(Rect, roundednesss, 5, ColorFromState());
 			Vec2 p = Transform.Scale - textSize;
-			Raylib.DrawTextPro(font, text, new Vec2(Transform.Position.x + p.y * 0.5f, Transform.Position.y + p.y * 0.5f), Vec2.zero, 0f, fontSize, fontSpacing, textColor);
+			Raylib.DrawTextPro(font, text, new Vec2(Transform.Position.x + p.y * 0.5f, Transform.Position.y + p.y * 0.5f), Vec2.Zero, 0f, fontSize, fontSpacing, textColor);
 		}
 
 		protected override void OnStateChange(SelectionState _state, SelectionState _oldState)

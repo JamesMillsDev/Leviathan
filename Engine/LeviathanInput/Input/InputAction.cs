@@ -71,7 +71,7 @@ namespace Leviathan.Input
 
 		private void HandleAxis(bool _changeOccured)
 		{
-			axisValue = Vec2.zero;
+			axisValue = Vec2.Zero;
 			
 			foreach(InputMapping mapping in mappings)
 				axisValue += mapping.GetAxisValue();
@@ -80,7 +80,7 @@ namespace Leviathan.Input
 
 			if(_changeOccured)
 			{
-				if(axisValue != Vec2.zero)
+				if(axisValue != Vec2.Zero)
 				{
 					onPerformed?.Invoke(this);
 				}
