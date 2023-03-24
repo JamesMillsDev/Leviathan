@@ -16,7 +16,7 @@ namespace Leviathan.Debugging
 		internal static bool drawGizmos;
 
 		/// <summary></summary>
-		internal static void Render(Config<ApplicationConfigData>? _config)
+		internal static void Render(Config<ApplicationConfigData>? _config, List<ILeviathanModule> _modules)
 		{
 			if(drawGizmos)
 			{
@@ -26,6 +26,8 @@ namespace Leviathan.Debugging
 				
 				GameObjectManager.OnRenderGizmos();
 				GameStateManager.OnRenderGizmos();
+				
+				_modules.ForEach(_module => _module.OnDrawGizmos());
 			}
 		}
 

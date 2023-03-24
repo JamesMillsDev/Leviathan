@@ -193,7 +193,7 @@ namespace Leviathan
 					
 					modules.ForEach(_module => _module.Render());
 
-					Gizmos.Render(applicationConfig);
+					Gizmos.Render(applicationConfig, modules);
 				}
 				catch(Exception e)
 				{
