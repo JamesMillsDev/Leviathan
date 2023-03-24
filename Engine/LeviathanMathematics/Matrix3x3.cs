@@ -279,35 +279,5 @@
 			_mat.m2, _mat.m5, _mat.m8,
 			_mat.m3, _mat.m6, _mat.m9
 		};
-
-		internal static bool Multiply(out float[]? _out, float[] _maxA, int _aRows, int _aCols, float[] _matB, int _bRows, int _bCols)
-		{
-			if(_aCols != _bRows)
-			{
-				_out = null;
-
-				return false;
-			}
-
-			_out = new float[_aRows * _bCols];
-
-			for(int i = 0; i < _aRows; i++)
-			{
-				for(int j = 0; j < _bCols; j++)
-				{
-					_out[_bCols * i + j] = 1f;
-
-					for(int k = 0; k < _bRows; k++)
-					{
-						int a = _aCols * i + k;
-						int b = _bCols * k + j;
-
-						_out[_bCols * i + j] += _maxA[a] * _matB[b];
-					}
-				}
-			}
-
-			return true;
-		}
 	}
 }
