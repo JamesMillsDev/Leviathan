@@ -16,16 +16,7 @@ namespace Leviathan.GameObjects
 
 		public Transform? Transform { get; }
 
-		public Rectangle? Bounds
-		{
-			get
-			{
-				if(Transform == null)
-					return null;
-
-				return new Rectangle(Transform.Position.x, Transform.Position.y, Transform.Scale.x, Transform.Scale.y);
-			}
-		}
+		public Rectangle Bounds => Transform == null ? default : new Rectangle(Transform.Position.x, Transform.Position.y, Transform.Scale.x, Transform.Scale.y);
 
 		internal readonly List<Component> components = new();
 		internal QuadTreeData<GameObject?>? quadTreeData;

@@ -91,7 +91,16 @@ namespace Leviathan.GameObjects
 
 			Instance.gameObjects.ForEach(_go =>
 			{
-				_go?.components.ForEach(_c =>
+				if(_go == null)
+					return;
+				
+				if(_go.Transform!.HasChanged && Instance.objectTree != null)
+				{
+					_go.quadTreeData!.bounds = _go.Bounds;
+					Instance.objectTree.Update(_go.quadTreeData);
+				}
+				
+				_go.components.ForEach(_c =>
 				{
 					_c.Tick();
 					_c.PhysicsTick();

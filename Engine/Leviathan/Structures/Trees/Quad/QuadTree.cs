@@ -66,7 +66,7 @@ namespace Leviathan.Structures.Trees.Quad
 
 		public QuadTreeData<VALUE>? Insert([NotNull] QuadTreeData<VALUE>? _data)
 		{
-			if(!bounds.Contains(_data!.Bounds))
+			if(!bounds.Contains(_data!.bounds))
 				return default;
 
 			if(IsLeaf && contents.Count + 1 > MAX_DATA_PER_NODE)
@@ -212,7 +212,7 @@ namespace Leviathan.Structures.Trees.Quad
 			{
 				foreach(QuadTreeData<VALUE> data in contents)
 				{
-					if(data.Bounds.Contains(_area))
+					if(data.bounds.Contains(_area))
 						result.Add(data.value);
 				}
 			}
