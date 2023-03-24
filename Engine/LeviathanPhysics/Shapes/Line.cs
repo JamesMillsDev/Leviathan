@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Leviathan.Physics.Shapes
 {
-	public struct Line
+	public struct Line : IShape
 	{
 		public float Length => (end - start).Magnitude;
 		public float SqrLength => (end - start).SqrMagnitude;
@@ -28,6 +28,14 @@ namespace Leviathan.Physics.Shapes
 
 			return LMath.Approximately(_point.y, M * _point.x + B);
 		}
+		
+		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
+		{
+			Circle circle => Intersects(circle),
+			Rectangle rectangle => Intersects(rectangle),
+			OrientedRectangle oriented => Intersects(oriented),
+			_ => throw new ArgumentOutOfRangeException(nameof(_other), _other, null)
+		};
 
 		public bool Intersects(Circle _circle)
 		{

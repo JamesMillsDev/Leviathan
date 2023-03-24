@@ -2,7 +2,7 @@
 
 namespace Leviathan.Physics.Shapes
 {
-	public struct Rectangle
+	public struct Rectangle : IShape
 	{
 		public static Rectangle FromMinMax(Vector2 _min, Vector2 _max) => new Rectangle(_min, _max - _min);
 
@@ -49,6 +49,16 @@ namespace Leviathan.Physics.Shapes
 			       _point.x <= max.x &&
 			       _point.y <= max.y;
 		}
+		
+		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
+		{
+			Circle circle => Intersects(circle),
+			Rectangle rectangle => Intersects(rectangle),
+			OrientedRectangle oriented => Intersects(oriented),
+			_ => throw new ArgumentOutOfRangeException(nameof(_other), _other, null)
+		};
+
+		public bool Intersects(Circle _other) => _other.Intersects(this);
 
 		public bool Intersects(Rectangle _other)
 		{

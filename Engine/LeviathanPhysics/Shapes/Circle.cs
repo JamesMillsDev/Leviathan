@@ -2,10 +2,10 @@
 
 namespace Leviathan.Physics.Shapes
 {
-	public struct Circle
+	public struct Circle : IShape
 	{
 		public float SqrRadius => radius * radius;
-		
+
 		public Vector2 center;
 		public float radius;
 
@@ -24,6 +24,14 @@ namespace Leviathan.Physics.Shapes
 			return line.SqrLength < SqrRadius;
 		}
 
+		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
+		{
+			Circle circle => circle.Intersects(this),
+			Rectangle rectangle => rectangle.Intersects(this),
+			OrientedRectangle oriented => oriented.Intersects(this),
+			_ => throw new ArgumentOutOfRangeException(nameof(_other), _other, null)
+		};
+
 		public bool Intersects(Circle _other)
 		{
 			Line line = new Line(center, _other.center);
@@ -35,7 +43,7 @@ namespace Leviathan.Physics.Shapes
 		public bool Intersects(OrientedRectangle _other)
 		{
 			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_other.Rotation);
-			
+
 			Vector2 r = (center - _other.Center) * rotMat;
 
 			Circle lCircle = new(r + _other.HalfExtents, radius);
@@ -48,7 +56,7 @@ namespace Leviathan.Physics.Shapes
 		{
 			Vector2 min = _other.Min;
 			Vector2 max = _other.Max;
-			
+
 			Vector2 closestPoint = center;
 
 			closestPoint.x = closestPoint.x < min.x ? min.x : closestPoint.x;

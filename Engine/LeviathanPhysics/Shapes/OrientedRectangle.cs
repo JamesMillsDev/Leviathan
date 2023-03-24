@@ -2,7 +2,7 @@
 
 namespace Leviathan.Physics.Shapes
 {
-	public struct OrientedRectangle
+	public struct OrientedRectangle : IShape
 	{
 		public Vector2 Center
 		{
@@ -37,6 +37,15 @@ namespace Leviathan.Physics.Shapes
 
 			return local.Contains(localPoint);
 		}
+		
+
+		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
+		{
+			Circle circle => circle.Intersects(this),
+			Rectangle rectangle => rectangle.Intersects(this),
+			OrientedRectangle oriented => oriented.Intersects(this),
+			_ => throw new ArgumentOutOfRangeException(nameof(_other), _other, null)
+		};
 
 		public bool Intersects(OrientedRectangle _other)
 		{

@@ -5,6 +5,8 @@ namespace Leviathan.GameObjects
 	public class GameObjectManager : Singleton<GameObjectManager>
 	{
 		public static IEnumerable<GameObject?> All => Instance == null ? new List<GameObject?>() : Instance.gameObjects;
+		public static Action<GameObject?>? onObjectSpawned;
+		public static Action<GameObject?>? onObjectDestroyed;
 
 		private static readonly Logger logger = new("GameObjectManager");
 
@@ -22,6 +24,7 @@ namespace Leviathan.GameObjects
 				Instance.listUpdates.Add(() =>
 				{
 					Instance.gameObjects.Add(_gameObject);
+					onObjectSpawned?.Invoke(_gameObject);
 				});
 			}
 		}
@@ -43,6 +46,7 @@ namespace Leviathan.GameObjects
 						component.OnDestroy();
 
 					Instance.gameObjects.Remove(_gameObject);
+					onObjectDestroyed?.Invoke(_gameObject);
 				});
 			}
 		}
