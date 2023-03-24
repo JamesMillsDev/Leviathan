@@ -2,7 +2,7 @@
 
 namespace Leviathan.Physics
 {
-	internal struct Rectangle
+	public struct Rectangle
 	{
 		public static Rectangle FromMinMax(Vector2 _min, Vector2 _max) => new Rectangle(_min, _max - _min);
 
@@ -48,6 +48,47 @@ namespace Leviathan.Physics
 			       min.y <= _point.y &&
 			       _point.x <= max.x &&
 			       _point.y <= max.y;
+		}
+
+		public bool Intersects(Rectangle _other)
+		{
+			Vector2[] axisToTest = { Vector2.Right, Vector2.Up };
+
+			foreach(Vector2 axis in axisToTest)
+			{
+				if(!Interval.OverlapOnAxis(this, _other, axis))
+					return false;
+			}
+
+			return true;
+		}
+
+		public bool Intersects(OrientedRectangle _other)
+		{
+			Vector2 axis = new Vector2(_other.HalfExtents.x, 0).Normalized;
+			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_other.Rotation);
+			
+			Vector2[] axisToTest = { Vector2.Right, Vector2.Up, axis * rotMat, Vector2.Zero };
+
+			axis = new Vector2(0, _other.HalfExtents.y).Normalized;
+			axisToTest[3] = axis * rotMat;
+			
+			foreach(Vector2 a in axisToTest)
+			{
+				if(!Interval.OverlapOnAxis(this, _other, a))
+					return false;
+			}
+
+			return true;
+		}
+
+		public static implicit operator Raylib_cs.Rectangle(Rectangle _rect) => new(_rect.Min.x, _rect.Min.y, _rect.size.x, _rect.size.y);
+		public static implicit operator Rectangle(Raylib_cs.Rectangle _rect)
+		{
+			Vector2 min = new Vector2(_rect.x, _rect.y);
+			Vector2 max = min + new Vector2(_rect.width, _rect.height);
+			
+			return FromMinMax(min, max);
 		}
 	}
 }

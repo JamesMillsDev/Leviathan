@@ -1,6 +1,6 @@
 ﻿using Leviathan.Mathematics;
 
-namespace LeviathanMathematics.Tests
+namespace Leviathan.Mathematics.Tests
 {
 	public class TestsBase
 	{

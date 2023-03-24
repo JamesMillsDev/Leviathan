@@ -1,14 +1,7 @@
-﻿using Leviathan.Mathematics;
-
-using System.Numerics;
-
-using Vector2 = Leviathan.Mathematics.Vector2;
-using Vector3 = Leviathan.Mathematics.Vector3;
-
-namespace LeviathanMathematics.Tests
+﻿namespace Leviathan.Mathematics.Tests
 {
 	[TestClass]
-	public class Vec2Tests : TestsBase
+	public class Vector2Tests : TestsBase
 	{
 		[TestMethod]
 		public void Magnitude()

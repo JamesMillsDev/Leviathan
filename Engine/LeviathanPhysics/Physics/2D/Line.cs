@@ -43,7 +43,20 @@ namespace Leviathan.Physics
 			return circleToClosest.SqrLength < _circle.SqrRadius;
 		}
 
-		internal bool Intersects(Rectangle _rect)
+		public bool Intersects(OrientedRectangle _box)
+		{
+			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_box.Rotation);
+
+			Line local;
+			local.start = (start - _box.Center) * rotMat + (Vector3)_box.HalfExtents;
+			local.end = (end - _box.Center) * rotMat + (Vector3)_box.HalfExtents;
+
+			Rectangle localRect = new(Vector2.Zero, _box.HalfExtents * 2f);
+
+			return local.Intersects(localRect);
+		}
+
+		public bool Intersects(Rectangle _rect)
 		{
 			if(_rect.Contains(start) || _rect.Contains(end))
 				return true;
@@ -64,37 +77,6 @@ namespace Leviathan.Physics
 			float t = tMin < 0 ? tMax : tMin;
 
 			return t > 0f && t * t < SqrLength;
-		}
-
-		public bool Intersects(Box2D _box)
-		{
-			float theta = -_box.Rotation;
-			float[] rotMat =
-			{
-				LMath.Cos(theta), LMath.Sin(theta),
-				-LMath.Sin(theta), LMath.Cos(theta)
-			};
-
-			Line local;
-			Vector2 rotVec = start - _box.Center;
-
-			if(Matrix3x3.Multiply(out float[]? @out, rotVec, 1, 2, rotMat, 2, 2) && @out == null)
-				return false;
-
-			rotVec = @out!;
-			local.start = rotVec + _box.HalfExtents;
-
-			rotVec = end - _box.Center;
-
-			if(Matrix3x3.Multiply(out @out, rotVec, 1, 2, rotMat, 2, 2) && @out == null)
-				return false;
-
-			rotVec = @out!;
-			local.end = rotVec + _box.HalfExtents;
-
-			Rectangle localRect = new(Vector2.Zero, _box.HalfExtents * 2f);
-
-			return local.Intersects(localRect);
 		}
 	}
 }
