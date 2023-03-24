@@ -15,6 +15,7 @@ namespace Leviathan
 		public ref Color ClearColor => ref clearColor;
 		public bool IsFullscreen { get; private set; }
 		public string? Title { get; private set; }
+		public Rectangle ScreenBounds => new(0, 0, screenSize.x, screenSize.y);
 
 		private Vector2Int screenSize;
 		private Color clearColor;

@@ -1,7 +1,10 @@
 ﻿using Leviathan.Extensions;
+using Leviathan.GameObjects;
 using Leviathan.Mathematics;
 
 using Raylib_cs;
+
+using System.Diagnostics.CodeAnalysis;
 
 namespace Leviathan.Structures.Trees.Quad
 {
@@ -11,7 +14,7 @@ namespace Leviathan.Structures.Trees.Quad
 		protected const int MAX_DATA_PER_NODE = 15;
 
 		public bool IsLeaf => children.Count == 0;
-		
+
 		public int NumObjects
 		{
 			get
@@ -23,7 +26,7 @@ namespace Leviathan.Structures.Trees.Quad
 
 				Queue<QuadTree<VALUE>> process = new();
 				process.Enqueue(this);
-				
+
 				while(process.Count > 0)
 				{
 					QuadTree<VALUE> processing = process.Dequeue();
@@ -42,7 +45,7 @@ namespace Leviathan.Structures.Trees.Quad
 						}
 					}
 				}
-				
+
 				Reset();
 
 				return objectCount;
@@ -52,7 +55,7 @@ namespace Leviathan.Structures.Trees.Quad
 		protected readonly List<QuadTree<VALUE>> children = new();
 		protected readonly List<QuadTreeData<VALUE>> contents = new();
 		protected readonly Rectangle bounds;
-			
+
 		protected int currentDepth;
 
 		public QuadTree(Rectangle _bounds)
@@ -61,11 +64,11 @@ namespace Leviathan.Structures.Trees.Quad
 			currentDepth = 0;
 		}
 
-		public void Insert(QuadTreeData<VALUE> _data)
+		public QuadTreeData<VALUE>? Insert([NotNull] QuadTreeData<VALUE>? _data)
 		{
-			if(!bounds.Contains(_data.bounds))
-				return;
-			
+			if(!bounds.Contains(_data!.Bounds))
+				return default;
+
 			if(IsLeaf && contents.Count + 1 > MAX_DATA_PER_NODE)
 				Split();
 
@@ -78,6 +81,8 @@ namespace Leviathan.Structures.Trees.Quad
 				foreach(QuadTree<VALUE> node in children)
 					node.Insert(_data);
 			}
+
+			return _data;
 		}
 
 		public void Remove(QuadTreeData<VALUE> _data)
@@ -90,10 +95,11 @@ namespace Leviathan.Structures.Trees.Quad
 				{
 					if(contents[i].value == null)
 						continue;
-					
+
 					if(contents[i].value!.Equals(_data.value))
 					{
 						removeIndex = i;
+
 						break;
 					}
 				}
@@ -107,7 +113,7 @@ namespace Leviathan.Structures.Trees.Quad
 					foreach(QuadTree<VALUE> child in children)
 						child.Remove(_data);
 				}
-				
+
 				Shake();
 			}
 		}
@@ -131,7 +137,7 @@ namespace Leviathan.Structures.Trees.Quad
 				{
 					Queue<QuadTree<VALUE>> process = new();
 					process.Enqueue(this);
-				
+
 					while(process.Count > 0)
 					{
 						QuadTree<VALUE> processing = process.Dequeue();
@@ -146,7 +152,7 @@ namespace Leviathan.Structures.Trees.Quad
 							contents.AddRange(processing.contents);
 						}
 					}
-					
+
 					children.Clear();
 				}
 			}
@@ -159,7 +165,7 @@ namespace Leviathan.Structures.Trees.Quad
 
 			Vector2 min = bounds.Min();
 			Vector2 max = bounds.Max();
-			
+
 			Vector2 center = min + (max - max) * 0.5f;
 			Rectangle[] childBounds =
 			{
@@ -177,7 +183,7 @@ namespace Leviathan.Structures.Trees.Quad
 
 			for(int i = 0; i < contents.Count; i++)
 				children[i].Insert(contents[i]);
-			
+
 			contents.Clear();
 		}
 
@@ -195,9 +201,10 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 		}
 
-		public List<QuadTreeData<VALUE>> Query(Rectangle _area)
+		public List<VALUE> Query(Rectangle _area)
 		{
-			List<QuadTreeData<VALUE>> result = new();
+			List<VALUE> result = new();
+
 			if(!bounds.Contains(_area))
 				return result;
 
@@ -205,8 +212,8 @@ namespace Leviathan.Structures.Trees.Quad
 			{
 				foreach(QuadTreeData<VALUE> data in contents)
 				{
-					if(data.bounds.Contains(_area))
-						result.Add(data);
+					if(data.Bounds.Contains(_area))
+						result.Add(data.value);
 				}
 			}
 			else
@@ -214,7 +221,7 @@ namespace Leviathan.Structures.Trees.Quad
 				// ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
 				foreach(QuadTree<VALUE> child in children)
 				{
-					List<QuadTreeData<VALUE>> recurse = child.Query(_area);
+					List<VALUE> recurse = child.Query(_area);
 					if(recurse.Count > 0)
 					{
 						result.AddRange(recurse);
