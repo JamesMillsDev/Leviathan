@@ -1,6 +1,6 @@
 ﻿using Leviathan.Mathematics;
 
-namespace Leviathan.Physics
+namespace Leviathan.Physics.Shapes
 {
 	public struct Circle
 	{

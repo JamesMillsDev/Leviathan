@@ -1,7 +1,4 @@
-﻿using Leviathan.Extensions;
-using Leviathan.Mathematics;
-
-using Raylib_cs;
+﻿using Raylib_cs;
 
 using System.Diagnostics.CodeAnalysis;
 
@@ -9,12 +6,14 @@ using Color = Leviathan.Mathematics.Color;
 
 namespace Leviathan.Structures.Trees.Quad
 {
-	public class QuadTree<VALUE>
+	public abstract class QuadTree<VALUE, BOUNDS, DATA, TREE>
+		where DATA : QuadTreeData<VALUE, BOUNDS>
+		where TREE : QuadTree<VALUE, BOUNDS, DATA, TREE>
 	{
 		protected const int MAX_DEPTH = 5;
 		protected const int MAX_DATA_PER_NODE = 15;
 
-		public bool IsLeaf => children.Count == 0;
+		protected bool IsLeaf => children.Count == 0;
 
 		public int NumObjects
 		{
@@ -25,21 +24,23 @@ namespace Leviathan.Structures.Trees.Quad
 				for(int i = 0; i < objectCount; i++)
 					contents[i].flag = true;
 
-				Queue<QuadTree<VALUE>> process = new();
-				process.Enqueue(this);
+				Queue<TREE> process = new();
+				process.Enqueue((TREE)this);
 
 				while(process.Count > 0)
 				{
-					QuadTree<VALUE> processing = process.Dequeue();
+					TREE processing = process.Dequeue();
 
 					if(!processing.IsLeaf)
 					{
-						foreach(QuadTree<VALUE> node in processing.children)
-							process.Enqueue(node);
+						foreach(TREE quadTree in processing.children)
+						{
+							process.Enqueue(quadTree);
+						}
 					}
 					else
 					{
-						foreach(QuadTreeData<VALUE> data in processing.contents.Where(_data => !_data.flag))
+						foreach(DATA data in processing.contents.Where(_data => !_data.flag))
 						{
 							objectCount++;
 							data.flag = true;
@@ -53,40 +54,21 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 		}
 
-		protected readonly List<QuadTree<VALUE>> children = new();
-		protected readonly List<QuadTreeData<VALUE>> contents = new();
-		protected readonly Rectangle bounds;
+		protected readonly List<TREE> children = new();
+		protected readonly List<DATA> contents = new();
+		protected readonly BOUNDS bounds;
 
-		protected int currentDepth;
+		protected internal int currentDepth;
 
-		public QuadTree(Rectangle _bounds)
+		protected QuadTree(BOUNDS _bounds)
 		{
 			bounds = _bounds;
 			currentDepth = 0;
 		}
 
-		public QuadTreeData<VALUE>? Insert([NotNull] QuadTreeData<VALUE>? _data)
-		{
-			if(!bounds.Contains(_data!.bounds))
-				return default;
+		public abstract DATA? Insert([NotNull] DATA? _data);
 
-			if(IsLeaf && contents.Count + 1 > MAX_DATA_PER_NODE)
-				Split();
-
-			if(IsLeaf)
-			{
-				contents.Add(_data);
-			}
-			else
-			{
-				foreach(QuadTree<VALUE> node in children)
-					node.Insert(_data);
-			}
-
-			return _data;
-		}
-
-		public void Remove(QuadTreeData<VALUE> _data)
+		public void Remove(DATA _data)
 		{
 			if(IsLeaf)
 			{
@@ -111,7 +93,7 @@ namespace Leviathan.Structures.Trees.Quad
 				}
 				else
 				{
-					foreach(QuadTree<VALUE> child in children)
+					foreach(TREE child in children)
 						child.Remove(_data);
 				}
 
@@ -119,7 +101,7 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 		}
 
-		public void Update(QuadTreeData<VALUE> _data)
+		public void Update(DATA _data)
 		{
 			Remove(_data);
 			Insert(_data);
@@ -136,17 +118,17 @@ namespace Leviathan.Structures.Trees.Quad
 				}
 				else if(numObjects < MAX_DATA_PER_NODE)
 				{
-					Queue<QuadTree<VALUE>> process = new();
-					process.Enqueue(this);
+					Queue<TREE> process = new();
+					process.Enqueue((TREE)this);
 
 					while(process.Count > 0)
 					{
-						QuadTree<VALUE> processing = process.Dequeue();
+						TREE processing = process.Dequeue();
 
 						if(!processing.IsLeaf)
 						{
-							foreach(QuadTree<VALUE> node in processing.children)
-								process.Enqueue(node);
+							foreach(TREE quadTree in processing.children)
+								process.Enqueue(quadTree);
 						}
 						else
 						{
@@ -159,102 +141,42 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 		}
 
-		public void Split()
-		{
-			if(currentDepth + 1 >= MAX_DEPTH)
-				return;
-
-			Vector2 min = bounds.Min();
-			Vector2 max = bounds.Max();
-
-			Vector2 center = min + (max - max) * 0.5f;
-			Rectangle[] childBounds =
-			{
-				RayRectangleExtensions.FromMinMax(min, center),
-				RayRectangleExtensions.FromMinMax(new Vector2(center.x, min.y), new Vector2(max.x, center.y)),
-				RayRectangleExtensions.FromMinMax(center, max),
-				RayRectangleExtensions.FromMinMax(new Vector2(min.x, center.y), new Vector2(center.x, max.y))
-			};
-
-			for(int i = 0; i < childBounds.Length; i++)
-			{
-				children.Add(new QuadTree<VALUE>(childBounds[i]));
-				children[i].currentDepth = currentDepth + 1;
-			}
-
-			foreach(QuadTree<VALUE> child in children)
-			{
-				for(int i = 0; i < contents.Count; i++)
-				{
-					child.Insert(contents[i]);
-				}
-			}
-
-			contents.Clear();
-		}
+		public abstract void Split();
 
 		public void Reset()
 		{
 			if(IsLeaf)
 			{
-				foreach(QuadTreeData<VALUE> data in contents)
+				foreach(DATA data in contents)
 					data.flag = false;
 			}
 			else
 			{
-				foreach(QuadTree<VALUE> child in children)
+				foreach(TREE child in children)
 					child.Reset();
 			}
 		}
 
-		public List<VALUE> Query(Rectangle _area)
-		{
-			List<VALUE> result = new();
-
-			if(!bounds.Contains(_area))
-				return result;
-
-			if(IsLeaf)
-			{
-				foreach(QuadTreeData<VALUE> data in contents)
-				{
-					if(data.bounds.Contains(_area))
-						result.Add(data.value);
-				}
-			}
-			else
-			{
-				// ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-				foreach(QuadTree<VALUE> child in children)
-				{
-					List<VALUE> recurse = child.Query(_area);
-					if(recurse.Count > 0)
-					{
-						result.AddRange(recurse);
-					}
-				}
-			}
-
-			return result;
-		}
+		public abstract List<VALUE> Query(BOUNDS _area);
 
 		public void Visualise()
 		{
-			Queue<QuadTree<VALUE>> toProcess = new();
-			toProcess.Enqueue(this);
+			Queue<TREE> toProcess = new();
+			toProcess.Enqueue((TREE)this);
 
 			while(toProcess.Count > 0)
 			{
-				QuadTree<VALUE> processing = toProcess.Dequeue();
+				TREE processing = toProcess.Dequeue();
 
-				Raylib.DrawRectangleLines((int)processing.bounds.x, (int)processing.bounds.y, (int)processing.bounds.width, (int)processing.bounds.height, Color.Red);
-				Raylib.DrawText($"{processing.contents.Count}", (int)processing.bounds.x + 5, (int)processing.bounds.y + 5, 10, Color.Red);
-
-				foreach(QuadTree<VALUE> child in processing.children)
+				Visualise(processing);
+				
+				foreach(TREE child in processing.children)
 				{
 					toProcess.Enqueue(child);
 				}
 			}
 		}
+
+		protected abstract void Visualise(TREE _tree);
 	}
 }

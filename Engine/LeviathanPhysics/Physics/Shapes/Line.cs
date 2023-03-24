@@ -2,7 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace Leviathan.Physics
+namespace Leviathan.Physics.Shapes
 {
 	public struct Line
 	{

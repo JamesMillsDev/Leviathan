@@ -2,12 +2,23 @@
 {
 	internal class PhysicsModule : ILeviathanModule
 	{
-		public void Load() { }
+		private PhysicsTree? container;
+
+		public void Load()
+		{
+			if(Application.Window == null)
+				return;
+			
+			container = new PhysicsTree(Application.Window.ScreenBounds);
+		}
 
 		public void Render() { }
 
 		public void Tick() { }
 
-		public void Unload() { }
+		public void Unload()
+		{
+			container = null;
+		}
 	}
 }
