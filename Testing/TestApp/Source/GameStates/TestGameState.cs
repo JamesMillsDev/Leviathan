@@ -5,7 +5,11 @@ using Leviathan.GameStates;
 using Leviathan.Mathematics;
 using Leviathan.UI;
 
+using Raylib_cs;
+
 using TestApp.GameObjects.Components;
+
+using Color = Leviathan.Mathematics.Color;
 
 namespace TestApp.GameStates
 {
@@ -16,7 +20,9 @@ namespace TestApp.GameStates
 		private GameObject? player;
 		private GameObject? turret;
 
-		private Button? button;
+		private List<GameObject?> randomObjects = new();
+
+		// private Button? button;
 
 		public void Enter()
 		{
@@ -50,9 +56,20 @@ namespace TestApp.GameStates
 
 			GameObjectManager.Spawn(turret);
 
-			button = new Button(Vector2.Zero, "banana", new Button.RenderSettings(50, Color.Red));
+			for(int i = 0; i < 150; i++)
+			{
+				GameObject? test = new GameObject($"Banana ({i + 1})");
+				if(test is { Transform: { } })
+				{
+					test.Transform.Position = new Vector2(Raylib.GetRandomValue(0, Application.Window.ScreenSize.x), Raylib.GetRandomValue(0, Application.Window.ScreenSize.y));
+				}
+				
+				GameObjectManager.Spawn(test);
+			}
 
-			UIManager.Add(button);
+			// button = new Button(Vector2.Zero, "banana", new Button.RenderSettings(50, Color.Red));
+
+			//UIManager.Add(button);
 		}
 
 		public void Tick() { }

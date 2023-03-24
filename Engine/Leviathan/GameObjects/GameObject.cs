@@ -1,6 +1,4 @@
-﻿using Leviathan.Structures.Trees.Quad;
-
-using Raylib_cs;
+﻿using Raylib_cs;
 
 using Transform = Leviathan.GameObjects.Components.Transform;
 
@@ -19,7 +17,6 @@ namespace Leviathan.GameObjects
 		public Rectangle Bounds => Transform == null ? default : new Rectangle(Transform.Position.x, Transform.Position.y, Transform.Scale.x, Transform.Scale.y);
 
 		internal readonly List<Component> components = new();
-		internal QuadTreeData<GameObject?>? quadTreeData;
 
 		public GameObject(string? _name)
 		{

@@ -1,7 +1,4 @@
 ﻿using Leviathan.Debugging;
-using Leviathan.Structures.Trees.Quad;
-
-using Raylib_cs;
 
 namespace Leviathan.GameObjects
 {
@@ -25,7 +22,6 @@ namespace Leviathan.GameObjects
 				Instance.listUpdates.Add(() =>
 				{
 					Instance.gameObjects.Add(_gameObject);
-					_gameObject.quadTreeData = Instance.objectTree?.Insert(new QuadTreeData<GameObject?>(_gameObject, _gameObject.Bounds));
 				});
 			}
 		}
@@ -47,22 +43,8 @@ namespace Leviathan.GameObjects
 						component.OnDestroy();
 
 					Instance.gameObjects.Remove(_gameObject);
-					if(_gameObject.quadTreeData != null)
-						Instance.objectTree?.Remove(_gameObject.quadTreeData);
 				});
 			}
-		}
-
-		public static List<GameObject?> GetAllInBounds(Rectangle _bounds)
-		{
-			if(Instance == null)
-			{
-				logger.LogException(new NullReferenceException("Not yet initialised!"));
-
-				return new List<GameObject?>();
-			}
-
-			return Instance.objectTree != null ? Instance.objectTree.Query(_bounds) : new List<GameObject?>();
 		}
 
 		internal static void Render()
@@ -94,12 +76,6 @@ namespace Leviathan.GameObjects
 				if(_go == null)
 					return;
 				
-				if(_go.Transform!.HasChanged && Instance.objectTree != null)
-				{
-					_go.quadTreeData!.bounds = _go.Bounds;
-					Instance.objectTree.Update(_go.quadTreeData);
-				}
-				
 				_go.components.ForEach(_c =>
 				{
 					_c.Tick();
@@ -122,8 +98,5 @@ namespace Leviathan.GameObjects
 
 		private readonly List<GameObject?> gameObjects = new();
 		private readonly List<Action> listUpdates = new();
-		private QuadTree<GameObject?>? objectTree;
-
-		protected override void OnCreate() => objectTree = new QuadTree<GameObject?>(Application.Window!.ScreenBounds);
 	}
 }

@@ -1,10 +1,11 @@
 ﻿using Leviathan.Extensions;
-using Leviathan.GameObjects;
 using Leviathan.Mathematics;
 
 using Raylib_cs;
 
 using System.Diagnostics.CodeAnalysis;
+
+using Color = Leviathan.Mathematics.Color;
 
 namespace Leviathan.Structures.Trees.Quad
 {
@@ -181,8 +182,13 @@ namespace Leviathan.Structures.Trees.Quad
 				children[i].currentDepth = currentDepth + 1;
 			}
 
-			for(int i = 0; i < contents.Count; i++)
-				children[i].Insert(contents[i]);
+			foreach(QuadTree<VALUE> child in children)
+			{
+				for(int i = 0; i < contents.Count; i++)
+				{
+					child.Insert(contents[i]);
+				}
+			}
 
 			contents.Clear();
 		}
@@ -230,6 +236,25 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 
 			return result;
+		}
+
+		public void Visualise()
+		{
+			Queue<QuadTree<VALUE>> toProcess = new();
+			toProcess.Enqueue(this);
+
+			while(toProcess.Count > 0)
+			{
+				QuadTree<VALUE> processing = toProcess.Dequeue();
+
+				Raylib.DrawRectangleLines((int)processing.bounds.x, (int)processing.bounds.y, (int)processing.bounds.width, (int)processing.bounds.height, Color.Red);
+				Raylib.DrawText($"{processing.contents.Count}", (int)processing.bounds.x + 5, (int)processing.bounds.y + 5, 10, Color.Red);
+
+				foreach(QuadTree<VALUE> child in processing.children)
+				{
+					toProcess.Enqueue(child);
+				}
+			}
 		}
 	}
 }

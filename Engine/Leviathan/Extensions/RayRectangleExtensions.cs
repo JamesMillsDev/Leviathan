@@ -6,8 +6,36 @@ namespace Leviathan.Extensions
 {
 	public static class RayRectangleExtensions
 	{
-		public static Vector2 Min(this Rectangle _rect) => new Vector2(_rect.x, _rect.y);
-		public static Vector2 Max(this Rectangle _rect) => new Vector2(_rect.x + _rect.width, _rect.y + _rect.height);
+		public static Vector2 Size(this Rectangle _rect) => new Vector2(_rect.width, _rect.height);
+
+		public static Vector2 Center(this Rectangle _rect)
+		{
+			Vector2 halfSize = _rect.Size() * 0.5f;
+
+			return new Vector2(_rect.x + halfSize.x, _rect.y + halfSize.y);
+		}
+		
+		public static Vector2 Min(this Rectangle _rect)
+		{
+			Vector2 size = _rect.Size();
+			Vector2 center = _rect.Center();
+
+			Vector2 p1 = center;
+			Vector2 p2 = center + size;
+			
+			return Vector2.Min(p1, p2);
+		}
+
+		public static Vector2 Max(this Rectangle _rect)
+		{
+			Vector2 size = _rect.Size();
+			Vector2 center = _rect.Center();
+
+			Vector2 p1 = center;
+			Vector2 p2 = center + size;
+			
+			return Vector2.Max(p1, p2);
+		}
 
 		public static bool Contains(this Rectangle _rect, Rectangle _other)
 		{
