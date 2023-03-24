@@ -1,4 +1,5 @@
 ﻿using Leviathan.GameObjects;
+using Leviathan.Physics.Components;
 
 namespace Leviathan.Physics
 {

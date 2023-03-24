@@ -38,7 +38,7 @@ namespace Leviathan.GameObjects.Components
 			if(GameObject is { Transform: { } } && texture != null && tint != null)
 			{
 				Vector2? position = GameObject.Transform.Position;
-				Vector3? rotation = GameObject.Transform.Rotation;
+				float rotation = GameObject.Transform.Rotation;
 				Vector2? scale = GameObject.Transform.Scale;
 
 				Rectangle src = new()
@@ -57,7 +57,7 @@ namespace Leviathan.GameObjects.Components
 					height = scale.Value.y
 				};
 
-				Raylib.DrawTexturePro(texture, src, dst, new Vector2(dst.width * .5f, dst.height * .5f), rotation.Value.x, (Color) tint);
+				Raylib.DrawTexturePro(texture, src, dst, new Vector2(dst.width * .5f, dst.height * .5f), rotation, (Color) tint);
 			}
 		}
 	}

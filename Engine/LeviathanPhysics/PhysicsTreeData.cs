@@ -1,4 +1,5 @@
-﻿using Leviathan.Physics.Shapes;
+﻿using Leviathan.Physics.Components;
+using Leviathan.Physics.Shapes;
 using Leviathan.Structures.Trees.Quad;
 
 namespace Leviathan.Physics

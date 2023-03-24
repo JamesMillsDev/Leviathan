@@ -3,7 +3,7 @@ using Leviathan.GameObjects;
 using Leviathan.GameObjects.Components;
 using Leviathan.GameStates;
 using Leviathan.Mathematics;
-using Leviathan.UI;
+using Leviathan.Physics.Components;
 
 using Raylib_cs;
 
@@ -20,8 +20,6 @@ namespace TestApp.GameStates
 		private GameObject? player;
 		private GameObject? turret;
 
-		private List<GameObject?> randomObjects = new();
-
 		// private Button? button;
 
 		public void Enter()
@@ -36,6 +34,7 @@ namespace TestApp.GameStates
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
 			player.AddComponent<RotationComponent>(5f, "rotateBase");
+			player.AddComponent<CircleCollider>();
 
 			GameObjectManager.Spawn(player);
 
@@ -58,12 +57,10 @@ namespace TestApp.GameStates
 
 			for(int i = 0; i < 150; i++)
 			{
-				GameObject? test = new GameObject($"Banana ({i + 1})");
+				GameObject test = new($"Banana ({i + 1})");
 				if(test is { Transform: { } })
-				{
-					test.Transform.Position = new Vector2(Raylib.GetRandomValue(0, Application.Window.ScreenSize.x), Raylib.GetRandomValue(0, Application.Window.ScreenSize.y));
-				}
-				
+					test.Transform.Position = new Vector2(Raylib.GetRandomValue(0, Application.Window!.ScreenSize.x), Raylib.GetRandomValue(0, Application.Window.ScreenSize.y));
+
 				GameObjectManager.Spawn(test);
 			}
 

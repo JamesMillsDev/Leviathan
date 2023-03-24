@@ -57,15 +57,15 @@ namespace Leviathan.GameObjects.Components
 			}
 		}
 
-		public Vector3 Rotation => Parent != null ? (transform * Parent.transform).GetRotation() : transform.GetRotation();
+		public float Rotation => (Parent != null ? (transform * Parent.transform).GetRotationX() : transform.GetRotationX()) * LMath.RAD_2_DEG;
 
-		public Vector3 LocalRotation => transform.GetRotation();
+		public float LocalRotation => transform.GetRotationX();
 
 		public Vector2 Forward
 		{
 			get
 			{
-				float radians = Rotation.x * LMath.DEG_2_RAD;
+				float radians = Rotation * LMath.DEG_2_RAD;
 
 				return Vector2.Rotate(new Vector2(MathF.Cos(radians), MathF.Sin(radians)), -90f).Normalized;
 			}
@@ -83,6 +83,8 @@ namespace Leviathan.GameObjects.Components
 			transform.SetRotationZ(transform.GetRotationX() + _rotation);
 			hasChanged = true;
 		}
+
+		public Vector2 TransformVector(Vector2 _vector2) => transform * _vector2;
 
 		public override string ToString() => $"\tPosition: {Position}\n\tRotation: {Rotation}\n\tScale: {Scale}";
 	}
