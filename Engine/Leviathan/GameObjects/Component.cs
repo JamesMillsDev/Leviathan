@@ -16,8 +16,6 @@
 
 		public virtual void OnDestroy() { }
 
-		public virtual void Reconfigure() { }
-
 		public virtual void OnRenderGizmos() { }
 	}
 }

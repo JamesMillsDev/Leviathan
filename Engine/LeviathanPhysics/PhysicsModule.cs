@@ -1,19 +1,20 @@
-﻿using Leviathan.GameObjects;
+﻿using Leviathan.Events;
 using Leviathan.Physics.Components;
 
 namespace Leviathan.Physics
 {
-	internal class PhysicsModule : ILeviathanModule
+	internal class PhysicsModule : ILeviathanModule, IEventHandler
 	{
-		private PhysicsTree? container;
+		private PhysicsGraph? container;
 
 		public void Load()
 		{
 			if(Application.Window == null)
 				return;
+			
+			EventBus.RegisterObject(this);
 
-			GameObjectManager.onObjectSpawned += OnObjectSpawned;
-			container = new PhysicsTree(Application.Window.ScreenBounds);
+			container = new PhysicsGraph(Application.Window.ScreenBounds);
 		}
 
 		public void OnDrawGizmos()
@@ -23,25 +24,30 @@ namespace Leviathan.Physics
 
 		public void Unload()
 		{
+			EventBus.RemoveObject(this);
+			
 			container = null;
-			GameObjectManager.onObjectDestroyed += OnObjectDestroyed;
 		}
 
-		private void OnObjectSpawned(GameObject? _gameObject)
+		[SubscribeEvent]
+		// ReSharper disable once UnusedMember.Local
+		private void OnObjectSpawned(GameObjectSpawnedEvent _event)
 		{
-			if(_gameObject == null)
+			if(_event.gameObject == null)
 				return;
 			
-			if(_gameObject.TryGetComponent(out Collider? collider) && collider != null)
-				collider.data = container?.Insert(new PhysicsTreeData(collider, _gameObject.Bounds));
+			if(_event.gameObject.TryGetComponent(out Collider? collider) && collider != null)
+				collider.data = container?.Insert(new PhysicsTreeData(collider, _event.gameObject.Bounds));
 		}
 
-		private void OnObjectDestroyed(GameObject? _gameObject)
+		[SubscribeEvent]
+		// ReSharper disable once UnusedMember.Local
+		private void OnObjectDestroyed(GameObjectDestroyedEvent _event)
 		{
-			if(_gameObject == null)
+			if(_event.gameObject == null)
 				return;
 			
-			if(_gameObject.TryGetComponent(out Collider? collider) && collider is { data: { } })
+			if(_event.gameObject.TryGetComponent(out Collider? collider) && collider is { data: { } })
 				container?.Remove(collider.data);
 		}
 	}

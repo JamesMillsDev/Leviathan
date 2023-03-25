@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Leviathan.Events;
+
+using Newtonsoft.Json;
 
 namespace Leviathan.Configuration
 {
 	/// <summary>The generic config class that can be used to read configuration data easily.</summary>
 	/// <typeparam name="DATA">The <see cref="IConfigData"/> type that is stored within the json config file.</typeparam>
-	public class Config<DATA> where DATA : IConfigData, new()
+	public class Config<DATA> : IEventHandler where DATA : IConfigData, new()
 	{
 		public ref DATA? Data => ref data;
 		
@@ -40,12 +42,13 @@ namespace Leviathan.Configuration
 			name = _name;
 			data = new DATA();
 			converter = new ConfigConverter();
-			Application.onReconfigure += Load;
-
-		#if !CONFIG_GENERATION
+			
+			EventBus.RegisterObject(this);
+			
 			Load();
-		#endif
 		}
+
+		~Config() => EventBus.RemoveObject(this);
 
 		/// <summary>Attempts to retrieve a value from the config file using the key provided.</summary>
 		/// <param name="_key">The config key for the configuration value that is being requested.</param>
@@ -77,5 +80,8 @@ namespace Leviathan.Configuration
 			string json = File.ReadAllText(ConfigPath);
 			data = JsonConvert.DeserializeObject<DATA>(json, converter);
 		}
+
+		[SubscribeEvent]
+		private void OnConfigReload(ConfigReloadEvent _event) => Load();
 	}
 }

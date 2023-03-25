@@ -12,9 +12,9 @@ using Rectangle = Leviathan.Physics.Shapes.Rectangle;
 namespace Leviathan.Physics
 {
 	[SuppressMessage("ReSharper", "PossiblyImpureMethodCallOnReadonlyVariable")]
-	public class PhysicsTree : QuadTree<Collider, Rectangle, PhysicsTreeData, PhysicsTree>
+	public class PhysicsGraph : QuadTree<Collider, Rectangle, PhysicsTreeData, PhysicsGraph>
 	{
-		public PhysicsTree(Rectangle _bounds) : base(_bounds) { }
+		public PhysicsGraph(Rectangle _bounds) : base(_bounds) { }
 
 		public override PhysicsTreeData? Insert([NotNull] PhysicsTreeData? _data)
 		{
@@ -30,7 +30,7 @@ namespace Leviathan.Physics
 			}
 			else
 			{
-				foreach(PhysicsTree node in children)
+				foreach(PhysicsGraph node in children)
 					node.Insert(_data);
 			}
 
@@ -56,11 +56,11 @@ namespace Leviathan.Physics
 
 			for(int i = 0; i < childBounds.Length; i++)
 			{
-				children.Add(new PhysicsTree(childBounds[i]));
+				children.Add(new PhysicsGraph(childBounds[i]));
 				children[i].currentDepth = currentDepth + 1;
 			}
 
-			foreach(PhysicsTree child in children)
+			foreach(PhysicsGraph child in children)
 			{
 				foreach(PhysicsTreeData data in contents)
 				{
@@ -89,7 +89,7 @@ namespace Leviathan.Physics
 			else
 			{
 				// ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-				foreach(PhysicsTree child in children)
+				foreach(PhysicsGraph child in children)
 				{
 					List<Collider> recurse = child.Query(_area);
 					if(recurse.Count > 0)
@@ -102,10 +102,10 @@ namespace Leviathan.Physics
 			return result;
 		}
 
-		protected override void Visualise(PhysicsTree _tree)
+		protected override void Visualise(PhysicsGraph _graph)
 		{
-			Raylib.DrawRectangleLines((int) _tree.bounds.Min.x, (int) _tree.bounds.Min.y, (int) _tree.bounds.size.x, (int) _tree.bounds.size.y, Color.Red);
-			Raylib.DrawText($"{_tree.contents.Count}", (int) _tree.bounds.Min.x + 5, (int) _tree.bounds.Min.y + 5, 10, Color.Red);
+			Raylib.DrawRectangleLines((int) _graph.bounds.Min.x, (int) _graph.bounds.Min.y, (int) _graph.bounds.size.x, (int) _graph.bounds.size.y, Color.Red);
+			Raylib.DrawText($"{_graph.contents.Count}", (int) _graph.bounds.Min.x + 5, (int) _graph.bounds.Min.y + 5, 10, Color.Red);
 		}
 	}
 }

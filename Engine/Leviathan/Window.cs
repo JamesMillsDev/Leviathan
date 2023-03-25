@@ -1,5 +1,6 @@
 ﻿using Leviathan.Configuration;
 using Leviathan.Configuration.Converters.Math;
+using Leviathan.Events;
 using Leviathan.GameObjects;
 using Leviathan.Mathematics;
 
@@ -9,7 +10,7 @@ using Color = Leviathan.Mathematics.Color;
 
 namespace Leviathan
 {
-	public sealed class Window
+	public sealed class Window : IEventHandler
 	{
 		public ref Vector2Int ScreenSize => ref screenSize;
 		public ref Color ClearColor => ref clearColor;
@@ -28,7 +29,6 @@ namespace Leviathan
 		internal Window(Config<ApplicationConfigData>? _programConfig)
 		{
 			programConfig = _programConfig ?? throw new NullReferenceException($"Program config is null!");
-			Application.onReconfigure += Reconfigure;
 			
 			screenSize = programConfig.GetValue("window.screenSize", Int2Converter.Instance);
 			Title = programConfig.GetValue<string>("application.name");
@@ -46,6 +46,8 @@ namespace Leviathan
 
 		internal void Open()
 		{
+			EventBus.RegisterObject(this);
+			
 			Application.raylibLogger.LogWarn($"Opening window with size {screenSize} and name {Title}");
 			Raylib.InitWindow(screenSize.x, screenSize.y, Title!);
 			
@@ -66,6 +68,8 @@ namespace Leviathan
 		{
 			Application.raylibLogger.LogWarn($"Closing window with size {screenSize} and name {Title}");
 			Raylib.CloseWindow();
+			
+			EventBus.RemoveObject(this);
 		}
 
 		internal void Render()
@@ -106,7 +110,10 @@ namespace Leviathan
 				Raylib.ToggleFullscreen();
 		}
 
-		private void Reconfigure()
+		[SubscribeEvent]
+		// ReSharper disable once UnusedMember.Local
+		// ReSharper disable once UnusedParameter.Local
+		private void Reconfigure(ConfigReloadEvent _event)
 		{
 			if(programConfig == null)
 				throw new NullReferenceException("Program config is null!");

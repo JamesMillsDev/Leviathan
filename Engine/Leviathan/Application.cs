@@ -1,5 +1,6 @@
 ﻿using Leviathan.Configuration;
 using Leviathan.Debugging;
+using Leviathan.Events;
 using Leviathan.GameObjects;
 using Leviathan.GameStates;
 using Leviathan.Resources;
@@ -13,9 +14,6 @@ namespace Leviathan
 	/// <summary></summary>
 	public sealed class Application
 	{
-		/// <summary></summary>
-		internal static Action? onReconfigure;
-
 		/// <summary>The raylib version of the logger (used for all Raylib calls)</summary>
 		internal static readonly Logger raylibLogger = new("Raylib");
 
@@ -211,9 +209,8 @@ namespace Leviathan
 		/// <summary>Rebuild the configs and reconfigure all components in the game.</summary>
 		private void Reconfigure()
 		{
-			// Tell everything to reconfigure
-			onReconfigure?.Invoke();
-
+			EventBus.Raise(new ConfigReloadEvent());
+			
 			// Reload the global key values
 			exitKey = applicationConfig!.GetValue<long>("application.quitKey");
 			configReloadKey = applicationConfig!.GetValue<long>("debug.reloadConfigKey");

@@ -34,7 +34,6 @@ namespace Leviathan.GameObjects
 			COMPONENT component = new();
 			component.SetGameObject(this);
 			component.Start(_data);
-			Application.onReconfigure += component.Reconfigure;
 			components.Add(component);
 
 			return component;
@@ -49,7 +48,6 @@ namespace Leviathan.GameObjects
 			if(_component != null && components.Contains(_component))
 			{
 				components.Remove(_component);
-				Application.onReconfigure -= _component.Reconfigure;
 				_component.OnDestroy();
 			}
 		}

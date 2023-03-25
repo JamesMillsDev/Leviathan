@@ -20,6 +20,7 @@
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="Raylib-cs" Version="4.2.0.2" />
+        <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     </ItemGroup>
 
     <ItemGroup>
