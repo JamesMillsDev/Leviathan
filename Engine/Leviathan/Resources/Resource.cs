@@ -38,7 +38,7 @@
 		private readonly UnloadDelegate unload;
 
 		/// <summary>The path to the physical resource on the file system.</summary>
-		private readonly string path;
+		protected string path;
 
 		/// <param name="_load">The delegate used to load the resource.</param>
 		/// <param name="_unload">The delegate used to unload the resource.</param>

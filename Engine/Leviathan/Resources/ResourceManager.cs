@@ -90,12 +90,16 @@ namespace Leviathan.Resources
 		/// <summary>Clears all the memory contained within the system.</summary>
 		protected override void OnDestroy()
 		{
-			ClearMemoryFor<TextureResource?, Texture2D>(resources, resourcePaths);
-			ClearMemoryFor<FontResource?, Font>(resources, resourcePaths);
-			ClearMemoryFor<ImageResource?, Image>(resources, resourcePaths);
-			ClearMemoryFor<SoundResource?, Sound>(resources, resourcePaths);
+			foreach(object? resource in resources.Values)
+			{
+				if(resource is IDisposable disposable)
+					disposable.Dispose();
+			}
 			
 			EventBus.Raise(new ResourceManagerCleanupEvent(this));
+			
+			resourcePaths.Clear();
+			resources.Clear();
 		}
 
 		/// <summary>Retrieves the corresponding file path for the passed ID.</summary>
@@ -125,19 +129,6 @@ namespace Leviathan.Resources
 
 				_paths.Add(fileName, file);
 			}
-		}
-
-		/// <summary>Unloads all files within the passed dictionary and empties the dictionaries.</summary>
-		/// <param name="_resources">The managed resource dictionary that we are unloading.</param>
-		/// <param name="_paths">The dictionary of paths for the file type.</param>
-		private static void ClearMemoryFor<RESOURCE, ASSET>(Dictionary<string, object?> _resources, Dictionary<string, string> _paths)
-			where RESOURCE : Resource<ASSET>?
-		{
-			foreach(KeyValuePair<string, object?> pair in _resources)
-				((RESOURCE?)pair.Value)?.Dispose();
-
-			_resources.Clear();
-			_paths.Clear();
 		}
 
 		//@cond
