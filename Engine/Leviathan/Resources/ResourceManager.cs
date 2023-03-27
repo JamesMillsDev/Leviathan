@@ -1,4 +1,5 @@
 ﻿using Leviathan.Configuration;
+using Leviathan.Events;
 
 using Newtonsoft.Json.Linq;
 
@@ -24,13 +25,10 @@ namespace Leviathan.Resources
 			};
 		}
 
-		/// <summary>The delegate that is used to test if the system has a resource.</summary>
-		private delegate bool HasResourceDelegate(string _key);
-
 		/// <summary>Attempts to find the resource associated with the id.</summary>
 		/// <param name="_id">The id of the resource we want. This includes the type such as 'textures'.</param>
 		/// <typeparam name="RESOURCE">The managed resource type such as '<see cref="TextureResource"/>'.</typeparam>
-		/// <typeparam name="ASSET">The actual asset type such as '<see cref="Texture"/>'.</typeparam>
+		/// <typeparam name="ASSET">The actual asset type such as '<see cref="TextureResource"/>'.</typeparam>
 		/// <returns>The managed resource for the passed ID. This can return null if the type does not exist.</returns>
 		public static RESOURCE? Find<RESOURCE, ASSET>(string _id)
 			where RESOURCE : Resource<ASSET>
@@ -38,23 +36,25 @@ namespace Leviathan.Resources
 			if(Instance == null)
 				throw new NullReferenceException("Resource Manager not yet setup!");
 
-			return (RESOURCE?) Convert.ChangeType(TryGetResource<RESOURCE, ASSET>(_id, Instance.HasResource, Instance.resourcePaths, Instance.resources), typeof(RESOURCE));
+			return (RESOURCE?) Convert.ChangeType(TryGetResource<RESOURCE, ASSET>(_id, Instance.resourcePaths, Instance.resources), typeof(RESOURCE));
 		}
 
 		/// <summary>A generic function that can be used to find a resource from any dictionary.</summary>
 		/// <param name="_id">The resource ID that is being retrieved.</param>
-		/// <param name="_hasResourceDelegate">The delegate that is used to determine if the resource already exists.</param>
 		/// <param name="_paths">The collection of paths for the specific resource type.</param>
 		/// <param name="_resources">The actual resource collection.</param>
 		/// <typeparam name="T">The type of managed resource.</typeparam>
 		/// <typeparam name="R">The internal Raylib resource type.</typeparam>
-		private static object? TryGetResource<T, R>(string _id, HasResourceDelegate _hasResourceDelegate, Dictionary<string, string> _paths, Dictionary<string, object?> _resources)
+		private static object? TryGetResource<T, R>(string _id, Dictionary<string, string> _paths, Dictionary<string, object?> _resources)
 			where T : Resource<R>
 		{
+			if(Instance == null)
+				return null;
+			
 			string path = GetPathFromId(_id, _paths);
 			if(!string.IsNullOrEmpty(path))
 			{
-				if(!_hasResourceDelegate(_id))
+				if(!Instance.HasResource(_id))
 					_resources.Add(_id, (T) Activator.CreateInstance(typeof(T), path)!);
 
 				return (T?)_resources[_id];
@@ -83,6 +83,8 @@ namespace Leviathan.Resources
 					}
 				}
 			}
+			
+			EventBus.Raise(new ResourceManagerLoadEvent(this));
 		}
 
 		/// <summary>Clears all the memory contained within the system.</summary>
@@ -92,6 +94,8 @@ namespace Leviathan.Resources
 			ClearMemoryFor<FontResource?, Font>(resources, resourcePaths);
 			ClearMemoryFor<ImageResource?, Image>(resources, resourcePaths);
 			ClearMemoryFor<SoundResource?, Sound>(resources, resourcePaths);
+			
+			EventBus.Raise(new ResourceManagerCleanupEvent(this));
 		}
 
 		/// <summary>Retrieves the corresponding file path for the passed ID.</summary>
@@ -140,6 +144,8 @@ namespace Leviathan.Resources
 		private readonly Dictionary<string, string> resourcePaths = new();
 		private readonly Dictionary<string, object?> resources = new();
 
+		public void LocateFiles(string _path, string _extension) => LocateFiles(_path, _extension, resourcePaths);
+		
 		private bool HasResource(string _id) => resources.ContainsKey(_id);
 		//@endcond
 	}

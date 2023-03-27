@@ -1,4 +1,5 @@
 ﻿using Leviathan.GameObjects;
+using Leviathan.Resources;
 
 namespace Leviathan.Events
 {
@@ -22,5 +23,19 @@ namespace Leviathan.Events
 	public class GameObjectDestroyedEvent : GameObjectEvent
 	{
 		public GameObjectDestroyedEvent(GameObject _gameObject) : base(_gameObject) { }
+	}
+
+	public class ResourceManagerLoadEvent : BaseEvent
+	{
+		public readonly ResourceManager resourceManager;
+
+		public ResourceManagerLoadEvent(ResourceManager _resourceManager) => resourceManager = _resourceManager;
+	}
+
+	public class ResourceManagerCleanupEvent : BaseEvent
+	{
+		public readonly ResourceManager resourceManager;
+
+		public ResourceManagerCleanupEvent(ResourceManager _resourceManager) => resourceManager = _resourceManager;
 	}
 }

@@ -3,10 +3,7 @@ using Leviathan.Resources;
 
 using Raylib_cs;
 
-using System.Numerics;
-
 using Color = Leviathan.Mathematics.Color;
-using Vector2 = Leviathan.Mathematics.Vector2;
 
 namespace Leviathan.UI
 {
@@ -24,7 +21,7 @@ namespace Leviathan.UI
 			if(image == null)
 				return;
 			
-			Raylib.DrawTexturePro(image, new Rectangle(0, 0, image.Width, image.Height), Rect, System.Numerics.Vector2.Zero, 0, Raylib_cs.Color.WHITE);
+			Raylib.DrawTexturePro(image, new Rectangle(0, 0, image.Width, image.Height), Rect, Vector2.Zero, 0, Color.White);
 		}
 	}
 }
