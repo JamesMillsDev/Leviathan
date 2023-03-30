@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviathan", "Leviathan\Leviathan.vcxproj", "{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{EC7DB440-AA39-4630-8A35-DE6E348024DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{CEFC3E18-3C61-44D8-8D1C-E3604C302365}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{B6A4F9A0-0358-421D-B4B9-C93C4F4B1F51}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviathan", "Framework\Leviathan\Leviathan.vcxproj", "{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviamath", "Framework\Leviamath\Leviamath.vcxproj", "{A2283FA3-76B5-4C81-8217-48D9CC19958F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGame", "Other\TestGame\TestGame.vcxproj", "{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviathan-Test", "Testing\Leviathan-Test\Leviathan-Test.vcxproj", "{221C974A-8E48-4F42-8455-82AD9C54FEC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +33,39 @@ Global
 		{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}.Release|x64.Build.0 = Release|x64
 		{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}.Release|x86.ActiveCfg = Release|Win32
 		{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}.Release|x86.Build.0 = Release|Win32
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Debug|x64.ActiveCfg = Debug|x64
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Debug|x64.Build.0 = Debug|x64
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Debug|x86.ActiveCfg = Debug|Win32
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Debug|x86.Build.0 = Debug|Win32
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Release|x64.ActiveCfg = Release|x64
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Release|x64.Build.0 = Release|x64
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Release|x86.ActiveCfg = Release|Win32
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F}.Release|x86.Build.0 = Release|Win32
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Debug|x64.ActiveCfg = Debug|x64
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Debug|x64.Build.0 = Debug|x64
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Debug|x86.ActiveCfg = Debug|Win32
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Debug|x86.Build.0 = Debug|Win32
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Release|x64.ActiveCfg = Release|x64
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Release|x64.Build.0 = Release|x64
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Release|x86.ActiveCfg = Release|Win32
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}.Release|x86.Build.0 = Release|Win32
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Debug|x64.ActiveCfg = Debug|x64
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Debug|x64.Build.0 = Debug|x64
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Debug|x86.ActiveCfg = Debug|Win32
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Debug|x86.Build.0 = Debug|Win32
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Release|x64.ActiveCfg = Release|x64
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Release|x64.Build.0 = Release|x64
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Release|x86.ActiveCfg = Release|Win32
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1} = {EC7DB440-AA39-4630-8A35-DE6E348024DC}
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F} = {EC7DB440-AA39-4630-8A35-DE6E348024DC}
+		{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF} = {B6A4F9A0-0358-421D-B4B9-C93C4F4B1F51}
+		{221C974A-8E48-4F42-8455-82AD9C54FEC5} = {CEFC3E18-3C61-44D8-8D1C-E3604C302365}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C758D2DE-0D12-4BA8-813B-00B3C8F129AF}
