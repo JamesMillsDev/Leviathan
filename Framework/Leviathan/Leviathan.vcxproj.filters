@@ -29,9 +29,6 @@
     <ClCompile Include="application.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Source</Filter>
     </ClCompile>

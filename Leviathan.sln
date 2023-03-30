@@ -10,10 +10,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{B6A4F9A0-0358-421D-B4B9-C93C4F4B1F51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviathan", "Framework\Leviathan\Leviathan.vcxproj", "{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F} = {A2283FA3-76B5-4C81-8217-48D9CC19958F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviamath", "Framework\Leviamath\Leviamath.vcxproj", "{A2283FA3-76B5-4C81-8217-48D9CC19958F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGame", "Other\TestGame\TestGame.vcxproj", "{F5738A77-C7F8-4B41-BCF6-7CA9219F6BDF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1} = {8BECEE34-E7DA-4DCB-9D8D-150880ADAAD1}
+		{A2283FA3-76B5-4C81-8217-48D9CC19958F} = {A2283FA3-76B5-4C81-8217-48D9CC19958F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leviathan-Test", "Testing\Leviathan-Test\Leviathan-Test.vcxproj", "{221C974A-8E48-4F42-8455-82AD9C54FEC5}"
 EndProject
