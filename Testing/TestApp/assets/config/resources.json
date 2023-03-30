@@ -1,0 +1,17 @@
+﻿{
+  "extensions": {
+    "textures": [
+      "png",
+      "jpg"
+    ],
+    "sounds": [
+      "wav"
+    ],
+    "images": [
+      "png"
+    ],
+    "fonts": [
+      "ttf"
+    ]
+  }
+}
