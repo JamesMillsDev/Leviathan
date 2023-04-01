@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="leviamath.cpp" />
     <ClCompile Include="mat3.cpp" />
     <ClCompile Include="mat4.cpp" />
     <ClCompile Include="vec2.cpp" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\color.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\leviamath.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat3.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat4.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec2.h" />
