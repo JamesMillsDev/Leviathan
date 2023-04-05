@@ -1,7 +1,7 @@
 #pragma once
 
 #include <initializer_list>
-#include <raylib/raymath.h>
+#include <raylib/raylib.h>
 
 #define VEC_2_LENGTH 2
 

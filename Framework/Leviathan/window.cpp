@@ -2,9 +2,14 @@
 
 #include <raylib/raylib.h>
 
-window::window(int _width, int _height, const char* _title) 
-	: m_width(_width), m_height(_height), m_title(_title)
+#include <Leviathan/config.h>
+
+window::window()
 {
+	m_width = config::getIntValue(WINDOW_CATEGORY, "width");
+	m_height = config::getIntValue(WINDOW_CATEGORY, "height");
+	m_title = config::getTextValue(PROGRAM_CATEGORY, "title");
+	m_clearColor = config::getColorValue(PROGRAM_CATEGORY, "clearColor");
 }
 
 void window::open()
@@ -20,7 +25,7 @@ void window::close()
 void window::beginFrame()
 {
 	BeginDrawing();
-	ClearBackground(RAYWHITE);
+	ClearBackground(m_clearColor);
 }
 
 void window::endFrame()

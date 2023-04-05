@@ -17,9 +17,11 @@ vec3::vec3(float _x, float _y, float _z)
 
 vec3::vec3(initializer_list<float> _values) : x(0), y(0), z(0)
 {
-	for (const float* iter = _values.begin(), int i = 0; iter != _values.end(); iter++, i++)
+	int i = 0;
+	for (const float* iter = _values.begin(); iter != _values.end(); iter++)
 	{
 		values[i] = *iter;
+		i++;
 	}
 }
 

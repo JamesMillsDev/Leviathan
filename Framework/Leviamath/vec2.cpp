@@ -16,9 +16,11 @@ vec2::vec2(float _x, float _y) : x(_x), y(_y)
 
 vec2::vec2(initializer_list<float> _values) : x(0), y(0)
 {
-	for (const float* iter = _values.begin(), int i = 0; iter != _values.end(); iter++, i++)
+	int i = 0;
+	for (const float* iter = _values.begin(); iter != _values.end(); iter++)
 	{
 		values[i] = *iter;
+		i++;
 	}
 }
 

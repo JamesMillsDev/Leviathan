@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\application.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\assets.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\config.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\game.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\gameobject_manager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\gameobject.h" />
@@ -27,6 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="assets.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="GameObjects\gameobject.cpp" />
     <ClCompile Include="GameObjects\gameobject_manager.cpp" />
     <ClCompile Include="window.cpp" />

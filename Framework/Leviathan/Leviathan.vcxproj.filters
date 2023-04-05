@@ -24,6 +24,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\gameobject_manager.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\assets.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\config.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp">
@@ -37,6 +43,12 @@
     </ClCompile>
     <ClCompile Include="GameObjects\gameobject_manager.cpp">
       <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="assets.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

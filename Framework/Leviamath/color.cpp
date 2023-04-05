@@ -11,9 +11,9 @@ color::color(uint32_t _val) : m_value(_val)
 color::color(uint8_t _red, uint8_t _green, uint8_t _blue, uint8_t _alpha) : m_value(0x00000000)
 {
 	setRed(_red);
-	setRed(_green);
-	setRed(_blue);
-	setRed(_alpha);
+	setGreen(_green);
+	setBlue(_blue);
+	setAlpha(_alpha);
 }
 
 uint8_t color::red()
@@ -43,17 +43,17 @@ void color::setRed(uint8_t _red)
 
 void color::setGreen(uint8_t _green)
 {
-	m_value = (m_value & 0x00ffffff) | ((uint32_t)_green << 16);
+	m_value = (m_value & 0xff00ffff) | ((uint32_t)_green << 16);
 }
 
 void color::setBlue(uint8_t _blue)
 {
-	m_value = (m_value & 0x00ffffff) | ((uint32_t)_blue << 8);
+	m_value = (m_value & 0xffff00ff) | ((uint32_t)_blue << 8);
 }
 
 void color::setAlpha(uint8_t _alpha)
 {
-	m_value = (m_value & 0x00ffffff) | ((uint32_t)_alpha << 0);
+	m_value = (m_value & 0xffffff00) | ((uint32_t)_alpha << 0);
 }
 
 color::operator Color()

@@ -3,10 +3,15 @@
 #include <Leviathan/window.h>
 #include <raylib/raylib.h>
 
+#include <Leviathan/config.h>
+
 application* application::m_instance = nullptr;
 
-application::application(game* _game) : m_game(_game), m_window(new window(800, 450, "test"))
+application::application(game* _game) : m_game(_game), m_window(nullptr)
 {
+	config::createInstance("config.cfg");
+
+	m_window = new window();
 }
 
 application::~application()
@@ -22,6 +27,8 @@ application::~application()
 		delete m_window;
 		m_window = nullptr;
 	}
+
+	config::destroyInstance();
 }
 
 void application::process()
