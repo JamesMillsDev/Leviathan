@@ -101,15 +101,15 @@
 
 		public static Vector2 Lerp(Vector2 _a, Vector2 _b, float _t)
 		{
-			_t = LMath.Clamp01(_t);
+			_t = Leviamath.Clamp01(_t);
 
 			return _a * (1 - _t) + _b * _t;
 		}
 
 		public static Vector2 LerpUnclamped(Vector2 _a, Vector2 _b, float _t) => _a * (1 - _t) + _b * _t;
 
-		public static Vector2 Min(Vector2 _a, Vector2 _b) => new(LMath.Min(_a.x, _b.x), LMath.Min(_a.y, _b.y));
-		public static Vector2 Max(Vector2 _a, Vector2 _b) => new(LMath.Max(_a.x, _b.x), LMath.Max(_a.y, _b.y));
+		public static Vector2 Min(Vector2 _a, Vector2 _b) => new(Leviamath.Min(_a.x, _b.x), Leviamath.Min(_a.y, _b.y));
+		public static Vector2 Max(Vector2 _a, Vector2 _b) => new(Leviamath.Max(_a.x, _b.x), Leviamath.Max(_a.y, _b.y));
 
 		public static Vector2 Reflect(Vector2 _direction, Vector2 _normal)
 		{
@@ -122,7 +122,7 @@
 
 		public static Vector2 Rotate(Vector2 _vec, float _angle)
 		{
-			float angle = _angle * LMath.DEG_2_RAD;
+			float angle = _angle * Leviamath.DEG_2_RAD;
 
 			return new Vector2
 			{

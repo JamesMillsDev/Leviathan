@@ -55,7 +55,7 @@ namespace Leviathan.Physics
 					result.radius = distance;
 			}
 
-			result.radius = LMath.Sqrt(result.radius);
+			result.radius = Leviamath.Sqrt(result.radius);
 
 			return result;
 		}

@@ -72,7 +72,7 @@
 		/// <param name="_v"></param>
 		public static implicit operator System.Numerics.Vector3(Vector3 _v) => new System.Numerics.Vector3(_v.x, _v.y, _v.z);
 
-		public static bool operator ==(Vector3 _lhs, Vector3 _rhs) => _lhs.Magnitude - _lhs.Magnitude < LMath.EPSILON && _lhs.Magnitude - _rhs.Magnitude > -LMath.EPSILON;
+		public static bool operator ==(Vector3 _lhs, Vector3 _rhs) => _lhs.Magnitude - _lhs.Magnitude < Leviamath.EPSILON && _lhs.Magnitude - _rhs.Magnitude > -Leviamath.EPSILON;
 		
 		public static bool operator !=(Vector3 _lhs, Vector3 _rhs) => !(_lhs == _rhs);
 

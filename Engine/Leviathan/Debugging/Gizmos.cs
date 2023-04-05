@@ -55,7 +55,7 @@ namespace Leviathan.Debugging
 		public static void DrawWireRectangle(Rectangle _rectangle, Color _color, float _rotation = 0f)
 		{
 			// Calculate the forward and right vectors of the rectangle
-			float radians = _rotation * LMath.DEG_2_RAD;
+			float radians = _rotation * Leviamath.DEG_2_RAD;
 			Vector2 forward = new(MathF.Cos(radians), MathF.Sin(radians));
 			Vector2 right = new(forward.y, -forward.x);
 

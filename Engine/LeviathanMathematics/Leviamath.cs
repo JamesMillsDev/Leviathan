@@ -1,6 +1,6 @@
 ﻿namespace Leviathan.Mathematics
 {
-	public static class LMath
+	public static class Leviamath
 	{
 		/// <summary> Degrees-to-radians conversion constant. Multiply a degree angle by this constant to get the radians equivalent. </summary>
 		public const float DEG_2_RAD = PI * 2f / 360f;
@@ -9,9 +9,16 @@
 		public const float RAD_2_DEG = 1f / DEG_2_RAD;
 
 		/// <summary> The smallest possible float value greater than 0. </summary>
-		public const float EPSILON = float.Epsilon;
+		public const float EPSILON = 1.4e-45f;
 
-		public const float PI = MathF.PI;
+		/// <summary> The mathematical constant PI </summary>
+		public const float PI = 3.14159265f;
+
+		/// <summary> An impossibly large value. </summary>
+		public const float POSITIVE_INFINITY = 1.0f / 0.0f;
+		
+		/// <summary> An impossibly small value. </summary>
+		public const float NEGATIVE_INFINITY = -1.0f / 0.0f;
 
 		/// <summary> Finds the lower of two floats </summary>
 		public static float Min(float _a, float _b) => _a < _b ? _a : _b;

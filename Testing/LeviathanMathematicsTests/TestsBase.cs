@@ -9,7 +9,7 @@ namespace Leviathan.Mathematics.Tests
 
 		protected static bool Compare(float _a, float _b)
 		{
-			return LMath.Approximately(_a, _b);
+			return Leviamath.Approximately(_a, _b);
 		}
 
 		protected static bool Compare(Color _a, Color _b) => Compare((float)_a.R, _b.R) && Compare((float)_a.G, _b.G) && Compare((float)_a.B, _b.B) && Compare((float)_a.A, _b.A);
@@ -42,7 +42,7 @@ namespace Leviathan.Mathematics.Tests
 		{
 			Random rand = new(DateTime.Now.Millisecond);
 
-			_val = LMath.Remap(rand.NextSingle(), 0, 1, _min, _max);
+			_val = Leviamath.Remap(rand.NextSingle(), 0, 1, _min, _max);
 		}
 		
 		// ReSharper disable once InconsistentNaming
@@ -50,8 +50,8 @@ namespace Leviathan.Mathematics.Tests
 		{
 			Random rand = new(DateTime.Now.Millisecond);
 
-			_x = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
-			_y = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
+			_x = Leviamath.Remap(rand.NextSingle(), 0, 1, -100, 100);
+			_y = Leviamath.Remap(rand.NextSingle(), 0, 1, -100, 100);
 		}
 		
 		// ReSharper disable once InconsistentNaming
@@ -59,9 +59,9 @@ namespace Leviathan.Mathematics.Tests
 		{
 			Random rand = new(DateTime.Now.Millisecond);
 
-			_x = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
-			_y = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
-			_z = LMath.Remap(rand.NextSingle(), 0, 1, -100, 100);
+			_x = Leviamath.Remap(rand.NextSingle(), 0, 1, -100, 100);
+			_y = Leviamath.Remap(rand.NextSingle(), 0, 1, -100, 100);
+			_z = Leviamath.Remap(rand.NextSingle(), 0, 1, -100, 100);
 		}
 
 		protected static Vector2 RandomVector2()

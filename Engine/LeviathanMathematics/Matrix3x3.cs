@@ -177,7 +177,7 @@
 			                   _vec.x * m2 + _vec.y * m5);
 		}
 
-		public Vector3 GetRotation() => new Vector3(GetRotationX() * LMath.RAD_2_DEG, GetRotationY() * LMath.RAD_2_DEG, GetRotationZ() * LMath.RAD_2_DEG);
+		public Vector3 GetRotation() => new Vector3(GetRotationX() * Leviamath.RAD_2_DEG, GetRotationY() * Leviamath.RAD_2_DEG, GetRotationZ() * Leviamath.RAD_2_DEG);
 
 		public void SetTranslation(float _tx, float _ty)
 		{

@@ -73,19 +73,31 @@ namespace Leviathan.Physics.Shapes
 			return true;
 		}
 
-		public bool Intersects(OrientedRectangle _other)
+		public bool Intersects(OrientedRectangle _box)
 		{
-			Vector2 axis = new Vector2(_other.HalfExtents.x, 0).Normalized;
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_other.Rotation);
-			
-			Vector2[] axisToTest = { Vector2.Right, Vector2.Up, axis * rotMat, Vector2.Zero };
-
-			axis = new Vector2(0, _other.HalfExtents.y).Normalized;
-			axisToTest[3] = axis * rotMat;
-			
-			foreach(Vector2 a in axisToTest)
+			Vector2[] axisToTest =
 			{
-				if(!Interval.OverlapOnAxis(this, _other, a))
+				Vector2.Right, Vector2.Up,
+				Vector2.Zero, Vector2.Zero
+			};
+			
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(_box.ThetaRotation);
+			
+			Vector2 axis = new Vector2(_box.halfExtents.x, 0).Normalized;
+			if(!MatrixMath.Multiply(out float[]? output, axis, 1, 2, rotationMat, 2, 2))
+				return false;
+
+			axisToTest[2] = output!;
+			
+			axis = new Vector2(0, _box.halfExtents.y).Normalized;
+			if(!MatrixMath.Multiply(out output, axis, 1, 2, rotationMat, 2, 2))
+				return false;
+
+			axisToTest[3] = output!;
+
+			foreach(Vector2 test in axisToTest)
+			{
+				if(!Interval.OverlapOnAxis(this, _box, test))
 					return false;
 			}
 

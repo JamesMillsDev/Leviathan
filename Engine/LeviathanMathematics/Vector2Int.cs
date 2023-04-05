@@ -47,7 +47,7 @@
 		public static Vector2Int operator *(Vector2Int _lhs, Vector2Int _rhs) => new(_lhs.x * _rhs.x, _lhs.y * _rhs.y);
 		public static Vector2Int operator *(Vector2Int _lhs, float _rhs) => new((int) (_lhs.x * _rhs), (int) (_lhs.y * _rhs));
 
-		public static bool operator ==(Vector2Int _lhs, Vector2Int _rhs) => _lhs.Magnitude - _lhs.Magnitude < LMath.EPSILON && _lhs.Magnitude - _rhs.Magnitude > -LMath.EPSILON;
+		public static bool operator ==(Vector2Int _lhs, Vector2Int _rhs) => _lhs.Magnitude - _lhs.Magnitude < Leviamath.EPSILON && _lhs.Magnitude - _rhs.Magnitude > -Leviamath.EPSILON;
 		public static bool operator !=(Vector2Int _lhs, Vector2Int _rhs) => !(_lhs == _rhs);
 		public static bool operator >(Vector2Int _lhs, Vector2Int _rhs) => _lhs.Magnitude > _rhs.Magnitude;
 		public static bool operator <(Vector2Int _lhs, Vector2Int _rhs) => _lhs.Magnitude < _rhs.Magnitude;

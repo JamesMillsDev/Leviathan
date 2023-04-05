@@ -40,16 +40,19 @@ namespace Leviathan.Physics.Shapes
 			return line.SqrLength <= radiiSum * radiiSum;
 		}
 
-		public bool Intersects(OrientedRectangle _other)
+		public bool Intersects(OrientedRectangle _box)
 		{
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_other.Rotation);
+			Vector2 rotVector = center - _box.center;
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(-_box.ThetaRotation);
+			
+			if(!MatrixMath.Multiply(out float[]? output, rotVector, 1, 2, rotationMat, 2, 2))
+				return false;
 
-			Vector2 r = (center - _other.Center) * rotMat;
+			Circle localCircle = new(output! + _box.halfExtents, radius);
 
-			Circle lCircle = new(r + _other.HalfExtents, radius);
-			Rectangle lRect = new(Vector2.Zero, _other.HalfExtents * 2f);
-
-			return lCircle.Intersects(lRect);
+			Rectangle localRect = new(Vector2.Zero, _box.halfExtents * 2.0f);
+			
+			return localCircle.Intersects(localRect);
 		}
 
 		public bool Intersects(Rectangle _other)

@@ -10,7 +10,7 @@
 
 			float expected = MathF.Sqrt(MathF.Pow(vec.x, 2) + MathF.Pow(vec.y, 2));
 
-			Assert.IsTrue(LMath.Approximately(vec.Magnitude, expected));
+			Assert.IsTrue(Leviamath.Approximately(vec.Magnitude, expected));
 		}
 
 		[TestMethod]
@@ -20,7 +20,7 @@
 
 			float expected = MathF.Pow(vec.x, 2) + MathF.Pow(vec.y, 2);
 
-			Assert.IsTrue(LMath.Approximately(vec.SqrMagnitude, expected));
+			Assert.IsTrue(Leviamath.Approximately(vec.SqrMagnitude, expected));
 		}
 
 		[TestMethod]

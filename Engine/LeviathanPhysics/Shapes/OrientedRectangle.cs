@@ -4,41 +4,38 @@ namespace Leviathan.Physics.Shapes
 {
 	public struct OrientedRectangle : IShape
 	{
-		public Vector2 Center
-		{
-			get => transform.Translation;
-			set => transform.Translation = value;
-		}
-
-		public Vector2 HalfExtents => transform.Scale * .5f;
-		public float Rotation
-		{
-			get => transform.GetRotationX();
-			set => transform.SetRotationZ(value);
-		}
-
-		private Matrix3x3 transform;
+		public float ThetaRotation => rotation * Leviamath.DEG_2_RAD;
+		
+		public Vector2 center;
+		public Vector2 halfExtents;
+		public float rotation;
 
 		public OrientedRectangle(Vector2? _position = null, Vector2? _halfExtents = null, float _rotation = 0f)
 		{
-			Vector2 pos = _position ?? Vector2.Zero;
-			Vector2 halfExtents = _halfExtents ?? Vector2.One;
-
-			transform = Matrix3x3.CreateTranslation(pos) * Matrix3x3.CreateZRotation(_rotation) * Matrix3x3.CreateScale(halfExtents);
+			center = _position ?? Vector2.Zero;
+			halfExtents = _halfExtents ?? Vector2.One;
+			rotation = _rotation;
 		}
 
 		public bool Contains(Vector2 _point)
 		{
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(Rotation);
-			Vector2 rotated = (_point - Center) * rotMat;
+			Vector2 rotVector = _point - center;
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(-ThetaRotation);
 
-			Rectangle local = new(Vector2.Zero, HalfExtents * 2f);
-			Vector2 localPoint = rotated + HalfExtents;
+			if(!MatrixMath.Multiply(out float[]? output, rotVector, 1, 2, rotationMat, 2, 2) && output != null)
+				return false;
 
-			return local.Contains(localPoint);
+			Rectangle localRect = new()
+			{
+				center = Vector2.Zero,
+				size = halfExtents * 2.0f
+			};
+
+			Vector2 localPoint = rotVector + output!;
+			
+			return localRect.Contains(localPoint);
 		}
 		
-
 		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
 		{
 			Circle circle => circle.Intersects(this),
@@ -49,17 +46,20 @@ namespace Leviathan.Physics.Shapes
 
 		public bool Intersects(OrientedRectangle _other)
 		{
-			Rectangle local1 = new(Vector2.Zero, HalfExtents * 2.0f);
-
-			OrientedRectangle local2 = new(_other.Center, _other.HalfExtents, 0)
+			Rectangle local1 = new(Vector2.Zero, _other.halfExtents * 2.0f);
+			OrientedRectangle local2 = new(_other.center, _other.halfExtents)
 			{
-				Rotation = _other.Rotation - Rotation
+				rotation = _other.rotation - rotation
 			};
 			
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-Rotation);
-			Vector2 r = (_other.Center - Center) * rotMat;
-			local2.Center = r + HalfExtents;
+			Vector2 rotVector = center - _other.center;
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(ThetaRotation);
+			
+			if(!MatrixMath.Multiply(out float[]? output, rotVector, 1, 2, rotationMat, 2, 2))
+				return false;
 
+			local2.center = output! + _other.halfExtents;
+			
 			return local1.Intersects(local2);
 		}
 	}

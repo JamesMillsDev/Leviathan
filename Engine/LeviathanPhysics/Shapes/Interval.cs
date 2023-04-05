@@ -14,6 +14,7 @@ namespace Leviathan.Physics.Shapes
 
 			return b.Value.min <= a.Value.max && a.Value.min <= b.Value.max;
 		}
+		
 		internal static bool OverlapOnAxis(Rectangle _a, OrientedRectangle _b, Vector2 _axis)
 		{
 			Interval? a = Get(_a, _axis);
@@ -44,8 +45,8 @@ namespace Leviathan.Physics.Shapes
 			{
 				float projection = Vector2.Dot(_axis, verts[i]);
 
-				result.min = LMath.Min(projection, result.min);
-				result.max = LMath.Max(projection, result.max);
+				result.min = Leviamath.Min(projection, result.min);
+				result.max = Leviamath.Max(projection, result.max);
 			}
 			
 			return result;
@@ -53,32 +54,40 @@ namespace Leviathan.Physics.Shapes
 		
 		internal static Interval? Get(OrientedRectangle _box, Vector2 _axis)
 		{
-			Interval result = new();
-
-			Rectangle rect = new(_box.Center - _box.HalfExtents, _box.HalfExtents * 2);
+			Rectangle rect = new(_box.center - _box.halfExtents, _box.halfExtents * 2.0f);
 
 			Vector2 min = rect.Min;
 			Vector2 max = rect.Max;
-			
+
 			Vector2[] verts =
 			{
 				min, max,
 				new(min.x, max.y), new(max.x, min.y)
 			};
-			
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_box.Rotation);
-			
+
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(_box.ThetaRotation);
+
 			for(int i = 0; i < verts.Length; i++)
-				verts[i] = (verts[i] - rect.center) * rotMat + (Vector3) rect.center;
+			{
+				Vector2 rotVector = verts[i] - _box.center;
+				
+				if(!MatrixMath.Multiply(out float[]? output, rotVector, 1, 2, rotationMat, 2, 2))
+					return null;
+
+				rotVector = output!;
+				verts[i] = rotVector + _box.center;
+			}
+
+			Interval result;
 
 			result.min = result.max = Vector2.Dot(_axis, verts[0]);
 
 			for(int i = 1; i < verts.Length; i++)
 			{
-				float projection = Vector2.Dot(_axis, verts[i]);
+				float proj = Vector2.Dot(_axis, verts[i]);
 
-				result.min = LMath.Min(projection, result.min);
-				result.max = LMath.Max(projection, result.max);
+				result.min = proj < result.min ? proj : result.min;
+				result.max = proj > result.max ? proj : result.max;
 			}
 			
 			return result;

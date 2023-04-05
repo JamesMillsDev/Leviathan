@@ -26,7 +26,7 @@ namespace Leviathan.Physics.Shapes
 			float M = dy / dx;
 			float B = start.y - M * start.x;
 
-			return LMath.Approximately(_point.y, M * _point.x + B);
+			return Leviamath.Approximately(_point.y, M * _point.x + B);
 		}
 		
 		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
@@ -53,15 +53,25 @@ namespace Leviathan.Physics.Shapes
 
 		public bool Intersects(OrientedRectangle _box)
 		{
-			Matrix3x3 rotMat = Matrix3x3.CreateZRotation(-_box.Rotation);
+			Matrix2x2 rotationMat = Matrix2x2.FromAngle(-_box.ThetaRotation);
+			Vector2 rotVector = start - _box.center;
 
-			Line local;
-			local.start = (start - _box.Center) * rotMat + (Vector3)_box.HalfExtents;
-			local.end = (end - _box.Center) * rotMat + (Vector3)_box.HalfExtents;
+			Line localLine = new();
+			
+			if(!MatrixMath.Multiply(out float[]? output, rotVector, 1, 2, rotationMat, 2, 2))
+				return false;
 
-			Rectangle localRect = new(Vector2.Zero, _box.HalfExtents * 2f);
+			localLine.start = output! + _box.halfExtents;
+			rotVector = end - _box.center;
+			
+			if(!MatrixMath.Multiply(out output, rotVector, 1, 2, rotationMat, 2, 2))
+				return false;
 
-			return local.Intersects(localRect);
+			localLine.end = output! + _box.halfExtents;
+
+			Rectangle localRect = new(Vector2.Zero, _box.halfExtents * 2.0f);
+			
+			return localRect.Intersects(localLine);
 		}
 
 		public bool Intersects(Rectangle _rect)
@@ -76,8 +86,8 @@ namespace Leviathan.Physics.Shapes
 			Vector2 min = (_rect.Min - start) * norm;
 			Vector2 max = (_rect.Max - start) * norm;
 
-			float tMin = LMath.Max(LMath.Min(min.x, max.x), LMath.Min(min.y, max.y));
-			float tMax = LMath.Min(LMath.Max(min.x, max.x), LMath.Max(min.y, max.y));
+			float tMin = Leviamath.Max(Leviamath.Min(min.x, max.x), Leviamath.Min(min.y, max.y));
+			float tMax = Leviamath.Min(Leviamath.Max(min.x, max.x), Leviamath.Max(min.y, max.y));
 
 			if(tMin < 0 || tMin > tMax)
 				return false;

@@ -34,7 +34,7 @@ namespace TestApp.GameStates
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
 			player.AddComponent<RotationComponent>(5f, "rotateBase");
-			player.AddComponent<CircleCollider>();
+			player.AddComponent<BoxCollider2D>();
 
 			GameObjectManager.Spawn(player);
 

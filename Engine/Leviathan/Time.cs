@@ -31,7 +31,7 @@ namespace Leviathan
 		internal static void Tick()
 		{
 			// Make sure time is between 0 and 1
-			timeScale = LMath.Clamp01(timeScale);
+			timeScale = Leviamath.Clamp01(timeScale);
 
 			// Get the amount of time between frames and update the time by it 
 			deltaTime = Raylib.GetFrameTime() * timeScale;
