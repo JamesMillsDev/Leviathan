@@ -4,7 +4,7 @@ using Leviathan.Physics.Shapes;
 
 namespace Leviathan.Physics.Components
 {
-	public class BoxCollider2D : Collider
+	public class BoxCollider2D : Collider, IPhysicsHandler
 	{
 		protected OrientedRectangle? Box => Shape as OrientedRectangle?;
 		protected override IShape? Shape { get; set; }
@@ -29,10 +29,17 @@ namespace Leviathan.Physics.Components
 			}
 		}
 
+		private Color colliderCol = Color.Green;
+		
 		public override void OnRenderGizmos()
 		{
 			if(Box.HasValue)
-				Gizmos.DrawWireRectangle(new Rectangle(Box.Value.center, Box.Value.halfExtents * 2.0f), Color.Green, Box.Value.rotation);
+				Gizmos.DrawWireRectangle(new Rectangle(Box.Value.center, Box.Value.halfExtents * 2.0f), colliderCol, Box.Value.rotation);
+		}
+
+		public void OnTriggerEnter(Collider _other)
+		{
+			colliderCol = Color.Red;
 		}
 	}
 }

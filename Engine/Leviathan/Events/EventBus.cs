@@ -12,20 +12,19 @@ namespace Leviathan.Events
 
 		private static readonly List<object> registeredListeners;
 
+		private static bool hasLoaded = false;
+
 		static EventBus()
 		{
 			events = new Dictionary<Type, List<MethodInfo>>();
 			registeredListeners = new List<object>();
-			new Thread(LoadEventsThread).Start();
 		}
 
 		private static void LoadEventsThread()
 		{
 			List<Type> eventListeners = new();
 
-			List<Assembly> assemblies = new(AppDomain.CurrentDomain.GetAssemblies());
-
-			foreach(Assembly assembly in assemblies)
+			foreach(Assembly assembly in LeviathanLoader.modules)
 			{
 				foreach(Type type in assembly.GetTypes())
 				{
@@ -72,6 +71,14 @@ namespace Leviathan.Events
 
 		public static void Raise<EVENT>(EVENT _event) where EVENT : BaseEvent
 		{
+			if(!hasLoaded)
+			{
+				Thread thread = new Thread(LoadEventsThread);
+				thread.Start();
+				thread.Join();
+				hasLoaded = true;
+			}
+			
 			foreach(List<MethodInfo> methods in events.Values.Where(_eventType => _eventType.Select(_method => _method.GetParameters()[0].ParameterType).First() == typeof(EVENT)))
 			{
 				foreach(MethodInfo method in methods)

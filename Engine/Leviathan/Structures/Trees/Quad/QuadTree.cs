@@ -1,8 +1,4 @@
-﻿using Raylib_cs;
-
-using System.Diagnostics.CodeAnalysis;
-
-using Color = Leviathan.Mathematics.Color;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Leviathan.Structures.Trees.Quad
 {
@@ -58,7 +54,7 @@ namespace Leviathan.Structures.Trees.Quad
 		protected readonly List<DATA> contents = new();
 		protected readonly BOUNDS bounds;
 
-		protected internal int currentDepth;
+		protected int currentDepth;
 
 		protected QuadTree(BOUNDS _bounds)
 		{

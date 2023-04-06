@@ -6,6 +6,8 @@ namespace Leviathan.Physics.Shapes
 {
 	public struct Line : IShape
 	{
+		public Rectangle Bounds => Rectangle.FromMinMax(start, end);
+		
 		public float Length => (end - start).Magnitude;
 		public float SqrLength => (end - start).SqrMagnitude;
 
@@ -28,7 +30,7 @@ namespace Leviathan.Physics.Shapes
 
 			return Leviamath.Approximately(_point.y, M * _point.x + B);
 		}
-		
+
 		public bool Intersects<SHAPE>(SHAPE _other) where SHAPE : IShape => _other switch
 		{
 			Circle circle => Intersects(circle),

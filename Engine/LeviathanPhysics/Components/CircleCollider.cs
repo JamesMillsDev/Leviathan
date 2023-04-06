@@ -4,7 +4,7 @@ using Leviathan.Physics.Shapes;
 
 namespace Leviathan.Physics.Components
 {
-	public class CircleCollider : Collider
+	public class CircleCollider : Collider, IPhysicsHandler
 	{
 		protected Circle? Circle => Shape as Circle?;
 		protected override IShape? Shape { get; set; }
@@ -27,11 +27,23 @@ namespace Leviathan.Physics.Components
 				Shape = c;
 			}
 		}
+		
+		private Color colliderCol = Color.Green;
 
 		public override void OnRenderGizmos()
 		{
 			if(Circle.HasValue)
-				Gizmos.DrawWireCircle(Circle.Value.center, Circle.Value.radius, Color.Green);
+				Gizmos.DrawWireCircle(Circle.Value.center, Circle.Value.radius, colliderCol);
+		}
+
+		public void OnTriggerEnter(Collider _other)
+		{
+			colliderCol = Color.Red;
+		}
+
+		public void OnTriggerExit(Collider _other)
+		{
+			colliderCol = Color.Green;
 		}
 	}
 }

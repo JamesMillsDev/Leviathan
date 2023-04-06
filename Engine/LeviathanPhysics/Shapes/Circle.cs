@@ -4,6 +4,8 @@ namespace Leviathan.Physics.Shapes
 {
 	public struct Circle : IShape
 	{
+		public Rectangle Bounds => new Rectangle(center, Vector2.One * radius);
+		
 		public float SqrRadius => radius * radius;
 
 		public Vector2 center;

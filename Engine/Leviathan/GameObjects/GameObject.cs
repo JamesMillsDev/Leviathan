@@ -54,12 +54,12 @@ namespace Leviathan.GameObjects
 
 		public COMPONENT? GetComponent<COMPONENT>() where COMPONENT : Component
 		{
-			return (COMPONENT?) components.FirstOrDefault(_component => _component.GetType() == typeof(COMPONENT));
+			return (COMPONENT?) components.FirstOrDefault(_component => _component is COMPONENT);
 		}
 
 		public COMPONENT?[] GetComponents<COMPONENT>() where COMPONENT : Component
 		{
-			return (COMPONENT?[]) components.Where(_component => _component.GetType() == typeof(COMPONENT)).ToArray();
+			return components.Where(_component => _component is COMPONENT).Cast<COMPONENT>().ToArray();
 		}
 
 		public bool TryGetComponent<COMPONENT>(out COMPONENT? _component) where COMPONENT : Component

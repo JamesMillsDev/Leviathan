@@ -34,7 +34,7 @@ namespace TestApp.GameStates
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
 			player.AddComponent<RotationComponent>(5f, "rotateBase");
-			player.AddComponent<BoxCollider2D>();
+			player.AddComponent<CircleCollider>();
 
 			GameObjectManager.Spawn(player);
 
@@ -63,6 +63,15 @@ namespace TestApp.GameStates
 
 				GameObjectManager.Spawn(test);
 			}
+
+			GameObject empty = new("Test Collider");
+			if(empty.Transform is { })
+			{
+				empty.Transform.LocalScale = Vector2.One * 250f;
+			}
+
+			empty.AddComponent<CircleCollider>();
+			GameObjectManager.Spawn(empty);
 
 			// button = new Button(Vector2.Zero, "banana", new Button.RenderSettings(50, Color.Red));
 

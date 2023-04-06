@@ -5,8 +5,23 @@ namespace Leviathan.Physics.Components
 {
 	public abstract class Collider : Component
 	{
-		internal PhysicsTreeData? data;
-
+		public Rectangle Bounds => Shape!.Bounds;
+		
 		protected abstract IShape? Shape { get; set; }
+		
+		public bool isTrigger = false;
+		
+		internal PhysicsTreeData? data;
+		internal List<Collider> collisions = new();
+
+		internal bool CheckCollision(Collider _other)
+		{
+			if(Shape is { } && _other.Shape is { })
+			{
+				return Shape.Intersects(_other.Shape);
+			}
+
+			return false;
+		}
 	}
 }

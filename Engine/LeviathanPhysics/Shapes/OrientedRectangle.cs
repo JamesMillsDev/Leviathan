@@ -4,6 +4,8 @@ namespace Leviathan.Physics.Shapes
 {
 	public struct OrientedRectangle : IShape
 	{
+		public Rectangle Bounds => new Rectangle(center, halfExtents * 2.0f);
+		
 		public float ThetaRotation => rotation * Leviamath.DEG_2_RAD;
 		
 		public Vector2 center;

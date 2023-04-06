@@ -5,7 +5,9 @@ namespace Leviathan.Physics.Shapes
 	public struct Rectangle : IShape
 	{
 		public static Rectangle FromMinMax(Vector2 _min, Vector2 _max) => new Rectangle(_min, _max - _min);
-
+		
+		public Rectangle Bounds => this;
+		
 		public Vector2 Min
 		{
 			get
