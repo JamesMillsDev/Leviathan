@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Leviathan.Mathematics;
+
+using System.Diagnostics.CodeAnalysis;
 
 namespace Leviathan.Structures.Trees.Quad
 {
-	public abstract class QuadTree<VALUE, BOUNDS, DATA, TREE>
-		where DATA : QuadTreeData<VALUE, BOUNDS>
-		where TREE : QuadTree<VALUE, BOUNDS, DATA, TREE>
+	public abstract class QuadTree<VALUE, DATA, TREE>
+		where DATA : QuadTreeData<VALUE>
+		where TREE : QuadTree<VALUE, DATA, TREE>
 	{
 		protected const int MAX_DEPTH = 5;
 		protected const int MAX_DATA_PER_NODE = 15;
@@ -52,11 +54,11 @@ namespace Leviathan.Structures.Trees.Quad
 
 		protected readonly List<TREE> children = new();
 		protected readonly List<DATA> contents = new();
-		protected readonly BOUNDS bounds;
+		protected readonly Rectangle bounds;
 
 		protected int currentDepth;
 
-		protected QuadTree(BOUNDS _bounds)
+		protected QuadTree(Rectangle _bounds)
 		{
 			bounds = _bounds;
 			currentDepth = 0;
@@ -153,7 +155,7 @@ namespace Leviathan.Structures.Trees.Quad
 			}
 		}
 
-		public abstract List<VALUE> Query(BOUNDS _area);
+		public abstract List<VALUE?> Query(Rectangle _area);
 
 		public void Visualise()
 		{

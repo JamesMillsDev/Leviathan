@@ -7,12 +7,12 @@ using Raylib_cs;
 using System.Diagnostics.CodeAnalysis;
 
 using Color = Leviathan.Mathematics.Color;
-using Rectangle = Leviathan.Physics.Shapes.Rectangle;
+using Rectangle = Leviathan.Mathematics.Rectangle;
 
 namespace Leviathan.Physics
 {
 	[SuppressMessage("ReSharper", "PossiblyImpureMethodCallOnReadonlyVariable")]
-	public class PhysicsGraph : QuadTree<Collider, Rectangle, PhysicsTreeData, PhysicsGraph>
+	public class PhysicsGraph : QuadTree<Collider, PhysicsTreeData, PhysicsGraph>
 	{
 		public PhysicsGraph(Rectangle _bounds) : base(_bounds) { }
 
@@ -71,7 +71,7 @@ namespace Leviathan.Physics
 			contents.Clear();
 		}
 
-		public override List<Collider> Query(Rectangle _area)
+		public override List<Collider?> Query(Rectangle _area)
 		{
 			List<Collider> result = new();
 

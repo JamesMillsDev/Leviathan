@@ -2,6 +2,8 @@
 
 using Raylib_cs;
 
+using Rectangle = Raylib_cs.Rectangle;
+
 namespace Leviathan.Extensions
 {
 	public static class RayRectangleExtensions

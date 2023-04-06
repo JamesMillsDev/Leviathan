@@ -1,7 +1,6 @@
 ﻿using Leviathan.Events;
 using Leviathan.GameObjects;
 using Leviathan.Physics.Components;
-using Leviathan.Physics.Shapes;
 
 using System.Diagnostics;
 
@@ -23,71 +22,42 @@ namespace Leviathan.Physics
 
 		public void Tick()
 		{
+			if(container is not { })
+				return;
+
 			Stopwatch stopwatch = new();
 			stopwatch.Start();
 
-			List<Collider> startCollisions = new();
-			List<Collider> stayCollisions = new();
-			
 			foreach(GameObject? gameObject in GameObjectManager.All)
 			{
-				startCollisions.Clear();
-				stayCollisions.Clear();
-				
-				// It should never be null, but for safety we will check anyway
-				if(gameObject is { Transform: { } } && container is { })
+				if(gameObject is { })
 				{
-					IPhysicsHandler[] handlers = gameObject.components.Where(_comp => _comp is IPhysicsHandler)
-					                                     .Cast<IPhysicsHandler>()
-					                                     .ToArray();
-					
-					foreach(Collider? collider in gameObject.GetComponents<Collider>())
+					List<Collider?> aColliders = new(gameObject.GetComponents<Collider>());
+
+					Collider?[] queried = container.Query(gameObject.Bounds.Scaled(2.0f))
+					                               .Where(_q => !aColliders.Contains(_q))
+					                               .ToArray();
+
+					foreach(Collider? collider in aColliders)
 					{
 						if(collider is { })
 						{
-							List<Collider> lastCollisions = collider.collisions;
+							int id1 = (int) collider.Shape;
 
-							Rectangle queryRange = new()
+							foreach(Collider? other in queried)
 							{
-								center = gameObject.Transform.Position,
-								size = collider.Bounds.size * 2.0f
-							};
-
-							collider.collisions = container.Query(queryRange)
-							                               .Where(_q => _q != collider)
-							                               .Where(_q => collider.CheckCollision(_q))
-							                               .ToList();
-
-							foreach(Collider collision in collider.collisions)
-							{
-								if(lastCollisions.Contains(collision))
+								if(other is { })
 								{
-									lastCollisions.Remove(collision);
-									stayCollisions.Add(collision);
-								}
-								else
-								{
-									startCollisions.Add(collision);
-								}
-							}
-
-							if(lastCollisions.Count > 0 || startCollisions.Count > 0 || stayCollisions.Count > 0)
-							{
-								foreach(IPhysicsHandler handler in handlers)
-								{
-									foreach(Collider lastCollision in lastCollisions)
+									int id2 = (int) other.Shape;
+									if(id1 >= 0 && id2 >= 0)
 									{
-										handler.OnTriggerExit(lastCollision);
-									}
-
-									foreach(Collider startCollision in startCollisions)
-									{
-										handler.OnTriggerEnter(startCollision);
-									}
-
-									foreach(Collider stayCollision in stayCollisions)
-									{
-										handler.OnTriggerStay(stayCollision);
+										int funcIndex = id1 * (int) CollisionFunctions.Shape.Max + id2;
+										Collision? collision = CollisionFunctions.collisionFunctions[funcIndex](collider, other);
+										
+										if(collision != null)
+										{
+											Console.WriteLine("COLLISION");
+										}
 									}
 								}
 							}
@@ -95,7 +65,7 @@ namespace Leviathan.Physics
 					}
 				}
 			}
-			
+
 			stopwatch.Stop();
 			Console.WriteLine(stopwatch.ElapsedMilliseconds);
 		}

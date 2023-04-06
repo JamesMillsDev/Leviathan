@@ -1,12 +1,12 @@
-﻿using Raylib_cs;
+﻿using Leviathan.Mathematics;
 
 namespace Leviathan.Structures.Trees.Quad
 {
-	public class QuadTreeData<VALUE, BOUNDS> : TreeData<VALUE>
+	public class QuadTreeData<VALUE> : TreeData<VALUE>
 	{
-		public BOUNDS bounds;
+		public Rectangle bounds;
 
-		public QuadTreeData(VALUE _value, BOUNDS _bounds) : base(_value)
+		public QuadTreeData(VALUE _value, Rectangle _bounds) : base(_value)
 		{
 			bounds = _bounds;
 		}

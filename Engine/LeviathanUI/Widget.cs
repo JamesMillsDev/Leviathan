@@ -4,6 +4,7 @@ using Raylib_cs;
 
 using System.Diagnostics.CodeAnalysis;
 
+using Rectangle = Raylib_cs.Rectangle;
 using Transform = Leviathan.GameObjects.Components.Transform;
 
 namespace Leviathan.UI

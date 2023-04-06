@@ -6,6 +6,7 @@ using Leviathan.Mathematics;
 using Raylib_cs;
 
 using Color = Leviathan.Mathematics.Color;
+using Rectangle = Raylib_cs.Rectangle;
 
 namespace Leviathan.Debugging
 {

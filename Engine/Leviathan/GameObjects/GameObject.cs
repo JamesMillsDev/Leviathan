@@ -1,6 +1,5 @@
-﻿using Raylib_cs;
-
-using Transform = Leviathan.GameObjects.Components.Transform;
+﻿using Leviathan.GameObjects.Components;
+using Leviathan.Mathematics;
 
 namespace Leviathan.GameObjects
 {
@@ -14,7 +13,7 @@ namespace Leviathan.GameObjects
 
 		public Transform? Transform { get; }
 
-		public Rectangle Bounds => Transform == null ? default : new Rectangle(Transform.Position.x, Transform.Position.y, Transform.Scale.x, Transform.Scale.y);
+		public Rectangle Bounds => Transform == null ? default : new Rectangle(Transform.Position, Transform.Scale);
 
 		internal readonly List<Component> components = new();
 
