@@ -34,7 +34,7 @@ namespace TestApp.GameStates
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
 			player.AddComponent<RotationComponent>(5f, "rotateBase");
-			player.AddComponent<BoxCollider2D>();
+			player.AddComponent<BoxCollider>();
 
 			GameObjectManager.Spawn(player);
 
@@ -70,7 +70,8 @@ namespace TestApp.GameStates
 				empty.Transform.LocalScale = Vector2.One * 250f;
 			}
 
-			empty.AddComponent<BoxCollider2D>();
+			BoxCollider? b = empty.AddComponent<BoxCollider>();
+			b!.isTrigger = true;
 			
 			GameObjectManager.Spawn(empty);
 

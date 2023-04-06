@@ -3,12 +3,14 @@ using Leviathan.Mathematics;
 
 namespace Leviathan.Physics.Components
 {
-	public class BoxCollider2D : Collider
+	public class BoxCollider : Collider, IPhysicsHandler
 	{
 		internal override CollisionFunctions.Shape Shape => CollisionFunctions.Shape.Box;
 
 		public Vector2 center = Vector2.Zero;
 		public Vector2 extents = Vector2.One;
+
+		private Color color = Color.Green;
 
 		public override void Tick()
 		{
@@ -25,11 +27,26 @@ namespace Leviathan.Physics.Components
 		{
 			if(GameObject is { Transform: { } })
 			{
-				Gizmos.DrawWireRectangle(new Rectangle(center, extents * 2), Color.Green, GameObject.Transform.Rotation);
+				Gizmos.DrawWireRectangle(new Rectangle(center, extents * 2), color, GameObject.Transform.Rotation);
 			}
 		}
 
-		internal bool CheckCorners(ref BoxCollider2D _box, ref Vector2 _contact, ref int _numContacts, ref float _overlap, ref Vector2 _edgeNormal)
+		public void OnTriggerEnter(Collider _collider)
+		{
+			color = Color.Red;
+		}
+
+		public void OnTriggerStay(Collider _collider)
+		{
+			color = Color.Blue;
+		}
+
+		public void OnTriggerExit(Collider _collider)
+		{
+			color = Color.Green;
+		}
+
+		internal bool CheckCorners(ref BoxCollider _box, ref Vector2 _contact, ref int _numContacts, ref float _overlap, ref Vector2 _edgeNormal)
 		{
 			if(GameObject is { Transform: { } })
 			{

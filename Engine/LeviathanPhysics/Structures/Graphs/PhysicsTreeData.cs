@@ -2,7 +2,7 @@
 using Leviathan.Physics.Components;
 using Leviathan.Structures.Trees.Quad;
 
-namespace Leviathan.Physics
+namespace Leviathan.Physics.Structures.Graphs
 {
 	public class PhysicsTreeData : QuadTreeData<Collider>
 	{

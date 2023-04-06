@@ -12,25 +12,25 @@ namespace Leviathan.Physics
 			Max
 		}
 
-		internal static readonly Func<Collider, Collider, Collision?>[] collisionFunctions =
+		internal static readonly Action<Collider, Collider>[] collisionFunctions =
 		{
 			CircleCircle, CircleBox,
 			BoxCircle, BoxBox
 		};
 
-		private static Collision? CircleCircle(Collider _a, Collider _b)
+		private static void CircleCircle(Collider _a, Collider _b)
 		{
-			return null;
+			
 		}
 
-		private static Collision? CircleBox(Collider _circle, Collider _box)
+		private static void CircleBox(Collider _circle, Collider _box)
 		{
-			return null;
+			
 		}
 
-		private static Collision? BoxBox(Collider _a, Collider _b)
+		private static void BoxBox(Collider _a, Collider _b)
 		{
-			if(_a is BoxCollider2D aBox && _b is BoxCollider2D bBox)
+			if(_a is BoxCollider aBox && _b is BoxCollider bBox)
 			{
 				Vector2 normal = Vector2.Zero;
 				Vector2 contact = Vector2.Zero;
@@ -51,17 +51,15 @@ namespace Leviathan.Physics
 						point = contact,
 						delta = overlap
 					};
-
-					return collision;
+					
+					_a.ResolveCollision(_b, collision);
 				}
 			}
-			
-			return null;
 		}
 
-		private static Collision? BoxCircle(Collider _box, Collider _circle)
+		private static void BoxCircle(Collider _box, Collider _circle)
 		{
-			return null;
+			
 		}
 	}
 }

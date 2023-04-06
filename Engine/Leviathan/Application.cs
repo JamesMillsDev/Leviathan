@@ -20,6 +20,8 @@ namespace Leviathan
 		/// <summary>A global accessor for the window context. Allows the access of screen size and background color.</summary>
 		public static ref Window? Window => ref instance!.window;
 
+		public static bool IsRunning => instance!.running;
+
 		/// <summary>The Application's singleton instance. Only used to access the Window value.</summary>
 		private static Application? instance;
 

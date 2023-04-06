@@ -1,5 +1,6 @@
 ﻿using Leviathan.GameObjects;
 using Leviathan.Mathematics;
+using Leviathan.Physics.Structures.Graphs;
 
 namespace Leviathan.Physics.Components
 {
@@ -7,15 +8,15 @@ namespace Leviathan.Physics.Components
 	{
 		internal abstract CollisionFunctions.Shape Shape { get; }
 		
-		public bool isTrigger;
+		public bool isTrigger = false;
 		
 		internal PhysicsTreeData? data;
 
 		private readonly List<Collider> objectsInside = new();
 		private readonly List<Collider> objectsInsideThisFrame = new();
 
-		protected internal Vector2 localXAxis;
-		protected internal Vector2 localYAxis;
+		internal Vector2 localXAxis;
+		internal Vector2 localYAxis;
 
 		protected Vector2 lastPos;
 		protected float lastRot;
@@ -39,6 +40,8 @@ namespace Leviathan.Physics.Components
 		{
 			if(isTrigger)
 			{
+				List<Collider> objectsStaying = new();
+
 				for(int i = 0; i < objectsInside.Count; i++)
 				{
 					Collider collider = objectsInside[i];
@@ -50,18 +53,31 @@ namespace Leviathan.Physics.Components
 						objectsInside.RemoveAt(i);
 						i--;
 					}
+					else
+					{
+						objectsStaying.Add(collider);
+					}
 				}
-				
+
+				foreach(Collider collider in objectsStaying)
+					ProcessTriggerStay(collider);
+
 				objectsInsideThisFrame.Clear();
 			}
 		}
 
-		protected internal void TryTriggerEnter(Collider _other)
+		internal void ResolveCollision(Collider _other, Collision _collision)
 		{
-			if(isTrigger && !objectsInside.Contains(_other))
+			if(!objectsInsideThisFrame.Contains(_other))
+				objectsInsideThisFrame.Add(_other);
+
+			if(!isTrigger && !_other.isTrigger)
+			{
+				// This is a hard collision
+			}
+			else
 			{
 				ProcessTriggerEnter(_other);
-				objectsInside.Add(_other);
 			}
 		}
 
@@ -69,6 +85,9 @@ namespace Leviathan.Physics.Components
 		{
 			if(_collider.GameObject is not { })
 				return;
+			
+			if(!objectsInside.Contains(_collider))
+				objectsInside.Add(_collider);
 
 			IPhysicsHandler[] handlers = _collider.GameObject.components
 			                                      .Where(_c => _c is IPhysicsHandler)

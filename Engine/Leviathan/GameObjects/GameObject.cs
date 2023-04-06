@@ -56,9 +56,9 @@ namespace Leviathan.GameObjects
 			return (COMPONENT?) components.FirstOrDefault(_component => _component is COMPONENT);
 		}
 
-		public COMPONENT?[] GetComponents<COMPONENT>() where COMPONENT : Component
+		public IEnumerable<COMPONENT?> GetComponents<COMPONENT>() where COMPONENT : Component
 		{
-			return components.Where(_component => _component is COMPONENT).Cast<COMPONENT>().ToArray();
+			return components.Where(_component => _component is COMPONENT).Cast<COMPONENT>();
 		}
 
 		public bool TryGetComponent<COMPONENT>(out COMPONENT? _component) where COMPONENT : Component

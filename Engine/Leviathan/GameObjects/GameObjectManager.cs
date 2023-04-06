@@ -6,6 +6,8 @@ namespace Leviathan.GameObjects
 	public class GameObjectManager : Singleton<GameObjectManager>
 	{
 		public static IEnumerable<GameObject?> All => Instance == null ? new List<GameObject?>() : Instance.gameObjects;
+		
+		internal static bool TickComplete { get; private set; }
 
 		private static readonly Logger logger = new("GameObjectManager");
 
@@ -70,6 +72,8 @@ namespace Leviathan.GameObjects
 
 				return;
 			}
+
+			TickComplete = false;
 			
 			Instance.listUpdates.ForEach(_update => _update());
 			Instance.listUpdates.Clear();
@@ -82,9 +86,10 @@ namespace Leviathan.GameObjects
 				_go.components.ForEach(_c =>
 				{
 					_c.Tick();
-					_c.PhysicsTick();
 				});
 			});
+
+			TickComplete = true;
 		}
 
 		internal static void OnRenderGizmos()

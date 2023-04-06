@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using Color = Leviathan.Mathematics.Color;
 using Rectangle = Leviathan.Mathematics.Rectangle;
 
-namespace Leviathan.Physics
+namespace Leviathan.Physics.Structures.Graphs
 {
 	[SuppressMessage("ReSharper", "PossiblyImpureMethodCallOnReadonlyVariable")]
 	public class PhysicsGraph : QuadTree<Collider, PhysicsTreeData, PhysicsGraph>
@@ -73,7 +73,7 @@ namespace Leviathan.Physics
 
 		public override List<Collider?> Query(Rectangle _area)
 		{
-			List<Collider> result = new();
+			List<Collider?> result = new();
 
 			if(!bounds.Intersects(_area))
 				return result;
@@ -91,7 +91,7 @@ namespace Leviathan.Physics
 				// ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
 				foreach(PhysicsGraph child in children)
 				{
-					List<Collider> recurse = child.Query(_area);
+					List<Collider?> recurse = child.Query(_area);
 					if(recurse.Count > 0)
 					{
 						result.AddRange(recurse);
