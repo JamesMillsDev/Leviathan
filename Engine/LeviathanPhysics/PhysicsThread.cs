@@ -27,7 +27,7 @@ namespace Leviathan.Physics
 				while(accumulatedTime >= TIME_STEP)
 				{
 					foreach(GameObject? gameObject in GameObjectManager.All)
-						gameObject?.components.ForEach(_c => _c.PhysicsTick());
+						gameObject?.components.ForEach(_c => _c.PhysicsTick(TIME_STEP));
 					
 					accumulatedTime -= TIME_STEP;
 					

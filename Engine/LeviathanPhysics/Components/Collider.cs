@@ -36,7 +36,7 @@ namespace Leviathan.Physics.Components
 			}
 		}
 
-		public override void PhysicsTick()
+		public override void PhysicsTick(float _timeStep)
 		{
 			if(isTrigger)
 			{

@@ -1,4 +1,5 @@
 ﻿using Leviathan.Events;
+using Leviathan.Mathematics;
 using Leviathan.Physics.Components;
 using Leviathan.Physics.Structures.Graphs;
 
@@ -6,6 +7,8 @@ namespace Leviathan.Physics
 {
 	public class PhysicsScene : IEventHandler
 	{
+		public static Vector2 gravity = new Vector2(0, -9.82f);
+		
 		private PhysicsGraph container = null!;
 
 		public void Load()

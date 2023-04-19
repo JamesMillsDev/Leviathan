@@ -10,7 +10,7 @@
 
 		public virtual void Tick() { }
 
-		public virtual void PhysicsTick() { }
+		public virtual void PhysicsTick(float _timeStep) { }
 
 		public virtual void Render() { }
 
