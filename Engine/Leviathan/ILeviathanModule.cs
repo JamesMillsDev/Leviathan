@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Leviathan.UI")]
-[assembly: InternalsVisibleTo("Leviathan.Input")]
+[assembly: InternalsVisibleTo("Leviathan.InputSystem")]
 [assembly: InternalsVisibleTo("Leviathan.Physics")]
 
 namespace Leviathan

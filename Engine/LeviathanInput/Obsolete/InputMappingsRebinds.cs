@@ -1,7 +1,8 @@
 ﻿using Raylib_cs;
 
-namespace Leviathan.Input
+namespace Leviathan.Input.Obsolete
 {
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public enum GamepadAxis
 	{
 		None = -1,
@@ -11,6 +12,7 @@ namespace Leviathan.Input
 		LeftTrigger
 	}
 
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public enum GamepadButton
 	{
 		None = -1,
@@ -33,6 +35,7 @@ namespace Leviathan.Input
 		Center = Raylib_cs.GamepadButton.GAMEPAD_BUTTON_MIDDLE
 	}
 
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public enum KeyCode
 	{
 		None = -1,
@@ -147,6 +150,7 @@ namespace Leviathan.Input
 		KeyboardMenu = KeyboardKey.KEY_KB_MENU
 	}
 
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public enum MouseButton
 	{
 		None = -1,
@@ -159,6 +163,7 @@ namespace Leviathan.Input
 		Back = Raylib_cs.MouseButton.MOUSE_BUTTON_BACK
 	}
 
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public enum MouseAxis
 	{
 		None = -1,

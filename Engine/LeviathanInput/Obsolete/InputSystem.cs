@@ -2,8 +2,9 @@
 
 using Newtonsoft.Json;
 
-namespace Leviathan.Input
+namespace Leviathan.Input.Obsolete
 {
+	[Obsolete("Rebuilding in favour of new SharpX version")]
 	public class InputSystem : Singleton<InputSystem>
 	{
 		private static readonly Logger logger = new Logger("InputSystem");

@@ -1,11 +1,19 @@
-﻿namespace Leviathan.Input
+﻿using Leviathan.Configuration;
+
+namespace Leviathan.InputSystem
 {
 	internal class InputModule : ILeviathanModule
 	{
-		public void Load() => InputSystem.CreateInstance();
+		internal static Config<InputConfigData>? config;
 
-		public void Tick() => InputSystem.Tick();
+		public void Load()
+		{
+			config = new Config<InputConfigData>("input");
+			Input.Load(config);
+		}
 
-		public void Unload() => InputSystem.DestroyInstance();
+		public void Tick() => Input.Poll();
+
+		public void Unload() { }
 	}
 }

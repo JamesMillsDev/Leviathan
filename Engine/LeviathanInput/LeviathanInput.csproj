@@ -5,8 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
-        <AssemblyName>Leviathan.Input</AssemblyName>
-        <RootNamespace>Leviathan.Input</RootNamespace>
+        <AssemblyName>Leviathan.InputSystem</AssemblyName>
+        <RootNamespace>Leviathan.InputSystem</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -20,6 +20,8 @@
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="Raylib-cs" Version="4.2.0.2" />
+        <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
+        <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     </ItemGroup>
 
     <ItemGroup>
