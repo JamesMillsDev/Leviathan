@@ -6,6 +6,8 @@ namespace Leviathan.GameStates
 	{
 		private static readonly Logger logger = new("GameStateManager");
 
+		private static readonly List<Action> updateStatesActions = new();
+
 		public static void Add(IGameState _state)
 		{
 			if(Instance == null)
@@ -30,8 +32,11 @@ namespace Leviathan.GameStates
 
 			if(Instance.states.ContainsKey(_state))
 			{
-				Instance.states[_state].Enter();
-				Instance.active.Add(Instance.states[_state]);
+				updateStatesActions.Add(() =>
+				{
+					Instance.states[_state].Enter();
+					Instance.active.Add(Instance.states[_state]);
+				});
 			}
 		}
 
@@ -46,8 +51,11 @@ namespace Leviathan.GameStates
 
 			if(Instance.states.ContainsKey(_state) && Instance.active.Contains(Instance.states[_state]))
 			{
-				Instance.states[_state].Exit();
-				Instance.active.Remove(Instance.states[_state]);
+				updateStatesActions.Add(() =>
+				{
+					Instance.states[_state].Exit();
+					Instance.active.Remove(Instance.states[_state]);
+				});
 			}
 		}
 
@@ -59,7 +67,7 @@ namespace Leviathan.GameStates
 
 				return;
 			}
-			
+
 			Instance.active.ForEach(_state => _state.Render());
 		}
 
@@ -71,6 +79,11 @@ namespace Leviathan.GameStates
 
 				return;
 			}
+
+			foreach(Action action in updateStatesActions)
+				action();
+
+			updateStatesActions.Clear();
 			
 			Instance.active.ForEach(_state => _state.Tick());
 		}
@@ -83,7 +96,7 @@ namespace Leviathan.GameStates
 
 				return;
 			}
-			
+
 			Instance.active.ForEach(_state => _state.OnRenderGizmos());
 		}
 
