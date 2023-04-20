@@ -1,7 +1,5 @@
 ﻿using Leviathan;
 using Leviathan.GameObjects;
-using Leviathan.Input;
-using Leviathan.Mathematics;
 
 namespace TestApp.GameObjects.Components
 {
@@ -15,12 +13,12 @@ namespace TestApp.GameObjects.Components
 		{
 			speed = (float) _data[0];
 
-			InputAction? action = InputSystem.Find("movement");
+			/*InputAction? action = InputSystem.Find("movement");
 			if(action != null)
 			{
 				action.onPerformed += OnMovementPerformed;
 				action.onCancelled += OnMovementCancelled;
-			}
+			}*/
 		}
 
 		public override void Tick()
@@ -34,7 +32,7 @@ namespace TestApp.GameObjects.Components
 			}
 		}
 
-		private void OnMovementPerformed(InputAction? _action)
+		/*private void OnMovementPerformed(InputAction? _action)
 		{
 			movement = _action?.ReadValue<Vector2>().y;
 		}
@@ -42,6 +40,6 @@ namespace TestApp.GameObjects.Components
 		private void OnMovementCancelled(InputAction? _action)
 		{
 			movement = 0;
-		}
+		}*/
 	}
 }

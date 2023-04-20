@@ -2,7 +2,7 @@
 
 using Newtonsoft.Json;
 
-namespace Leviathan.Input
+namespace Leviathan.InputSystem
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class InputAction
@@ -12,12 +12,12 @@ namespace Leviathan.Input
 			Button,
 			Axis
 		}
-		
-		[JsonProperty] public List<InputMapping> mappings = new();
-		[JsonProperty] public ActionType Type { get; set; } = ActionType.Button;
 
 		public Action<InputAction>? onPerformed;
 		public Action<InputAction>? onCancelled;
+
+		[JsonProperty] public List<InputMapping> mappings = new();
+		[JsonProperty] public ActionType Type { get; set; } = ActionType.Button;
 
 		private bool buttonValue;
 		private Vector2 axisValue;
@@ -32,63 +32,9 @@ namespace Leviathan.Input
 			};
 		}
 
-		internal void Tick()
+		internal void Poll()
 		{
-			bool changeOccured = mappings.Any(_mapping => _mapping.Tick(0));
-
-			switch(Type)
-			{
-				case ActionType.Button:
-					HandleButton(changeOccured);
-					break;
-				case ActionType.Axis:
-					HandleAxis(changeOccured);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
-
-		private void HandleButton(bool _changeOccured)
-		{
-			buttonValue = false;
 			
-			foreach(InputMapping mapping in mappings)
-				buttonValue |= mapping.GetButtonValue();
-
-			if(_changeOccured)
-			{
-				if(buttonValue)
-				{
-					onPerformed?.Invoke(this);
-				}
-				else
-				{
-					onCancelled?.Invoke(this);
-				}
-			}
-		}
-
-		private void HandleAxis(bool _changeOccured)
-		{
-			axisValue = Vector2.Zero;
-			
-			foreach(InputMapping mapping in mappings)
-				axisValue += mapping.GetAxisValue();
-			
-			axisValue.Normalise();
-
-			if(_changeOccured)
-			{
-				if(axisValue != Vector2.Zero)
-				{
-					onPerformed?.Invoke(this);
-				}
-				else
-				{
-					onCancelled?.Invoke(this);
-				}
-			}
 		}
 	}
 }

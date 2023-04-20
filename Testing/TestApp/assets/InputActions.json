@@ -7,8 +7,8 @@
         "GamepadButton": -1,
         "Key": 0,
         "Keys": {
-          "forward": 87,
-          "back": 83,
+          "forward": 17,
+          "back": 31,
           "right": 0,
           "left": 0
         },
