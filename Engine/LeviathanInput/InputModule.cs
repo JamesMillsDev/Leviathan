@@ -14,6 +14,6 @@ namespace Leviathan.InputSystem
 
 		public void Tick() => Input.Poll();
 
-		public void Unload() { }
+		public void Unload() => Input.Unload();
 	}
 }

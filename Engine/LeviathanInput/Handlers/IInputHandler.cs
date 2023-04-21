@@ -2,6 +2,8 @@
 {
 	public interface IInputHandler
 	{
+		public HandlerType Type { get; }
+		
 		public void Poll();
 	}
 }

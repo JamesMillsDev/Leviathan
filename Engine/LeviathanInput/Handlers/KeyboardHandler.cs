@@ -4,6 +4,8 @@ namespace Leviathan.InputSystem.Handlers
 {
 	public class KeyboardHandler : IInputHandler
 	{
+		public HandlerType Type => HandlerType.Keyboard;
+		
 		private readonly Keyboard keyboard;
 
 		private readonly List<Key> pressed = new();
@@ -17,7 +19,7 @@ namespace Leviathan.InputSystem.Handlers
 
 		public bool IsPressed(Key _key) => pressed.Contains(_key);
 		public bool IsReleased(Key _key) => released.Contains(_key);
-		
+
 		public void Poll()
 		{
 			keyboard.Poll();

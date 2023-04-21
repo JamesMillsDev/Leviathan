@@ -4,56 +4,62 @@
       {
         "Type": 5,
         "GamepadAxis": -1,
-        "GamepadButton": -1,
-        "Key": 0,
-        "Keys": {
+        "GamepadButton": 0,
+        "KeyCode": 0,
+        "Keys":
+        {
           "forward": 17,
           "back": 31,
           "right": 0,
           "left": 0
         },
-        "MouseButton": -1,
+        "MouseButton": 0,
         "MouseAxis": -1
       }
     ],
-    "Type": 1
+    "Type": 1,
+    "ActiveHandlerType": 0
   },
   "rotateBase": {
     "mappings": [
       {
         "Type": 5,
         "GamepadAxis": -1,
-        "GamepadButton": -1,
-        "Key": 0,
-        "Keys": {
+        "GamepadButton": 0,
+        "KeyCode": 0,
+        "Keys":
+        {
           "forward": 0,
           "back": 0,
-          "right": 68,
-          "left": 65
+          "right": 32,
+          "left": 30
         },
-        "MouseButton": -1,
+        "MouseButton": 0,
         "MouseAxis": -1
       }
     ],
-    "Type": 1
+    "Type": 1,
+    "ActiveHandlerType": 0
   },
   "rotateTurret": {
     "mappings": [
       {
         "Type": 5,
         "GamepadAxis": -1,
-        "GamepadButton": -1,
-        "Key": 0,
-        "Keys": {
+        "GamepadButton": 0,
+        "KeyCode": 0,
+        "Keys":
+        {
           "forward": 0,
           "back": 0,
-          "right": 69,
-          "left": 81
+          "right": 18,
+          "left": 16
         },
-        "MouseButton": -1,
+        "MouseButton": 0,
         "MouseAxis": -1
       }
     ],
-    "Type": 1
+    "Type": 1,
+    "ActiveHandlerType": 0
   }
 }
