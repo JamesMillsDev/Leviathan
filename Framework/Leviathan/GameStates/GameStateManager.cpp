@@ -81,23 +81,6 @@ GameStateManager::~GameStateManager()
 	m_activeStates.clear();
 }
 
-void GameStateManager::CreateInstance()
-{
-	if (m_instance != nullptr)
-		return;
-
-	m_instance = new GameStateManager();
-}
-
-void GameStateManager::DestroyInstance()
-{
-	if (m_instance != nullptr)
-	{
-		delete m_instance;
-		m_instance = nullptr;
-	}
-}
-
 void GameStateManager::Tick()
 {
 	vector<IGameState*>& active = m_instance->m_activeStates;

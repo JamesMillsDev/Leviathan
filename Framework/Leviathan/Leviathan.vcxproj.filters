@@ -10,6 +10,9 @@
     <Filter Include="Source\GameStates">
       <UniqueIdentifier>{d7da4a52-3d56-45b8-ad49-ebbaaa641d12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Resources">
+      <UniqueIdentifier>{d44b3df8-91b7-446f-bb08-36224a15a064}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
@@ -27,9 +30,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Assets.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -42,7 +42,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Transform.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Transform.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -54,9 +59,6 @@
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Assets.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -66,6 +68,8 @@
     <ClCompile Include="GameObjects\GameObject.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\Transform.cpp" />
+    <ClCompile Include="GameObjects\Transform.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

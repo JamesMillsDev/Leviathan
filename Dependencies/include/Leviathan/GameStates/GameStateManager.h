@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Leviathan/Singleton.h>
+
 #include <functional>
 #include <vector>
 #include <map>
@@ -10,7 +12,7 @@ using std::map;
 
 typedef function<void()> UpdateAction;
 
-class GameStateManager
+class GameStateManager : Singleton<GameStateManager>
 {
 public:
 	static void AddState(class IGameState* _state);
@@ -21,8 +23,6 @@ public:
 private:
 	friend class Application;
 
-	static GameStateManager* m_instance;
-
 	vector<UpdateAction> m_listUpdates;
 	vector<class IGameState*> m_activeStates;
 	map<char*, class IGameState*> m_states;
@@ -30,9 +30,6 @@ private:
 	GameStateManager() = default;
 	GameStateManager(GameStateManager&) = delete;
 	~GameStateManager();
-
-	static void CreateInstance();
-	static void DestroyInstance();
 
 	static void Tick();
 	static void Render();

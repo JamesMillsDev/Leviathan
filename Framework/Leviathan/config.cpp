@@ -10,7 +10,7 @@ using std::getline;
 
 Config* Config::m_instance = nullptr;
 
-void Config::reload()
+void Config::Reload()
 {
 	if (m_instance == nullptr)
 		return;

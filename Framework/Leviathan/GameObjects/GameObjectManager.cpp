@@ -46,23 +46,6 @@ GameObjectManager::~GameObjectManager()
 	m_objects.clear();
 }
 
-void GameObjectManager::CreateInstance()
-{
-	if (m_instance != nullptr)
-		return;
-
-	m_instance = new GameObjectManager();
-}
-
-void GameObjectManager::DestroyInstance()
-{
-	if (m_instance != nullptr)
-	{
-		delete m_instance;
-		m_instance = nullptr;
-	}
-}
-
 void GameObjectManager::Tick()
 {
 	vector<IGameObject*>& objects = m_instance->m_objects;

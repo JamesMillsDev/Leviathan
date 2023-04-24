@@ -33,7 +33,7 @@ struct InvalidValueException : public std::exception
 class Config
 {
 public:
-	static void reload();
+	static void Reload();
 
 	static int GetIntValue(string _group, string _id);
 	static bool GetBooleanValue(string _group, string _id);
