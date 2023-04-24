@@ -6,13 +6,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="color.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="mat3.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="mat4.cpp">
+    <ClCompile Include="Mat4.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="vec2.cpp">
@@ -27,15 +24,13 @@
     <ClCompile Include="leviamath.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Color32.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\color.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat3.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat4.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat4.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec2.h">
@@ -50,5 +45,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\leviamath.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Color32.h" />
   </ItemGroup>
 </Project>

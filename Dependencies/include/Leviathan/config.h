@@ -7,8 +7,8 @@
 #include <string>
 #include <map>
 
-#include <Leviathan/Math/vec2.h>
-#include <Leviathan/Math/color.h>
+#include <Leviathan/Math/Vec2.h>
+#include <Leviathan/Math/Color32.h>
 
 #include <type_traits>
 
@@ -18,11 +18,11 @@ using std::is_same;
 
 typedef string group_id;
 
-struct invalid_value_exception : public std::exception
+struct InvalidValueException : public std::exception
 {
 	string value;
 
-	invalid_value_exception(string _value) : value("Key not found: " + _value) {}
+	InvalidValueException(string _value) : value("Key not found: " + _value) {}
 
 	const char* what() const throw ()
 	{
@@ -30,37 +30,36 @@ struct invalid_value_exception : public std::exception
 	}
 };
 
-class config
+class Config
 {
 public:
 	static void reload();
 
+	static int GetIntValue(string _group, string _id);
+	static bool GetBooleanValue(string _group, string _id);
+	static float GetFloatValue(string _group, string _id);
+	static Vec2 GetVectorValue(string _group, string _id);
+	static Color32 GetColorValue(string _group, string _id);
+	static const char* GetTextValue(string _group, string _id);
 
-	static int getIntValue(string _group, string _id);
-	static bool getBooleanValue(string _group, string _id);
-	static float getFloatValue(string _group, string _id);
-	static vec2 getVectorValue(string _group, string _id);
-	static color getColorValue(string _group, string _id);
-	static const char* getTextValue(string _group, string _id);
-
-	static void createInstance(string _filePath);
-	static void destroyInstance();
+	static void CreateInstance(string _filePath);
+	static void DestroyInstance();
 
 private:
-	static config* m_instance;
+	static Config* m_instance;
 
 	string m_filePath;
 	map<group_id, map<string, int>> m_intValues;
 	map<group_id, map<string, bool>> m_boolValues;
 	map<group_id, map<string, float>> m_floatValues;
-	map<group_id, map<string, vec2>> m_vectorValues;
-	map<group_id, map<string, color>> m_colorValues;
+	map<group_id, map<string, Vec2>> m_vectorValues;
+	map<group_id, map<string, Color32>> m_colorValues;
 	map<group_id, map<string, string>> m_textValues;
 
-	config(string _filePath);
-	config(const config&) = delete;
+	Config(string _filePath);
+	Config(const Config&) = delete;
 
-	void clear();
-	void load(string _filePath);
+	void Clear();
+	void Load(string _filePath);
 
 };

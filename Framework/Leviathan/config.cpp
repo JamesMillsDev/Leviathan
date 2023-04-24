@@ -1,4 +1,4 @@
-#include <Leviathan/config.h>
+#include <Leviathan/Config.h>
 
 #include <fstream>
 #include <vector>
@@ -8,18 +8,18 @@ using std::vector;
 
 using std::getline;
 
-config* config::m_instance = nullptr;
+Config* Config::m_instance = nullptr;
 
-void config::reload()
+void Config::reload()
 {
 	if (m_instance == nullptr)
 		return;
 
-	m_instance->clear();
-	m_instance->load(m_instance->m_filePath);
+	m_instance->Clear();
+	m_instance->Load(m_instance->m_filePath);
 }
 
-int config::getIntValue(string _group, string _id)
+int Config::GetIntValue(string _group, string _id)
 {
 	if (m_instance->m_intValues.find(_group) != m_instance->m_intValues.end())
 	{
@@ -34,7 +34,7 @@ int config::getIntValue(string _group, string _id)
 	return 0;
 }
 
-bool config::getBooleanValue(string _group, string _id)
+bool Config::GetBooleanValue(string _group, string _id)
 {
 	if (m_instance->m_boolValues.find(_group) != m_instance->m_boolValues.end())
 	{
@@ -49,7 +49,7 @@ bool config::getBooleanValue(string _group, string _id)
 	return false;
 }
 
-float config::getFloatValue(string _group, string _id)
+float Config::GetFloatValue(string _group, string _id)
 {
 	if (m_instance->m_floatValues.find(_group) != m_instance->m_floatValues.end())
 	{
@@ -64,7 +64,7 @@ float config::getFloatValue(string _group, string _id)
 	return 0;
 }
 
-vec2 config::getVectorValue(string _group, string _id)
+Vec2 Config::GetVectorValue(string _group, string _id)
 {
 	if (m_instance->m_vectorValues.find(_group) != m_instance->m_vectorValues.end())
 	{
@@ -76,10 +76,10 @@ vec2 config::getVectorValue(string _group, string _id)
 		}
 	}
 
-	return vec2();
+	return Vec2();
 }
 
-color config::getColorValue(string _group, string _id)
+Color32 Config::GetColorValue(string _group, string _id)
 {
 	if (m_instance->m_colorValues.find(_group) != m_instance->m_colorValues.end())
 	{
@@ -91,10 +91,10 @@ color config::getColorValue(string _group, string _id)
 		}
 	}
 
-	return color();
+	return Color32();
 }
 
-const char* config::getTextValue(string _group, string _id)
+const char* Config::GetTextValue(string _group, string _id)
 {
 	if (m_instance->m_textValues.find(_group) != m_instance->m_textValues.end())
 	{
@@ -109,23 +109,23 @@ const char* config::getTextValue(string _group, string _id)
 	return 0;
 }
 
-void config::createInstance(string _filePath)
+void Config::CreateInstance(string _filePath)
 {
-	m_instance = new config(_filePath);
+	m_instance = new Config(_filePath);
 }
 
-void config::destroyInstance()
+void Config::DestroyInstance()
 {
 	delete m_instance;
 }
 
-config::config(string _filePath)
+Config::Config(string _filePath)
 {
 	m_filePath = _filePath;
-	load(m_filePath);
+	Load(m_filePath);
 }
 
-void config::clear()
+void Config::Clear()
 {
 	m_intValues.clear();
 	m_boolValues.clear();
@@ -135,7 +135,7 @@ void config::clear()
 	m_textValues.clear();
 }
 
-void config::load(string _filePath)
+void Config::Load(string _filePath)
 {
 	ifstream configFile("assets\\" + _filePath);
 	if (configFile.bad())
@@ -185,11 +185,11 @@ void config::load(string _filePath)
 
 				if (values.size() == 2)
 				{
-					m_vectorValues[lastGroup][id] = vec2{ values[0], values[1] };
+					m_vectorValues[lastGroup][id] = Vec2{ values[0], values[1] };
 				}
 				else if (values.size() == 4)
 				{
-					m_colorValues[lastGroup][id] = color
+					m_colorValues[lastGroup][id] = Color32
 					{
 						(uint8_t)values[0],
 						(uint8_t)values[1],

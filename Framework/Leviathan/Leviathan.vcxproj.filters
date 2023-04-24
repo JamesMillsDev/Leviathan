@@ -9,45 +9,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\application.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\game.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\window.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\gameobject.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\gameobject_manager.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\assets.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Assets.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\config.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="application.cpp">
+    <ClCompile Include="Application.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="window.cpp">
+    <ClCompile Include="Window.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\gameobject.cpp">
+    <ClCompile Include="GameObjects\GameObject.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\gameobject_manager.cpp">
+    <ClCompile Include="GameObjects\GameObjectManager.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="assets.cpp">
+    <ClCompile Include="Assets.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="config.cpp">
+    <ClCompile Include="Config.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,20 +1,20 @@
 #pragma once
 
-#include <Leviathan/Math/color.h>
+#include <Leviathan/Math/Color32.h>
 
-struct window
+struct Window
 {
 private:
-	friend class application;
+	friend class Application;
 
 	int m_width;
 	int m_height;
 	const char* m_title;
-	color m_clearColor;
+	Color32 m_clearColor;
 
-	window();
-	window(window&) = delete;
-	~window() = default;
+	Window();
+	Window(Window&) = delete;
+	~Window() = default;
 
 	void open();
 	void close();

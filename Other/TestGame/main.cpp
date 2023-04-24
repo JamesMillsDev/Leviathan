@@ -1,14 +1,14 @@
 #include <Leviathan/application.h>
 #include <Leviathan/game.h>
 
-class testGame : public game
+class testGame : public Game
 {
 protected:
-	virtual void load() override {}
+	virtual void Load() override {}
 
 };
 
 int main()
 {
-	return application::run<testGame>();
+	return Application::run<testGame>();
 }

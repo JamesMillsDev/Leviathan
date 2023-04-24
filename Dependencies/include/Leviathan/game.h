@@ -1,14 +1,14 @@
 #pragma once
 
-class game
+class Game
 {
 protected:
-	friend class application;
+	friend class Application;
 
-	virtual void load() = 0;
-	virtual void unload() {}
+	virtual void Load() = 0;
+	virtual void Unload() {}
 
-	virtual void tick() {}
-	virtual void render() {}
+	virtual void Tick() {}
+	virtual void Render() {}
 
 };

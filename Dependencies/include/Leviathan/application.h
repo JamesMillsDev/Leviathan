@@ -7,32 +7,32 @@
 template<class T, class U>
 concept Derived = std::is_base_of<U, T>::value;
 
-class application
+class Application
 {
 public:
-	template<Derived<game> GAME>
+	template<Derived<Game> GAME>
 	static int run();
 
 private:
-	static application* m_instance;
+	static Application* m_instance;
 
-	struct window* m_window;
+	struct Window* m_window;
 	
-	game* m_game;
+	Game* m_game;
 
-	application(game* _game);
-	~application();
+	Application(Game* _game);
+	~Application();
 
 	void process();
 
 };
 
-template<Derived<game> GAME>
-inline int application::run()
+template<Derived<Game> GAME>
+inline int Application::run()
 {
 	if (m_instance == nullptr)
 	{
-		m_instance = new application(new GAME());
+		m_instance = new Application(new GAME());
 		m_instance->process();
 		return 0;
 	}

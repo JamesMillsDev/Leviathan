@@ -4,31 +4,31 @@
 
 #include <Leviathan/config.h>
 
-window::window()
+Window::Window()
 {
-	m_width = config::getIntValue(WINDOW_CATEGORY, "width");
-	m_height = config::getIntValue(WINDOW_CATEGORY, "height");
-	m_title = config::getTextValue(PROGRAM_CATEGORY, "title");
-	m_clearColor = config::getColorValue(PROGRAM_CATEGORY, "clearColor");
+	m_width = Config::GetIntValue(WINDOW_CATEGORY, "width");
+	m_height = Config::GetIntValue(WINDOW_CATEGORY, "height");
+	m_title = Config::GetTextValue(PROGRAM_CATEGORY, "title");
+	m_clearColor = Config::GetColorValue(PROGRAM_CATEGORY, "clearColor");
 }
 
-void window::open()
+void Window::open()
 {
 	InitWindow(m_width, m_height, m_title);
 }
 
-void window::close()
+void Window::close()
 {
 	CloseWindow();
 }
 
-void window::beginFrame()
+void Window::beginFrame()
 {
 	BeginDrawing();
 	ClearBackground(m_clearColor);
 }
 
-void window::endFrame()
+void Window::endFrame()
 {
 	EndDrawing();
 }

@@ -1,20 +1,20 @@
-#include <Leviathan/application.h>
+#include <Leviathan/Application.h>
 
-#include <Leviathan/window.h>
+#include <Leviathan/Window.h>
 #include <raylib/raylib.h>
 
-#include <Leviathan/config.h>
+#include <Leviathan/Config.h>
 
-application* application::m_instance = nullptr;
+Application* Application::m_instance = nullptr;
 
-application::application(game* _game) : m_game(_game), m_window(nullptr)
+Application::Application(Game* _game) : m_game(_game), m_window(nullptr)
 {
-	config::createInstance("config.cfg");
+	Config::CreateInstance("config.cfg");
 
-	m_window = new window();
+	m_window = new Window();
 }
 
-application::~application()
+Application::~Application()
 {
 	if (m_game != nullptr)
 	{
@@ -28,10 +28,10 @@ application::~application()
 		m_window = nullptr;
 	}
 
-	config::destroyInstance();
+	Config::DestroyInstance();
 }
 
-void application::process()
+void Application::process()
 {
 	m_window->open();
 

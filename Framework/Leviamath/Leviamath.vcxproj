@@ -170,7 +170,7 @@
     <ClCompile Include="Color32.cpp" />
     <ClCompile Include="Leviamath.cpp" />
     <ClCompile Include="Mat3.cpp" />
-    <ClCompile Include="mat4.cpp" />
+    <ClCompile Include="Mat4.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="Vec4.cpp" />
@@ -179,7 +179,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Leviamath.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat3.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat4.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat4.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec2.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec3.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec4.h" />
