@@ -1,7 +1,7 @@
 ﻿using Leviathan.Mathematics;
 using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using Color = Leviathan.Mathematics.Color;
 
@@ -16,9 +16,9 @@ namespace Leviathan.UI
 			public ColorBlock colors = new ColorBlock()
 			{
 				disabled = new Color(255, 255, 255, 128),
-				hovered = Raylib_cs.Color.DARKGRAY,
-				normal = Raylib_cs.Color.LIGHTGRAY,
-				selected = Raylib_cs.Color.BLACK
+				hovered = Color.DarkGray,
+				normal = Color.LightGray,
+				selected = Color.Black
 			};
 
 			public int fontSize;

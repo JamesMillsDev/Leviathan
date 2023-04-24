@@ -75,8 +75,8 @@
 		public static bool operator ==(Color _lhs, Color _rhs) => _lhs.color == _rhs.color;
 		public static bool operator !=(Color _lhs, Color _rhs) => !(_lhs == _rhs);
 
-		public static implicit operator Raylib_cs.Color(Color _color) => new(_color.R, _color.G, _color.B, _color.A);
-		public static implicit operator Color(Raylib_cs.Color _color) => new(_color.r, _color.g, _color.b, _color.a);
+		public static implicit operator Raylib_CsLo.Color(Color _color) => new(_color.R, _color.G, _color.B, _color.A);
+		public static implicit operator Color(Raylib_CsLo.Color _color) => new(_color.r, _color.g, _color.b, _color.a);
 
 		public static implicit operator Color(uint _color) => new(_color);
 	}

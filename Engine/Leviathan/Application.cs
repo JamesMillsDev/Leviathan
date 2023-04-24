@@ -5,7 +5,7 @@ using Leviathan.GameObjects;
 using Leviathan.GameStates;
 using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using System.Reflection;
 
@@ -77,7 +77,7 @@ namespace Leviathan
 
 				// Set the exit key and stop raylib from logging normally
 				Raylib.SetExitKey((KeyboardKey) exitKey);
-				Raylib.SetTraceLogLevel(TraceLogLevel.LOG_NONE);
+				Raylib.SetTraceLogLevel((int)TraceLogLevel.LOG_NONE);
 
 				// Create the window instance
 				window = new Window(applicationConfig);

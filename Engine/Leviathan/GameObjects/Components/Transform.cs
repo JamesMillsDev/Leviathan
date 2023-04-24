@@ -84,6 +84,12 @@ namespace Leviathan.GameObjects.Components
 			hasChanged = true;
 		}
 
+		public void SetRotation(float _rotation)
+		{
+			transform.SetRotationZ(_rotation);
+			hasChanged = true;
+		}
+
 		public Vector2 TransformVector(Vector2 _vector2) => transform * _vector2;
 
 		public override string ToString() => $"\tPosition: {Position}\n\tRotation: {Rotation}\n\tScale: {Scale}";

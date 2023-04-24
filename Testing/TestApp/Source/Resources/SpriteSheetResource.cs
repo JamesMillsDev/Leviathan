@@ -1,12 +1,12 @@
 ﻿using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using System.Xml;
 
 namespace TestApp.Resources
 {
-	public class SpriteSheetResource : Resource<Texture2D>
+	public class SpriteSheetResource : Resource<Texture>
 	{
 		public int FullWidth => Value.width;
 		public int FullHeight => Value.height;

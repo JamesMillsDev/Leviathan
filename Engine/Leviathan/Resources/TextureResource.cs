@@ -1,9 +1,9 @@
-﻿using Raylib_cs;
+﻿using Raylib_CsLo;
 
 namespace Leviathan.Resources
 {
 	/// <summary>The implementation for Textures in the Resource system.</summary>
-	public class TextureResource : Resource<Texture2D>
+	public class TextureResource : Resource<Texture>
 	{
 		/// <summary>The constructor for a texture resource which calls the base constructor passing in Raylib's Load and Unload texture functions.</summary>
 		/// <param name="_path">The path to the texture that is being loaded.</param>

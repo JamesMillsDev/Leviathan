@@ -1,8 +1,6 @@
 ﻿using Leviathan.Mathematics;
 
-using Raylib_cs;
-
-using Rectangle = Raylib_cs.Rectangle;
+using Rectangle = Raylib_CsLo.Rectangle;
 
 namespace Leviathan.Extensions
 {

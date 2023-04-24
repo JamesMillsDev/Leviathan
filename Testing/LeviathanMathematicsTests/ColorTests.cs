@@ -1,6 +1,4 @@
-﻿using Leviathan.Mathematics;
-
-namespace Leviathan.Mathematics.Tests
+﻿namespace Leviathan.Mathematics.Tests
 {
 	[TestClass]
 	public class ColorTests : TestsBase
@@ -84,7 +82,7 @@ namespace Leviathan.Mathematics.Tests
 		public void RaylibImplicitCast()
 		{
 			Color color = new(0xffffffff);
-			Raylib_cs.Color rayColor = new(255, 255, 255, 255);
+			Raylib_CsLo.Color rayColor = new(255, 255, 255, 255);
 			
 			Assert.IsTrue(Compare(color, rayColor));
 		}

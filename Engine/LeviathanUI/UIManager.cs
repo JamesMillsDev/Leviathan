@@ -1,6 +1,6 @@
 ﻿using Leviathan.Debugging;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 namespace Leviathan.UI
 {

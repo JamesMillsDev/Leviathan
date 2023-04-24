@@ -1,10 +1,10 @@
 ﻿using Leviathan.Mathematics;
 using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using Color = Leviathan.Mathematics.Color;
-using Rectangle = Raylib_cs.Rectangle;
+using Rectangle = Raylib_CsLo.Rectangle;
 
 namespace Leviathan.UI
 {
@@ -14,7 +14,7 @@ namespace Leviathan.UI
 		
 		public ImageWidget(Vector2 _position, Vector2 _size, string _imageId) : base(_position, _size)
 		{
-			image = ResourceManager.Find<TextureResource, Texture2D>($"Textures/{_imageId}");
+			image = ResourceManager.Find<TextureResource, Texture>($"Textures/{_imageId}");
 		}
 
 		public override void Render()

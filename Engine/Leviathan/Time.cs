@@ -1,6 +1,6 @@
 ﻿using Leviathan.Mathematics;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using System.Diagnostics.CodeAnalysis;
 

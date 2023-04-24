@@ -1,4 +1,4 @@
-﻿using Raylib_cs;
+﻿using Raylib_CsLo;
 
 namespace Leviathan.Mathematics
 {
@@ -54,8 +54,8 @@ namespace Leviathan.Mathematics
 
 		public Rectangle Scaled(float _scalar) => new(center, size * _scalar);
 
-		public static implicit operator Raylib_cs.Rectangle(Rectangle _rect) => new(_rect.Min.x, _rect.Min.y, _rect.size.x, _rect.size.y);
-		public static implicit operator Rectangle(Raylib_cs.Rectangle _rect)
+		public static implicit operator Raylib_CsLo.Rectangle(Rectangle _rect) => new(_rect.Min.x, _rect.Min.y, _rect.size.x, _rect.size.y);
+		public static implicit operator Rectangle(Raylib_CsLo.Rectangle _rect)
 		{
 			Vector2 min = new Vector2(_rect.x, _rect.y);
 			Vector2 max = min + new Vector2(_rect.width, _rect.height);

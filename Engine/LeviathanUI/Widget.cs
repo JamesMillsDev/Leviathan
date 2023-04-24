@@ -1,10 +1,8 @@
 ﻿using Leviathan.Mathematics;
 
-using Raylib_cs;
-
 using System.Diagnostics.CodeAnalysis;
 
-using Rectangle = Raylib_cs.Rectangle;
+using Rectangle = Raylib_CsLo.Rectangle;
 using Transform = Leviathan.GameObjects.Components.Transform;
 
 namespace Leviathan.UI

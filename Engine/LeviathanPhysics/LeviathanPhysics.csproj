@@ -7,11 +7,16 @@
         <AssemblyName>Leviathan.Physics</AssemblyName>
         <RootNamespace>Leviathan.Physics</RootNamespace>
         <LangVersion>default</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\LeviathanMathematics\LeviathanMathematics.csproj" />
         <ProjectReference Include="..\Leviathan\Leviathan.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Raylib-CsLo" Version="4.2.0.9" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">

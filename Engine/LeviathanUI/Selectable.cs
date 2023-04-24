@@ -1,6 +1,6 @@
 ﻿using Leviathan.Mathematics;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using Color = Leviathan.Mathematics.Color;
 
@@ -66,7 +66,7 @@ namespace Leviathan.UI
 			SelectionState.Hovered => colors.hovered,
 			SelectionState.Selected => colors.selected,
 			SelectionState.Disabled => colors.disabled,
-			_ => Raylib_cs.Color.BLANK
+			_ => Color.Black
 		};
 	}
 }

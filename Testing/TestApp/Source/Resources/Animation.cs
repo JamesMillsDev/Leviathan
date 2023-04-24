@@ -1,7 +1,7 @@
 ﻿using Leviathan;
 using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using System.Xml;
 
@@ -64,13 +64,13 @@ namespace TestApp.Resources
 
 			XmlAttribute? spriteSheetAttribute = element.Attributes["spritesheet"];
 			if(spriteSheetAttribute != null)
-				spriteSheet = ResourceManager.Find<SpriteSheetResource, Texture2D>($"spritesheets/{spriteSheetAttribute.Value}");
+				spriteSheet = ResourceManager.Find<SpriteSheetResource, Texture>($"spritesheets/{spriteSheetAttribute.Value}");
 			
 			foreach(XmlElement frameElement in element.ChildNodes)
 				frames.Add(new Frame(frameElement, spriteSheet));
 		}
 
-		public void Tick(out Rectangle _frame, out Texture2D? _texture)
+		public void Tick(out Rectangle _frame, out Texture? _texture)
 		{
 			time += Time.deltaTime * speed;
 

@@ -14,6 +14,10 @@
       <ProjectReference Include="..\Leviathan\Leviathan.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Raylib-CsLo" Version="4.2.0.9" />
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)Templates\LeviathanTemplateProject\Dependencies\$(TargetName).dll&quot;;" />
     </Target>

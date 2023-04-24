@@ -1,10 +1,10 @@
 ﻿using Leviathan.Mathematics;
 using Leviathan.Resources;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using Color = Leviathan.Mathematics.Color;
-using Rectangle = Raylib_cs.Rectangle;
+using Rectangle = Raylib_CsLo.Rectangle;
 
 namespace Leviathan.GameObjects.Components
 {
@@ -16,7 +16,7 @@ namespace Leviathan.GameObjects.Components
 			set
 			{
 				sprite = value;
-				texture = sprite != null ? ResourceManager.Find<TextureResource, Texture2D>($"textures/{sprite}") : null;
+				texture = sprite != null ? ResourceManager.Find<TextureResource, Texture>($"textures/{sprite}") : null;
 			}
 		}
 
@@ -29,9 +29,9 @@ namespace Leviathan.GameObjects.Components
 		public override void Start(params object[] _data)
 		{
 			sprite = (string) _data[0];
-			tint = _data.Length > 1 ? (Color) _data[1] : new Raylib_cs.Color(255, 255, 255, 255);
+			tint = _data.Length > 1 ? (Color) _data[1] : new Raylib_CsLo.Color(255, 255, 255, 255);
 
-			texture = ResourceManager.Find<TextureResource, Texture2D>($"textures/{sprite}");
+			texture = ResourceManager.Find<TextureResource, Texture>($"textures/{sprite}");
 		}
 
 		public override void Render()

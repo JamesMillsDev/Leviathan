@@ -5,11 +5,7 @@ using Leviathan.GameStates;
 using Leviathan.Mathematics;
 using Leviathan.Physics.Components;
 
-using Raylib_cs;
-
 using TestApp.GameObjects.Components;
-
-using Color = Leviathan.Mathematics.Color;
 
 namespace TestApp.GameStates
 {
@@ -34,7 +30,7 @@ namespace TestApp.GameStates
 			player.AddComponent<SpriteRenderer>("player");
 			player.AddComponent<MovementComponent>(100f);
 			player.AddComponent<RotationComponent>(5f, "rotateBase");
-			player.AddComponent<BoxCollider>();
+			player.AddComponent<BoxCollider>(0.1f);
 
 			GameObjectManager.Spawn(player);
 
@@ -64,7 +60,7 @@ namespace TestApp.GameStates
 				GameObjectManager.Spawn(test);
 			}*/
 
-			GameObject empty = new("Test Collider");
+			/*GameObject empty = new("Test Collider");
 			if(empty.Transform is { })
 			{
 				empty.Transform.LocalScale = Vector2.One * 250f;
@@ -73,7 +69,7 @@ namespace TestApp.GameStates
 			BoxCollider? b = empty.AddComponent<BoxCollider>();
 			b!.isTrigger = true;
 			
-			GameObjectManager.Spawn(empty);
+			GameObjectManager.Spawn(empty);*/
 
 			// button = new Button(Vector2.Zero, "banana", new Button.RenderSettings(50, Color.Red));
 

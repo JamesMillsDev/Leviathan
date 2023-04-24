@@ -4,10 +4,10 @@ using Leviathan.Events;
 using Leviathan.GameObjects;
 using Leviathan.Mathematics;
 
-using Raylib_cs;
+using Raylib_CsLo;
 
 using Color = Leviathan.Mathematics.Color;
-using Rectangle = Raylib_cs.Rectangle;
+using Rectangle = Raylib_CsLo.Rectangle;
 
 namespace Leviathan
 {

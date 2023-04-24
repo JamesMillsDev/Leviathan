@@ -3,8 +3,6 @@ using Leviathan.Events;
 
 using Newtonsoft.Json.Linq;
 
-using Raylib_cs;
-
 namespace Leviathan.Resources
 {
 	/// <summary>A global manager used to manage all sorts of assets for the game.</summary>
