@@ -167,22 +167,22 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="color.cpp" />
-    <ClCompile Include="leviamath.cpp" />
-    <ClCompile Include="mat3.cpp" />
+    <ClCompile Include="Color32.cpp" />
+    <ClCompile Include="Leviamath.cpp" />
+    <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="mat4.cpp" />
-    <ClCompile Include="vec2.cpp" />
-    <ClCompile Include="vec3.cpp" />
-    <ClCompile Include="vec4.cpp" />
+    <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="Vec3.cpp" />
+    <ClCompile Include="Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\color.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\leviamath.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat3.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Color32.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Leviamath.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat3.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat4.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec2.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec3.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec4.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec2.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec3.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
