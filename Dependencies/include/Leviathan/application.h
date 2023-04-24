@@ -11,7 +11,7 @@ class Application
 {
 public:
 	template<Derived<Game> GAME>
-	static int run();
+	static int Run();
 
 private:
 	static Application* m_instance;
@@ -23,17 +23,17 @@ private:
 	Application(Game* _game);
 	~Application();
 
-	void process();
+	void Process();
 
 };
 
 template<Derived<Game> GAME>
-inline int Application::run()
+inline int Application::Run()
 {
 	if (m_instance == nullptr)
 	{
 		m_instance = new Application(new GAME());
-		m_instance->process();
+		m_instance->Process();
 		return 0;
 	}
 

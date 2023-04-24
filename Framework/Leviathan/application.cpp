@@ -4,6 +4,8 @@
 #include <raylib/raylib.h>
 
 #include <Leviathan/Config.h>
+#include <Leviathan/GameStates/GameStateManager.h>
+#include <Leviathan/GameObjects/GameObjectManager.h>
 
 Application* Application::m_instance = nullptr;
 
@@ -31,16 +33,28 @@ Application::~Application()
 	Config::DestroyInstance();
 }
 
-void Application::process()
+void Application::Process()
 {
-	m_window->open();
+	m_window->Open();
+
+	GameStateManager::CreateInstance();
+	GameObjectManager::CreateInstance();
 
 	while (!WindowShouldClose())
 	{
-		m_window->beginFrame();
+		GameStateManager::Tick();
+		GameObjectManager::Tick();
 
-		m_window->endFrame();
+		m_window->BeginFrame();
+
+		GameStateManager::Render();
+		GameObjectManager::Render();
+
+		m_window->EndFrame();
 	}
 
-	m_window->close();
+	GameObjectManager::DestroyInstance();
+	GameStateManager::DestroyInstance();
+
+	m_window->Close();
 }

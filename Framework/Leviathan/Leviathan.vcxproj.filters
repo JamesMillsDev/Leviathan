@@ -7,6 +7,9 @@
     <Filter Include="Source\GameObjects">
       <UniqueIdentifier>{d1e8a0bc-29ef-44cd-b7ae-96b9034c7d34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\GameStates">
+      <UniqueIdentifier>{d7da4a52-3d56-45b8-ad49-ebbaaa641d12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
@@ -30,6 +33,16 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\GameStateManager.h">
+      <Filter>Source\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h">
+      <Filter>Source\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -37,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjects\GameObject.cpp">
-      <Filter>Source\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
       <Filter>Source\GameObjects</Filter>
@@ -50,5 +60,12 @@
     <ClCompile Include="Config.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GameStates\GameStateManager.cpp">
+      <Filter>Source\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\GameObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Transform.cpp" />
   </ItemGroup>
 </Project>

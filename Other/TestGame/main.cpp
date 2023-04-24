@@ -10,5 +10,5 @@ protected:
 
 int main()
 {
-	return Application::run<testGame>();
+	return Application::Run<testGame>();
 }

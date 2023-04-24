@@ -11,7 +11,7 @@ public:
 	static const float RAD_2_DEG;
 
 	/// <summary>The standard mathematical constant, PI (3.14).</summary>
-	static const float PI;
+	static const float LPI;
 
 	/// <summary>A number as close to 0 as possible without actually being 0.</summary>
 	static const float EPSILON;

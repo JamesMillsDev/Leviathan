@@ -2,9 +2,9 @@
 
 #include <cmath>
 
-const float Leviamath::DEG_2_RAD = PI * 2.f / 360.f;
+const float Leviamath::DEG_2_RAD = LPI * 2.f / 360.f;
 const float Leviamath::RAD_2_DEG = 1.f / DEG_2_RAD;
-const float Leviamath::PI = 3.14159274f;
+const float Leviamath::LPI = 3.14159274f;
 const float Leviamath::EPSILON = 1.401298E-45f;
 const float Leviamath::POSITIVE_INFINITY = 1.f / 0.f;
 const float Leviamath::NEGATIVE_INFINITY = -1.f / 0.f;

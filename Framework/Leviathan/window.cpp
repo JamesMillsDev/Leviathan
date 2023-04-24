@@ -12,23 +12,23 @@ Window::Window()
 	m_clearColor = Config::GetColorValue(PROGRAM_CATEGORY, "clearColor");
 }
 
-void Window::open()
+void Window::Open()
 {
 	InitWindow(m_width, m_height, m_title);
 }
 
-void Window::close()
+void Window::Close()
 {
 	CloseWindow();
 }
 
-void Window::beginFrame()
+void Window::BeginFrame()
 {
 	BeginDrawing();
 	ClearBackground(m_clearColor);
 }
 
-void Window::endFrame()
+void Window::EndFrame()
 {
 	EndDrawing();
 }

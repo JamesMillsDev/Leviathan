@@ -16,10 +16,10 @@ private:
 	Window(Window&) = delete;
 	~Window() = default;
 
-	void open();
-	void close();
+	void Open();
+	void Close();
 
-	void beginFrame();
-	void endFrame();
+	void BeginFrame();
+	void EndFrame();
 
 };
