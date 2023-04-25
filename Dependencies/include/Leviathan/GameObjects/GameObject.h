@@ -70,6 +70,9 @@ inline COMPONENT* IGameObject::GetComponent()
 template<Derived<IComponent> COMPONENT>
 inline COMPONENT* IGameObject::AddComponent()
 {
+	if (typeid(COMPONENT) == typeid(TransformComponent))
+		return;
+
 	COMPONENT* component = new COMPONENT(this);
 
 	m_listUpdates.push_back([&]()
