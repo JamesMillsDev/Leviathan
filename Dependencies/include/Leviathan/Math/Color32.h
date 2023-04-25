@@ -1,26 +1,28 @@
 #pragma once
 
+#include <Leviathan/Leviathan.h>
+
 #include <cstdint>
 #include <raylib/raylib.h>
 
 struct Color32
 {
-	Color32();
-	Color32(uint32_t _val);
-	Color32(uint8_t _red, uint8_t _green, uint8_t _blue, uint8_t _alpha);
+	DLL Color32();
+	DLL Color32(uint32_t _val);
+	DLL Color32(uint8_t _red, uint8_t _green, uint8_t _blue, uint8_t _alpha);
 
-	uint8_t Red() const;
-	uint8_t Green() const;
-	uint8_t Blue() const;
-	uint8_t Alpha() const;
+	DLL uint8_t Red() const;
+	DLL uint8_t Green() const;
+	DLL uint8_t Blue() const;
+	DLL uint8_t Alpha() const;
 
-	void SetRed(uint8_t _red);
-	void SetGreen(uint8_t _green);
-	void SetBlue(uint8_t _blue);
-	void SetAlpha(uint8_t _alpha);
+	DLL void SetRed(uint8_t _red);
+	DLL void SetGreen(uint8_t _green);
+	DLL void SetBlue(uint8_t _blue);
+	DLL void SetAlpha(uint8_t _alpha);
 
-	operator Color() const;
-	operator uint32_t() const;
+	DLL operator Color() const;
+	DLL operator uint32_t() const;
 
 private:
 	uint32_t m_value;

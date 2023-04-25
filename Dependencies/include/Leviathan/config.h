@@ -4,11 +4,12 @@
 #define WINDOW_CATEGORY "Window"
 #define DEBUG_CATEGORY "Debug"
 
-#include <string>
-#include <map>
-
+#include <Leviathan/Leviathan.h>
 #include <Leviathan/Math/Vec2.h>
 #include <Leviathan/Math/Color32.h>
+
+#include <string>
+#include <map>
 
 #include <type_traits>
 
@@ -33,17 +34,17 @@ struct InvalidValueException : public std::exception
 class Config
 {
 public:
-	static void Reload();
+	DLL static void Reload();
 
-	static int GetIntValue(string _group, string _id);
-	static bool GetBooleanValue(string _group, string _id);
-	static float GetFloatValue(string _group, string _id);
-	static Vec2 GetVectorValue(string _group, string _id);
-	static Color32 GetColorValue(string _group, string _id);
-	static const char* GetTextValue(string _group, string _id);
+	DLL static int GetIntValue(string _group, string _id);
+	DLL static bool GetBooleanValue(string _group, string _id);
+	DLL static float GetFloatValue(string _group, string _id);
+	DLL static Vec2 GetVectorValue(string _group, string _id);
+	DLL static Color32 GetColorValue(string _group, string _id);
+	DLL static const char* GetTextValue(string _group, string _id);
 
-	static void CreateInstance(string _filePath);
-	static void DestroyInstance();
+	DLL static void CreateInstance(string _filePath);
+	DLL static void DestroyInstance();
 
 private:
 	static Config* m_instance;
@@ -56,10 +57,10 @@ private:
 	map<group_id, map<string, Color32>> m_colorValues;
 	map<group_id, map<string, string>> m_textValues;
 
-	Config(string _filePath);
+	DLL Config(string _filePath);
 	Config(const Config&) = delete;
 
-	void Clear();
-	void Load(string _filePath);
+	DLL void Clear();
+	DLL void Load(string _filePath);
 
 };

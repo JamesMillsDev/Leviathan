@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Leviathan/Math/Leviamath.h>
+
 #include <initializer_list>
 
 #define MAT_3_LENGTH 3
@@ -19,41 +21,41 @@ struct Mat3
 		float values[MAT_3_SIZE];
 	};
 
-	Mat3();
-	Mat3(float _values);
-	Mat3(float _m1, float _m4, float _m7, float _m2, float _m5, float _m8, float _m3, float _m6, float _m9);
-	Mat3(initializer_list<float> _values);
+	DLL Mat3();
+	DLL Mat3(float _values);
+	DLL Mat3(float _m1, float _m4, float _m7, float _m2, float _m5, float _m8, float _m3, float _m6, float _m9);
+	DLL Mat3(initializer_list<float> _values);
 
-	struct Vec2 TransformPoint(Vec2 _point) const;
-	struct Vec2 TransformVector(Vec2 _vec) const;
+	DLL struct Vec2 TransformPoint(Vec2 _point) const;
+	DLL struct Vec2 TransformVector(Vec2 _vec) const;
 
-	void SetRotation(float _theta);
+	DLL void SetRotation(float _theta);
 
-	float GetRotation() const;
+	DLL float GetRotation() const;
 
-	void SetTranslation(float _x, float _y);
-	void SetTranslation(struct Vec2 _translation);
+	DLL void SetTranslation(float _x, float _y);
+	DLL void SetTranslation(struct Vec2 _translation);
 
-	void Translate(float _x, float _y);
-	void Translate(struct Vec2 _translation);
+	DLL void Translate(float _x, float _y);
+	DLL void Translate(struct Vec2 _translation);
 
-	void GetTranslation(float& _x, float& _y) const;
-	struct Vec2 GetTranslation();
+	DLL void GetTranslation(float& _x, float& _y) const;
+	DLL struct Vec2 GetTranslation();
 
-	void SetScale(float _x, float _y);
-	void SetScale(struct Vec2 _scale);
+	DLL void SetScale(float _x, float _y);
+	DLL void SetScale(struct Vec2 _scale);
 
-	void GetScale(float& _x, float& _y);
-	struct Vec2 GetScale();
+	DLL void GetScale(float& _x, float& _y);
+	DLL struct Vec2 GetScale();
 
-	struct Vec3 GetXAxis();
-	struct Vec3 GetYAxis();
-	struct Vec3 GetZAxis();
+	DLL struct Vec3 GetXAxis();
+	DLL struct Vec3 GetYAxis();
+	DLL struct Vec3 GetZAxis();
 
-	static Mat3 Identity();
+	DLL static Mat3 Identity();
 
 };
 
-static Mat3 operator*(Mat3 _lhs, Mat3 _rhs);
-static Vec3 operator*(Mat3 _lhs, struct Vec3 _rhs);
-static Vec3 operator*(struct Vec3 _lhs, Mat3 _rhs);
+DLL extern Mat3 operator*(Mat3 _lhs, Mat3 _rhs);
+DLL extern Vec3 operator*(Mat3 _lhs, struct Vec3 _rhs);
+DLL extern Vec3 operator*(struct Vec3 _lhs, Mat3 _rhs);

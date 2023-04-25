@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Leviathan/Leviathan.h>
 #include <Leviathan/Singleton.h>
 
 #include <functional>
@@ -10,11 +11,15 @@ using std::vector;
 
 typedef function<void()> UpdateAction;
 
-class GameObjectManager : Singleton<GameObjectManager>
+class GameObjectManager : public Singleton<GameObjectManager>
 {
 public:
-	void Spawn(class IGameObject* _go);
-	void Destroy(class IGameObject* _go);
+	GameObjectManager() = default;
+	GameObjectManager(GameObjectManager&) = delete;
+	DLL ~GameObjectManager();
+
+	DLL static void Spawn(class IGameObject* _go);
+	DLL static void Destroy(class IGameObject* _go);
 
 private:
 	friend class Application;
@@ -22,11 +27,7 @@ private:
 	vector<UpdateAction> m_listUpdates;
 	vector<class IGameObject*> m_objects;
 
-	GameObjectManager() = default;
-	GameObjectManager(GameObjectManager&) = delete;
-	~GameObjectManager();
-
-	static void Tick();
-	static void Render();
+	DLL static void Tick();
+	DLL static void Render();
 
 };

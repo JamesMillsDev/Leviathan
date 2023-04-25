@@ -2,13 +2,6 @@
 
 #include <cmath>
 
-const float Leviamath::DEG_2_RAD = LPI * 2.f / 360.f;
-const float Leviamath::RAD_2_DEG = 1.f / DEG_2_RAD;
-const float Leviamath::LPI = 3.14159274f;
-const float Leviamath::EPSILON = 1.401298E-45f;
-const float Leviamath::POSITIVE_INFINITY = 1.f / 0.f;
-const float Leviamath::NEGATIVE_INFINITY = -1.f / 0.f;
-
 float Leviamath::Min(const float _a, const float _b)
 {
 	return fminf(_a, _b);
@@ -66,7 +59,7 @@ float Leviamath::Exp(const float _val)
 
 float Leviamath::Sign(const float _val)
 {
-	return _val > 0 ? 1 : _val < 0 ? -1 : 0;
+	return _val > 0.f ? 1.f : _val < 0.f ? -1.f : 0.f;
 }
 
 float Leviamath::Abs(const float _val)

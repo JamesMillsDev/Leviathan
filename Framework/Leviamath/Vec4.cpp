@@ -1,7 +1,5 @@
 #include <Leviathan/Math/Vec4.h>
 
-#include <Leviathan/Math/Leviamath.h>
-
 Vec4::Vec4()
     : x(0), y(0), z(0), w(0)
 {

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Leviathan/game.h>
+#include <Leviathan/Leviathan.h>
+#include <Leviathan/Game.h>
 
 #include <concepts>
 
@@ -14,16 +15,16 @@ public:
 	static int Run();
 
 private:
-	static Application* m_instance;
+	DLL static Application* m_instance;
 
 	struct Window* m_window;
 	
 	Game* m_game;
 
-	Application(Game* _game);
-	~Application();
+	DLL Application(Game* _game);
+	DLL ~Application();
 
-	void Process();
+	DLL void Process();
 
 };
 

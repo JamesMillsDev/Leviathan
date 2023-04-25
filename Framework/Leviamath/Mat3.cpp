@@ -1,7 +1,5 @@
 #include <Leviathan/Math/Mat3.h>
 
-#include <Leviathan/Math/Leviamath.h>
-
 #include <Leviathan/Math/Vec2.h>
 #include <Leviathan/Math/Vec3.h>
 

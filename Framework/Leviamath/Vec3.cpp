@@ -1,7 +1,5 @@
 #include <Leviathan/Math/Vec3.h>
 
-#include <Leviathan/Math/Leviamath.h>
-
 Vec3::Vec3()
     : x(0), y(0), z(0)
 {

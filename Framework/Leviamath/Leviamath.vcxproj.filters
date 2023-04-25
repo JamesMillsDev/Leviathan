@@ -4,6 +4,9 @@
     <Filter Include="Source">
       <UniqueIdentifier>{65fe96c2-4d40-4aa1-8176-19c083d94b62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{a63979ea-fad5-433d-b0b8-5ca7865f5234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mat3.cpp">
@@ -29,26 +32,26 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\mat3.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Color32.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Leviamath.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat3.h">
+      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Mat4.h">
-      <Filter>Source</Filter>
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec2.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec2.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec3.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec3.h">
+      <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\vec4.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\leviamath.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Color32.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Math\Vec4.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

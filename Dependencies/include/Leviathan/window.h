@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Leviathan/Leviathan.h>
+
 #include <Leviathan/Math/Color32.h>
 
 struct Window
@@ -12,14 +14,14 @@ private:
 	const char* m_title;
 	Color32 m_clearColor;
 
-	Window();
+	DLL Window();
 	Window(Window&) = delete;
 	~Window() = default;
 
-	void Open();
-	void Close();
+	DLL void Open();
+	DLL void Close();
 
-	void BeginFrame();
-	void EndFrame();
+	DLL void BeginFrame();
+	DLL void EndFrame();
 
 };

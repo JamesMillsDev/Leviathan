@@ -1,7 +1,5 @@
 #include <Leviathan/Math/Vec2.h>
 
-#include <Leviathan/Math/Leviamath.h>
-
 Vec2::Vec2() : x(0), y(0)
 {
 }
@@ -144,7 +142,7 @@ Vec2 Vec2::Perpendicular(const Vec2 _vec)
 
 Vec2 Vec2::Rotate(const Vec2 _vec, const float _angle)
 {
-    const float angle = _angle * Leviamath::DEG_2_RAD;
+    const float angle = _angle * DEG_2_RAD;
 
     return
     {

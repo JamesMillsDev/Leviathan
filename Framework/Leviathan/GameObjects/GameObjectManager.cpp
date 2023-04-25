@@ -2,8 +2,6 @@
 
 #include <Leviathan/GameObjects/GameObject.h>
 
-GameObjectManager* GameObjectManager::m_instance = nullptr;
-
 void GameObjectManager::Spawn(IGameObject* _go)
 {
 	vector<IGameObject*>& objects = m_instance->m_objects;

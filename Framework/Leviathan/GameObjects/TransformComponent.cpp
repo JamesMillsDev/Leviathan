@@ -1,13 +1,13 @@
-#include <Leviathan/GameObjects/Transform.h>
+#include <Leviathan/GameObjects/TransformComponent.h>
 
 #include <Leviathan/Math/Leviamath.h>
 
-Transform*& Transform::Parent()
+TransformComponent*& TransformComponent::Parent()
 {
 	return m_parent;
 }
 
-void Transform::SetParent(Transform* _parent)
+void TransformComponent::SetParent(TransformComponent* _parent)
 {
 	if (_parent == nullptr)
 	{
@@ -22,120 +22,120 @@ void Transform::SetParent(Transform* _parent)
 	}
 }
 
-float Transform::Rotation()
+float TransformComponent::Rotation()
 {
 	return GlobalTransform().GetRotation();
 }
 
-float Transform::LocalRotation()
+float TransformComponent::LocalRotation()
 {
 	return m_transform.GetRotation();
 }
 
-void Transform::SetRotation(const float& _newRot)
+void TransformComponent::SetRotation(const float& _newRot)
 {
-	m_transform.SetRotation(_newRot * Leviamath::DEG_2_RAD);
+	m_transform.SetRotation(_newRot * DEG_2_RAD);
 }
 
-void Transform::UpdateRotation(const float& _amount)
+void TransformComponent::UpdateRotation(const float& _amount)
 {
-	m_transform.SetRotation(m_transform.GetRotation() + _amount * Leviamath::DEG_2_RAD);
+	m_transform.SetRotation(m_transform.GetRotation() + _amount * DEG_2_RAD);
 }
 
-void Transform::Position(float& _x, float& _y)
+void TransformComponent::Position(float& _x, float& _y)
 {
 	Vec2 pos = Position();
 	_x = pos.x;
 	_y = pos.y;
 }
 
-Vec2 Transform::Position()
+Vec2 TransformComponent::Position()
 {
 	return GlobalTransform().GetTranslation();
 }
 
-void Transform::LocalPosition(float& _x, float& _y)
+void TransformComponent::LocalPosition(float& _x, float& _y)
 {
 	Vec2 pos = LocalPosition();
 	_x = pos.x;
 	_y = pos.y;
 }
 
-Vec2 Transform::LocalPosition()
+Vec2 TransformComponent::LocalPosition()
 {
 	return m_transform.GetTranslation();
 }
 
-void Transform::SetPosition(const Vec2& _newPosition)
+void TransformComponent::SetPosition(const Vec2& _newPosition)
 {
 	m_transform.SetTranslation(_newPosition);
 }
 
-void Transform::SetPosition(const float& _newX, const float& _newY)
+void TransformComponent::SetPosition(const float& _newX, const float& _newY)
 {
 	SetPosition({ _newX, _newY });
 }
 
-void Transform::UpdatePosition(const Vec2& _amount)
+void TransformComponent::UpdatePosition(const Vec2& _amount)
 {
 	m_transform.Translate(_amount);
 }
 
-void Transform::UpdatePosition(const float& _x, const float& _y)
+void TransformComponent::UpdatePosition(const float& _x, const float& _y)
 {
 	UpdatePosition({ _x, _y });
 }
 
-void Transform::Scale(float& _x, float& _y)
+void TransformComponent::Scale(float& _x, float& _y)
 {
 	Vec2 scale = Scale();
 	_x = scale.x;
 	_y = scale.y;
 }
 
-Vec2 Transform::Scale()
+Vec2 TransformComponent::Scale()
 {
 	return GlobalTransform().GetScale();
 }
 
-void Transform::LocalScale(float& _x, float& _y)
+void TransformComponent::LocalScale(float& _x, float& _y)
 {
 	Vec2 scale = LocalScale();
 	_x = scale.x;
 	_y = scale.y;
 }
 
-Vec2 Transform::LocalScale()
+Vec2 TransformComponent::LocalScale()
 {
 	return m_transform.GetScale();
 }
 
-void Transform::SetScale(const Vec2& _newScale)
+void TransformComponent::SetScale(const Vec2& _newScale)
 {
 	m_transform.SetScale(_newScale);
 }
 
-void Transform::SetScale(const float& _newX, const float& _newY)
+void TransformComponent::SetScale(const float& _newX, const float& _newY)
 {
 	SetScale({ _newX, _newY });
 }
 
-void Transform::UpdateScale(const Vec2& _amount)
+void TransformComponent::UpdateScale(const Vec2& _amount)
 {
 	m_transform.SetScale(m_transform.GetScale() + _amount);
 }
 
-void Transform::UpdateScale(const float& _x, const float& _y)
+void TransformComponent::UpdateScale(const float& _x, const float& _y)
 {
 	UpdateScale({ _x, _y });
 }
 
-Mat3 Transform::GlobalTransform()
+Mat3 TransformComponent::GlobalTransform()
 {
 	return m_parent != nullptr ? m_parent->m_transform * m_transform : m_transform;
 }
 
-void Transform::AddChild(Transform* _child)
+void TransformComponent::AddChild(TransformComponent* _child)
 {
 	m_listUpdates.push_back([&, this]()
 		{
@@ -147,7 +147,7 @@ void Transform::AddChild(Transform* _child)
 		});
 }
 
-void Transform::RemoveChild(Transform* _child)
+void TransformComponent::RemoveChild(TransformComponent* _child)
 {
 	m_listUpdates.push_back([&, this]()
 		{
@@ -155,14 +155,14 @@ void Transform::RemoveChild(Transform* _child)
 			{
 				_child->m_parent = nullptr;
 				
-				vector<Transform*>::iterator iter = std::find(m_children.begin(), m_children.end(), _child);
+				vector<TransformComponent*>::iterator iter = std::find(m_children.begin(), m_children.end(), _child);
 				if (iter != m_children.end())
 					m_children.erase(iter, iter);
 			}
 		});
 }
 
-void Transform::Tick()
+void TransformComponent::Tick()
 {
 	for (auto iter = m_listUpdates.begin(); iter != m_listUpdates.end(); iter++)
 	{

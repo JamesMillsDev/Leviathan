@@ -2,8 +2,6 @@
 
 #include <Leviathan/GameStates/IGameState.h>
 
-GameStateManager* GameStateManager::m_instance = nullptr;
-
 void GameStateManager::AddState(IGameState* _state)
 {
 	map<char*, IGameState*>& states = m_instance->m_states;

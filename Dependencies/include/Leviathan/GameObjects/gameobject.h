@@ -5,8 +5,9 @@
 #include <vector>
 #include <string>
 
+#include <Leviathan/Leviathan.h>
 #include <Leviathan/GameObjects/Component.h>
-#include <Leviathan/GameObjects/Transform.h>
+#include <Leviathan/GameObjects/TransformComponent.h>
 
 using std::function;
 using std::vector;
@@ -32,7 +33,7 @@ public:
 private:
 	friend class GameObjectManager;
 
-	Transform* m_transform;
+	TransformComponent* m_transform;
 
 	vector<UpdateAction> m_listUpdates;
 	vector<IComponent*> m_components;
@@ -40,15 +41,15 @@ private:
 	string m_name;
 	string m_tag;
 
-	IGameObject();
-	IGameObject(string _name);
+	DLL IGameObject();
+	DLL IGameObject(string _name);
 	IGameObject(IGameObject&) = delete;
-	~IGameObject();
+	DLL ~IGameObject();
 
-	void Load();
-	void Tick();
-	void Render();
-	void Unload();
+	DLL void Load();
+	DLL void Tick();
+	DLL void Render();
+	DLL void Unload();
 
 };
 

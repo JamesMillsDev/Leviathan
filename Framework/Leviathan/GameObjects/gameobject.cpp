@@ -1,14 +1,12 @@
 #include <Leviathan/GameObjects/GameObject.h>
 
-#include <Leviathan/GameObjects/Transform.h>
-
 IGameObject::IGameObject() :
-	m_name("Game Object"), m_tag("Default"), m_transform(new Transform())
+	m_name("Game Object"), m_tag("Default"), m_transform(new TransformComponent())
 {
 }
 
 IGameObject::IGameObject(string _name) :
-	m_name("Game Object"), m_tag("Default"), m_transform(new Transform())
+	m_name("Game Object"), m_tag("Default"), m_transform(new TransformComponent())
 
 {
 }

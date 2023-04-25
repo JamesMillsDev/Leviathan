@@ -13,40 +13,61 @@
     <Filter Include="Source\Resources">
       <UniqueIdentifier>{d44b3df8-91b7-446f-bb08-36224a15a064}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{7897fc54-bc17-48bc-b2ca-901bece810b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\GameObjects">
+      <UniqueIdentifier>{d009ccc9-0ba6-4118-83d1-3481358663ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\GameStates">
+      <UniqueIdentifier>{85fcfc76-2dcd-447d-a5bf-afb7b04ff4d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Resources">
+      <UniqueIdentifier>{fa1b4dc0-8755-4ffa-ba5e-7b851ac98ae7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
+      <Filter>Include\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h">
-      <Filter>Source\GameObjects</Filter>
+      <Filter>Include\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h">
-      <Filter>Source\GameObjects</Filter>
+      <Filter>Include\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TransformComponent.h">
+      <Filter>Include\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\GameStateManager.h">
-      <Filter>Source\GameStates</Filter>
+      <Filter>Include\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h">
-      <Filter>Source\GameStates</Filter>
+      <Filter>Include\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
-      <Filter>Source\GameObjects</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h">
+      <Filter>Include\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Transform.h">
-      <Filter>Source\GameObjects</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h">
+      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h">
-      <Filter>Source</Filter>
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resource.h">
+      <Filter>Include\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +89,11 @@
     <ClCompile Include="GameObjects\GameObject.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\Transform.cpp">
+    <ClCompile Include="GameObjects\TransformComponent.cpp">
       <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Resources.cpp">
+      <Filter>Source\Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
