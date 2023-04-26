@@ -8,11 +8,11 @@ public:
 	static void DestroyInstance();
 
 	static T*& Get();
+	virtual void OnCreate() {}
+	virtual void OnDestroy() {}
 
 protected:
 	static T* m_instance;
-	virtual void OnCreate() {}
-	virtual void OnDestroy() {}
 
 };
 

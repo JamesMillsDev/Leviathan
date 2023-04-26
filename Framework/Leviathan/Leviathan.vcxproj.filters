@@ -69,6 +69,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h">
+      <Filter>Include\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -95,5 +98,11 @@
     <ClCompile Include="Resources\Resources.cpp">
       <Filter>Source\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="Resources\TextureResource.cpp">
+      <Filter>Source\Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

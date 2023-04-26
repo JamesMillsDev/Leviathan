@@ -3,16 +3,17 @@
 #include <Leviathan/Leviathan.h>
 #include <Leviathan/Game.h>
 
-#include <concepts>
+#include <string>
 
-template<class T, class U>
-concept Derived = std::is_base_of<U, T>::value;
+using std::string;
 
 class Application
 {
 public:
 	template<Derived<Game> GAME>
-	static int Run();
+	static int Run(char* argv[]);
+
+	static const char* GetApplicationDirectory();
 
 private:
 	DLL static Application* m_instance;
@@ -20,6 +21,7 @@ private:
 	struct Window* m_window;
 	
 	Game* m_game;
+	const char* m_applicationDir;
 
 	DLL Application(Game* _game);
 	DLL ~Application();
@@ -29,11 +31,15 @@ private:
 };
 
 template<Derived<Game> GAME>
-inline int Application::Run()
+inline int Application::Run(char* argv[])
 {
 	if (m_instance == nullptr)
 	{
+		string argv_str(argv[0]);
+		string base = argv_str.substr(0, argv_str.find_last_of("\\"));
+
 		m_instance = new Application(new GAME());
+		m_instance->m_applicationDir = base.c_str();
 		m_instance->Process();
 		return 0;
 	}

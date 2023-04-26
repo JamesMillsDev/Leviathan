@@ -15,9 +15,6 @@ using std::string;
 
 typedef function<void()> UpdateAction;
 
-template<class T, class U>
-concept Derived = std::is_base_of<U, T>::value;
-
 class IGameObject
 {
 public:

@@ -1,14 +1,7 @@
-#include <Leviathan/application.h>
-#include <Leviathan/game.h>
+#include <Leviathan/Application.h>
+#include "TestGame.h"
 
-class testGame : public Game
+int main(int argc, char* argv[])
 {
-protected:
-	virtual void Load() override {}
-
-};
-
-int main()
-{
-	return Application::Run<testGame>();
+	return Application::Run<TestGame>(argv);
 }

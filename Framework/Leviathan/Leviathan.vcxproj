@@ -31,6 +31,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resource.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h" />
   </ItemGroup>
@@ -42,7 +43,11 @@
     <ClCompile Include="GameObjects\TransformComponent.cpp" />
     <ClCompile Include="GameStates\GameStateManager.cpp" />
     <ClCompile Include="Resources\Resources.cpp" />
+    <ClCompile Include="Resources\TextureResource.cpp" />
     <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -237,6 +242,5 @@ if not exist "%path%" mkdir "%path%"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
