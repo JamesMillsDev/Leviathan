@@ -12,5 +12,7 @@ void TestGame::Load()
 
 void TestGame::Render()
 {
-	DrawTexture(texture->Get(), 0, 0, RAYWHITE);
+	Texture2D test = texture->Get();
+
+	DrawTexture(test, 0, 0, RAYWHITE);
 }
