@@ -1,6 +1,6 @@
 #include <Leviathan/window.h>
 
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 #include <Leviathan/config.h>
 

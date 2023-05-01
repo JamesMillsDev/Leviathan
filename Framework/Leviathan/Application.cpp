@@ -1,7 +1,7 @@
 #include <Leviathan/Application.h>
 
 #include <Leviathan/Window.h>
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 #include <Leviathan/Config.h>
 #include <Leviathan/Resources/Resources.h>

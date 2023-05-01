@@ -3,7 +3,7 @@
 #include <Leviathan/Math/Leviamath.h>
 
 #include <initializer_list>
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 #define VEC_2_LENGTH 2
 

@@ -2,7 +2,7 @@
 
 #include <Leviathan/Leviathan.h>
 
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 #include <Leviathan/Resources/Resource.h>
 

@@ -6,7 +6,7 @@
 #define DLL __declspec(dllimport)
 #endif
 
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 /// <summary>A number as close to 0 as possible without actually being 0.</summary>
 #define EPSILON 1.401298E-45f

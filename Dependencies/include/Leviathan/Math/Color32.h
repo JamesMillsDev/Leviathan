@@ -3,7 +3,7 @@
 #include <Leviathan/Leviathan.h>
 
 #include <cstdint>
-#include <raylib/raylib.h>
+#include <raylib.h>
 
 struct Color32
 {
