@@ -33,6 +33,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugiconfig.hpp" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugixml.hpp" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h" />
   </ItemGroup>
@@ -45,6 +47,7 @@
     <ClCompile Include="GameStates\GameStateManager.cpp" />
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\TextureResource.cpp" />
+    <ClCompile Include="Third Party\pugixml.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -28,6 +28,9 @@
     <Filter Include="Third Party">
       <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Third Party">
+      <UniqueIdentifier>{2e295d45-8957-4f90-ae9e-e2540c186ba5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -78,6 +81,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h">
       <Filter>Third Party</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugiconfig.hpp">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugixml.hpp">
+      <Filter>Third Party</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -106,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Resources\TextureResource.cpp">
       <Filter>Source\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Third Party\pugixml.cpp">
+      <Filter>Source\Third Party</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
