@@ -25,6 +25,9 @@
     <Filter Include="Include\Resources">
       <UniqueIdentifier>{fa1b4dc0-8755-4ffa-ba5e-7b851ac98ae7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Third Party">
+      <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -72,6 +75,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h">
       <Filter>Include\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h">
+      <Filter>Third Party</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -103,7 +109,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
 </Project>

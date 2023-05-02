@@ -1,5 +1,7 @@
 #include <Leviathan/Config.h>
 
+#include <Leviathan/Application.h>
+
 #include <fstream>
 #include <vector>
 
@@ -8,131 +10,38 @@ using std::vector;
 
 using std::getline;
 
-Config* Config::m_instance = nullptr;
-
 void Config::Reload()
 {
-	if (m_instance == nullptr)
-		return;
-
-	m_instance->Clear();
-	m_instance->Load(m_instance->m_filePath);
-}
-
-int Config::GetIntValue(string _group, string _id)
-{
-	if (m_instance->m_intValues.find(_group) != m_instance->m_intValues.end())
-	{
-		auto& set = m_instance->m_intValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id];
-		}
-	}
-
-	return 0;
-}
-
-bool Config::GetBooleanValue(string _group, string _id)
-{
-	if (m_instance->m_boolValues.find(_group) != m_instance->m_boolValues.end())
-	{
-		auto& set = m_instance->m_boolValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id];
-		}
-	}
-
-	return false;
-}
-
-float Config::GetFloatValue(string _group, string _id)
-{
-	if (m_instance->m_floatValues.find(_group) != m_instance->m_floatValues.end())
-	{
-		auto& set = m_instance->m_floatValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id];
-		}
-	}
-
-	return 0;
-}
-
-Vec2 Config::GetVectorValue(string _group, string _id)
-{
-	if (m_instance->m_vectorValues.find(_group) != m_instance->m_vectorValues.end())
-	{
-		auto& set = m_instance->m_vectorValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id];
-		}
-	}
-
-	return Vec2();
-}
-
-Color32 Config::GetColorValue(string _group, string _id)
-{
-	if (m_instance->m_colorValues.find(_group) != m_instance->m_colorValues.end())
-	{
-		auto& set = m_instance->m_colorValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id];
-		}
-	}
-
-	return Color32();
-}
-
-const char* Config::GetTextValue(string _group, string _id)
-{
-	if (m_instance->m_textValues.find(_group) != m_instance->m_textValues.end())
-	{
-		auto& set = m_instance->m_textValues[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return set[_id].c_str();
-		}
-	}
-
-	return 0;
-}
-
-void Config::CreateInstance(string _filePath)
-{
-	m_instance = new Config(_filePath);
-}
-
-void Config::DestroyInstance()
-{
-	delete m_instance;
+	Clear();
+	Load(m_filePath);
 }
 
 Config::Config(string _filePath)
 {
+	Application::AddConfigReloadCallback(&Config::Reload, this);
+
 	m_filePath = _filePath;
 	Load(m_filePath);
 }
 
 void Config::Clear()
 {
-	m_intValues.clear();
+	/*m_intValues.clear();
 	m_boolValues.clear();
 	m_floatValues.clear();
 	m_vectorValues.clear();
 	m_colorValues.clear();
-	m_textValues.clear();
+	m_textValues.clear();*/
+
+	for (auto group : m_data)
+	{
+		for (auto iter = group.second.begin(); iter != group.second.end(); iter++)
+		{
+			delete (*iter).second;
+		}
+	}
+
+	m_data.clear();
 }
 
 void Config::Load(string _filePath)
@@ -185,11 +94,11 @@ void Config::Load(string _filePath)
 
 				if (values.size() == 2)
 				{
-					m_vectorValues[lastGroup][id] = Vec2{ values[0], values[1] };
+					m_data[lastGroup][id] = new Vec2{ values[0], values[1] };
 				}
 				else if (values.size() == 4)
 				{
-					m_colorValues[lastGroup][id] = Color32
+					m_data[lastGroup][id] = new Color32
 					{
 						(uint8_t)values[0],
 						(uint8_t)values[1],
@@ -202,24 +111,24 @@ void Config::Load(string _filePath)
 			{
 				if (val.find('.') != -1)
 				{
-					m_floatValues[lastGroup][id] = (float)atof(val.c_str());
+					m_data[lastGroup][id] = new float((float)atof(val.c_str()));
 					continue;
 				}
 
 				if (val == "false" || val == "true")
 				{
-					m_boolValues[lastGroup][id] = val == "true";
+					m_data[lastGroup][id] = new bool(val == "true");
 				}
 				else
 				{
 					int ascii = (int)val[0];
 					if (ascii >= 48 && ascii <= 57)
 					{
-						m_intValues[lastGroup][id] = atoi(val.c_str());
+						m_data[lastGroup][id] = new int(atoi(val.c_str()));
 					}
 					else
 					{
-						m_textValues[lastGroup][id] = val;
+						m_data[lastGroup][id] = new string(val);
 					}
 				}
 			}

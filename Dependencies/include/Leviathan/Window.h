@@ -13,6 +13,7 @@ private:
 	int m_height;
 	const char* m_title;
 	Color32 m_clearColor;
+	class Config* m_config;
 
 	DLL Window();
 	Window(Window&) = delete;

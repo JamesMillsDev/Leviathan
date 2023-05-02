@@ -23,16 +23,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="assets\config.cfg">
-      <Filter>Resource Files</Filter>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="TestGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="assets\app.cfg">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\debug.cfg">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\window.cfg">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

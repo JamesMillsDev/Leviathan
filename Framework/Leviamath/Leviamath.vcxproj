@@ -81,6 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Dependencies\lib\Leviathan\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
+    <raylib_LibraryType>DynamicRelease</raylib_LibraryType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Dependencies\lib\Leviathan\</OutDir>

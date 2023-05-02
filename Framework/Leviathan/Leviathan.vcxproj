@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +48,6 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -113,6 +113,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Dependencies\lib\Leviathan\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
+    <raylib_LibraryType>DynamicRelease</raylib_LibraryType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Dependencies\lib\Leviathan\</OutDir>

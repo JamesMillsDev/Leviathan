@@ -8,6 +8,8 @@
 #include <Leviathan/GameStates/GameStateManager.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
 
+using std::invoke;
+
 Application* Application::m_instance = nullptr;
 
 const char* Application::GetApplicationDirectory()
@@ -15,11 +17,22 @@ const char* Application::GetApplicationDirectory()
 	return m_instance->m_applicationDir;
 }
 
-Application::Application(Game* _game) : m_game(_game), m_window(nullptr)
+Config* Application::GetConfig(ConfigType _type)
 {
-	Config::CreateInstance("config.cfg");
+	if (m_instance->m_configs.find(_type) == m_instance->m_configs.end())
+		return nullptr;
 
-	m_window = new Window();
+	return m_instance->m_configs[_type];
+}
+
+void Application::AddConfigReloadCallback(ReloadCallback _callback, Config* _config)
+{
+	m_instance->m_onConfigReload.push_back({ _callback, _config });
+}
+
+Application::Application(Game* _game) : m_game(_game), m_window(nullptr), m_applicationDir(nullptr)
+{
+	
 }
 
 Application::~Application()
@@ -36,11 +49,32 @@ Application::~Application()
 		m_window = nullptr;
 	}
 
-	Config::DestroyInstance();
+	for (auto& config : m_configs)
+	{
+		if (config.second != nullptr)
+		{
+			delete config.second;
+		}
+	}
+
+	m_configs.clear();
+}
+
+void Application::Init()
+{
+	m_configs[ConfigType::APPLICATION] = new Config("app.cfg");
+	m_configs[ConfigType::WINDOW] = new Config("window.cfg");
+	m_configs[ConfigType::DEBUG] = new Config("debug.cfg");
+
+	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Debug", "reloadConfigKey");
+
+	m_window = new Window();
 }
 
 void Application::Process()
 {
+	Init();
+
 	m_window->Open();
 
 	Resources::CreateInstance();
@@ -51,6 +85,14 @@ void Application::Process()
 
 	while (!WindowShouldClose())
 	{
+		if (IsKeyPressed(m_configReloadKey))
+		{
+			for (auto& callback : m_onConfigReload)
+			{
+				invoke(callback.first, callback.second);
+			}
+		}
+
 		m_game->Tick();
 
 		GameStateManager::Tick();

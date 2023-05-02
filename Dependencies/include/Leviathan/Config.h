@@ -34,33 +34,35 @@ struct InvalidValueException : public std::exception
 class Config
 {
 public:
-	DLL static void Reload();
+	DLL Config(string _filePath);
 
-	DLL static int GetIntValue(string _group, string _id);
-	DLL static bool GetBooleanValue(string _group, string _id);
-	DLL static float GetFloatValue(string _group, string _id);
-	DLL static Vec2 GetVectorValue(string _group, string _id);
-	DLL static Color32 GetColorValue(string _group, string _id);
-	DLL static const char* GetTextValue(string _group, string _id);
-
-	DLL static void CreateInstance(string _filePath);
-	DLL static void DestroyInstance();
+	template<typename DATA>
+	DATA* GetValue(string _group, string _id);
 
 private:
-	static Config* m_instance;
-
 	string m_filePath;
-	map<group_id, map<string, int>> m_intValues;
-	map<group_id, map<string, bool>> m_boolValues;
-	map<group_id, map<string, float>> m_floatValues;
-	map<group_id, map<string, Vec2>> m_vectorValues;
-	map<group_id, map<string, Color32>> m_colorValues;
-	map<group_id, map<string, string>> m_textValues;
+	map<group_id, map<string, void*>> m_data;
 
-	DLL Config(string _filePath);
 	Config(const Config&) = delete;
 
+	DLL void Reload();
 	DLL void Clear();
 	DLL void Load(string _filePath);
 
 };
+
+template<typename DATA>
+inline DATA* Config::GetValue(string _group, string _id)
+{
+	if (m_data.find(_group) != m_data.end())
+	{
+		auto& set = m_data[_group];
+
+		if (set.find(_id) != set.end())
+		{
+			return (DATA*)set[_id];
+		}
+	}
+
+	return nullptr;
+}
