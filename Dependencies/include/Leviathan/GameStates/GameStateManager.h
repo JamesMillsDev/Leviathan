@@ -32,6 +32,7 @@ private:
 	vector<class IGameState*> m_activeStates;
 	map<char*, class IGameState*> m_states;
 
+private:
 	DLL static void Tick();
 	DLL static void Render();
 

@@ -13,8 +13,10 @@ public:
 	T Get();
 
 protected:
-	Resource(function<T(const char*)> _load, function<void(T)> _unload, string _path);
 	T* m_resource;
+
+protected:
+	Resource(function<T(const char*)> _load, function<void(T)> _unload, string _path);
 
 private:
 	friend class Resources;

@@ -43,6 +43,7 @@ private:
 	string m_filePath;
 	map<group_id, map<string, void*>> m_data;
 
+private:
 	Config(const Config&) = delete;
 
 	DLL void Reload();

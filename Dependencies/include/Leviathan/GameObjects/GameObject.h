@@ -38,6 +38,7 @@ private:
 	string m_name;
 	string m_tag;
 
+private:
 	DLL IGameObject();
 	DLL IGameObject(string _name);
 	IGameObject(IGameObject&) = delete;

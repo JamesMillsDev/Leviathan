@@ -27,6 +27,7 @@ private:
 	vector<UpdateAction> m_listUpdates;
 	vector<class IGameObject*> m_objects;
 
+private:
 	DLL static void Tick();
 	DLL static void Render();
 

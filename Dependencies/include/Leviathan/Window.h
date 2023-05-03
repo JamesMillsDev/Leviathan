@@ -15,6 +15,7 @@ private:
 	Color32 m_clearColor;
 	class Config* m_config;
 
+private:
 	DLL Window();
 	Window(Window&) = delete;
 	~Window() = default;

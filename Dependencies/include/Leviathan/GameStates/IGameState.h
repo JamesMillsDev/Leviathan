@@ -8,11 +8,12 @@ public:
 	virtual void Render() {}
 	virtual void Unload() {}
 
+protected:
+	IGameState(char* _id) : m_name(_id) {}
+
 private:
 	friend class GameStateManager;
 
 	char* m_name;
-
-	IGameState(char* _id) : m_name(_id) {}
 
 };

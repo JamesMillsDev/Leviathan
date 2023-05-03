@@ -58,6 +58,7 @@ private:
 	vector<TransformComponent*> m_children;
 	vector<UpdateAction> m_listUpdates;
 
+private:
 	TransformComponent() : m_transform(Mat3::Identity()), m_parent(nullptr) {}
 
 	DLL Mat3 GlobalTransform();

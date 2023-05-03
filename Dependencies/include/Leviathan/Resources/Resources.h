@@ -26,6 +26,7 @@ private:
 	map<string, string> m_paths;
 	map<string, void*> m_resources;
 
+private:
 	template<typename ASSET, Derived<Resource<ASSET>> RESOURCE>
 	static RESOURCE* TryGetResource(string& _id);
 

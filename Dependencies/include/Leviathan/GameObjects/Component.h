@@ -10,7 +10,6 @@ protected:
 	virtual void Render() {}
 	virtual void Unload() {}
 
-
 private:
 	friend class IGameObject;
 

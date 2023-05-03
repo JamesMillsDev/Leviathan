@@ -44,6 +44,7 @@ private:
 
 	int m_configReloadKey;
 
+private:
 	DLL Application(Game* _game);
 	DLL ~Application();
 
