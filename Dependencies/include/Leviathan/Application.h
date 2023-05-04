@@ -7,10 +7,12 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <functional>
 
 using std::map;
 using std::vector;
 using std::string;
+using std::function;
 using std::pair;
 
 enum class ConfigType
@@ -20,7 +22,7 @@ enum class ConfigType
 	DEBUG
 };
 
-typedef void(Config::*ReloadCallback)();
+typedef function<void()> ReloadCallback;
 
 class Application
 {
@@ -30,12 +32,12 @@ public:
 
 	DLL static const char* GetApplicationDirectory();
 	DLL static Config* GetConfig(ConfigType _type);
-	DLL static void AddConfigReloadCallback(ReloadCallback _callback, class Config* _config);
+	DLL static void AddConfigReloadCallback(ReloadCallback _callback);
 
 private:
 	DLL static Application* m_instance;
 
-	vector<pair<ReloadCallback, class Config*>> m_onConfigReload;
+	vector<ReloadCallback> m_onConfigReload;
 	struct Window* m_window;
 	map<ConfigType, Config*> m_configs;
 	
@@ -50,6 +52,7 @@ private:
 
 	DLL void Init();
 	DLL void Process();
+	DLL void OnConfigReloaded(class Config* _config);
 
 };
 

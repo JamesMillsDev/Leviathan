@@ -14,25 +14,26 @@ void Config::Reload()
 {
 	Clear();
 	Load(m_filePath);
+
+	for (auto& iter : m_listeners)
+		iter(this);
 }
 
 Config::Config(string _filePath)
 {
-	Application::AddConfigReloadCallback(&Config::Reload, this);
+	Application::AddConfigReloadCallback(std::bind(&Config::Reload, this));
 
 	m_filePath = _filePath;
 	Load(m_filePath);
 }
 
+void Config::ListenForReload(ConfigReloadCallback _callback)
+{
+	m_listeners.push_back(_callback);
+}
+
 void Config::Clear()
 {
-	/*m_intValues.clear();
-	m_boolValues.clear();
-	m_floatValues.clear();
-	m_vectorValues.clear();
-	m_colorValues.clear();
-	m_textValues.clear();*/
-
 	for (auto group : m_data)
 	{
 		for (auto iter = group.second.begin(); iter != group.second.end(); iter++)

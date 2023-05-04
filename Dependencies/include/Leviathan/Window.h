@@ -11,6 +11,7 @@ private:
 
 	int m_width;
 	int m_height;
+	int m_fullscreenKey;
 	const char* m_title;
 	Color32 m_clearColor;
 	class Config* m_config;
@@ -25,5 +26,7 @@ private:
 
 	DLL void BeginFrame();
 	DLL void EndFrame();
+	DLL void TryToggleFullscreen();
+	DLL void OnConfigReloaded(class Config* _config);
 
 };

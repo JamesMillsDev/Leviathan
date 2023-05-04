@@ -10,14 +10,20 @@
 
 #include <string>
 #include <map>
+#include <vector>
+#include <functional>
 
 #include <type_traits>
 
 using std::string;
 using std::map;
+using std::vector;
+using std::function;
 using std::is_same;
 
 typedef string group_id;
+
+typedef function<void(class Config*)> ConfigReloadCallback;
 
 struct InvalidValueException : public std::exception
 {
@@ -39,9 +45,12 @@ public:
 	template<typename DATA>
 	DATA* GetValue(string _group, string _id);
 
+	DLL void ListenForReload(ConfigReloadCallback _callback);
+
 private:
 	string m_filePath;
 	map<group_id, map<string, void*>> m_data;
+	vector<ConfigReloadCallback> m_listeners;
 
 private:
 	Config(const Config&) = delete;
