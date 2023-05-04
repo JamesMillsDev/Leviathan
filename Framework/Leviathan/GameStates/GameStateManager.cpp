@@ -31,13 +31,13 @@ void GameStateManager::RemoveState(IGameState* _state)
 void GameStateManager::ActivateState(char* _id)
 {
 	map<char*, IGameState*>& states = m_instance->m_states;
-	vector<IGameState*>& active = m_instance->m_activeStates;
+	list<IGameState*>& active = m_instance->m_activeStates;
 
 	if (states.find(_id) != states.end())
 	{
 		m_instance->m_listUpdates.push_back([&]()
 			{
-				vector<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
+				list<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
 
 				if (iter == active.end())
 				{
@@ -51,13 +51,13 @@ void GameStateManager::ActivateState(char* _id)
 void GameStateManager::DeactivateState(char* _id)
 {
 	map<char*, IGameState*>& states = m_instance->m_states;
-	vector<IGameState*>& active = m_instance->m_activeStates;
+	list<IGameState*>& active = m_instance->m_activeStates;
 
 	if (states.find(_id) != states.end())
 	{
 		m_instance->m_listUpdates.push_back([&]()
 			{
-				vector<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
+				list<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
 
 				if (iter != active.end())
 				{
@@ -81,7 +81,7 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Tick()
 {
-	vector<IGameState*>& active = m_instance->m_activeStates;
+	list<IGameState*>& active = m_instance->m_activeStates;
 	vector<UpdateAction>& updates = m_instance->m_listUpdates;
 
 	for (auto iter = updates.begin(); iter != updates.end(); iter++)
@@ -99,7 +99,7 @@ void GameStateManager::Tick()
 
 void GameStateManager::Render()
 {
-	vector<IGameState*>& active = m_instance->m_activeStates;
+	list<IGameState*>& active = m_instance->m_activeStates;
 	for (auto iter = active.begin(); iter != active.end(); iter++)
 	{
 		(*iter)->Render();

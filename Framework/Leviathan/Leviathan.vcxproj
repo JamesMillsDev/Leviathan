@@ -25,6 +25,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TextureComponent.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TransformComponent.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\GameStateManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h" />
@@ -43,6 +44,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\GameObjectManager.cpp" />
+    <ClCompile Include="GameObjects\TextureComponent.cpp" />
     <ClCompile Include="GameObjects\TransformComponent.cpp" />
     <ClCompile Include="GameStates\GameStateManager.cpp" />
     <ClCompile Include="Resources\Resources.cpp" />

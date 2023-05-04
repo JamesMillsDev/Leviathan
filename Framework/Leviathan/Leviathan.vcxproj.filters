@@ -87,6 +87,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugixml.hpp">
       <Filter>Third Party</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TextureComponent.h">
+      <Filter>Include\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="Third Party\pugixml.cpp">
       <Filter>Source\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\TextureComponent.cpp">
+      <Filter>Source\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

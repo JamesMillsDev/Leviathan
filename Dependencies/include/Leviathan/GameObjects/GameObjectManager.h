@@ -5,9 +5,11 @@
 
 #include <functional>
 #include <vector>
+#include <list>
 
 using std::function;
 using std::vector;
+using std::list;
 
 typedef function<void()> UpdateAction;
 
@@ -25,7 +27,7 @@ private:
 	friend class Application;
 
 	vector<UpdateAction> m_listUpdates;
-	vector<class IGameObject*> m_objects;
+	list<class IGameObject*> m_objects;
 
 private:
 	DLL static void Tick();

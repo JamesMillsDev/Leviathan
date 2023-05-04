@@ -6,7 +6,7 @@ class TestGame : public Game
 {
 protected:
 	virtual void Load() override;
-	virtual void Render() override;
+	virtual void Unload() override;
 
 };
 

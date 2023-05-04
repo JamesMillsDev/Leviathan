@@ -1,18 +1,24 @@
 #include "TestGame.h"
 
-#include <Leviathan/Resources/TextureResource.h>
-#include <Leviathan/Resources/Resources.h>
+#include <Leviathan/GameObjects/GameObject.h>
+#include <Leviathan/GameObjects/TextureComponent.h>
+#include <Leviathan/GameObjects/GameObjectManager.h>
 
-TextureResource* texture = nullptr;
+IGameObject* textured = nullptr;
 
 void TestGame::Load()
 {
-	texture = Resources::Find<Texture2D, TextureResource>("textures/test");
+	textured = new IGameObject("textured");
+	textured->Transform()->SetScale({ 500, 500 });
+	textured->Transform()->SetPosition({ 250, 250 });
+
+	TextureComponent* t = textured->AddComponent<TextureComponent>();
+	t->SetTexture("textures/test");
+
+	GameObjectManager::Spawn(textured);
 }
 
-void TestGame::Render()
+void TestGame::Unload()
 {
-	Texture2D test = texture->Get();
-
-	DrawTexture(test, 0, 0, RAYWHITE);
+	GameObjectManager::Destroy(textured);
 }

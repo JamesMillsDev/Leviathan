@@ -3,6 +3,7 @@
 #include <concepts>
 #include <functional>
 #include <vector>
+#include <list>
 #include <string>
 
 #include <Leviathan/Leviathan.h>
@@ -11,6 +12,7 @@
 
 using std::function;
 using std::vector;
+using std::list;
 using std::string;
 
 typedef function<void()> UpdateAction;
@@ -18,6 +20,13 @@ typedef function<void()> UpdateAction;
 class IGameObject
 {
 public:
+	DLL IGameObject();
+	DLL IGameObject(string _name);
+	IGameObject(IGameObject&) = delete;
+	DLL ~IGameObject();
+
+	DLL TransformComponent* Transform();
+
 	template<Derived<IComponent> COMPONENT>
 	COMPONENT* GetComponent();
 
@@ -33,16 +42,12 @@ private:
 	TransformComponent* m_transform;
 
 	vector<UpdateAction> m_listUpdates;
-	vector<IComponent*> m_components;
+	list<IComponent*> m_components;
 
 	string m_name;
 	string m_tag;
 
 private:
-	DLL IGameObject();
-	DLL IGameObject(string _name);
-	IGameObject(IGameObject&) = delete;
-	DLL ~IGameObject();
 
 	DLL void Load();
 	DLL void Tick();
@@ -69,11 +74,11 @@ template<Derived<IComponent> COMPONENT>
 inline COMPONENT* IGameObject::AddComponent()
 {
 	if (typeid(COMPONENT) == typeid(TransformComponent))
-		return;
+		return nullptr;
 
 	COMPONENT* component = new COMPONENT(this);
 
-	m_listUpdates.push_back([&]()
+	m_listUpdates.push_back([=, this]()
 		{
 			component->Load();
 			m_components.push_back(component);

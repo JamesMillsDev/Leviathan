@@ -4,32 +4,34 @@
 
 void GameObjectManager::Spawn(IGameObject* _go)
 {
-	vector<IGameObject*>& objects = m_instance->m_objects;
+	list<IGameObject*>& objects = m_instance->m_objects;
+	IGameObject* go = _go;
 
 	m_instance->m_listUpdates.push_back([&]()
 		{
-			vector<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), _go);
+			list<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), go);
 
 			if (iter == objects.end())
 			{
-				_go->Load();
-				objects.push_back(_go);
+				go->Load();
+				objects.push_back(go);
 			}
 		});
 }
 
 void GameObjectManager::Destroy(IGameObject* _go)
 {
-	vector<IGameObject*>& objects = m_instance->m_objects;
+	list<IGameObject*>& objects = m_instance->m_objects;
+	IGameObject* go = _go;
 
 	m_instance->m_listUpdates.push_back([&]()
 		{
-			vector<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), _go);
+			list<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), go);
 
 			if (iter != objects.end())
 			{
-				_go->Unload();
-				objects.erase(iter, iter);
+				go->Unload();
+				objects.erase(iter);
 			}
 		});
 }
@@ -46,7 +48,7 @@ GameObjectManager::~GameObjectManager()
 
 void GameObjectManager::Tick()
 {
-	vector<IGameObject*>& objects = m_instance->m_objects;
+	list<IGameObject*>& objects = m_instance->m_objects;
 	vector<UpdateAction>& updates = m_instance->m_listUpdates;
 
 	for (auto iter = updates.begin(); iter != updates.end(); iter++)
@@ -64,7 +66,7 @@ void GameObjectManager::Tick()
 
 void GameObjectManager::Render()
 {
-	vector<IGameObject*>& objects = m_instance->m_objects;
+	list<IGameObject*>& objects = m_instance->m_objects;
 	for (auto iter = objects.begin(); iter != objects.end(); iter++)
 	{
 		(*iter)->Render();

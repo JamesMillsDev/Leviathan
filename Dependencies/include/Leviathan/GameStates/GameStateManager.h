@@ -5,10 +5,12 @@
 
 #include <functional>
 #include <vector>
+#include <list>
 #include <map>
 
 using std::function;
 using std::vector;
+using std::list;
 using std::map;
 
 typedef function<void()> UpdateAction;
@@ -29,7 +31,7 @@ private:
 	friend class Application;
 
 	vector<UpdateAction> m_listUpdates;
-	vector<class IGameState*> m_activeStates;
+	list<class IGameState*> m_activeStates;
 	map<char*, class IGameState*> m_states;
 
 private:

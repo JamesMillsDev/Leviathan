@@ -6,9 +6,11 @@
 
 #include <map>
 #include <string>
+#include <stdexcept>
 
 using std::string;
 using std::map;
+using std::runtime_error;
 
 class Resources : public Singleton<Resources>
 {
@@ -56,6 +58,6 @@ RESOURCE* Resources::TryGetResource(string& _id)
 
 		return (RESOURCE*)GetInstance()->m_resources[_id];
 	}
-
-	return nullptr;
+	
+	throw runtime_error("No resource with id '" + _id + "' found!");
 }

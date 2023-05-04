@@ -15,9 +15,14 @@ IGameObject::~IGameObject()
 {
 	while (m_components.size() > 0)
 	{
-		delete m_components[m_components.size() - 1];
+		delete m_components.back();
 		m_components.pop_back();
 	}
+}
+
+DLL TransformComponent* IGameObject::Transform()
+{
+	return m_transform;
 }
 
 void IGameObject::Load()
