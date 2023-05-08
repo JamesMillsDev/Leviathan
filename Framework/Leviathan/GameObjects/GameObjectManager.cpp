@@ -2,45 +2,45 @@
 
 #include <Leviathan/GameObjects/GameObject.h>
 
-void GameObjectManager::Spawn(IGameObject* _go)
+void GameObjectManager::Spawn(GameObject* _go)
 {
-	list<IGameObject*>& objects = m_instance->m_objects;
-	IGameObject* go = _go;
+	list<GameObject*>& objects = m_instance->m_objects;
+	GameObject* go = _go;
 
-	m_instance->m_listUpdates.push_back([&]()
+	m_instance->m_listUpdates.push_back({ [&](GameObject* _g)
 		{
-			list<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), go);
+			list<GameObject*>::iterator iter = std::find(objects.end(), objects.end(), _g);
 
 			if (iter == objects.end())
 			{
-				go->Load();
-				objects.push_back(go);
+				_g->Load();
+				objects.push_back(_g);
 			}
-		});
+		}, _go });
 }
 
-void GameObjectManager::Destroy(IGameObject* _go)
+void GameObjectManager::Destroy(GameObject* _go)
 {
-	list<IGameObject*>& objects = m_instance->m_objects;
-	IGameObject* go = _go;
+	list<GameObject*>& objects = m_instance->m_objects;
 
-	m_instance->m_listUpdates.push_back([&]()
+	m_instance->m_listUpdates.push_back({ [&](GameObject* _g)
 		{
-			list<IGameObject*>::iterator iter = std::find(objects.end(), objects.end(), go);
+			list<GameObject*>::iterator iter = std::find(objects.end(), objects.end(), _g);
 
 			if (iter != objects.end())
 			{
-				go->Unload();
+				_g->Unload();
 				objects.erase(iter);
+				delete _g;
 			}
-		});
+		}, _go });
 }
 
 GameObjectManager::~GameObjectManager()
 {
 	for (auto iter = m_objects.begin(); iter != m_objects.end(); iter++)
 	{
-		delete *iter;
+		delete* iter;
 	}
 
 	m_objects.clear();
@@ -48,12 +48,12 @@ GameObjectManager::~GameObjectManager()
 
 void GameObjectManager::Tick()
 {
-	list<IGameObject*>& objects = m_instance->m_objects;
-	vector<UpdateAction>& updates = m_instance->m_listUpdates;
+	list<GameObject*>& objects = m_instance->m_objects;
+	vector<pair<function<void(class GameObject*)>, GameObject*>>& updates = m_instance->m_listUpdates;
 
 	for (auto iter = updates.begin(); iter != updates.end(); iter++)
 	{
-		(*iter)();
+		(*iter).first((*iter).second);
 	}
 
 	updates.clear();
@@ -66,7 +66,7 @@ void GameObjectManager::Tick()
 
 void GameObjectManager::Render()
 {
-	list<IGameObject*>& objects = m_instance->m_objects;
+	list<GameObject*>& objects = m_instance->m_objects;
 	for (auto iter = objects.begin(); iter != objects.end(); iter++)
 	{
 		(*iter)->Render();

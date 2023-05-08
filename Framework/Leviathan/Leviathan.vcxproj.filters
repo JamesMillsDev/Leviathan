@@ -31,6 +31,12 @@
     <Filter Include="Source\Third Party">
       <UniqueIdentifier>{2e295d45-8957-4f90-ae9e-e2540c186ba5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Physics">
+      <UniqueIdentifier>{0ddbfd87-cbf2-4176-9916-da5de62ecaec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{09fee0b7-d1f6-4d69-a6c0-769cc6a6e2b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -90,6 +96,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TextureComponent.h">
       <Filter>Include\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Rigidbody.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -124,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="GameObjects\TextureComponent.cpp">
       <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Rigidbody.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsManager.cpp">
+      <Filter>Source\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

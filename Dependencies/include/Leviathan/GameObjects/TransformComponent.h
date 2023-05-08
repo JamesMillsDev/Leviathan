@@ -11,7 +11,7 @@
 using std::function;
 using std::vector;
 
-typedef function<void()> UpdateAction;
+typedef function<void()> TransformUpdateAction;
 
 class TransformComponent
 {
@@ -51,12 +51,12 @@ public:
 	DLL void UpdateScale(const float& _x, const float& _y);
 
 private:
-	friend class IGameObject;
+	friend class GameObject;
 
 	Mat3 m_transform;
 	TransformComponent* m_parent;
 	vector<TransformComponent*> m_children;
-	vector<UpdateAction> m_listUpdates;
+	vector<TransformUpdateAction> m_listUpdates;
 
 private:
 	TransformComponent() : m_transform(Mat3::Identity()), m_parent(nullptr) {}

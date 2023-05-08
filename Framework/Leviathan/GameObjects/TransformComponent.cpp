@@ -24,7 +24,7 @@ void TransformComponent::SetParent(TransformComponent* _parent)
 
 float TransformComponent::Rotation()
 {
-	return GlobalTransform().GetRotation();
+	return GlobalTransform().GetRotation() * RAD_2_DEG;
 }
 
 float TransformComponent::LocalRotation()

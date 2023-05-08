@@ -5216,61 +5216,61 @@ namespace pugi
 		return prev->next_attribute ? xml_attribute(prev) : xml_attribute();
 	}
 
-	PUGI__FN const char_t* xml_attribute::as_string(const char_t* def) const
+	PUGI__FN const char_t* xml_attribute::as_string(const char_t* m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? value : def;
+		return value ? value : m_bodyDef;
 	}
 
-	PUGI__FN int xml_attribute::as_int(int def) const
+	PUGI__FN int xml_attribute::as_int(int m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_int(value) : def;
+		return value ? impl::get_value_int(value) : m_bodyDef;
 	}
 
-	PUGI__FN unsigned int xml_attribute::as_uint(unsigned int def) const
+	PUGI__FN unsigned int xml_attribute::as_uint(unsigned int m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_uint(value) : def;
+		return value ? impl::get_value_uint(value) : m_bodyDef;
 	}
 
-	PUGI__FN double xml_attribute::as_double(double def) const
+	PUGI__FN double xml_attribute::as_double(double m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_double(value) : def;
+		return value ? impl::get_value_double(value) : m_bodyDef;
 	}
 
-	PUGI__FN float xml_attribute::as_float(float def) const
+	PUGI__FN float xml_attribute::as_float(float m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_float(value) : def;
+		return value ? impl::get_value_float(value) : m_bodyDef;
 	}
 
-	PUGI__FN bool xml_attribute::as_bool(bool def) const
+	PUGI__FN bool xml_attribute::as_bool(bool m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_bool(value) : def;
+		return value ? impl::get_value_bool(value) : m_bodyDef;
 	}
 
 #ifdef PUGIXML_HAS_LONG_LONG
-	PUGI__FN long long xml_attribute::as_llong(long long def) const
+	PUGI__FN long long xml_attribute::as_llong(long long m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_llong(value) : def;
+		return value ? impl::get_value_llong(value) : m_bodyDef;
 	}
 
-	PUGI__FN unsigned long long xml_attribute::as_ullong(unsigned long long def) const
+	PUGI__FN unsigned long long xml_attribute::as_ullong(unsigned long long m_bodyDef) const
 	{
-		if (!_attr) return def;
+		if (!_attr) return m_bodyDef;
 		const char_t* value = _attr->value;
-		return value ? impl::get_value_ullong(value) : def;
+		return value ? impl::get_value_ullong(value) : m_bodyDef;
 	}
 #endif
 
@@ -6595,69 +6595,69 @@ namespace pugi
 		return value ? value : PUGIXML_TEXT("");
 	}
 
-	PUGI__FN const char_t* xml_text::as_string(const char_t* def) const
+	PUGI__FN const char_t* xml_text::as_string(const char_t* m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? value : def;
+		return value ? value : m_bodyDef;
 	}
 
-	PUGI__FN int xml_text::as_int(int def) const
+	PUGI__FN int xml_text::as_int(int m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_int(value) : def;
+		return value ? impl::get_value_int(value) : m_bodyDef;
 	}
 
-	PUGI__FN unsigned int xml_text::as_uint(unsigned int def) const
+	PUGI__FN unsigned int xml_text::as_uint(unsigned int m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_uint(value) : def;
+		return value ? impl::get_value_uint(value) : m_bodyDef;
 	}
 
-	PUGI__FN double xml_text::as_double(double def) const
+	PUGI__FN double xml_text::as_double(double m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_double(value) : def;
+		return value ? impl::get_value_double(value) : m_bodyDef;
 	}
 
-	PUGI__FN float xml_text::as_float(float def) const
+	PUGI__FN float xml_text::as_float(float m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_float(value) : def;
+		return value ? impl::get_value_float(value) : m_bodyDef;
 	}
 
-	PUGI__FN bool xml_text::as_bool(bool def) const
+	PUGI__FN bool xml_text::as_bool(bool m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_bool(value) : def;
+		return value ? impl::get_value_bool(value) : m_bodyDef;
 	}
 
 #ifdef PUGIXML_HAS_LONG_LONG
-	PUGI__FN long long xml_text::as_llong(long long def) const
+	PUGI__FN long long xml_text::as_llong(long long m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_llong(value) : def;
+		return value ? impl::get_value_llong(value) : m_bodyDef;
 	}
 
-	PUGI__FN unsigned long long xml_text::as_ullong(unsigned long long def) const
+	PUGI__FN unsigned long long xml_text::as_ullong(unsigned long long m_bodyDef) const
 	{
 		xml_node_struct* d = _data();
-		if (!d) return def;
+		if (!d) return m_bodyDef;
 		const char_t* value = d->value;
-		return value ? impl::get_value_ullong(value) : def;
+		return value ? impl::get_value_ullong(value) : m_bodyDef;
 	}
 #endif
 

@@ -1,17 +1,17 @@
 #include <Leviathan/GameObjects/GameObject.h>
 
-IGameObject::IGameObject() :
+GameObject::GameObject() :
 	m_name("Game Object"), m_tag("Default"), m_transform(new TransformComponent())
 {
 }
 
-IGameObject::IGameObject(string _name) :
+GameObject::GameObject(string _name) :
 	m_name("Game Object"), m_tag("Default"), m_transform(new TransformComponent())
 
 {
 }
 
-IGameObject::~IGameObject()
+GameObject::~GameObject()
 {
 	while (m_components.size() > 0)
 	{
@@ -20,12 +20,12 @@ IGameObject::~IGameObject()
 	}
 }
 
-DLL TransformComponent* IGameObject::Transform()
+DLL TransformComponent* GameObject::Transform()
 {
 	return m_transform;
 }
 
-void IGameObject::Load()
+void GameObject::Load()
 {
 	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 	{
@@ -33,7 +33,7 @@ void IGameObject::Load()
 	}
 }
 
-void IGameObject::Tick()
+void GameObject::Tick()
 {
 	for (auto iter = m_listUpdates.begin(); iter != m_listUpdates.end(); iter++)
 	{
@@ -48,7 +48,7 @@ void IGameObject::Tick()
 	}
 }
 
-void IGameObject::Render()
+void GameObject::Render()
 {
 	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 	{
@@ -56,7 +56,7 @@ void IGameObject::Render()
 	}
 }
 
-void IGameObject::Unload()
+void GameObject::Unload()
 {
 	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 	{

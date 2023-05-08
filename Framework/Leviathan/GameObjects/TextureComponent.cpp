@@ -11,8 +11,8 @@
 
 using std::exception;
 
-TextureComponent::TextureComponent(IGameObject* _owner)
-	: IComponent(_owner), m_texture(nullptr), m_id(nullptr)
+TextureComponent::TextureComponent(GameObject* _owner)
+	: Component(_owner), m_texture(nullptr), m_id(nullptr)
 {
 	
 }

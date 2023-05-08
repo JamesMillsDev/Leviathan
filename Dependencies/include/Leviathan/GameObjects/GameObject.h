@@ -15,25 +15,25 @@ using std::vector;
 using std::list;
 using std::string;
 
-typedef function<void()> UpdateAction;
+typedef function<void()> ComponentUpdateAction;
 
-class IGameObject
+class GameObject
 {
 public:
-	DLL IGameObject();
-	DLL IGameObject(string _name);
-	IGameObject(IGameObject&) = delete;
-	DLL ~IGameObject();
+	DLL GameObject();
+	DLL GameObject(string _name);
+	GameObject(GameObject&) = delete;
+	DLL ~GameObject();
 
 	DLL TransformComponent* Transform();
 
-	template<Derived<IComponent> COMPONENT>
+	template<Derived<Component> COMPONENT>
 	COMPONENT* GetComponent();
 
-	template<Derived<IComponent> COMPONENT>
+	template<Derived<Component> COMPONENT>
 	COMPONENT* AddComponent();
 
-	template<Derived<IComponent> COMPONENT>
+	template<Derived<Component> COMPONENT>
 	void DestroyComponent(COMPONENT* _component);
 
 private:
@@ -41,8 +41,8 @@ private:
 
 	TransformComponent* m_transform;
 
-	vector<UpdateAction> m_listUpdates;
-	list<IComponent*> m_components;
+	vector<ComponentUpdateAction> m_listUpdates;
+	list<Component*> m_components;
 
 	string m_name;
 	string m_tag;
@@ -56,8 +56,8 @@ private:
 
 };
 
-template<Derived<IComponent> COMPONENT>
-inline COMPONENT* IGameObject::GetComponent()
+template<Derived<Component> COMPONENT>
+inline COMPONENT* GameObject::GetComponent()
 {
 	for(auto iter = m_components.begin(); iter != m_components.end(); iter++)
 	{
@@ -70,8 +70,8 @@ inline COMPONENT* IGameObject::GetComponent()
 	return nullptr;
 }
 
-template<Derived<IComponent> COMPONENT>
-inline COMPONENT* IGameObject::AddComponent()
+template<Derived<Component> COMPONENT>
+inline COMPONENT* GameObject::AddComponent()
 {
 	if (typeid(COMPONENT) == typeid(TransformComponent))
 		return nullptr;
@@ -87,12 +87,12 @@ inline COMPONENT* IGameObject::AddComponent()
 	return component;
 }
 
-template<Derived<IComponent> COMPONENT>
-inline void IGameObject::DestroyComponent(COMPONENT* _component)
+template<Derived<Component> COMPONENT>
+inline void GameObject::DestroyComponent(COMPONENT* _component)
 {
 	m_listUpdates.push_back([&, this]()
 		{
-			vector<IComponent*>::iterator iter = std::find(m_components.begin(), m_components.end(), _component);
+			vector<Component*>::iterator iter = std::find(m_components.begin(), m_components.end(), _component);
 
 			if (iter != m_components.end())
 			{

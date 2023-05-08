@@ -166,6 +166,11 @@ Vec2::operator Vector2() const
     return { x, y };
 }
 
+Vec2::operator b2Vec2() const
+{
+    return { x, y };
+}
+
 Vec2 operator+(const Vec2 _rhs, const Vec2 _lhs)
 {
     return { _rhs.x + _lhs.x, _rhs.y + _lhs.y };

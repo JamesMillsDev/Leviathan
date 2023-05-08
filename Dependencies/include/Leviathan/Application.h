@@ -33,6 +33,7 @@ public:
 	DLL static const char* GetApplicationDirectory();
 	DLL static Config* GetConfig(ConfigType _type);
 	DLL static void AddConfigReloadCallback(ReloadCallback _callback);
+	DLL static void GetWindowSize(int& _width, int& _height);
 
 private:
 	DLL static Application* m_instance;

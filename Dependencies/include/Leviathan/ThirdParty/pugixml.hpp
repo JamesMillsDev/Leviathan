@@ -400,21 +400,21 @@ namespace pugi
 		const char_t* value() const;
 
 		// Get attribute value, or the default value if attribute is empty
-		const char_t* as_string(const char_t* def = PUGIXML_TEXT("")) const;
+		const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
 
 		// Get attribute value as a number, or the default value if conversion did not succeed or attribute is empty
-		int as_int(int def = 0) const;
-		unsigned int as_uint(unsigned int def = 0) const;
-		double as_double(double def = 0) const;
-		float as_float(float def = 0) const;
+		int as_int(int m_bodyDef = 0) const;
+		unsigned int as_uint(unsigned int m_bodyDef = 0) const;
+		double as_double(double m_bodyDef = 0) const;
+		float as_float(float m_bodyDef = 0) const;
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		long long as_llong(long long def = 0) const;
-		unsigned long long as_ullong(unsigned long long def = 0) const;
+		long long as_llong(long long m_bodyDef = 0) const;
+		unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
 	#endif
 
 		// Get attribute value as bool (returns true if first character is in '1tTyY' set), or the default value if attribute is empty
-		bool as_bool(bool def = false) const;
+		bool as_bool(bool m_bodyDef = false) const;
 
 		// Set attribute name/value (returns false if attribute is empty or there is not enough memory)
 		bool set_name(const char_t* rhs);
@@ -762,21 +762,21 @@ namespace pugi
 		const char_t* get() const;
 
 		// Get text, or the default value if object is empty
-		const char_t* as_string(const char_t* def = PUGIXML_TEXT("")) const;
+		const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
 
 		// Get text as a number, or the default value if conversion did not succeed or object is empty
-		int as_int(int def = 0) const;
-		unsigned int as_uint(unsigned int def = 0) const;
-		double as_double(double def = 0) const;
-		float as_float(float def = 0) const;
+		int as_int(int m_bodyDef = 0) const;
+		unsigned int as_uint(unsigned int m_bodyDef = 0) const;
+		double as_double(double m_bodyDef = 0) const;
+		float as_float(float m_bodyDef = 0) const;
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		long long as_llong(long long def = 0) const;
-		unsigned long long as_ullong(unsigned long long def = 0) const;
+		long long as_llong(long long m_bodyDef = 0) const;
+		unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
 	#endif
 
 		// Get text as bool (returns true if first character is in '1tTyY' set), or the default value if object is empty
-		bool as_bool(bool def = false) const;
+		bool as_bool(bool m_bodyDef = false) const;
 
 		// Set text (returns false if object is empty or there is not enough memory)
 		bool set(const char_t* rhs, size_t sz);

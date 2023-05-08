@@ -49,5 +49,8 @@
     <CopyFileToFolders Include="assets\textures\test.png">
       <Filter>Resource Files\Textures</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\physics.cfg">
+      <Filter>Resource Files\Config</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

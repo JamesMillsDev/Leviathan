@@ -4,6 +4,7 @@
 
 #include <initializer_list>
 #include <raylib.h>
+#include <Box2D/Common/b2Math.h>
 
 #define VEC_2_LENGTH 2
 
@@ -57,6 +58,7 @@ struct Vec2
 	DLL static Vec2 SignedAngle(Vec2 _vec);
 
 	DLL operator Vector2() const;
+	DLL operator b2Vec2() const;
 
 };
 

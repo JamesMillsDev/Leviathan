@@ -8,5 +8,7 @@ protected:
 	virtual void Load() override;
 	virtual void Unload() override;
 
+	virtual void Tick() override;
+
 };
 

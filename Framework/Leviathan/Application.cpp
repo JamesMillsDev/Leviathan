@@ -7,6 +7,7 @@
 #include <Leviathan/Resources/Resources.h>
 #include <Leviathan/GameStates/GameStateManager.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
+#include <Leviathan/Physics/PhysicsManager.h>
 
 Application* Application::m_instance = nullptr;
 
@@ -26,6 +27,12 @@ Config* Application::GetConfig(ConfigType _type)
 void Application::AddConfigReloadCallback(ReloadCallback _callback)
 {
 	m_instance->m_onConfigReload.push_back(_callback);
+}
+
+void Application::GetWindowSize(int& _width, int& _height)
+{
+	_width = m_instance->m_window->m_width;
+	_height = m_instance->m_window->m_height;
 }
 
 Application::Application(Game* _game) 
@@ -78,6 +85,7 @@ void Application::Process()
 	m_window->Open();
 
 	Resources::CreateInstance();
+	PhysicsManager::CreateInstance();
 	GameStateManager::CreateInstance();
 	GameObjectManager::CreateInstance();
 
@@ -95,6 +103,7 @@ void Application::Process()
 
 		m_game->Tick();
 
+		PhysicsManager::Tick();
 		GameStateManager::Tick();
 		GameObjectManager::Tick();
 

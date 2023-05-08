@@ -1,13 +1,13 @@
 #pragma once
 
-class IComponent
+class Component
 {
 protected:
-	friend class IGameObject;
+	friend class GameObject;
 
-	class IGameObject* m_owner;
+	class GameObject* m_owner;
 
-	IComponent(class IGameObject* _owner) : m_owner(_owner) {}
+	Component(class GameObject* _owner) : m_owner(_owner) {}
 
 	virtual void Load() {}
 	virtual void Tick() {}
