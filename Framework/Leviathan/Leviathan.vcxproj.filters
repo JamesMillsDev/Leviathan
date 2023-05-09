@@ -102,6 +102,13 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\BoxCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -143,9 +150,15 @@
     <ClCompile Include="Physics\PhysicsManager.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Color32.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\BoxCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

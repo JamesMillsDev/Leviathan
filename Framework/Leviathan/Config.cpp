@@ -1,9 +1,14 @@
 #include <Leviathan/Config.h>
 
 #include <Leviathan/Application.h>
+#include <Leviathan/Color32.h>
+
+#include <glm/vec2.hpp>
 
 #include <fstream>
 #include <vector>
+
+using glm::vec2;
 
 using std::ifstream;
 using std::vector;
@@ -95,7 +100,7 @@ void Config::Load(string _filePath)
 
 				if (values.size() == 2)
 				{
-					m_data[lastGroup][id] = new Vec2{ values[0], values[1] };
+					m_data[lastGroup][id] = new vec2{ values[0], values[1] };
 				}
 				else if (values.size() == 4)
 				{

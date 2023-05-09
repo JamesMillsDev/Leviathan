@@ -1,13 +1,17 @@
 #include <Leviathan/Physics/Rigidbody.h>
 
 #include <Leviathan/Physics/PhysicsManager.h>
+#include <Leviathan/Physics/Collider.h>
 #include <Leviathan/GameObjects/GameObject.h>
 
 #include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/b2Fixture.h>
 
 #include <functional>
 
-const Vec2& Rigidbody::GetVelocity() const
+#include <raylib.h>
+
+const vec2& Rigidbody::GetVelocity() const
 {
 	return m_velocity;
 }
@@ -20,6 +24,16 @@ const float& Rigidbody::GetAngularVelocity() const
 const float& Rigidbody::GetGravityScale() const
 {
 	return m_gravityScale;
+}
+
+const float& Rigidbody::GetMass() const
+{
+	return m_mass;
+}
+
+const float& Rigidbody::GetFriction() const
+{
+	return m_friction;
 }
 
 const bool& Rigidbody::IsRotationLocked() const
@@ -37,42 +51,78 @@ const bool& Rigidbody::IsStatic() const
 	return m_isStatic;
 }
 
-void Rigidbody::SetVelocity(Vec2& _velocity)
+void Rigidbody::SetVelocity(vec2& _velocity)
 {
-	m_body->SetLinearVelocity(_velocity);
+	if (m_body != nullptr)
+		m_body->SetLinearVelocity({ _velocity.x, _velocity.y });
 }
 
 void Rigidbody::SetAngularVelocity(float _velocity)
 {
-	m_body->SetAngularVelocity(_velocity);
+	if (m_body != nullptr)
+		m_body->SetAngularVelocity(_velocity);
 }
 
 void Rigidbody::SetGravityScale(float _scale)
 {
 	m_gravityScale = _scale;
-	m_body->SetGravityScale(_scale);
+	if(m_body != nullptr)
+		m_body->SetGravityScale(_scale);
+}
+
+void Rigidbody::SetMass(float _mass)
+{
+	m_mass = _mass;
+
+	if (m_body != nullptr)
+	{
+		for (b2Fixture* fixture = m_body->GetFixtureList(); fixture; fixture->GetNext())
+		{
+			fixture->SetDensity(m_mass);
+		}
+
+		m_body->ResetMassData();
+	}
+}
+
+void Rigidbody::SetFriction(float _friction)
+{
+	m_friction = _friction;
+
+	if (m_body != nullptr)
+	{
+		for (b2Fixture* fixture = m_body->GetFixtureList(); fixture; fixture->GetNext())
+		{
+			fixture->SetFriction(m_friction);
+		}
+
+		m_body->ResetMassData();
+	}
 }
 
 void Rigidbody::LockRotation(bool _locked)
 {
 	m_lockRotation = _locked;
-	m_body->SetFixedRotation(_locked);
+	if (m_body != nullptr)
+		m_body->SetFixedRotation(_locked);
 }
 
 void Rigidbody::SetKinematic(bool _isKinematic)
 {
 	m_isKinematic = _isKinematic;
-	m_body->SetType(m_isStatic ?
-		b2BodyType::b2_staticBody : m_isKinematic ?
-		b2BodyType::b2_dynamicBody : b2BodyType::b2_kinematicBody);
+	if (m_body != nullptr)
+		m_body->SetType(m_isStatic ?
+			b2BodyType::b2_staticBody : m_isKinematic ?
+			b2BodyType::b2_dynamicBody : b2BodyType::b2_kinematicBody);
 }
 
 void Rigidbody::SetStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
-	m_body->SetType(m_isStatic ?
-		b2BodyType::b2_staticBody : m_isKinematic ?
-		b2BodyType::b2_dynamicBody : b2BodyType::b2_kinematicBody);
+	if (m_body != nullptr)
+		m_body->SetType(m_isStatic ?
+			b2BodyType::b2_staticBody : m_isKinematic ?
+			b2BodyType::b2_dynamicBody : b2BodyType::b2_kinematicBody);
 }
 
 void Rigidbody::SetEnabled(bool _enabled)
@@ -85,8 +135,8 @@ void Rigidbody::SetEnabled(bool _enabled)
 
 Rigidbody::Rigidbody(GameObject* _owner)
 	: Component(_owner), m_body(nullptr), m_bodyDef(nullptr), m_angularVelocity(0),
-	m_velocity({ 0, 0 }), m_lockRotation(false), m_gravityScale(1), m_isKinematic(false),
-	m_isStatic(false)
+	m_velocity({ 0, 0 }), m_lockRotation(false), m_mass(1), m_friction(0.1f),
+	m_gravityScale(1), m_isKinematic(false), m_isStatic(false), m_fixtureCount(0)
 {
 	_owner->ListenToAddRemoveComponent(&Rigidbody::OnAddRemoveComponent, this);
 }
@@ -103,11 +153,11 @@ void Rigidbody::Load()
 {
 	if (m_bodyDef == nullptr)
 		m_bodyDef = new b2BodyDef();
-	Vec2 pos = m_owner->Transform()->Position();
+	vec2 pos = m_owner->Transform()->Position();
 	float rot = m_owner->Transform()->Rotation();
 
 	m_bodyDef->position.Set(pos.x, pos.y);
-	m_bodyDef->angle = rot * DEG_2_RAD;
+	m_bodyDef->angle = rot * DEG2RAD;
 	m_bodyDef->fixedRotation = m_lockRotation;
 	m_bodyDef->gravityScale = m_gravityScale;
 	m_bodyDef->type = m_isStatic ?
@@ -124,7 +174,7 @@ void Rigidbody::Tick()
 	m_angularVelocity = m_body->GetAngularVelocity();
 
 	b2Vec2 pos = m_body->GetPosition();
-	float32 rotation = m_body->GetAngle() * RAD_2_DEG;
+	float32 rotation = m_body->GetAngle() * RAD2DEG;
 	m_owner->Transform()->SetPosition(pos.x, pos.y);
 	m_owner->Transform()->SetRotation(rotation);
 }
@@ -133,27 +183,30 @@ void Rigidbody::Unload()
 {
 }
 
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Collision/Shapes/b2PolygonShape.h>
-
 void Rigidbody::OnAddRemoveComponent(Component* _component, bool _added, Component* _caller)
 {
 	// do thing here for when add and remove
-	if (_component == _caller)
+	if (_component != _caller)
 	{
-		if (Rigidbody* rb = dynamic_cast<Rigidbody*>(_caller))
+		if (Collider* collider = dynamic_cast<Collider*>(_component))
 		{
-			Vec2 scale = rb->m_owner->Transform()->Scale();
+			if (Rigidbody* rb = dynamic_cast<Rigidbody*>(_caller))
+			{
+				if (_added)
+				{
+					collider->AttachTo(rb->m_body, rb);
+					rb->m_fixtureCount++;
 
-			b2PolygonShape dynamicBox;
-			dynamicBox.SetAsBox(scale.x / 2, scale.y / 2);
+					rb->m_body->ResetMassData();
+				}
+				else
+				{
+					collider->DetachFrom(rb->m_body, rb);
+					rb->m_fixtureCount--;
 
-			b2FixtureDef fixtureDef;
-			fixtureDef.shape = &dynamicBox;
-			fixtureDef.density = 1.0f;
-			fixtureDef.friction = 0.3f;
-
-			rb->m_body->CreateFixture(&fixtureDef);
+					rb->m_body->ResetMassData();
+				}
+			}
 		}
 	}
 }

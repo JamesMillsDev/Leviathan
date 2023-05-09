@@ -1,6 +1,18 @@
 #include <Leviathan/GameObjects/TransformComponent.h>
 
-#include <Leviathan/Math/Leviamath.h>
+#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+
+#include <raylib.h>
+
+using glm::vec3;
+using glm::vec4;
+using glm::quat;
 
 TransformComponent*& TransformComponent::Parent()
 {
@@ -24,51 +36,103 @@ void TransformComponent::SetParent(TransformComponent* _parent)
 
 float TransformComponent::Rotation()
 {
-	return GlobalTransform().GetRotation() * RAD_2_DEG;
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(GlobalTransform(), scale, rot, trans, skew, perspective);
+
+	return glm::eulerAngles(rot).z * RAD2DEG;
 }
 
 float TransformComponent::LocalRotation()
 {
-	return m_transform.GetRotation();
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	return glm::eulerAngles(rot).z * RAD2DEG;
 }
 
 void TransformComponent::SetRotation(const float& _newRot)
 {
-	m_transform.SetRotation(_newRot * DEG_2_RAD);
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	m_transform = glm::translate(mat4(1.f), trans) *
+		glm::toMat4(glm::angleAxis(_newRot * DEG2RAD, vec3(0, 0, 1.f))) *
+		glm::scale(mat4(1.f), scale);
 }
 
 void TransformComponent::UpdateRotation(const float& _amount)
 {
-	m_transform.SetRotation(m_transform.GetRotation() + _amount * DEG_2_RAD);
+	m_transform = m_transform * glm::toMat4(glm::angleAxis(_amount * DEG2RAD, vec3(0, 0, 1.f)));
 }
 
 void TransformComponent::Position(float& _x, float& _y)
 {
-	Vec2 pos = Position();
+	vec2 pos = Position();
 	_x = pos.x;
 	_y = pos.y;
 }
 
-Vec2 TransformComponent::Position()
+vec2 TransformComponent::Position()
 {
-	return GlobalTransform().GetTranslation();
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(GlobalTransform(), scale, rot, trans, skew, perspective);
+
+	return trans;
 }
 
 void TransformComponent::LocalPosition(float& _x, float& _y)
 {
-	Vec2 pos = LocalPosition();
+	vec2 pos = LocalPosition();
 	_x = pos.x;
 	_y = pos.y;
 }
 
-Vec2 TransformComponent::LocalPosition()
+vec2 TransformComponent::LocalPosition()
 {
-	return m_transform.GetTranslation();
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	return trans;
 }
 
-void TransformComponent::SetPosition(const Vec2& _newPosition)
+void TransformComponent::SetPosition(const vec2& _newPosition)
 {
-	m_transform.SetTranslation(_newPosition);
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	m_transform = glm::translate(mat4(1.f), vec3(_newPosition, 0.f)) *
+		glm::toMat4(rot) *
+		glm::scale(mat4(1.f), scale);
 }
 
 void TransformComponent::SetPosition(const float& _newX, const float& _newY)
@@ -76,9 +140,9 @@ void TransformComponent::SetPosition(const float& _newX, const float& _newY)
 	SetPosition({ _newX, _newY });
 }
 
-void TransformComponent::UpdatePosition(const Vec2& _amount)
+void TransformComponent::UpdatePosition(const vec2& _amount)
 {
-	m_transform.Translate(_amount);
+	m_transform = glm::translate(m_transform, vec3(_amount, 0.f));
 }
 
 void TransformComponent::UpdatePosition(const float& _x, const float& _y)
@@ -88,31 +152,57 @@ void TransformComponent::UpdatePosition(const float& _x, const float& _y)
 
 void TransformComponent::Scale(float& _x, float& _y)
 {
-	Vec2 scale = Scale();
+	vec2 scale = Scale();
 	_x = scale.x;
 	_y = scale.y;
 }
 
-Vec2 TransformComponent::Scale()
+vec2 TransformComponent::Scale()
 {
-	return GlobalTransform().GetScale();
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(GlobalTransform(), scale, rot, trans, skew, perspective);
+
+	return scale;
 }
 
 void TransformComponent::LocalScale(float& _x, float& _y)
 {
-	Vec2 scale = LocalScale();
+	vec2 scale = LocalScale();
 	_x = scale.x;
 	_y = scale.y;
 }
 
-Vec2 TransformComponent::LocalScale()
+vec2 TransformComponent::LocalScale()
 {
-	return m_transform.GetScale();
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	return scale;
 }
 
-void TransformComponent::SetScale(const Vec2& _newScale)
+void TransformComponent::SetScale(const vec2& _newScale)
 {
-	m_transform.SetScale(_newScale);
+	vec3 scale;
+	quat rot;
+	vec3 trans;
+	vec3 skew;
+	vec4 perspective;
+
+	glm::decompose(m_transform, scale, rot, trans, skew, perspective);
+
+	m_transform = glm::translate(mat4(1.f), trans) *
+		glm::toMat4(rot) *
+		glm::scale(mat4(1.f), vec3(_newScale, 1.f));
 }
 
 void TransformComponent::SetScale(const float& _newX, const float& _newY)
@@ -120,9 +210,9 @@ void TransformComponent::SetScale(const float& _newX, const float& _newY)
 	SetScale({ _newX, _newY });
 }
 
-void TransformComponent::UpdateScale(const Vec2& _amount)
+void TransformComponent::UpdateScale(const vec2& _amount)
 {
-	m_transform.SetScale(m_transform.GetScale() + _amount);
+	m_transform = glm::scale(m_transform, vec3(_amount, 1.f));
 }
 
 void TransformComponent::UpdateScale(const float& _x, const float& _y)
@@ -130,7 +220,14 @@ void TransformComponent::UpdateScale(const float& _x, const float& _y)
 	UpdateScale({ _x, _y });
 }
 
-Mat3 TransformComponent::GlobalTransform()
+void TransformComponent::TRS(const vec2& _pos, const float& _angle, const vec2& _scale)
+{
+	SetPosition(_pos);
+	SetScale(_scale);
+	SetRotation(_angle);
+}
+
+mat4 TransformComponent::GlobalTransform()
 {
 	return m_parent != nullptr ? m_parent->m_transform * m_transform : m_transform;
 }

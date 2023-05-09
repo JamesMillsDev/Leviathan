@@ -7,6 +7,10 @@
 
 #include <Leviathan/Application.h>
 
+#include <glm/vec2.hpp>
+
+using glm::vec2;
+
 PhysicsManager::PhysicsManager()
 	: m_world(nullptr), m_config(nullptr), m_positionIterations(0), m_velocityIterations(0)
 {
@@ -30,8 +34,8 @@ void PhysicsManager::OnCreate()
 {
 	m_config = new Config("physics.cfg");
 
-	Vec2 gravity = *m_config->GetValue<Vec2>("World", "gravity");
-	m_world = new b2World(gravity);
+	vec2 gravity = *m_config->GetValue<vec2>("World", "gravity");
+	m_world = new b2World({ gravity.x, gravity.y });
 
 	m_velocityIterations = *m_config->GetValue<int>("World", "velocityIterations");
 	m_positionIterations = *m_config->GetValue<int>("World", "positionIterations");

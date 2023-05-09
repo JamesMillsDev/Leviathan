@@ -5,8 +5,6 @@
 #define DEBUG_CATEGORY "Debug"
 
 #include <Leviathan/Leviathan.h>
-#include <Leviathan/Math/Vec2.h>
-#include <Leviathan/Math/Color32.h>
 
 #include <string>
 #include <map>

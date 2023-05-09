@@ -2,7 +2,7 @@
 
 #include <Leviathan/Leviathan.h>
 
-#include <Leviathan/Math/Color32.h>
+#include <Leviathan/Color32.h>
 
 struct Window
 {

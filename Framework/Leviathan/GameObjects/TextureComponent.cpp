@@ -63,13 +63,13 @@ void TextureComponent::Render()
 				transform->Scale().y
 			};
 
-			Vec2 center =
+			vec2 center =
 			{
 				transform->Scale().x / 2,
 				transform->Scale().y / 2
 			};
 
-			DrawTexturePro(*m_texture, src, dst, center, transform->Rotation(), WHITE);
+			DrawTexturePro(*m_texture, src, dst, { center.x, center.y }, transform->Rotation(), WHITE);
 		}
 	}
 }
