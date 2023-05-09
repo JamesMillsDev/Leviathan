@@ -1,9 +1,9 @@
 #pragma once
 
-#include <concepts>
 #include <functional>
 #include <vector>
 #include <list>
+#include <map>
 #include <string>
 
 #include <Leviathan/Leviathan.h>
@@ -13,9 +13,11 @@
 using std::function;
 using std::vector;
 using std::list;
+using std::map;
 using std::string;
 
 typedef function<void()> ComponentUpdateAction;
+typedef function<void(Component*, bool, Component*)> ComponentAddRemoveFunction;
 
 class GameObject
 {
@@ -36,12 +38,16 @@ public:
 	template<Derived<Component> COMPONENT>
 	void DestroyComponent(COMPONENT* _component);
 
+	void ListenToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener);
+	void StopListeningToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener);
+
 private:
 	friend class GameObjectManager;
 
 	TransformComponent* m_transform;
 
 	vector<ComponentUpdateAction> m_listUpdates;
+	map<Component*, ComponentAddRemoveFunction> m_addRemoveUpdates;
 	list<Component*> m_components;
 
 	string m_name;
@@ -82,6 +88,13 @@ inline COMPONENT* GameObject::AddComponent()
 		{
 			component->Load();
 			m_components.push_back(component);
+			for (auto& addRemove : m_addRemoveUpdates)
+			{
+				Component* caller = addRemove.first;
+				ComponentAddRemoveFunction callback = addRemove.second;
+
+				std::invoke(callback, component, true, caller);
+			}
 		});
 
 	return component;
@@ -98,6 +111,15 @@ inline void GameObject::DestroyComponent(COMPONENT* _component)
 			{
 				(*iter)->Unload();
 				m_components.erase(iter, iter);
+				for (auto& addRemove : m_addRemoveUpdates)
+				{
+					Component* caller = addRemove.first;
+					ComponentAddRemoveFunction callback = addRemove.second;
+
+					std::invoke(callback, _component, false, caller);
+				}
+
+				delete _component;
 			}
 		});
 }

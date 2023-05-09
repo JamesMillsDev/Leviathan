@@ -7,6 +7,8 @@
 #include <vector>
 #include <list>
 
+#include <Box2D/Common/b2Math.h>
+
 using std::function;
 using std::vector;
 using std::list;
@@ -19,9 +21,11 @@ public:
 	PhysicsManager(PhysicsManager&) = delete;
 	DLL ~PhysicsManager();
 	DLL virtual void OnCreate() override;
+	DLL static vector<class b2Body*> GetBodies();
 
 private:
 	friend class Application;
+	friend class Rigidbody;
 
 	const float TIME_STEP = 1.f / 60.f;
 
@@ -30,7 +34,10 @@ private:
 	int m_velocityIterations;
 	int m_positionIterations;
 
+
 private:
 	DLL static void Tick();
+
+	DLL static class b2Body* CreateBody(struct b2BodyDef* _bodyDef);
 
 };

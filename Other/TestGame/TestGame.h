@@ -11,4 +11,3 @@ protected:
 	virtual void Tick() override;
 
 };
-

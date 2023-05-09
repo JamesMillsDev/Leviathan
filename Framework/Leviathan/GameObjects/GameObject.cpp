@@ -25,6 +25,18 @@ DLL TransformComponent* GameObject::Transform()
 	return m_transform;
 }
 
+void GameObject::ListenToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener)
+{
+	if (m_addRemoveUpdates.find(_listener) == m_addRemoveUpdates.end())
+		m_addRemoveUpdates[_listener] = _callback;
+}
+
+void GameObject::StopListeningToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener)
+{
+	if (m_addRemoveUpdates.find(_listener) != m_addRemoveUpdates.end())
+		m_addRemoveUpdates.erase(_listener);
+}
+
 void GameObject::Load()
 {
 	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
@@ -44,7 +56,9 @@ void GameObject::Tick()
 
 	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
 	{
-		(*iter)->Tick();
+		Component* component = *iter;
+		if(component->IsEnabled())
+			component->Tick();
 	}
 }
 

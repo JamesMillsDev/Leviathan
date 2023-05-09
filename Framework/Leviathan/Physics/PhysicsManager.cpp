@@ -3,6 +3,9 @@
 #include <Leviathan/Config.h>
 
 #include <Box2D/Box2D.h>
+#include <Box2D/Common/b2Draw.h>
+
+#include <Leviathan/Application.h>
 
 PhysicsManager::PhysicsManager()
 	: m_world(nullptr), m_config(nullptr), m_positionIterations(0), m_velocityIterations(0)
@@ -32,4 +35,23 @@ void PhysicsManager::OnCreate()
 
 	m_velocityIterations = *m_config->GetValue<int>("World", "velocityIterations");
 	m_positionIterations = *m_config->GetValue<int>("World", "positionIterations");
+}
+
+vector<b2Body*> PhysicsManager::GetBodies()
+{
+	vector<b2Body*> bodies;
+
+	for (int i = 0; i < m_instance->m_world->GetBodyCount(); i++)
+	{
+		b2Body* body = &m_instance->m_world->GetBodyList()[i];
+		if(body != nullptr)
+			bodies.push_back(&m_instance->m_world->GetBodyList()[i]);
+	}
+
+	return bodies;
+}
+
+b2Body* PhysicsManager::CreateBody(b2BodyDef* _bodyDef)
+{
+	return m_instance->m_world->CreateBody(_bodyDef);
 }
