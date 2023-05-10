@@ -1,26 +1,15 @@
 #include <Leviathan/Physics/BoxCollider.h>
 
-#include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 
 BoxCollider::BoxCollider(GameObject* _owner)
-    : Collider(_owner), m_center(vec2(0.f)), m_extents(vec2(10.f))
+    : Collider(_owner), m_extents(vec2(10.f))
 {
-}
-
-void BoxCollider::SetCenter(const vec2& _center)
-{
-    m_center = _center;
 }
 
 void BoxCollider::SetExtents(const vec2& _extents)
 {
     m_extents = _extents;
-}
-
-const vec2& BoxCollider::GetCenter() const
-{
-    return m_center;
 }
 
 const vec2& BoxCollider::GetExtents() const

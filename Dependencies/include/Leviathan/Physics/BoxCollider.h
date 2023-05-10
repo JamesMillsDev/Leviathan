@@ -12,14 +12,11 @@ class BoxCollider : public Collider
 public:
 	DLL BoxCollider(class GameObject* _owner);
 
-	DLL void SetCenter(const vec2& _center);
 	DLL void SetExtents(const vec2& _extents);
 
-	DLL const vec2& GetCenter() const;
 	DLL const vec2& GetExtents() const;
 
 protected:
-	vec2 m_center;
 	vec2 m_extents;
 
 protected:

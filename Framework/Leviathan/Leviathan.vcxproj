@@ -32,7 +32,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\BoxCollider.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Rigidbody.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resource.h" />
@@ -48,6 +50,8 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color32.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="GameObjects\CircleCollider.cpp" />
+    <ClCompile Include="GameObjects\EdgeCollider.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\GameObjectManager.cpp" />
     <ClCompile Include="GameObjects\TextureComponent.cpp" />

@@ -3,6 +3,10 @@
 #include <Leviathan/Leviathan.h>
 #include <Leviathan/GameObjects/Component.h>
 
+#include <glm/vec2.hpp>
+
+using glm::vec2;
+
 class Collider : public Component
 {
 public:
@@ -12,8 +16,13 @@ public:
 	DLL void AttachTo(class b2Body* _body, class Rigidbody* _rb);
 	DLL void DetachFrom(class b2Body* _body, class Rigidbody* _rb);
 
+	DLL void SetCenter(const vec2& _center);
+	DLL const vec2& GetCenter() const;
+
 protected:
 	friend class GameObject;
+
+	vec2 m_center;
 
 protected:
 	virtual class b2Shape* BuildShape() = 0;

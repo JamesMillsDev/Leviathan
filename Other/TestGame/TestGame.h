@@ -9,5 +9,6 @@ protected:
 	virtual void Unload() override;
 
 	virtual void Tick() override;
+	virtual void Render() override;
 
 };

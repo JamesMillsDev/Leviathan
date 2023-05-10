@@ -109,10 +109,10 @@ void Application::Process()
 
 		m_window->BeginFrame();
 
-		m_game->Render();
 
 		GameStateManager::Render();
 		GameObjectManager::Render();
+		m_game->Render();
 
 		m_window->EndFrame();
 	}

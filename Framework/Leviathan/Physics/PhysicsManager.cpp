@@ -9,6 +9,8 @@
 
 #include <glm/vec2.hpp>
 
+#include <raylib.h>
+
 using glm::vec2;
 
 PhysicsManager::PhysicsManager()
@@ -27,7 +29,7 @@ PhysicsManager::~PhysicsManager()
 
 void PhysicsManager::Tick()
 {
-	m_instance->m_world->Step(m_instance->TIME_STEP, m_instance->m_velocityIterations, m_instance->m_positionIterations);
+	m_instance->m_world->Step(m_instance->TIME_STEP * GetFrameTime() * 1000, m_instance->m_velocityIterations, m_instance->m_positionIterations);
 }
 
 void PhysicsManager::OnCreate()
