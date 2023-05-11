@@ -41,6 +41,11 @@ DLL b2Shape* CircleCollider::BuildShape()
     return circle;
 }
 
+float CircleCollider::GetVolume()
+{
+    return PI * m_radius * m_radius;
+}
+
 void CircleCollider::OnDrawGizmos()
 {
     TransformComponent* transform = m_owner->Transform();

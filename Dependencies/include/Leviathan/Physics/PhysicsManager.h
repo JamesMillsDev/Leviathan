@@ -23,6 +23,8 @@ public:
 	DLL virtual void OnCreate() override;
 	DLL static vector<class b2Body*> GetBodies();
 
+	DLL static int PolygonCollisionDensity() { return m_instance->m_polygonDensity; }
+
 private:
 	friend class Application;
 	friend class Rigidbody;
@@ -34,6 +36,7 @@ private:
 	int m_velocityIterations;
 	int m_positionIterations;
 
+	int m_polygonDensity;
 
 private:
 	DLL static void Tick();

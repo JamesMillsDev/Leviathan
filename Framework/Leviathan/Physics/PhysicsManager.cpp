@@ -13,7 +13,8 @@
 using glm::vec2;
 
 PhysicsManager::PhysicsManager()
-	: m_world(nullptr), m_config(nullptr), m_positionIterations(0), m_velocityIterations(0)
+	: m_world(nullptr), m_config(nullptr), m_positionIterations(0), 
+	m_velocityIterations(0), m_polygonDensity(5)
 {
 }
 
@@ -40,6 +41,7 @@ void PhysicsManager::OnCreate()
 
 	m_velocityIterations = *m_config->GetValue<int>("World", "velocityIterations");
 	m_positionIterations = *m_config->GetValue<int>("World", "positionIterations");
+	m_polygonDensity = *m_config->GetValue<int>("Collision", "polygonDensity");
 }
 
 vector<b2Body*> PhysicsManager::GetBodies()

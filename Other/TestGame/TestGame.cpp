@@ -62,4 +62,12 @@ void TestGame::Tick()
 			rb->SetEnabled(!rb->IsEnabled());
 		}
 	}
+
+	if (IsKeyPressed(KEY_W))
+	{
+		if (Rigidbody* rb = textured->GetComponent<Rigidbody>())
+		{
+			rb->ApplyForce({ 0, 25.f }, ForceMode::IMPULSE);
+		}
+	}
 }

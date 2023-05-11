@@ -133,6 +133,26 @@ void Rigidbody::SetEnabled(bool _enabled)
 		m_body->SetEnabled(_enabled);
 }
 
+void Rigidbody::ApplyForce(const vec2& _force, ForceMode _mode)
+{
+	b2Vec2 force = { _force.x * 100.f, -_force.y * 100.f };
+
+	if(_mode == ForceMode::IMPULSE)
+		m_body->ApplyLinearImpulseToCenter(force, true);
+	else if(_mode == ForceMode::FORCE)
+		m_body->ApplyForceToCenter(force, true);
+}
+
+void Rigidbody::ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode)
+{
+	b2Vec2 force = { _force.x * 100.f, -_force.y * 100.f };
+
+	if (_mode == ForceMode::IMPULSE)
+		m_body->ApplyLinearImpulse(force, { _point.x, _point.y }, true);
+	else if (_mode == ForceMode::FORCE)
+		m_body->ApplyForce(force, { _point.x, _point.y }, true);
+}
+
 Rigidbody::Rigidbody(GameObject* _owner)
 	: Component(_owner), m_body(nullptr), m_bodyDef(nullptr), m_angularVelocity(0),
 	m_velocity({ 0, 0 }), m_lockRotation(false), m_mass(1), m_friction(0.1f),
@@ -196,15 +216,11 @@ void Rigidbody::OnAddRemoveComponent(Component* _component, bool _added, Compone
 				{
 					collider->AttachTo(rb->m_body, rb);
 					rb->m_fixtureCount++;
-
-					rb->m_body->ResetMassData();
 				}
 				else
 				{
 					collider->DetachFrom(rb->m_body, rb);
 					rb->m_fixtureCount--;
-
-					rb->m_body->ResetMassData();
 				}
 			}
 		}

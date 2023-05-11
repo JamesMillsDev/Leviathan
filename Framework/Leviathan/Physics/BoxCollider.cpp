@@ -39,6 +39,11 @@ b2Shape* BoxCollider::BuildShape()
     return polygon;
 }
 
+float BoxCollider::GetVolume()
+{
+    return (m_extents.x * 2.f) + (m_extents.y * 2.f);
+}
+
 void BoxCollider::OnDrawGizmos()
 {
     TransformComponent* transform = m_owner->Transform();

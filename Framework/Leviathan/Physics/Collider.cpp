@@ -1,5 +1,7 @@
 #include <Leviathan/Physics/Collider.h>
 
+#include <Leviathan/Application.h>
+
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/Physics/Rigidbody.h>
 
@@ -30,9 +32,12 @@ Collider::~Collider()
 
 void Collider::AttachTo(b2Body* _body, Rigidbody* _rb)
 {
+	int w = 0, h = 0;
+	Application::GetWindowSize(w, h);
+
 	m_fixtureDef = new b2FixtureDef();
 	m_fixtureDef->shape = m_shape;
-	m_fixtureDef->density = _rb->GetMass();
+	m_fixtureDef->density = _rb->GetMass() / GetVolume();
 	m_fixtureDef->friction = _rb->GetFriction();
 
 	m_fixture = _body->CreateFixture(m_fixtureDef);

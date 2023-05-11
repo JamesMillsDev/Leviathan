@@ -29,6 +29,7 @@ protected:
 
 protected:
 	virtual class b2Shape* BuildShape() = 0;
+	virtual float GetVolume() = 0;
 
 	DLL virtual void Load() override;
 

@@ -7,6 +7,12 @@
 
 using glm::vec2;
 
+enum class ForceMode
+{
+	IMPULSE,
+	FORCE
+};
+
 class Rigidbody : public Component
 {
 public:
@@ -35,6 +41,9 @@ public:
 	DLL void SetStatic(bool _isStatic);
 
 	DLL virtual void SetEnabled(bool _enabled) override;
+
+	DLL void ApplyForce(const vec2& _force, ForceMode _mode = ForceMode::FORCE);
+	DLL void ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode = ForceMode::FORCE);
 
 protected:
 	friend class GameObject;
