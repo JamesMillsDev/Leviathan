@@ -1,7 +1,11 @@
 #include <Leviathan/Physics/CircleCollider.h>
 
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Collision/Shapes/b2CircleShape.h>
+#include <Leviathan/Gizmos.h>
+#include <Leviathan/GameObjects/GameObject.h>
+#include <Leviathan/GameObjects/TransformComponent.h>
+
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_circle_shape.h>
 
 CircleCollider::CircleCollider(GameObject* _owner)
     : Collider(_owner), m_center(vec2(0.f)), m_radius(10.f)
@@ -35,4 +39,11 @@ DLL b2Shape* CircleCollider::BuildShape()
     circle->m_p = { m_center.x, m_center.y };
 
     return circle;
+}
+
+void CircleCollider::OnDrawGizmos()
+{
+    TransformComponent* transform = m_owner->Transform();
+
+    Gizmos::DrawWireCircle(transform->Position() + m_center, m_radius);
 }

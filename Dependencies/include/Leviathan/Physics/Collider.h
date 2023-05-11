@@ -23,15 +23,13 @@ protected:
 	friend class GameObject;
 
 	vec2 m_center;
+	class b2Shape* m_shape;
+	struct b2FixtureDef* m_fixtureDef;
+	class b2Fixture* m_fixture;
 
 protected:
 	virtual class b2Shape* BuildShape() = 0;
 
 	DLL virtual void Load() override;
-
-private:
-	class b2Shape* m_shape;
-	struct b2FixtureDef* m_fixtureDef;
-	class b2Fixture* m_fixture;
 
 };

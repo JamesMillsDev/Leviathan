@@ -77,3 +77,11 @@ void GameObject::Unload()
 		(*iter)->Unload();
 	}
 }
+
+void GameObject::OnDrawGizmos()
+{
+	for (auto iter = m_components.begin(); iter != m_components.end(); iter++)
+	{
+		(*iter)->OnDrawGizmos();
+	}
+}

@@ -4,8 +4,8 @@
 #include <Leviathan/Physics/Collider.h>
 #include <Leviathan/GameObjects/GameObject.h>
 
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_fixture.h>
 
 #include <functional>
 
@@ -130,7 +130,7 @@ void Rigidbody::SetEnabled(bool _enabled)
 	Component::SetEnabled(_enabled);
 
 	if (m_body != nullptr)
-		m_body->SetActive(_enabled);
+		m_body->SetEnabled(_enabled);
 }
 
 Rigidbody::Rigidbody(GameObject* _owner)
@@ -165,7 +165,7 @@ void Rigidbody::Load()
 		b2BodyType::b2_kinematicBody : b2BodyType::b2_dynamicBody;
 
 	m_body = PhysicsManager::CreateBody(m_bodyDef);
-	m_body->SetActive(IsEnabled());
+	m_body->SetEnabled(IsEnabled());
 }
 
 void Rigidbody::Tick()
@@ -174,7 +174,7 @@ void Rigidbody::Tick()
 	m_angularVelocity = m_body->GetAngularVelocity();
 
 	b2Vec2 pos = m_body->GetPosition();
-	float32 rotation = m_body->GetAngle() * RAD2DEG;
+	float rotation = m_body->GetAngle() * RAD2DEG;
 	m_owner->Transform()->SetPosition(pos.x, pos.y);
 	m_owner->Transform()->SetRotation(rotation);
 }

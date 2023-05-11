@@ -114,7 +114,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Gizmos.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -165,10 +170,15 @@
     <ClCompile Include="Physics\BoxCollider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\CircleCollider.cpp">
+    <ClCompile Include="Physics\CircleCollider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\EdgeCollider.cpp" />
+    <ClCompile Include="Physics\EdgeCollider.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmos.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

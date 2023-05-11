@@ -3,8 +3,8 @@
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/Physics/Rigidbody.h>
 
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_fixture.h>
 
 Collider::Collider(GameObject* _owner)
 	: Component(_owner), m_shape(nullptr), m_fixtureDef(nullptr), 

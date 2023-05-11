@@ -3,7 +3,6 @@
 #include <Leviathan/Config.h>
 
 #include <Box2D/Box2D.h>
-#include <Box2D/Common/b2Draw.h>
 
 #include <Leviathan/Application.h>
 

@@ -72,3 +72,12 @@ void GameObjectManager::Render()
 		(*iter)->Render();
 	}
 }
+
+void GameObjectManager::DrawGizmos()
+{
+	list<GameObject*>& objects = m_instance->m_objects;
+	for (auto iter = objects.begin(); iter != objects.end(); iter++)
+	{
+		(*iter)->OnDrawGizmos();
+	}
+}

@@ -25,5 +25,7 @@ protected:
 protected:
 	DLL virtual class b2Shape* BuildShape() override;
 
+	DLL virtual void OnDrawGizmos() override;
+
 };
 

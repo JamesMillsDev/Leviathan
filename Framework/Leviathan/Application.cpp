@@ -4,6 +4,7 @@
 #include <raylib.h>
 
 #include <Leviathan/Config.h>
+#include <Leviathan/Gizmos.h>
 #include <Leviathan/Resources/Resources.h>
 #include <Leviathan/GameStates/GameStateManager.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
@@ -72,7 +73,7 @@ void Application::Init()
 	m_configs[ConfigType::WINDOW] = new Config("window.cfg");
 	m_configs[ConfigType::DEBUG] = new Config("debug.cfg");
 
-	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Debug", "reloadConfigKey");
+	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Config", "reloadConfigKey");
 	m_configs[ConfigType::DEBUG]->ListenForReload(std::bind(&Application::OnConfigReloaded, this, m_configs[ConfigType::DEBUG]));
 
 	m_window = new Window();
@@ -88,11 +89,14 @@ void Application::Process()
 	PhysicsManager::CreateInstance();
 	GameStateManager::CreateInstance();
 	GameObjectManager::CreateInstance();
+	Gizmos::Init();
 
 	m_game->Load();
 
 	while (!WindowShouldClose())
 	{
+		Gizmos::Tick();
+
 		if (IsKeyPressed(m_configReloadKey))
 		{
 			for (auto& callback : m_onConfigReload)
@@ -109,10 +113,15 @@ void Application::Process()
 
 		m_window->BeginFrame();
 
-
 		GameStateManager::Render();
 		GameObjectManager::Render();
+
 		m_game->Render();
+
+		if (Gizmos::m_shown)
+		{
+			GameObjectManager::DrawGizmos();
+		}
 
 		m_window->EndFrame();
 	}
@@ -128,5 +137,5 @@ void Application::Process()
 
 void Application::OnConfigReloaded(Config* _config)
 {
-	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Debug", "reloadConfigKey");
+	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Config", "reloadConfigKey");
 }

@@ -32,4 +32,6 @@ private:
 	DLL static void Tick();
 	DLL static void Render();
 
+	DLL static void DrawGizmos();
+
 };

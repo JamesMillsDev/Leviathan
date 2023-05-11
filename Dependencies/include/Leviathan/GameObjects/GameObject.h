@@ -60,6 +60,8 @@ private:
 	DLL void Render();
 	DLL void Unload();
 
+	DLL void OnDrawGizmos();
+
 };
 
 template<Derived<Component> COMPONENT>

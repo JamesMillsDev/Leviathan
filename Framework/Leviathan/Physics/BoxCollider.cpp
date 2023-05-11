@@ -1,6 +1,12 @@
 #include <Leviathan/Physics/BoxCollider.h>
 
-#include <Box2D/Collision/Shapes/b2PolygonShape.h>
+#include <Leviathan/Gizmos.h>
+#include <Leviathan/GameObjects/GameObject.h>
+#include <Leviathan/GameObjects/TransformComponent.h>
+
+#include <box2d/b2_polygon_shape.h>
+
+#include <raylib.h>
 
 BoxCollider::BoxCollider(GameObject* _owner)
     : Collider(_owner), m_extents(vec2(10.f))
@@ -31,4 +37,11 @@ b2Shape* BoxCollider::BuildShape()
     polygon->Set(points, 4);
 
     return polygon;
+}
+
+void BoxCollider::OnDrawGizmos()
+{
+    TransformComponent* transform = m_owner->Transform();
+
+    Gizmos::DrawWireRect(transform->Position() + m_center, m_extents, transform->Rotation());
 }

@@ -7,7 +7,7 @@
 #include <vector>
 #include <list>
 
-#include <Box2D/Common/b2Math.h>
+#include <box2d/b2_math.h>
 
 using std::function;
 using std::vector;
