@@ -27,6 +27,9 @@ void Window::Open()
 	m_config->ListenForReload(std::bind(&Window::OnConfigReloaded, this, m_config));
 
 	InitWindow(m_width, m_height, m_title.c_str());
+
+	if (m_config->GetValue(WINDOW_CATEGORY, "useFullscreen")->Get<bool>())
+		ToggleFullscreen();
 }
 
 void Window::Close()
