@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ConfigValue.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h" />
@@ -31,43 +31,43 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TransformComponent.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\GameStateManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Gizmos.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\BoxCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PolygonCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Rigidbody.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resource.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugiconfig.hpp" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugixml.hpp" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugiconfig.hpp" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugixml.hpp" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Config.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\ConfigValue.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Gizmos.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Color32.cpp" />
-    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Core\Application.cpp" />
+    <ClCompile Include="Core\Color32.cpp" />
+    <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\GameObjectManager.cpp" />
     <ClCompile Include="GameObjects\TextureComponent.cpp" />
     <ClCompile Include="GameObjects\TransformComponent.cpp" />
     <ClCompile Include="GameStates\GameStateManager.cpp" />
-    <ClCompile Include="Gizmos.cpp" />
     <ClCompile Include="Physics\BoxCollider.cpp" />
     <ClCompile Include="Physics\CircleCollider.cpp" />
     <ClCompile Include="Physics\Collider.cpp" />
-    <ClCompile Include="Physics\EdgeCollider.cpp" />
+    <ClCompile Include="Physics\PolygonCollider.cpp" />
     <ClCompile Include="Physics\PhysicsManager.cpp" />
     <ClCompile Include="Physics\Rigidbody.cpp" />
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\TextureResource.cpp" />
     <ClCompile Include="Third Party\pugixml.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Utils\Config.cpp" />
+    <ClCompile Include="Utils\Gizmos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

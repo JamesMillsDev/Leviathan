@@ -1,32 +1,33 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
-#include <Leviathan/Game.h>
-#include <Leviathan/Config.h>
+#include <Leviathan/Core/Game.h>
 
-#include <map>
-#include <vector>
-#include <string>
+#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Utils/Config.h>
+
 #include <functional>
+#include <map>
+#include <string>
+#include <vector>
 
-using std::map;
-using std::vector;
-using std::string;
 using std::function;
+using std::map;
 using std::pair;
+using std::string;
+using std::vector;
 
 enum class ConfigType
 {
-	APPLICATION,
-	WINDOW,
-	DEBUG
+	Application,
+	Window,
+	Debug
 };
 
 class Application
 {
 public:
 	template<Derived<Game> GAME>
-	static int Run(char* argv[]);
+	static int Run(char* _argv[]);
 
 	DLL static const char* GetApplicationDirectory();
 	DLL static Config* GetConfig(ConfigType _type);
@@ -56,12 +57,12 @@ private:
 };
 
 template<Derived<Game> GAME>
-inline int Application::Run(char* argv[])
+inline int Application::Run(char* _argv[])
 {
 	if (m_instance == nullptr)
 	{
-		string argv_str(argv[0]);
-		string base = argv_str.substr(0, argv_str.find_last_of("\\"));
+		const string argvStr(_argv[0]);
+		const string base = argvStr.substr(0, argvStr.find_last_of("\\"));
 
 		m_instance = new Application(new GAME());
 		m_instance->m_applicationDir = base.c_str();

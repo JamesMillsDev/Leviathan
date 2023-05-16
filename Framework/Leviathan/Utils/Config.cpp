@@ -1,12 +1,14 @@
-#include <Leviathan/Config.h>
+#include <Leviathan/Utils/Config.h>
 
-#include <Leviathan/Application.h>
-#include <Leviathan/Color32.h>
-#include <Leviathan/ConfigValue.h>
+#include <Leviathan/Core/Application.h>
+#include <Leviathan/Core/Color32.h>
+
+#include <Leviathan/Utils/ConfigValue.h>
 
 #include <glm/vec2.hpp>
 
 #include <fstream>
+#include <ranges>
 #include <vector>
 
 using glm::vec2;
@@ -25,7 +27,7 @@ void Config::Reload()
 		iter(this);
 }
 
-Config::Config(string _filePath)
+Config::Config(const string _filePath)
 {
 	Application::AddConfigReloadCallback(&Config::Reload, this);
 
@@ -33,34 +35,32 @@ Config::Config(string _filePath)
 	Load(m_filePath);
 }
 
-class ConfigValue* Config::GetValue(string _group, string _id)
+ConfigValue* Config::GetValue(const string _group, const string _id)
 {
-	if (m_data.find(_group) != m_data.end())
+	if (m_data.contains(_group))
 	{
 		auto& set = m_data[_group];
 
-		if (set.find(_id) != set.end())
+		if (set.contains(_id))
 		{
-			return (ConfigValue*)set[_id];
+			return set[_id];
 		}
 	}
 
 	return nullptr;
 }
 
-void Config::ListenForReload(ConfigReloadCallback _callback)
+void Config::ListenForReload(const ConfigReloadCallback _callback)
 {
 	m_listeners.push_back(_callback);
 }
 
 void Config::Clear()
 {
-	for (auto group : m_data)
+	for (auto& group : m_data | std::views::values)
 	{
-		for (auto iter = group.second.begin(); iter != group.second.end(); iter++)
-		{
+		for (auto iter = group.begin(); iter != group.end(); ++iter)
 			delete (*iter).second;
-		}
 	}
 
 	m_data.clear();
@@ -70,7 +70,7 @@ void Config::Load(string _filePath)
 {
 	ifstream configFile("assets\\" + _filePath);
 	if (configFile.bad())
-		throw "Config file missing";
+		throw R"(Config file missing)";
 
 	string line;
 	string lastGroup;
@@ -143,7 +143,7 @@ void Config::Load(string _filePath)
 				}
 				else
 				{
-					int ascii = (int)val[0];
+					int ascii = val[0];
 					if (ascii >= 48 && ascii <= 57)
 					{
 						m_data[lastGroup][id] = new ConfigValue(new int(atoi(val.c_str())));

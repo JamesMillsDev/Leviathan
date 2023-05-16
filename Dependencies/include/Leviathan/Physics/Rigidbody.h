@@ -1,7 +1,8 @@
 #pragma once
 
+#include <Leviathan/Core/Leviathan.h>
+
 #include <Leviathan/GameObjects/Component.h>
-#include <Leviathan/Leviathan.h>
 
 #include <glm/vec2.hpp>
 
@@ -9,11 +10,11 @@ using glm::vec2;
 
 enum class ForceMode
 {
-	IMPULSE,
-	FORCE
+	Impulse,
+	Force
 };
 
-class Rigidbody : public Component
+class Rigidbody final : public Component
 {
 public:
 	DLL const vec2& GetVelocity() const;
@@ -40,10 +41,10 @@ public:
 	DLL void SetKinematic(bool _isKinematic);
 	DLL void SetStatic(bool _isStatic);
 
-	DLL virtual void SetEnabled(bool _enabled) override;
+	DLL void SetEnabled(bool _enabled) override;
 
-	DLL void ApplyForce(const vec2& _force, ForceMode _mode = ForceMode::FORCE);
-	DLL void ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode = ForceMode::FORCE);
+	DLL void ApplyForce(const vec2& _force, ForceMode _mode = ForceMode::Force);
+	DLL void ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode = ForceMode::Force);
 
 protected:
 	friend class GameObject;
@@ -64,11 +65,11 @@ protected:
 protected:
 
 	DLL Rigidbody(class GameObject* _owner);
-	DLL ~Rigidbody();
+	DLL ~Rigidbody() override;
 
-	DLL virtual void Load() override;
-	DLL virtual void Tick() override;
-	DLL virtual void Unload() override;
+	DLL void Load() override;
+	DLL void Tick() override;
+	DLL void Unload() override;
 
 private:
 	class b2Body* m_body;

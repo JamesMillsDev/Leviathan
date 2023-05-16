@@ -1,11 +1,11 @@
 #include <Leviathan/Physics/PhysicsManager.h>
 
-#include <Leviathan/Config.h>
-#include <Leviathan/ConfigValue.h>
+#include <Leviathan/Utils/Config.h>
+#include <Leviathan/Utils/ConfigValue.h>
 
 #include <Box2D/Box2D.h>
 
-#include <Leviathan/Application.h>
+#include <Leviathan/Core/Application.h>
 
 #include <glm/vec2.hpp>
 

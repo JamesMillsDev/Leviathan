@@ -3,8 +3,9 @@
 class Component
 {
 public:
+	virtual ~Component() = default;
 	const bool& IsEnabled() const { return m_enabled; }
-	virtual void SetEnabled(bool _enabled) { m_enabled = _enabled; }
+	virtual void SetEnabled(const bool _enabled) { m_enabled = _enabled; }
 
 protected:
 	friend class GameObject;

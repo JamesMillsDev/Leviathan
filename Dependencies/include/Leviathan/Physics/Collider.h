@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
+#include <Leviathan/Core/Leviathan.h>
+
 #include <Leviathan/GameObjects/Component.h>
 
 #include <glm/vec2.hpp>
@@ -11,9 +12,9 @@ class Collider : public Component
 {
 public:
 	DLL Collider(class GameObject* _owner);
-	DLL ~Collider();
+	DLL ~Collider() override;
 
-	DLL void AttachTo(class b2Body* _body, class Rigidbody* _rb);
+	DLL void AttachTo(class b2Body* _body, const class Rigidbody* _rb);
 	DLL void DetachFrom(class b2Body* _body, class Rigidbody* _rb);
 
 	DLL void SetCenter(const vec2& _center);
@@ -31,6 +32,6 @@ protected:
 	virtual class b2Shape* BuildShape() = 0;
 	virtual float GetVolume() = 0;
 
-	DLL virtual void Load() override;
+	DLL void Load() override;
 
 };

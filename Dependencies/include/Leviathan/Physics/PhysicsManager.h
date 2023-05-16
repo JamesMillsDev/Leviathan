@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
-#include <Leviathan/Singleton.h>
+#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Utils/Singleton.h>
 
 #include <functional>
 #include <vector>

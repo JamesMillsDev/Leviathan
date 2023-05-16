@@ -1,19 +1,20 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
+#include <Leviathan/Core/Leviathan.h>
+
 #include <Leviathan/GameObjects/Component.h>
 
-class TextureComponent : public Component
+class TextureComponent final : public Component
 {
 public:
 	DLL TextureComponent(class GameObject* _owner);
-	DLL ~TextureComponent();
+	DLL ~TextureComponent() override;
 
 	void SetTexture(const char* _id) { m_id = _id; }
 
 protected:
-	DLL virtual void Load() override;
-	DLL virtual void Render() override;
+	DLL void Load() override;
+	DLL void Render() override;
 
 private:
 	friend class GameObject;

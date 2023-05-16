@@ -4,104 +4,102 @@
 
 void GameStateManager::AddState(IGameState* _state)
 {
-	map<char*, IGameState*>& states = m_instance->m_states;
-
-	if (states.find(_state->m_name) != states.end())
-	{
-		m_instance->m_listUpdates.push_back([&]()
-			{
-				states[_state->m_name] = _state;
-			});
-	}
+    m_instance->AddState_Internal(_state);
 }
 
-void GameStateManager::RemoveState(IGameState* _state)
+void GameStateManager::RemoveState(const IGameState* _state)
 {
-	map<char*, IGameState*>& states = m_instance->m_states;
-
-	if (states.find(_state->m_name) != states.end())
-	{
-		m_instance->m_listUpdates.push_back([&]()
-			{
-				states.erase(_state->m_name);
-			});
-	}
+    m_instance->RemoveState_Internal(_state);
 }
 
-void GameStateManager::ActivateState(char* _id)
+void GameStateManager::ActivateState(const char* _id)
 {
-	map<char*, IGameState*>& states = m_instance->m_states;
-	list<IGameState*>& active = m_instance->m_activeStates;
-
-	if (states.find(_id) != states.end())
-	{
-		m_instance->m_listUpdates.push_back([&]()
-			{
-				list<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
-
-				if (iter == active.end())
-				{
-					states[_id]->Load();
-					active.push_back(states[_id]);
-				}
-			});
-	}
+    m_instance->ActivateState_Internal(_id);
 }
 
-void GameStateManager::DeactivateState(char* _id)
+void GameStateManager::DeactivateState(const char* _id)
 {
-	map<char*, IGameState*>& states = m_instance->m_states;
-	list<IGameState*>& active = m_instance->m_activeStates;
-
-	if (states.find(_id) != states.end())
-	{
-		m_instance->m_listUpdates.push_back([&]()
-			{
-				list<IGameState*>::iterator iter = std::find(active.end(), active.end(), states[_id]);
-
-				if (iter != active.end())
-				{
-					(*iter)->Unload();
-					active.erase(iter, iter);
-				}
-			});
-	}
+    m_instance->DeactivateState_Internal(_id);
 }
 
 GameStateManager::~GameStateManager()
 {
-	for (auto iter = m_states.begin(); iter != m_states.end(); iter++)
-	{
-		delete (*iter).second;
-	}
+    for(auto iter = m_states.begin(); iter != m_states.end(); ++iter)
+        delete (*iter).second;
 
-	m_states.clear();
-	m_activeStates.clear();
+    m_states.clear();
+    m_activeStates.clear();
 }
 
 void GameStateManager::Tick()
 {
-	list<IGameState*>& active = m_instance->m_activeStates;
-	vector<UpdateAction>& updates = m_instance->m_listUpdates;
+    list<IGameState*>& active = m_instance->m_activeStates;
+    vector<UpdateAction>& updates = m_instance->m_listUpdates;
 
-	for (auto iter = updates.begin(); iter != updates.end(); iter++)
-	{
-		(*iter)();
-	}
+    for(auto iter = updates.begin(); iter != updates.end(); ++iter)
+        (*iter)();
 
-	updates.clear();
+    updates.clear();
 
-	for (auto iter = active.begin(); iter != active.end(); iter++)
-	{
-		(*iter)->Tick();
-	}
+    for(auto iter = active.begin(); iter != active.end(); ++iter)
+        (*iter)->Tick();
 }
 
 void GameStateManager::Render()
 {
-	list<IGameState*>& active = m_instance->m_activeStates;
-	for (auto iter = active.begin(); iter != active.end(); iter++)
-	{
-		(*iter)->Render();
-	}
+    list<IGameState*>& active = m_instance->m_activeStates;
+    for(auto iter = active.begin(); iter != active.end(); ++iter)
+        (*iter)->Render();
+}
+
+void GameStateManager::AddState_Internal(IGameState* _state)
+{
+    m_listUpdates.emplace_back([=, this]()
+    {
+        if(!m_states.contains(_state->m_name))
+            m_states[_state->m_name] = _state;
+    });
+}
+
+DLL void GameStateManager::RemoveState_Internal(const IGameState* _state)
+{
+    m_listUpdates.emplace_back([=, this]()
+    {
+        if(m_states.contains(_state->m_name))
+            m_states.erase(_state->m_name);
+    });
+}
+
+void GameStateManager::ActivateState_Internal(const char* _id)
+{
+    m_listUpdates.emplace_back([=, this]()
+    {
+        if(m_states.contains(_id))
+        {
+            const list<IGameState*>::iterator iter = std::find(m_activeStates.end(), m_activeStates.end(), m_states[_id]);
+
+            if(iter == m_activeStates.end())
+            {
+                m_states[_id]->Load();
+                m_activeStates.push_back(m_states[_id]);
+            }
+        }
+    });
+}
+
+void GameStateManager::DeactivateState_Internal(const char* _id)
+{
+    m_listUpdates.emplace_back([=, this]()
+    {
+        if(m_states.contains(_id))
+        {
+            const list<IGameState*>::iterator iter = std::find(m_activeStates.end(), m_activeStates.end(), m_states[_id]);
+
+            if(iter != m_activeStates.end())
+            {
+                (*iter)->Unload();
+                m_activeStates.erase(iter);
+            }
+        }
+    });
 }

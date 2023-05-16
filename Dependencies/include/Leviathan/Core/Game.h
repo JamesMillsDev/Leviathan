@@ -2,6 +2,9 @@
 
 class Game
 {
+public:
+	virtual ~Game() = default;
+
 protected:
 	friend class Application;
 

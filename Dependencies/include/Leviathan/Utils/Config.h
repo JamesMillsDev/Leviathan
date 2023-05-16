@@ -4,32 +4,31 @@
 #define WINDOW_CATEGORY "Window"
 #define DEBUG_CATEGORY "Debug"
 
-#include <Leviathan/Leviathan.h>
+#include <Leviathan/Core/Leviathan.h>
 
-#include <string>
-#include <map>
-#include <vector>
 #include <functional>
-
+#include <map>
+#include <string>
 #include <type_traits>
+#include <vector>
 
-using std::string;
-using std::map;
-using std::vector;
 using std::function;
 using std::is_same;
+using std::map;
+using std::string;
+using std::vector;
 
-typedef string group_id;
+typedef string GroupId;
 
 typedef function<void(class Config*)> ConfigReloadCallback;
 
-struct InvalidValueException : public std::exception
+struct InvalidValueException final : std::exception
 {
 	string value;
 
-	InvalidValueException(string _value) : value("Key not found: " + _value) {}
+	InvalidValueException(const string _value) : value("Key not found: " + _value) {}
 
-	const char* what() const throw ()
+	const char* what() const noexcept override
 	{
 		return value.c_str();
 	}
@@ -46,7 +45,7 @@ public:
 
 private:
 	string m_filePath;
-	map<group_id, map<string, class ConfigValue*>> m_data;
+	map<GroupId, map<string, class ConfigValue*>> m_data;
 	vector<ConfigReloadCallback> m_listeners;
 
 private:

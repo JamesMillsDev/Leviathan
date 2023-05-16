@@ -1,20 +1,21 @@
 #pragma once
 
-#include <functional>
-#include <vector>
-#include <list>
-#include <map>
-#include <string>
+#include <Leviathan/Core/Leviathan.h>
 
-#include <Leviathan/Leviathan.h>
 #include <Leviathan/GameObjects/Component.h>
 #include <Leviathan/GameObjects/TransformComponent.h>
 
+#include <functional>
+#include <list>
+#include <map>
+#include <string>
+#include <vector>
+
 using std::function;
-using std::vector;
 using std::list;
 using std::map;
 using std::string;
+using std::vector;
 
 typedef function<void()> ComponentUpdateAction;
 typedef function<void(Component*, bool, Component*)> ComponentAddRemoveFunction;
@@ -27,7 +28,7 @@ public:
 	GameObject(GameObject&) = delete;
 	DLL ~GameObject();
 
-	DLL TransformComponent* Transform();
+	DLL TransformComponent* Transform() const;
 
 	template<Derived<Component> COMPONENT>
 	COMPONENT* GetComponent();
@@ -54,7 +55,6 @@ private:
 	string m_tag;
 
 private:
-
 	DLL void Load();
 	DLL void Tick();
 	DLL void Render();
@@ -65,21 +65,19 @@ private:
 };
 
 template<Derived<Component> COMPONENT>
-inline COMPONENT* GameObject::GetComponent()
+COMPONENT* GameObject::GetComponent()
 {
-	for(auto iter = m_components.begin(); iter != m_components.end(); iter++)
+	for(auto iter = m_components.begin(); iter != m_components.end(); ++iter)
 	{
 		if (COMPONENT* component = dynamic_cast<COMPONENT*>(*iter))
-		{
 			return component;
-		}
 	}
 
 	return nullptr;
 }
 
 template<Derived<Component> COMPONENT>
-inline COMPONENT* GameObject::AddComponent()
+COMPONENT* GameObject::AddComponent()
 {
 	if (typeid(COMPONENT) == typeid(TransformComponent))
 		return nullptr;
@@ -90,36 +88,28 @@ inline COMPONENT* GameObject::AddComponent()
 		{
 			component->Load();
 			m_components.push_back(component);
-			for (auto& addRemove : m_addRemoveUpdates)
-			{
-				Component* caller = addRemove.first;
-				ComponentAddRemoveFunction callback = addRemove.second;
-
+			for (const auto& [caller, callback] : m_addRemoveUpdates)
 				std::invoke(callback, component, true, caller);
-			}
+		
 		});
 
 	return component;
 }
 
 template<Derived<Component> COMPONENT>
-inline void GameObject::DestroyComponent(COMPONENT* _component)
+void GameObject::DestroyComponent(COMPONENT* _component)
 {
 	m_listUpdates.push_back([&, this]()
 		{
-			vector<Component*>::iterator iter = std::find(m_components.begin(), m_components.end(), _component);
+			const list<Component*>::iterator iter = std::find(m_components.begin(), m_components.end(), _component);
 
 			if (iter != m_components.end())
 			{
 				(*iter)->Unload();
 				m_components.erase(iter, iter);
-				for (auto& addRemove : m_addRemoveUpdates)
-				{
-					Component* caller = addRemove.first;
-					ComponentAddRemoveFunction callback = addRemove.second;
-
+				
+				for (const auto& [caller, callback] : m_addRemoveUpdates)
 					std::invoke(callback, _component, false, caller);
-				}
 
 				delete _component;
 			}

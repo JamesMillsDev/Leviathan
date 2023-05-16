@@ -3,17 +3,18 @@
 class IGameState
 {
 public:
+	virtual ~IGameState() = default;
 	virtual void Load() = 0;
 	virtual void Tick() {}
 	virtual void Render() {}
 	virtual void Unload() {}
 
 protected:
-	IGameState(char* _id) : m_name(_id) {}
+	IGameState(const char* _id) : m_name(_id) {}
 
 private:
 	friend class GameStateManager;
 
-	char* m_name;
+	const char* m_name;
 
 };

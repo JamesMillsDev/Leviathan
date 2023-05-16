@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
+#include <Leviathan/Core/Color32.h>
 
-#include <Leviathan/Color32.h>
+#include <Leviathan/Core/Leviathan.h>
 
 #include <string>
 

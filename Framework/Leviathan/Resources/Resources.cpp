@@ -1,6 +1,6 @@
 #include <Leviathan/Resources/Resources.h>
 
-#include <Leviathan/Application.h>
+#include <Leviathan/Core/Application.h>
 
 #include <filesystem>
 #include <iostream>
@@ -8,12 +8,11 @@
 using std::filesystem::path;
 using std::filesystem::recursive_directory_iterator;
 using std::filesystem::is_directory;
-using std::filesystem::current_path;
 using std::filesystem::exists;
 
-string Resources::PathFromID(string& _id)
+string Resources::PathFromID(const string& _id)
 {
-	if (m_instance->m_paths.find(_id) != m_instance->m_paths.end())
+	if (m_instance->m_paths.contains(_id))
 		return m_instance->m_paths[_id];
 
 	return "";
@@ -31,17 +30,15 @@ void Resources::OnCreate()
 
 void Resources::OnDestroy()
 {
-	for (auto iter = m_resources.begin(); iter != m_resources.end(); iter++)
-	{
+	for (auto iter = m_resources.begin(); iter != m_resources.end(); ++iter)
 		delete (*iter).second;
-	}
 
 	m_resources.clear();
 }
 
-void Resources::LocateFiles(string _path, string _extension)
+void Resources::LocateFiles(const string _path, const string _extension)
 {
-	path dir = path(string(Application::GetApplicationDirectory()) + "\\assets\\" + _path);
+	const path dir = path(string(Application::GetApplicationDirectory()) + "\\assets\\" + _path);
 	if (!exists(dir))
 		return;
 
@@ -61,12 +58,12 @@ void Resources::LocateFiles(string _path, string _extension)
 	}
 }
 
-bool Resources::HasResource(string& _id)
+bool Resources::HasResource(const string& _id) const
 {
-	return m_resources.find(_id) != m_resources.end();
+	return m_resources.contains(_id);
 }
 
-DLL Resources* Resources::GetInstance()
+Resources* Resources::GetInstance()
 {
 	return m_instance;
 }

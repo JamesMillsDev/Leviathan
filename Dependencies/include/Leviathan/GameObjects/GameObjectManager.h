@@ -1,23 +1,24 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
-#include <Leviathan/Singleton.h>
+#include <Leviathan/Core/Leviathan.h>
+
+#include <Leviathan/Utils/Singleton.h>
 
 #include <functional>
-#include <vector>
 #include <list>
+#include <vector>
 
 using std::function;
-using std::vector;
 using std::list;
 using std::pair;
+using std::vector;
 
-class GameObjectManager : public Singleton<GameObjectManager>
+class GameObjectManager final : public Singleton<GameObjectManager>
 {
 public:
 	GameObjectManager() = default;
 	GameObjectManager(GameObjectManager&) = delete;
-	DLL ~GameObjectManager();
+	DLL ~GameObjectManager() override;
 
 	DLL static void Spawn(class GameObject* _go);
 	DLL static void Destroy(class GameObject* _go);

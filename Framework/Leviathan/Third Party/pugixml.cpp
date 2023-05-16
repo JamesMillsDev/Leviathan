@@ -14,7 +14,7 @@
 #ifndef SOURCE_PUGIXML_CPP
 #define SOURCE_PUGIXML_CPP
 
-#include <Leviathan/ThirdParty/pugixml.hpp>
+#include <Leviathan/Third Party/pugixml.hpp>
 
 #include <stdlib.h>
 #include <stdio.h>

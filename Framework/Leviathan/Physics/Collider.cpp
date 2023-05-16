@@ -1,16 +1,17 @@
 #include <Leviathan/Physics/Collider.h>
 
-#include <Leviathan/Application.h>
+#include <Leviathan/Core/Application.h>
 
 #include <Leviathan/GameObjects/GameObject.h>
+
 #include <Leviathan/Physics/Rigidbody.h>
 
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
 
 Collider::Collider(GameObject* _owner)
-	: Component(_owner), m_shape(nullptr), m_fixtureDef(nullptr), 
-	m_fixture(nullptr), m_center(vec2(0.f))
+	: Component(_owner), m_center(vec2(0.f)), m_shape(nullptr),
+	  m_fixtureDef(nullptr), m_fixture(nullptr)
 {
 
 }
@@ -30,7 +31,7 @@ Collider::~Collider()
 	}
 }
 
-void Collider::AttachTo(b2Body* _body, Rigidbody* _rb)
+void Collider::AttachTo(b2Body* _body, const Rigidbody* _rb)
 {
 	int w = 0, h = 0;
 	Application::GetWindowSize(w, h);

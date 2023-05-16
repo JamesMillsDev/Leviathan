@@ -1,12 +1,14 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
-#include <Leviathan/Color32.h>
+#include <Leviathan/Core/Color32.h>
+#include <Leviathan/Core/Leviathan.h>
 
 #include <glm/vec2.hpp>
+
 #include <vector>
 
 using glm::vec2;
+
 using std::vector;
 
 class Gizmos

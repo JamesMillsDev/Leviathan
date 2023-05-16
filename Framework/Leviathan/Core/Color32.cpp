@@ -1,4 +1,4 @@
-#include <Leviathan/Color32.h>
+#include <Leviathan/Core/Color32.h>
 
 Color32::Color32() : m_value(0xffffffff)
 {

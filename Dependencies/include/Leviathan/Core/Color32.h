@@ -1,12 +1,13 @@
 #pragma once
 
-#include <Leviathan/Leviathan.h>
+#include <Leviathan/Core/Leviathan.h>
 
 #include <cstdint>
 #include <raylib.h>
 
 struct Color32
 {
+public:
 	DLL Color32();
 	DLL Color32(uint32_t _val);
 	DLL Color32(uint8_t _red, uint8_t _green, uint8_t _blue, uint8_t _alpha);

@@ -1,8 +1,9 @@
 #include <Leviathan/Physics/BoxCollider.h>
 
-#include <Leviathan/Gizmos.h>
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/GameObjects/TransformComponent.h>
+
+#include <Leviathan/Utils/Gizmos.h>
 
 #include <box2d/b2_polygon_shape.h>
 
@@ -25,7 +26,7 @@ const vec2& BoxCollider::GetExtents() const
 
 b2Shape* BoxCollider::BuildShape()
 {
-    b2Vec2 points[4]
+    const b2Vec2 points[4]
     {
         { m_center.x - m_extents.x, m_center.y - m_extents.y },
         { m_center.x + m_extents.x, m_center.y - m_extents.y },
@@ -46,7 +47,7 @@ float BoxCollider::GetVolume()
 
 void BoxCollider::OnDrawGizmos()
 {
-    TransformComponent* transform = m_owner->Transform();
+    const TransformComponent* transform = m_owner->Transform();
 
     Gizmos::DrawWireRect(transform->Position() + m_center, m_extents, transform->Rotation());
 }

@@ -37,6 +37,18 @@
     <Filter Include="Source\Physics">
       <UniqueIdentifier>{09fee0b7-d1f6-4d69-a6c0-769cc6a6e2b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Core">
+      <UniqueIdentifier>{e46bef3f-94d4-4611-bde3-28acb4b373a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{38f60df6-643b-4129-b06b-b6b21b701bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utils">
+      <UniqueIdentifier>{e61bbde8-b263-4000-8381-21b0027ced92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Utils">
+      <UniqueIdentifier>{65a66085-299d-49b1-9072-efa6171f3668}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -60,26 +72,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resources.h">
       <Filter>Include\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Singleton.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\Resource.h">
       <Filter>Include\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h">
       <Filter>Include\Resources</Filter>
@@ -102,9 +96,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
@@ -114,28 +105,40 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Gizmos.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ConfigValue.h">
-      <Filter>Include</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Config.h">
+      <Filter>Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\ConfigValue.h">
+      <Filter>Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Gizmos.h">
+      <Filter>Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h">
+      <Filter>Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h">
+      <Filter>Include\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
       <Filter>Source\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GameStates\GameStateManager.cpp">
       <Filter>Source\GameStates</Filter>
@@ -164,9 +167,6 @@
     <ClCompile Include="Physics\PhysicsManager.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Color32.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Physics\Collider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
@@ -179,11 +179,24 @@
     <ClCompile Include="Physics\EdgeCollider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Gizmos.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Core\Application.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Color32.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Window.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Config.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Gizmos.cpp">
+      <Filter>Source\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

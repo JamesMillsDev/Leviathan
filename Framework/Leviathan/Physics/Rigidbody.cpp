@@ -137,9 +137,9 @@ void Rigidbody::ApplyForce(const vec2& _force, ForceMode _mode)
 {
 	b2Vec2 force = { _force.x * 100.f, -_force.y * 100.f };
 
-	if(_mode == ForceMode::IMPULSE)
+	if(_mode == ForceMode::Impulse)
 		m_body->ApplyLinearImpulseToCenter(force, true);
-	else if(_mode == ForceMode::FORCE)
+	else if(_mode == ForceMode::Force)
 		m_body->ApplyForceToCenter(force, true);
 }
 
@@ -147,9 +147,9 @@ void Rigidbody::ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceM
 {
 	b2Vec2 force = { _force.x * 100.f, -_force.y * 100.f };
 
-	if (_mode == ForceMode::IMPULSE)
+	if (_mode == ForceMode::Impulse)
 		m_body->ApplyLinearImpulse(force, { _point.x, _point.y }, true);
-	else if (_mode == ForceMode::FORCE)
+	else if (_mode == ForceMode::Force)
 		m_body->ApplyForce(force, { _point.x, _point.y }, true);
 }
 
