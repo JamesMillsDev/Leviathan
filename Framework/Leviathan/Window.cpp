@@ -4,12 +4,13 @@
 
 #include <Leviathan/Application.h>
 #include <Leviathan/Config.h>
+#include <Leviathan/ConfigValue.h>
 
 #include <iostream>
 
 Window::Window() 
 	: m_config(nullptr), m_height(0), m_width(0), 
-	m_title(nullptr), m_fullscreenKey(0)
+	m_title(""), m_fullscreenKey(0)
 {
 	
 }
@@ -18,14 +19,14 @@ void Window::Open()
 {
 	m_config = Application::GetConfig(ConfigType::WINDOW);
 
-	m_width = *m_config->GetValue<int>(WINDOW_CATEGORY, "width");
-	m_height = *m_config->GetValue<int>(WINDOW_CATEGORY, "height");
-	m_title = m_config->GetValue<string>(WINDOW_CATEGORY, "title")->c_str();
-	m_clearColor = *m_config->GetValue<Color32>(WINDOW_CATEGORY, "clearColor");
-	m_fullscreenKey = *m_config->GetValue<int>(WINDOW_CATEGORY, "toggleFullscreenKey");
+	m_width = m_config->GetValue(WINDOW_CATEGORY, "width")->Get<int>();
+	m_height = m_config->GetValue(WINDOW_CATEGORY, "height")->Get<int>();
+	m_title = m_config->GetValue(WINDOW_CATEGORY, "title")->Get<string>();
+	m_clearColor = m_config->GetValue(WINDOW_CATEGORY, "clearColor")->Get<Color32>();
+	m_fullscreenKey = m_config->GetValue(WINDOW_CATEGORY, "toggleFullscreenKey")->Get<int>();
 	m_config->ListenForReload(std::bind(&Window::OnConfigReloaded, this, m_config));
 
-	InitWindow(m_width, m_height, m_title);
+	InitWindow(m_width, m_height, m_title.c_str());
 }
 
 void Window::Close()
@@ -62,8 +63,8 @@ void Window::TryToggleFullscreen()
 
 		if (!IsWindowFullscreen())
 		{
-			int width = *m_config->GetValue<int>(WINDOW_CATEGORY, "width");
-			int height = *m_config->GetValue<int>(WINDOW_CATEGORY, "height");
+			int width = m_config->GetValue(WINDOW_CATEGORY, "width")->Get<int>();
+			int height = m_config->GetValue(WINDOW_CATEGORY, "height")->Get<int>();
 
 			SetWindowSize(width, height);
 		}
@@ -72,13 +73,13 @@ void Window::TryToggleFullscreen()
 
 void Window::OnConfigReloaded(Config* _config)
 {
-	m_width = *_config->GetValue<int>(WINDOW_CATEGORY, "width");
-	m_height = *_config->GetValue<int>(WINDOW_CATEGORY, "height");
-	m_title = _config->GetValue<string>(WINDOW_CATEGORY, "title")->c_str();
-	m_clearColor = *_config->GetValue<Color32>(WINDOW_CATEGORY, "clearColor");
-	m_fullscreenKey = *_config->GetValue<int>(WINDOW_CATEGORY, "toggleFullscreenKey");
+	m_width = m_config->GetValue(WINDOW_CATEGORY, "width")->Get<int>();
+	m_height = m_config->GetValue(WINDOW_CATEGORY, "height")->Get<int>();
+	m_title = m_config->GetValue(WINDOW_CATEGORY, "title")->Get<string>();
+	m_clearColor = m_config->GetValue(WINDOW_CATEGORY, "clearColor")->Get<Color32>();
+	m_fullscreenKey = m_config->GetValue(WINDOW_CATEGORY, "toggleFullscreenKey")->Get<int>();
 
-	SetWindowTitle(m_title);
+	SetWindowTitle(m_title.c_str());
 	if (!IsWindowFullscreen())
 	{
 		SetWindowSize(m_width, m_height);

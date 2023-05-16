@@ -4,6 +4,7 @@
 
 #include <Leviathan/Application.h>
 #include <Leviathan/Config.h>
+#include <Leviathan/ConfigValue.h>
 
 Config* Gizmos::m_config = nullptr;
 Color32 Gizmos::color = { 0, 245, 0, 255 };
@@ -64,9 +65,9 @@ void Gizmos::Init()
 	m_config = Application::GetConfig(ConfigType::DEBUG);
 	m_config->ListenForReload(&Gizmos::OnConfigReload);
 
-	m_toggleKey = *m_config->GetValue<int>("Gizmos", "showGizmosKey");
-	m_lineThickness = *m_config->GetValue<float>("Gizmos", "gizmoLineThickness");
-	m_circleLineDensity = *m_config->GetValue<int>("Gizmos", "circleLineDensity");
+	m_toggleKey = m_config->GetValue("Gizmos", "showGizmosKey")->Get<int>();
+	m_lineThickness = m_config->GetValue("Gizmos", "gizmoLineThickness")->Get<float>();
+	m_circleLineDensity = m_config->GetValue("Gizmos", "circleLineDensity")->Get<int>();
 }
 
 void Gizmos::Tick()
@@ -79,7 +80,7 @@ void Gizmos::Tick()
 
 void Gizmos::OnConfigReload(Config* _config)
 {
-	m_toggleKey = *m_config->GetValue<int>("Gizmos", "showGizmosKey");
-	m_lineThickness = *m_config->GetValue<float>("Gizmos", "gizmoLineThickness");
-	m_circleLineDensity = *m_config->GetValue<int>("Gizmos", "circleLineDensity");
+	m_toggleKey = m_config->GetValue("Gizmos", "showGizmosKey")->Get<int>();
+	m_lineThickness = m_config->GetValue("Gizmos", "gizmoLineThickness")->Get<float>();
+	m_circleLineDensity = m_config->GetValue("Gizmos", "circleLineDensity")->Get<int>();
 }

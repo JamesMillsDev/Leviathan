@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Config.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ConfigValue.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />

@@ -40,14 +40,13 @@ class Config
 public:
 	DLL Config(string _filePath);
 
-	template<typename DATA>
-	DATA* GetValue(string _group, string _id);
+	class ConfigValue* GetValue(string _group, string _id);
 
 	DLL void ListenForReload(ConfigReloadCallback _callback);
 
 private:
 	string m_filePath;
-	map<group_id, map<string, void*>> m_data;
+	map<group_id, map<string, class ConfigValue*>> m_data;
 	vector<ConfigReloadCallback> m_listeners;
 
 private:
@@ -58,19 +57,3 @@ private:
 	DLL void Load(string _filePath);
 
 };
-
-template<typename DATA>
-inline DATA* Config::GetValue(string _group, string _id)
-{
-	if (m_data.find(_group) != m_data.end())
-	{
-		auto& set = m_data[_group];
-
-		if (set.find(_id) != set.end())
-		{
-			return (DATA*)set[_id];
-		}
-	}
-
-	return nullptr;
-}

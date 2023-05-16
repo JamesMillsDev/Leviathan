@@ -22,8 +22,6 @@ enum class ConfigType
 	DEBUG
 };
 
-typedef function<void()> ReloadCallback;
-
 class Application
 {
 public:
@@ -32,13 +30,13 @@ public:
 
 	DLL static const char* GetApplicationDirectory();
 	DLL static Config* GetConfig(ConfigType _type);
-	DLL static void AddConfigReloadCallback(ReloadCallback _callback);
+	DLL static void AddConfigReloadCallback(void(Config::*_callback)(), Config* _config);
 	DLL static void GetWindowSize(int& _width, int& _height);
 
 private:
 	DLL static Application* m_instance;
 
-	vector<ReloadCallback> m_onConfigReload;
+	vector<pair<Config*, void(Config::*)()>> m_onConfigReload;
 	struct Window* m_window;
 	map<ConfigType, Config*> m_configs;
 	

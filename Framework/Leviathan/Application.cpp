@@ -4,6 +4,7 @@
 #include <raylib.h>
 
 #include <Leviathan/Config.h>
+#include <Leviathan/ConfigValue.h>
 #include <Leviathan/Gizmos.h>
 #include <Leviathan/Resources/Resources.h>
 #include <Leviathan/GameStates/GameStateManager.h>
@@ -25,9 +26,9 @@ Config* Application::GetConfig(ConfigType _type)
 	return m_instance->m_configs[_type];
 }
 
-void Application::AddConfigReloadCallback(ReloadCallback _callback)
+void Application::AddConfigReloadCallback(void(Config::* _callback)(), Config* _config)
 {
-	m_instance->m_onConfigReload.push_back(_callback);
+	m_instance->m_onConfigReload.push_back({ _config, _callback });
 }
 
 void Application::GetWindowSize(int& _width, int& _height)
@@ -36,10 +37,10 @@ void Application::GetWindowSize(int& _width, int& _height)
 	_height = m_instance->m_window->m_height;
 }
 
-Application::Application(Game* _game) 
+Application::Application(Game* _game)
 	: m_game(_game), m_window(nullptr), m_applicationDir(nullptr), m_configReloadKey(0)
 {
-	
+
 }
 
 Application::~Application()
@@ -73,7 +74,7 @@ void Application::Init()
 	m_configs[ConfigType::WINDOW] = new Config("window.cfg");
 	m_configs[ConfigType::DEBUG] = new Config("debug.cfg");
 
-	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Config", "reloadConfigKey");
+	m_configReloadKey = m_configs[ConfigType::DEBUG]->GetValue("Config", "reloadConfigKey")->Get<int>();
 	m_configs[ConfigType::DEBUG]->ListenForReload(std::bind(&Application::OnConfigReloaded, this, m_configs[ConfigType::DEBUG]));
 
 	m_window = new Window();
@@ -101,7 +102,7 @@ void Application::Process()
 		{
 			for (auto& callback : m_onConfigReload)
 			{
-				callback();
+				std::invoke(callback.second, callback.first);
 			}
 		}
 
@@ -137,5 +138,5 @@ void Application::Process()
 
 void Application::OnConfigReloaded(Config* _config)
 {
-	m_configReloadKey = *m_configs[ConfigType::DEBUG]->GetValue<int>("Config", "reloadConfigKey");
+	m_configReloadKey = m_configs[ConfigType::DEBUG]->GetValue("Config", "reloadConfigKey")->Get<int>();
 }

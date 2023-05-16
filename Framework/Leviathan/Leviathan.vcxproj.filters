@@ -120,6 +120,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\ConfigValue.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

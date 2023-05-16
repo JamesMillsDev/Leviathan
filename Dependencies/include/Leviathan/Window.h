@@ -4,6 +4,10 @@
 
 #include <Leviathan/Color32.h>
 
+#include <string>
+
+using std::string;
+
 struct Window
 {
 private:
@@ -12,7 +16,7 @@ private:
 	int m_width;
 	int m_height;
 	int m_fullscreenKey;
-	const char* m_title;
+	string m_title;
 	Color32 m_clearColor;
 	class Config* m_config;
 

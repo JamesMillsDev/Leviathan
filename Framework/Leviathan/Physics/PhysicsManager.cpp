@@ -1,6 +1,7 @@
 #include <Leviathan/Physics/PhysicsManager.h>
 
 #include <Leviathan/Config.h>
+#include <Leviathan/ConfigValue.h>
 
 #include <Box2D/Box2D.h>
 
@@ -36,12 +37,12 @@ void PhysicsManager::OnCreate()
 {
 	m_config = new Config("physics.cfg");
 
-	vec2 gravity = *m_config->GetValue<vec2>("World", "gravity");
+	vec2 gravity = m_config->GetValue("World", "gravity")->Get<vec2>();
 	m_world = new b2World({ gravity.x, gravity.y });
 
-	m_velocityIterations = *m_config->GetValue<int>("World", "velocityIterations");
-	m_positionIterations = *m_config->GetValue<int>("World", "positionIterations");
-	m_polygonDensity = *m_config->GetValue<int>("Collision", "polygonDensity");
+	m_velocityIterations = m_config->GetValue("World", "velocityIterations")->Get<int>();
+	m_positionIterations = m_config->GetValue("World", "positionIterations")->Get<int>();
+	m_polygonDensity = m_config->GetValue("Collision", "polygonDensity")->Get<int>();
 }
 
 vector<b2Body*> PhysicsManager::GetBodies()
