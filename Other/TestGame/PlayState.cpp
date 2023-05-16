@@ -1,6 +1,6 @@
 #include "PlayState.h"
 
-#include <Leviathan/Application.h>
+#include <Leviathan/Core/Application.h>
 
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/GameObjects/TextureComponent.h>
@@ -10,6 +10,8 @@
 #include <Leviathan/Physics/BoxCollider.h>
 
 #include <raylib.h>
+
+#include <iostream>
 
 GameObject* textured = nullptr;
 GameObject* ground = nullptr;
@@ -53,6 +55,8 @@ void PlayState::Load()
 
 	GameObjectManager::Spawn(textured);
 	GameObjectManager::Spawn(ground);
+
+	GameTimerManager::Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
 }
 
 void PlayState::Tick()
@@ -78,4 +82,9 @@ void PlayState::Unload()
 {
 	GameObjectManager::Destroy(textured);
 	GameObjectManager::Destroy(ground);
+}
+
+void PlayState::DelayTest()
+{
+	std::cout << "Delay call" << std::endl;
 }

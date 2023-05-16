@@ -76,7 +76,7 @@ void GameStateManager::ActivateState_Internal(const char* _id)
     {
         if(m_states.contains(_id))
         {
-            const list<IGameState*>::iterator iter = std::find(m_activeStates.end(), m_activeStates.end(), m_states[_id]);
+            const list<IGameState*>::iterator iter = std::find(m_activeStates.begin(), m_activeStates.end(), m_states[_id]);
 
             if(iter == m_activeStates.end())
             {
@@ -93,7 +93,7 @@ void GameStateManager::DeactivateState_Internal(const char* _id)
     {
         if(m_states.contains(_id))
         {
-            const list<IGameState*>::iterator iter = std::find(m_activeStates.end(), m_activeStates.end(), m_states[_id]);
+            const list<IGameState*>::iterator iter = std::find(m_activeStates.begin(), m_activeStates.end(), m_states[_id]);
 
             if(iter != m_activeStates.end())
             {

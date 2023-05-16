@@ -1,5 +1,6 @@
 #include <Leviathan/Core/Application.h>
 
+#include <Leviathan/Core/Time.h>
 #include <Leviathan/Core/Window.h>
 
 #include <Leviathan/GameObjects/GameObjectManager.h>
@@ -9,6 +10,7 @@
 
 #include <Leviathan/Resources/Resources.h>
 
+#include <Leviathan/Utils/GameTimerManager.h>
 #include <Leviathan/Utils/ConfigValue.h>
 #include <Leviathan/Utils/Gizmos.h>
 
@@ -87,7 +89,8 @@ void Application::Process()
     Init();
 
     m_window->Open();
-
+    
+    GameTimerManager::CreateInstance();
     Resources::CreateInstance();
     PhysicsManager::CreateInstance();
     GameStateManager::CreateInstance();
@@ -98,6 +101,7 @@ void Application::Process()
 
     while(!WindowShouldClose())
     {
+        Time::Tick();
         Gizmos::Tick();
 
         if(IsKeyPressed(m_configReloadKey))
@@ -108,6 +112,7 @@ void Application::Process()
             }
         }
 
+        GameTimerManager::Tick();
         m_game->Tick();
 
         PhysicsManager::Tick();
@@ -134,6 +139,8 @@ void Application::Process()
     GameObjectManager::DestroyInstance();
     GameStateManager::DestroyInstance();
     Resources::DestroyInstance();
+    PhysicsManager::DestroyInstance();
+    GameTimerManager::DestroyInstance();
 
     m_window->Close();
 }

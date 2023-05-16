@@ -23,6 +23,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />
@@ -45,12 +46,14 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Config.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\ConfigValue.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\GameTimerManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Gizmos.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />
+    <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\GameObjectManager.cpp" />
@@ -67,6 +70,7 @@
     <ClCompile Include="Resources\TextureResource.cpp" />
     <ClCompile Include="Third Party\pugixml.cpp" />
     <ClCompile Include="Utils\Config.cpp" />
+    <ClCompile Include="Utils\GameTimerManager.cpp" />
     <ClCompile Include="Utils\Gizmos.cpp" />
   </ItemGroup>
   <ItemGroup>

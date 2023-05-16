@@ -78,15 +78,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Resources\TextureResource.h">
       <Filter>Include\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\raygui.h">
-      <Filter>Third Party</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugiconfig.hpp">
-      <Filter>Third Party</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\ThirdParty\pugixml.hpp">
-      <Filter>Third Party</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TextureComponent.h">
       <Filter>Include\GameObjects</Filter>
     </ClInclude>
@@ -103,9 +94,6 @@
       <Filter>Include\Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h">
-      <Filter>Include\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\EdgeCollider.h">
       <Filter>Include\Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Config.h">
@@ -133,6 +121,24 @@
       <Filter>Include\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugiconfig.hpp">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugixml.hpp">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PolygonCollider.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\GameTimerManager.h">
+      <Filter>Include\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -176,9 +182,6 @@
     <ClCompile Include="Physics\CircleCollider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\EdgeCollider.cpp">
-      <Filter>Source\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Application.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
@@ -194,9 +197,17 @@
     <ClCompile Include="Utils\Gizmos.cpp">
       <Filter>Source\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\PolygonCollider.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\GameTimerManager.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Time.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

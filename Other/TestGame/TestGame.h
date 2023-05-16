@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Leviathan/Game.h>
+#include <Leviathan/Core/Game.h>
 
 class TestGame : public Game
 {
