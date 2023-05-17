@@ -7,12 +7,9 @@
 
 #include <glm/gtx/rotate_vector.hpp>
 
-Config* Gizmos::m_config = nullptr;
 Color32 Gizmos::color = { 0, 245, 0, 255 };
-int Gizmos::m_toggleKey = 0;
-float Gizmos::m_lineThickness = 0;
-bool Gizmos::m_shown = false;
-int Gizmos::m_circleLineDensity = 45;
+
+Gizmos* Gizmos::m_instance = nullptr;
 
 void Gizmos::DrawRect(const Rectangle _rect, const vec2 _center, const float _rotation)
 {
@@ -29,10 +26,10 @@ void Gizmos::DrawWireRect(const vec2 _position, const vec2 _size, const float _r
     const vec2 bl = (-up * _size.y - right * _size.x) + _position;
     const vec2 br = (-up * _size.y + right * _size.x) + _position;
 
-    DrawLineEx({ tl.x, tl.y }, { tr.x, tr.y }, m_lineThickness, color);
-    DrawLineEx({ tr.x, tr.y }, { br.x, br.y }, m_lineThickness, color);
-    DrawLineEx({ br.x, br.y }, { bl.x, bl.y }, m_lineThickness, color);
-    DrawLineEx({ bl.x, bl.y }, { tl.x, tl.y }, m_lineThickness, color);
+    DrawLineEx({ tl.x, tl.y }, { tr.x, tr.y }, m_instance->m_lineThickness, color);
+    DrawLineEx({ tr.x, tr.y }, { br.x, br.y }, m_instance->m_lineThickness, color);
+    DrawLineEx({ br.x, br.y }, { bl.x, bl.y }, m_instance->m_lineThickness, color);
+    DrawLineEx({ bl.x, bl.y }, { tl.x, tl.y }, m_instance->m_lineThickness, color);
 }
 
 void Gizmos::DrawCircle(const vec2 _position, const float _radius)
@@ -42,7 +39,7 @@ void Gizmos::DrawCircle(const vec2 _position, const float _radius)
 
 void Gizmos::DrawWireCircle(const vec2 _position, const float _radius)
 {
-    DrawPolyLinesEx({ _position.x, _position.y }, m_circleLineDensity, _radius, 0.f, m_lineThickness, color);
+    DrawPolyLinesEx({ _position.x, _position.y }, m_instance->m_circleLineDensity, _radius, 0.f, m_instance->m_lineThickness, color);
 }
 
 void Gizmos::DrawPolyShape(const vector<vec2> _verts, const vec2 _position)
@@ -50,21 +47,21 @@ void Gizmos::DrawPolyShape(const vector<vec2> _verts, const vec2 _position)
     vec2 start = _verts[0] + _position;
     vec2 end = _verts[_verts.size() - 1] + _position;
 
-    DrawLineEx({ start.x, start.y }, { end.x, end.y }, m_lineThickness, color);
+    DrawLineEx({ start.x, start.y }, { end.x, end.y }, m_instance->m_lineThickness, color);
 
     for(int i = 0; i < _verts.size() - 1; i++)
     {
         start = _verts[i] + _position;
         end = _verts[i + 1] + _position;
 
-        DrawLineEx({ start.x, start.y }, { end.x, end.y }, m_lineThickness, color);
+        DrawLineEx({ start.x, start.y }, { end.x, end.y }, m_instance->m_lineThickness, color);
     }
 }
 
 void Gizmos::Init()
 {
     m_config = Application::GetConfig(ConfigType::Debug);
-    m_config->ListenForReload(&Gizmos::OnConfigReload);
+    m_config->ListenForReload(&Gizmos::OnConfigReload, this);
 
     m_toggleKey = m_config->GetValue("Gizmos", "showGizmosKey")->Get<int>();
     m_lineThickness = m_config->GetValue("Gizmos", "gizmoLineThickness")->Get<float>();

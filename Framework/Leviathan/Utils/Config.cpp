@@ -24,7 +24,7 @@ void Config::Reload()
 	Load(m_filePath);
 
 	for (auto& iter : m_listeners)
-		iter(this);
+		iter->Call();
 }
 
 Config::Config(const string _filePath)
@@ -33,6 +33,26 @@ Config::Config(const string _filePath)
 
 	m_filePath = _filePath;
 	Load(m_filePath);
+}
+
+Config::~Config()
+{
+	for (size_t i = 0; i < m_listeners.size(); i++)
+	{
+		delete m_listeners[i];
+	}
+
+	m_listeners.clear();
+
+	for (auto& group : m_data)
+	{
+		for (auto& set : group.second)
+		{
+			delete set.second;
+		}
+	}
+
+	m_data.clear();
 }
 
 ConfigValue* Config::GetValue(const string _group, const string _id)
@@ -48,11 +68,6 @@ ConfigValue* Config::GetValue(const string _group, const string _id)
 	}
 
 	return nullptr;
-}
-
-void Config::ListenForReload(const ConfigReloadCallback _callback)
-{
-	m_listeners.push_back(_callback);
 }
 
 void Config::Clear()

@@ -5,12 +5,10 @@
 #include <Leviathan/Core/Leviathan.h>
 #include <Leviathan/Utils/Config.h>
 
-#include <functional>
 #include <map>
 #include <string>
 #include <vector>
 
-using std::function;
 using std::map;
 using std::pair;
 using std::string;

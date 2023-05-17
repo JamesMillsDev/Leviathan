@@ -79,7 +79,7 @@ void Application::Init()
     m_configs[ConfigType::Debug] = new Config("debug.cfg");
 
     m_configReloadKey = m_configs[ConfigType::Debug]->GetValue("Config", "reloadConfigKey")->Get<int>();
-    m_configs[ConfigType::Debug]->ListenForReload(std::bind(&Application::OnConfigReloaded, this, m_configs[ConfigType::Debug]));
+    m_configs[ConfigType::Debug]->ListenForReload(&Application::OnConfigReloaded, this);
 
     m_window = new Window();
 }
@@ -95,14 +95,15 @@ void Application::Process()
     PhysicsManager::CreateInstance();
     GameStateManager::CreateInstance();
     GameObjectManager::CreateInstance();
-    Gizmos::Init();
+    Gizmos::m_instance = new Gizmos();
+    Gizmos::m_instance->Init();
 
     m_game->Load();
 
     while(!WindowShouldClose())
     {
         Time::Tick();
-        Gizmos::Tick();
+        Gizmos::m_instance->Tick();
 
         if(IsKeyPressed(m_configReloadKey))
         {
@@ -126,7 +127,7 @@ void Application::Process()
 
         m_game->Render();
 
-        if(Gizmos::m_shown)
+        if(Gizmos::m_instance->m_shown)
         {
             GameObjectManager::DrawGizmos();
         }

@@ -23,7 +23,7 @@ void Window::Open()
     m_title = m_config->GetValue(WINDOW_CATEGORY, "title")->Get<string>();
     m_clearColor = m_config->GetValue(WINDOW_CATEGORY, "clearColor")->Get<Color32>();
     m_fullscreenKey = m_config->GetValue(WINDOW_CATEGORY, "toggleFullscreenKey")->Get<int>();
-    m_config->ListenForReload(std::bind(&Window::OnConfigReloaded, this, m_config));
+    m_config->ListenForReload(&Window::OnConfigReloaded, this);
 
     InitWindow(m_width, m_height, m_title.c_str());
 

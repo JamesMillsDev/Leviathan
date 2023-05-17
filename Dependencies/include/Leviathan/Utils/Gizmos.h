@@ -26,18 +26,20 @@ public:
 private:
 	friend class Application;
 
-	DLL static class Config* m_config;
+	DLL static Gizmos* m_instance;
 
-	DLL static int m_toggleKey;
-	DLL static bool m_shown;
+	class Config* m_config;
 
-	DLL static float m_lineThickness;
-	DLL static int m_circleLineDensity;
+	int m_toggleKey;
+	bool m_shown;
+
+	float m_lineThickness;
+	int m_circleLineDensity;
 
 private:
-	DLL static void Init();
-	DLL static void Tick();
+	DLL void Init();
+	DLL void Tick();
 
-	DLL static void OnConfigReload(class Config* _config);
+	DLL void OnConfigReload(class Config* _config);
 
 };

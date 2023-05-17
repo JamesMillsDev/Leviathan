@@ -141,6 +141,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
