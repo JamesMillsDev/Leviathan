@@ -42,25 +42,8 @@ public:
 	void ListenForReload(void(T::* _callback)(Config*), T* _owner);
 
 private:
-	template<typename T>
-	struct TemplateCallback : public Callback
-	{
-	public:
-		void(T::* callback)(Config*);
-		T* owner;
-
-		void Call() override;
-
-	private:
-		friend class Config;
-
-		Config* m_config;
-
-	};
-
-private:
 	string m_filePath;
-	map<string, map<string, class ConfigValue*>> m_data;
+	map<string, map<string, class ConfigValue*>> userData;
 	vector<Callback*> m_listeners;
 
 private:
@@ -73,18 +56,12 @@ private:
 };
 
 template<typename T>
-inline void Config::TemplateCallback<T>::Call()
-{
-	(owner->*callback)(m_config);
-}
-
-template<typename T>
 inline void Config::ListenForReload(void(T::* _callback)(Config*), T* _owner)
 {
-	TemplateCallback<T>* callback = new TemplateCallback<T>();
+	TemplateCallbackOneParam<T, Config>* callback = new TemplateCallbackOneParam<T, Config>();
 	callback->callback = _callback;
 	callback->owner = _owner;
-	callback->m_config = this;
+	callback->param0 = this;
 
 	m_listeners.push_back(callback);
 }
