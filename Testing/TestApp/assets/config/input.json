@@ -1,0 +1,16 @@
+﻿{
+  "handlers": {
+    "keyboard": true,
+    "mouse": true,
+    "gamepad": false
+  },
+  "keyboard": {
+    
+  },
+  "mouse": {
+    "scrollDeadzone": 0.1
+  },
+  "gamepad": {
+    "maxControllers": 1
+  }
+}
