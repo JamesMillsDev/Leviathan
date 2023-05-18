@@ -34,6 +34,7 @@ void PlayState::Load()
 
 	Rigidbody* rb = textured->AddComponent<Rigidbody>();
 	rb->SetEnabled(false);
+	rb->ToggleConstraint(Constraints::FreezeRotation);
 
 	BoxCollider* collider = textured->AddComponent<BoxCollider>();
 	collider->SetExtents({ 50, 50 });
@@ -74,6 +75,14 @@ void PlayState::Tick()
 		if (Rigidbody* rb = textured->GetComponent<Rigidbody>())
 		{
 			rb->ApplyForce({ 0, 25.f }, ForceMode::Impulse);
+		}
+	}
+
+	if (IsKeyPressed(KEY_Q))
+	{
+		if (Rigidbody* rb = textured->GetComponent<Rigidbody>())
+		{
+			rb->ToggleConstraint(Constraints::FreezeRotation);
 		}
 	}
 }

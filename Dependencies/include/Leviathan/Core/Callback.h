@@ -13,7 +13,7 @@ public:
 	void(T::* callback)();
 	T* owner;
 
-	void* userData;
+	void* m_configValues;
 
 	void Call() override;
 
@@ -28,7 +28,7 @@ public:
 
 	P0* param0;
 
-	void* userData;
+	void* m_configValues;
 
 public:
 	void Call() override;
@@ -45,7 +45,7 @@ public:
 	P0* param0;
 	P1* param1;
 
-	void* userData;
+	void* m_configValues;
 
 public:
 	void Call() override;
@@ -63,7 +63,7 @@ public:
 	P1* param1;
 	P2* param2;
 
-	void* userData;
+	void* m_configValues;
 
 public:
 	void Call() override;

@@ -43,7 +43,7 @@ public:
 
 private:
 	string m_filePath;
-	map<string, map<string, class ConfigValue*>> userData;
+	map<string, map<string, class ConfigValue*>> m_configValues;
 	vector<Callback*> m_listeners;
 
 private:

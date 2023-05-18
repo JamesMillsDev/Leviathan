@@ -14,6 +14,16 @@ enum class ForceMode
 	Force
 };
 
+enum class Constraints
+{
+	None = 0x01,
+	FreezeX = 0x01 << 1,
+	FreezeY = 0x01 << 2,
+	FreezeRotation = 0x01 << 3,
+	FreezePosition = FreezeX | FreezeY,
+	FreezeAll = FreezeRotation | FreezePosition
+};
+
 class Rigidbody final : public Component
 {
 public:
@@ -23,8 +33,6 @@ public:
 	DLL const float& GetGravityScale() const;
 	DLL const float& GetMass() const;
 	DLL const float& GetFriction() const;
-
-	DLL const bool& IsRotationLocked() const;
 
 	DLL const bool& IsKinematic() const;
 	DLL const bool& IsStatic() const;
@@ -36,7 +44,8 @@ public:
 	DLL void SetMass(float _mass);
 	DLL void SetFriction(float _friction);
 
-	DLL void LockRotation(bool _locked);
+	DLL void ToggleConstraint(Constraints _constraints);
+	DLL Constraints GetConstraints() const;
 
 	DLL void SetKinematic(bool _isKinematic);
 	DLL void SetStatic(bool _isStatic);
@@ -48,7 +57,6 @@ public:
 
 protected:
 	friend class GameObject;
-	friend class TestGame;
 
 	vec2 m_velocity;
 	float m_angularVelocity;
@@ -60,7 +68,7 @@ protected:
 	bool m_isKinematic;
 	bool m_isStatic;
 
-	bool m_lockRotation;
+	Constraints m_constraints;
 
 protected:
 
@@ -70,6 +78,9 @@ protected:
 	DLL void Load() override;
 	DLL void Tick() override;
 	DLL void Unload() override;
+
+	DLL bool HasConstraint(Constraints _constraint);
+	DLL void TryConstrainVelocity();
 
 private:
 	class b2Body* m_body;

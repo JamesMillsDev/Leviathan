@@ -36,11 +36,6 @@ const float& Rigidbody::GetFriction() const
 	return m_friction;
 }
 
-const bool& Rigidbody::IsRotationLocked() const
-{
-	return m_lockRotation;
-}
-
 const bool& Rigidbody::IsKinematic() const
 {
 	return m_isKinematic;
@@ -100,11 +95,21 @@ void Rigidbody::SetFriction(float _friction)
 	}
 }
 
-void Rigidbody::LockRotation(bool _locked)
+void Rigidbody::ToggleConstraint(Constraints _constraints)
 {
-	m_lockRotation = _locked;
+	m_constraints = 
+		static_cast<Constraints>(static_cast<int>(m_constraints) ^ static_cast<int>(_constraints));
+
 	if (m_body != nullptr)
-		m_body->SetFixedRotation(_locked);
+	{
+		m_body->SetFixedRotation(HasConstraint(Constraints::FreezeRotation));
+		SetGravityScale(HasConstraint(Constraints::FreezeY) ? 0 : m_gravityScale);
+	}
+}
+
+Constraints Rigidbody::GetConstraints() const
+{
+	return m_constraints;
 }
 
 void Rigidbody::SetKinematic(bool _isKinematic)
@@ -155,7 +160,7 @@ void Rigidbody::ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceM
 
 Rigidbody::Rigidbody(GameObject* _owner)
 	: Component(_owner), m_body(nullptr), m_bodyDef(nullptr), m_angularVelocity(0),
-	m_velocity({ 0, 0 }), m_lockRotation(false), m_mass(1), m_friction(0.1f),
+	m_velocity({ 0, 0 }), m_constraints(Constraints::None), m_mass(1), m_friction(0.1f),
 	m_gravityScale(1), m_isKinematic(false), m_isStatic(false), m_fixtureCount(0)
 {
 	_owner->ListenToAddRemoveComponent(&Rigidbody::OnAddRemoveComponent, this);
@@ -178,8 +183,8 @@ void Rigidbody::Load()
 
 	m_bodyDef->position.Set(pos.x, pos.y);
 	m_bodyDef->angle = rot * DEG2RAD;
-	m_bodyDef->fixedRotation = m_lockRotation;
-	m_bodyDef->gravityScale = m_gravityScale;
+	m_bodyDef->fixedRotation = HasConstraint(Constraints::FreezeRotation);
+	m_bodyDef->gravityScale = HasConstraint(Constraints::FreezeY) ? 0 : m_gravityScale;
 	m_bodyDef->type = m_isStatic ?
 		b2BodyType::b2_staticBody : m_isKinematic ?
 		b2BodyType::b2_kinematicBody : b2BodyType::b2_dynamicBody;
@@ -197,10 +202,36 @@ void Rigidbody::Tick()
 	float rotation = m_body->GetAngle() * RAD2DEG;
 	m_owner->Transform()->SetPosition(pos.x, pos.y);
 	m_owner->Transform()->SetRotation(rotation);
+
+	TryConstrainVelocity();
 }
 
 void Rigidbody::Unload()
 {
+}
+
+bool Rigidbody::HasConstraint(Constraints _constraint)
+{
+	return static_cast<Constraints>(static_cast<int>(m_constraints) & static_cast<int>(_constraint)) == _constraint;
+}
+
+void Rigidbody::TryConstrainVelocity()
+{
+	if (HasConstraint(Constraints::FreezeX) || 
+		HasConstraint(Constraints::FreezeY) ||
+		HasConstraint(Constraints::FreezePosition))
+	{
+		vec2 velocity = { m_velocity.x, m_velocity.y };
+
+		if (HasConstraint(Constraints::FreezeX))
+			velocity.x = 0;
+		if (HasConstraint(Constraints::FreezeY))
+			velocity.y = 0;
+		if (HasConstraint(Constraints::FreezePosition))
+			velocity = { 0, 0 };
+
+		SetVelocity(velocity);
+	}
 }
 
 void Rigidbody::OnAddRemoveComponent(Component* _component, bool _added, Component* _caller)
