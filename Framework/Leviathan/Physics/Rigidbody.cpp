@@ -191,6 +191,8 @@ void Rigidbody::Load()
 
 	m_body = PhysicsManager::CreateBody(m_bodyDef);
 	m_body->SetEnabled(IsEnabled());
+
+	PhysicsManager::ObserveBody(this);
 }
 
 void Rigidbody::Tick()
@@ -208,6 +210,7 @@ void Rigidbody::Tick()
 
 void Rigidbody::Unload()
 {
+	PhysicsManager::StopObservingBody(this);
 }
 
 bool Rigidbody::HasConstraint(Constraints _constraint)

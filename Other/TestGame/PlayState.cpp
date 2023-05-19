@@ -9,6 +9,8 @@
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/BoxCollider.h>
 
+#include "PhysicsListenerTest.h"
+
 #include <raylib.h>
 
 #include <iostream>
@@ -34,10 +36,11 @@ void PlayState::Load()
 
 	Rigidbody* rb = textured->AddComponent<Rigidbody>();
 	rb->SetEnabled(false);
-	rb->ToggleConstraint(Constraints::FreezeRotation);
 
 	BoxCollider* collider = textured->AddComponent<BoxCollider>();
 	collider->SetExtents({ 50, 50 });
+
+	textured->AddComponent<PhysicsListenerTest>();
 
 	int w = 0, h = 0;
 	Application::GetWindowSize(w, h);

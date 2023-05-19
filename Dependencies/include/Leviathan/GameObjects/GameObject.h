@@ -39,6 +39,8 @@ public:
 	template<Derived<Component> COMPONENT>
 	void DestroyComponent(COMPONENT* _component);
 
+	const list<Component*> GetAllComponents() const;
+
 	void ListenToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener);
 	void StopListeningToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener);
 

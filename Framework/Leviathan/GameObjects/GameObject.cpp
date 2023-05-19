@@ -24,6 +24,11 @@ DLL TransformComponent* GameObject::Transform() const
     return m_transform;
 }
 
+const list<Component*> GameObject::GetAllComponents() const
+{
+    return m_components;
+}
+
 void GameObject::ListenToAddRemoveComponent(ComponentAddRemoveFunction _callback, Component* _listener)
 {
     if(!m_addRemoveUpdates.contains(_listener))

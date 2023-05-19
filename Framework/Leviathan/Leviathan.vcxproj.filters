@@ -144,6 +144,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\IPhysicsEventListener.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\ContactListener.h">
+      <Filter>Include\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -208,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="Core\Time.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\ContactListener.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Component.cpp">
+      <Filter>Source\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

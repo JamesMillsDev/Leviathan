@@ -36,6 +36,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\BoxCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\ContactListener.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\IPhysicsEventListener.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PolygonCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Rigidbody.h" />
@@ -56,6 +58,7 @@
     <ClCompile Include="Core\Color32.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Window.cpp" />
+    <ClCompile Include="GameObjects\Component.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\GameObjectManager.cpp" />
     <ClCompile Include="GameObjects\TextureComponent.cpp" />
@@ -64,6 +67,7 @@
     <ClCompile Include="Physics\BoxCollider.cpp" />
     <ClCompile Include="Physics\CircleCollider.cpp" />
     <ClCompile Include="Physics\Collider.cpp" />
+    <ClCompile Include="Physics\ContactListener.cpp" />
     <ClCompile Include="Physics\PolygonCollider.cpp" />
     <ClCompile Include="Physics\PhysicsManager.cpp" />
     <ClCompile Include="Physics\Rigidbody.cpp" />

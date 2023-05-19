@@ -7,6 +7,8 @@ public:
 	const bool& IsEnabled() const { return m_enabled; }
 	virtual void SetEnabled(const bool _enabled) { m_enabled = _enabled; }
 
+	const class GameObject* GetOwner() const;
+
 protected:
 	friend class GameObject;
 

@@ -177,10 +177,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsListenerTest.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="TestGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PhysicsListenerTest.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="TestGame.h" />
   </ItemGroup>

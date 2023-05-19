@@ -57,6 +57,7 @@ public:
 
 protected:
 	friend class GameObject;
+	friend class PhysicsManager;
 
 	vec2 m_velocity;
 	float m_angularVelocity;

@@ -3,9 +3,15 @@
 #include <Leviathan/Utils/Config.h>
 #include <Leviathan/Utils/ConfigValue.h>
 
-#include <Box2D/Box2D.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_world.h>
+#include <box2d/b2_fixture.h>
 
 #include <Leviathan/Core/Application.h>
+
+#include <Leviathan/Physics/Rigidbody.h>
+#include <Leviathan/Physics/Collider.h>
+#include <Leviathan/Physics/ContactListener.h>
 
 #include <glm/vec2.hpp>
 
@@ -43,6 +49,21 @@ void PhysicsManager::OnCreate()
 	m_velocityIterations = m_config->GetValue("World", "velocityIterations")->Get<int>();
 	m_positionIterations = m_config->GetValue("World", "positionIterations")->Get<int>();
 	m_polygonDensity = m_config->GetValue("Collision", "polygonDensity")->Get<int>();
+
+	m_contactListener = new ContactListener();
+	m_world->SetContactListener(m_contactListener);
+}
+
+void PhysicsManager::OnDestroy()
+{
+	delete m_config;
+	m_config = nullptr;
+
+	delete m_contactListener;
+	m_contactListener = nullptr;
+
+	delete m_world;
+	m_world = nullptr;
 }
 
 vector<b2Body*> PhysicsManager::GetBodies()
@@ -62,4 +83,53 @@ vector<b2Body*> PhysicsManager::GetBodies()
 b2Body* PhysicsManager::CreateBody(b2BodyDef* _bodyDef)
 {
 	return m_instance->m_world->CreateBody(_bodyDef);
+}
+
+void PhysicsManager::ObserveBody(Rigidbody* _body)
+{
+	map<b2Body*, Rigidbody*>& bodies = m_instance->m_bodies;
+	if (!bodies.contains(_body->m_body))
+		bodies[_body->m_body] = _body;
+}
+
+void PhysicsManager::StopObservingBody(Rigidbody* _body)
+{
+	map<b2Body*, Rigidbody*>& bodies = m_instance->m_bodies;
+	if (bodies.contains(_body->m_body))
+		bodies.erase(bodies.find(_body->m_body));
+}
+
+void PhysicsManager::ObserveCollider(Collider* _collider)
+{
+	map<b2Fixture*, Collider*>& colliders = m_instance->m_colliders;
+	if (!colliders.contains(_collider->m_fixture))
+		colliders[_collider->m_fixture] = _collider;
+}
+
+DLL void PhysicsManager::StopObservingCollider(Collider* _collider)
+{
+	map<b2Fixture*, Collider*>& colliders = m_instance->m_colliders;
+	if (colliders.contains(_collider->m_fixture))
+		colliders.erase(colliders.find(_collider->m_fixture));
+}
+
+Rigidbody* PhysicsManager::FindBodyFor(b2Fixture* _fixture)
+{
+	b2Body* body = _fixture->GetBody();
+	map<b2Body*, Rigidbody*>& bodies = m_instance->m_bodies;
+
+	if (bodies.contains(body))
+		return bodies[body];
+
+	return nullptr;
+}
+
+Collider* PhysicsManager::FindColliderFor(b2Fixture* _fixture)
+{
+	map<b2Fixture*, Collider*>& colliders = m_instance->m_colliders;
+
+	if (colliders.contains(_fixture))
+		return colliders[_fixture];
+
+	return nullptr;
 }

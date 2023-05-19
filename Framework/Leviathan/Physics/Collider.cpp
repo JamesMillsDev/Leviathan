@@ -5,13 +5,14 @@
 #include <Leviathan/GameObjects/GameObject.h>
 
 #include <Leviathan/Physics/Rigidbody.h>
+#include <Leviathan/Physics/PhysicsManager.h>
 
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
 
 Collider::Collider(GameObject* _owner)
 	: Component(_owner), m_center(vec2(0.f)), m_shape(nullptr),
-	  m_fixtureDef(nullptr), m_fixture(nullptr)
+	  m_fixtureDef(nullptr), m_fixture(nullptr), m_isTrigger(false)
 {
 
 }
@@ -40,12 +41,15 @@ void Collider::AttachTo(b2Body* _body, const Rigidbody* _rb)
 	m_fixtureDef->shape = m_shape;
 	m_fixtureDef->density = _rb->GetMass() / GetVolume();
 	m_fixtureDef->friction = _rb->GetFriction();
+	m_fixtureDef->isSensor = m_isTrigger;
 
 	m_fixture = _body->CreateFixture(m_fixtureDef);
+	PhysicsManager::ObserveCollider(this);
 }
 
 void Collider::DetachFrom(b2Body* _body, Rigidbody* _rb)
 {
+	PhysicsManager::StopObservingCollider(this);
 	_body->DestroyFixture(m_fixture);
 	m_fixture = nullptr;
 }
@@ -63,4 +67,18 @@ const vec2& Collider::GetCenter() const
 void Collider::Load()
 {
 	m_shape = BuildShape();
+}
+
+void Collider::SetIsTrigger(bool _isTrigger)
+{
+	m_isTrigger = _isTrigger;
+	if (m_fixture != nullptr)
+	{
+		m_fixture->SetSensor(m_isTrigger);
+	}
+}
+
+const bool Collider::IsTrigger() const
+{
+	return m_isTrigger;
 }
