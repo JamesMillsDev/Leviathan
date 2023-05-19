@@ -9,7 +9,7 @@
 
 #include <functional>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 const vec2& Rigidbody::GetVelocity() const
 {

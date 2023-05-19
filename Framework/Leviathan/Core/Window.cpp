@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 Window::Window()
     : m_width(0), m_height(0), m_fullscreenKey(0), m_config(nullptr)

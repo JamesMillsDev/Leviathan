@@ -7,7 +7,7 @@
 
 #include <box2d/b2_polygon_shape.h>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 BoxCollider::BoxCollider(GameObject* _owner)
     : Collider(_owner), m_extents(vec2(10.f))

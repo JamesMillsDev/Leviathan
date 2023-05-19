@@ -36,7 +36,7 @@ private:
 
 	class b2World* m_world;
 	class Config* m_config;
-	class ContactListener* m_contactListener;
+	/*class ContactListener* m_contactListener;*/
 	int m_velocityIterations;
 	int m_positionIterations;
 	map<class b2Body*, class Rigidbody*> m_bodies;

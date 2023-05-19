@@ -14,7 +14,7 @@
 #include <Leviathan/Utils/ConfigValue.h>
 #include <Leviathan/Utils/Gizmos.h>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 Application* Application::m_instance = nullptr;
 

@@ -11,11 +11,11 @@
 
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/Collider.h>
-#include <Leviathan/Physics/ContactListener.h>
+//#include <Leviathan/Physics/ContactListener.h>
 
 #include <glm/vec2.hpp>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 using glm::vec2;
 
@@ -50,8 +50,8 @@ void PhysicsManager::OnCreate()
 	m_positionIterations = m_config->GetValue("World", "positionIterations")->Get<int>();
 	m_polygonDensity = m_config->GetValue("Collision", "polygonDensity")->Get<int>();
 
-	m_contactListener = new ContactListener();
-	m_world->SetContactListener(m_contactListener);
+	/*m_contactListener = new ContactListener();
+	m_world->SetContactListener(m_contactListener);*/
 }
 
 void PhysicsManager::OnDestroy()
@@ -59,8 +59,8 @@ void PhysicsManager::OnDestroy()
 	delete m_config;
 	m_config = nullptr;
 
-	delete m_contactListener;
-	m_contactListener = nullptr;
+	/*delete m_contactListener;
+	m_contactListener = nullptr;*/
 
 	delete m_world;
 	m_world = nullptr;

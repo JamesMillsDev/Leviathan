@@ -12,7 +12,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 using glm::quat;
 using glm::vec3;
