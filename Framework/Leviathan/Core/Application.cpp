@@ -43,7 +43,8 @@ void Application::GetWindowSize(int& _width, int& _height)
 }
 
 Application::Application(Game* _game)
-    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), m_configReloadKey(0)
+    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), m_configReloadKey(0),
+    m_stateManager(nullptr), m_objectManager(nullptr)
 {
 }
 
@@ -72,7 +73,7 @@ Application::~Application()
     m_configs.clear();
 }
 
-void Application::Init()
+void Application::Load()
 {
     m_configs[ConfigType::Application] = new Config("app.cfg");
     m_configs[ConfigType::Window] = new Config("window.cfg");
@@ -82,23 +83,23 @@ void Application::Init()
     m_configs[ConfigType::Debug]->ListenForReload(&Application::OnConfigReloaded, this);
 
     m_window = new Window();
+    m_window->Open();
+
+    m_stateManager = new GameStateManager();
+    m_objectManager = new GameObjectManager();
+
+    GameTimerManager::CreateInstance();
+    Resources::CreateInstance();
+    PhysicsManager::CreateInstance();
+    Gizmos::m_instance = new Gizmos();
+    Gizmos::m_instance->Init();
+
+    m_game->Load(m_stateManager, m_objectManager);
 }
 
 void Application::Process()
 {
-    Init();
-
-    m_window->Open();
-    
-    GameTimerManager::CreateInstance();
-    Resources::CreateInstance();
-    PhysicsManager::CreateInstance();
-    GameStateManager::CreateInstance();
-    GameObjectManager::CreateInstance();
-    Gizmos::m_instance = new Gizmos();
-    Gizmos::m_instance->Init();
-
-    m_game->Load();
+    Load();
 
     while(!WindowShouldClose())
     {
@@ -117,36 +118,51 @@ void Application::Process()
         m_game->Tick();
 
         PhysicsManager::Tick();
-        GameStateManager::Tick();
-        GameObjectManager::Tick();
+        m_stateManager->Tick();
+        m_objectManager->Tick();
 
         m_window->BeginFrame();
 
-        GameStateManager::Render();
-        GameObjectManager::Render();
+        m_stateManager->Render();
+        m_objectManager->Render();
 
         m_game->Render();
 
         if(Gizmos::m_instance->m_shown)
         {
-            GameObjectManager::DrawGizmos();
+            m_objectManager->DrawGizmos();
         }
 
         m_window->EndFrame();
     }
 
-    m_game->Unload();
-
-    GameObjectManager::DestroyInstance();
-    GameStateManager::DestroyInstance();
-    Resources::DestroyInstance();
-    PhysicsManager::DestroyInstance();
-    GameTimerManager::DestroyInstance();
-
-    m_window->Close();
+    Unload();
 }
 
 void Application::OnConfigReloaded(Config* _config)
 {
     m_configReloadKey = m_configs[ConfigType::Debug]->GetValue("Config", "reloadConfigKey")->Get<int>();
+}
+
+void Application::Unload()
+{
+    m_game->Unload(m_stateManager, m_objectManager);
+
+    if (m_stateManager != nullptr)
+    {
+        delete m_stateManager;
+        m_stateManager = nullptr;
+    }
+
+    if (m_objectManager != nullptr)
+    {
+        delete m_objectManager;
+        m_objectManager = nullptr;
+    }
+
+    Resources::DestroyInstance();
+    PhysicsManager::DestroyInstance();
+    GameTimerManager::DestroyInstance();
+
+    m_window->Close();
 }

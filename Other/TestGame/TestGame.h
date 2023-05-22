@@ -5,6 +5,6 @@
 class TestGame : public Game
 {
 protected:
-	virtual void Load() override;
+	virtual void Load(class GameStateManager* _stateManager, class GameObjectManager* _objectManager) override;
 
 };

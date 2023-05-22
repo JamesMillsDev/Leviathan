@@ -13,15 +13,15 @@ using std::list;
 using std::pair;
 using std::vector;
 
-class GameObjectManager final : public Singleton<GameObjectManager>
+class GameObjectManager
 {
 public:
 	GameObjectManager() = default;
 	GameObjectManager(GameObjectManager&) = delete;
-	DLL ~GameObjectManager() override;
+	DLL ~GameObjectManager();
 
-	DLL static void Spawn(class GameObject* _go);
-	DLL static void Destroy(class GameObject* _go);
+	DLL void Spawn(class GameObject* _go);
+	DLL void Destroy(class GameObject* _go);
 
 private:
 	friend class Application;
@@ -30,9 +30,9 @@ private:
 	list<class GameObject*> m_objects;
 
 private:
-	DLL static void Tick();
-	DLL static void Render();
+	DLL void Tick();
+	DLL void Render();
 
-	DLL static void DrawGizmos();
+	DLL void DrawGizmos();
 
 };

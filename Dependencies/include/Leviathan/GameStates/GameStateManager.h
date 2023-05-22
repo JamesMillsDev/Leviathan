@@ -15,17 +15,17 @@ using std::map;
 
 typedef function<void()> UpdateAction;
 
-class GameStateManager final : public Singleton<GameStateManager>
+class GameStateManager
 {
 public:
 	GameStateManager() = default;
 	GameStateManager(GameStateManager&) = delete;
-	DLL ~GameStateManager() override;
+	DLL ~GameStateManager();
 
-	DLL static void AddState(class IGameState* _state);
-	DLL static void RemoveState(const class IGameState* _state);
-	DLL static void ActivateState(const char* _id);
-	DLL static void DeactivateState(const char* _id);
+	DLL void AddState(class IGameState* _state);
+	DLL void RemoveState(const class IGameState* _state);
+	DLL void ActivateState(const char* _id);
+	DLL void DeactivateState(const char* _id);
 
 private:
 	friend class Application;
@@ -35,13 +35,8 @@ private:
 	map<const char*, class IGameState*> m_states;
 
 private:
-	DLL static void Tick();
-	DLL static void Render();
-
-	DLL void AddState_Internal(class IGameState* _state);
-	DLL void RemoveState_Internal(const class IGameState* _state);
-	DLL void ActivateState_Internal(const char* _id);
-	DLL void DeactivateState_Internal(const char* _id);
+	DLL void Tick();
+	DLL void Render();
 
 };
 

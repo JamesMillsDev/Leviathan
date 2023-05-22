@@ -43,14 +43,17 @@ private:
 	const char* m_applicationDir;
 
 	int m_configReloadKey;
+	class GameStateManager* m_stateManager;
+	class GameObjectManager* m_objectManager;
 
 private:
 	DLL Application(Game* _game);
 	DLL ~Application();
 
-	DLL void Init();
+	DLL void Load();
 	DLL void Process();
 	DLL void OnConfigReloaded(class Config* _config);
+	DLL void Unload();
 
 };
 

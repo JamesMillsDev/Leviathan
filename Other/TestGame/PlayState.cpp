@@ -6,6 +6,8 @@
 #include <Leviathan/GameObjects/TextureComponent.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
 
+#include <Leviathan/GameStates/GameStateManager.h>
+
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/BoxCollider.h>
 
@@ -16,7 +18,8 @@
 GameObject* textured = nullptr;
 GameObject* ground = nullptr;
 
-PlayState::PlayState() : IGameState("PLAY")
+PlayState::PlayState(GameStateManager* _stateManager, class GameObjectManager* _goManager) 
+	: IGameState(_stateManager, _goManager, "PLAY")
 {
 }
 
@@ -53,8 +56,8 @@ void PlayState::Load()
 	TextureComponent* groundT = ground->AddComponent<TextureComponent>();
 	groundT->SetTexture("textures/test");
 
-	GameObjectManager::Spawn(textured);
-	GameObjectManager::Spawn(ground);
+	m_goManager->Spawn(textured);
+	m_goManager->Spawn(ground);
 
 	GameTimerManager::Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
 }
@@ -88,8 +91,8 @@ void PlayState::Tick()
 
 void PlayState::Unload()
 {
-	GameObjectManager::Destroy(textured);
-	GameObjectManager::Destroy(ground);
+	m_goManager->Destroy(textured);
+	m_goManager->Destroy(ground);
 }
 
 void PlayState::DelayTest()

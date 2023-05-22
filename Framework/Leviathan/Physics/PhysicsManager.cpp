@@ -106,7 +106,7 @@ void PhysicsManager::ObserveCollider(Collider* _collider)
 		colliders[_collider->m_fixture] = _collider;
 }
 
-DLL void PhysicsManager::StopObservingCollider(Collider* _collider)
+void PhysicsManager::StopObservingCollider(Collider* _collider)
 {
 	map<b2Fixture*, Collider*>& colliders = m_instance->m_colliders;
 	if (colliders.contains(_collider->m_fixture))
