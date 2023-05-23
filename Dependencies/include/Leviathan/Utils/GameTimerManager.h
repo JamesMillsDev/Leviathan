@@ -24,15 +24,15 @@ private:
 
 };
 
-class GameTimerManager final : public Singleton<GameTimerManager>
+class GameTimerManager
 {
 public:
 	GameTimerManager() = default;
 
 	template<typename T>
-	static void Set(TimerHandle& _timer, void(T::* _callback)(), T* _owner, float _duration);
+	void Set(TimerHandle& _timer, void(T::* _callback)(), T* _owner, float _duration);
 
-	DLL static void Cancel(TimerHandle& _timer);
+	DLL void Cancel(TimerHandle& _timer);
 
 private:
 	struct Timer
@@ -69,14 +69,13 @@ private:
 	};
 
 private:
-	friend class Application;
+	friend class GameManagers;
 
 	map<TimerHandle*, Timer*> m_timers;
 
 private:
-	DLL static void Tick();
-	DLL static unsigned int FindValidHandle();
-	DLL static GameTimerManager* GetInstance();
+	DLL void Tick();
+	DLL unsigned int FindValidHandle();
 
 };
 
@@ -90,7 +89,7 @@ void GameTimerManager::Set(TimerHandle& _timer, void(T::* _callback)(), T* _owne
 	TemplateTimer<T>* timer = new TemplateTimer<T>(_duration, _timer);
 	timer->callback = _callback;
 	timer->owner = _owner;
-	GetInstance()->m_timers[&_timer] = timer;
+	m_timers[&_timer] = timer;
 }
 
 template<typename T>

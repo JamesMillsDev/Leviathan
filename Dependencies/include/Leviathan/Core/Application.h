@@ -43,8 +43,7 @@ private:
 	const char* m_applicationDir;
 
 	int m_configReloadKey;
-	class GameStateManager* m_stateManager;
-	class GameObjectManager* m_objectManager;
+	class GameManagers* m_managers;
 
 private:
 	DLL Application(Game* _game);

@@ -2,15 +2,12 @@
 
 #include <Leviathan/Core/Time.h>
 #include <Leviathan/Core/Window.h>
-
-#include <Leviathan/GameObjects/GameObjectManager.h>
-#include <Leviathan/GameStates/GameStateManager.h>
+#include <Leviathan/Core/GameManagers.h>
 
 #include <Leviathan/Physics/PhysicsManager.h>
 
 #include <Leviathan/Resources/Resources.h>
 
-#include <Leviathan/Utils/GameTimerManager.h>
 #include <Leviathan/Utils/ConfigValue.h>
 #include <Leviathan/Utils/Gizmos.h>
 
@@ -43,8 +40,8 @@ void Application::GetWindowSize(int& _width, int& _height)
 }
 
 Application::Application(Game* _game)
-    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), m_configReloadKey(0),
-    m_stateManager(nullptr), m_objectManager(nullptr)
+    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), 
+    m_configReloadKey(0), m_managers(nullptr)
 {
 }
 
@@ -60,6 +57,12 @@ Application::~Application()
     {
         delete m_window;
         m_window = nullptr;
+    }
+
+    if (m_managers != nullptr)
+    {
+        delete m_managers;
+        m_managers = nullptr;
     }
 
     for(auto& config : m_configs)
@@ -85,16 +88,14 @@ void Application::Load()
     m_window = new Window();
     m_window->Open();
 
-    m_stateManager = new GameStateManager();
-    m_objectManager = new GameObjectManager();
+    m_managers = new GameManagers();
 
-    GameTimerManager::CreateInstance();
     Resources::CreateInstance();
     PhysicsManager::CreateInstance();
     Gizmos::m_instance = new Gizmos();
     Gizmos::m_instance->Init();
 
-    m_game->Load(m_stateManager, m_objectManager);
+    m_game->Load(m_managers);
 }
 
 void Application::Process()
@@ -109,29 +110,20 @@ void Application::Process()
         if(IsKeyPressed(m_configReloadKey))
         {
             for(auto& callback : m_onConfigReload)
-            {
-                std::invoke(callback.second, callback.first);
-            }
+                (callback.first->*callback.second)();
         }
 
-        GameTimerManager::Tick();
         m_game->Tick();
-
         PhysicsManager::Tick();
-        m_stateManager->Tick();
-        m_objectManager->Tick();
+        m_managers->Tick();
 
         m_window->BeginFrame();
 
-        m_stateManager->Render();
-        m_objectManager->Render();
-
         m_game->Render();
+        m_managers->Render();
 
         if(Gizmos::m_instance->m_shown)
-        {
-            m_objectManager->DrawGizmos();
-        }
+            m_managers->DrawGizmos();
 
         m_window->EndFrame();
     }
@@ -146,23 +138,10 @@ void Application::OnConfigReloaded(Config* _config)
 
 void Application::Unload()
 {
-    m_game->Unload(m_stateManager, m_objectManager);
-
-    if (m_stateManager != nullptr)
-    {
-        delete m_stateManager;
-        m_stateManager = nullptr;
-    }
-
-    if (m_objectManager != nullptr)
-    {
-        delete m_objectManager;
-        m_objectManager = nullptr;
-    }
+    m_game->Unload(m_managers);
 
     Resources::DestroyInstance();
     PhysicsManager::DestroyInstance();
-    GameTimerManager::DestroyInstance();
 
     m_window->Close();
 }

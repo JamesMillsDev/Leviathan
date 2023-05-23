@@ -28,7 +28,7 @@ public:
 	DLL void DeactivateState(const char* _id);
 
 private:
-	friend class Application;
+	friend class GameManagers;
 
 	vector<UpdateAction> m_listUpdates;
 	list<class IGameState*> m_activeStates;

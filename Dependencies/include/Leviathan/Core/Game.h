@@ -8,8 +8,8 @@ public:
 protected:
 	friend class Application;
 
-	virtual void Load(class GameStateManager* _stateManager, class GameObjectManager* _objectManager) = 0;
-	virtual void Unload(class GameStateManager* _stateManager, class GameObjectManager* _objectManager) {}
+	virtual void Load(class GameManagers* _gameManagers) = 0;
+	virtual void Unload(class GameManagers* _gameManagers) {}
 
 	virtual void Tick() {}
 	virtual void Render() {}

@@ -24,7 +24,7 @@ public:
 	DLL void Destroy(class GameObject* _go);
 
 private:
-	friend class Application;
+	friend class GameManagers;
 
 	vector<pair<function<void(class GameObject*)>, class GameObject*>> m_listUpdates;
 	list<class GameObject*> m_objects;

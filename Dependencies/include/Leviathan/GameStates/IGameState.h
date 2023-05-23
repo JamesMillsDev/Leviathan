@@ -10,12 +10,11 @@ public:
 	virtual void Unload() {}
 
 protected:
-	class GameStateManager* m_stateManager;
-	class GameObjectManager* m_goManager;
+	class GameManagers* m_gameManagers;
 
 protected:
-	IGameState(class GameStateManager* _stateManager, class GameObjectManager* _goManager, const char* _id)
-		: m_name(_id), m_stateManager(_stateManager), m_goManager(_goManager) {}
+	IGameState(class GameManagers* _gameManagers, const char* _id)
+		: m_name(_id), m_gameManagers(_gameManagers) {}
 
 private:
 	friend class GameStateManager;

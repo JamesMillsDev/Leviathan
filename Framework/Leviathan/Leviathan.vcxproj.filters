@@ -144,6 +144,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -207,6 +210,9 @@
       <Filter>Source\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Core\Time.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameManagers.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>

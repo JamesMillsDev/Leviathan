@@ -1,6 +1,7 @@
 #include "PlayState.h"
 
 #include <Leviathan/Core/Application.h>
+#include <Leviathan/Core/GameManagers.h>
 
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/GameObjects/TextureComponent.h>
@@ -18,8 +19,8 @@
 GameObject* textured = nullptr;
 GameObject* ground = nullptr;
 
-PlayState::PlayState(GameStateManager* _stateManager, class GameObjectManager* _goManager) 
-	: IGameState(_stateManager, _goManager, "PLAY")
+PlayState::PlayState(GameManagers* _gameManagers)
+	: IGameState(_gameManagers, "PLAY")
 {
 }
 
@@ -56,10 +57,10 @@ void PlayState::Load()
 	TextureComponent* groundT = ground->AddComponent<TextureComponent>();
 	groundT->SetTexture("textures/test");
 
-	m_goManager->Spawn(textured);
-	m_goManager->Spawn(ground);
+	m_gameManagers->objectManager->Spawn(textured);
+	m_gameManagers->objectManager->Spawn(ground);
 
-	GameTimerManager::Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
+	m_gameManagers->timerManager->Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
 }
 
 void PlayState::Tick()
@@ -91,8 +92,8 @@ void PlayState::Tick()
 
 void PlayState::Unload()
 {
-	m_goManager->Destroy(textured);
-	m_goManager->Destroy(ground);
+	m_gameManagers->objectManager->Destroy(textured);
+	m_gameManagers->objectManager->Destroy(ground);
 }
 
 void PlayState::DelayTest()
