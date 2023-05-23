@@ -40,20 +40,22 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="assets\app.cfg">
-      <Filter>Resource Files\Config</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="assets\debug.cfg">
-      <Filter>Resource Files\Config</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="assets\window.cfg">
-      <Filter>Resource Files\Config</Filter>
-    </CopyFileToFolders>
     <CopyFileToFolders Include="assets\textures\test.png">
       <Filter>Resource Files\Textures</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="assets\physics.cfg">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\config\app.cfg">
       <Filter>Resource Files\Config</Filter>
-    </CopyFileToFolders>
+    </None>
+    <None Include="assets\config\debug.cfg">
+      <Filter>Resource Files\Config</Filter>
+    </None>
+    <None Include="assets\config\physics.cfg">
+      <Filter>Resource Files\Config</Filter>
+    </None>
+    <None Include="assets\config\window.cfg">
+      <Filter>Resource Files\Config</Filter>
+    </None>
   </ItemGroup>
 </Project>

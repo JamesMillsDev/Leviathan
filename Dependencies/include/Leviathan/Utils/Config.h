@@ -33,7 +33,7 @@ struct InvalidValueException final : std::exception
 class Config
 {
 public:
-	DLL Config(string _filePath);
+	DLL Config(const string& _filePath);
 	DLL ~Config();
 
 	class ConfigValue* GetValue(string _group, string _id);

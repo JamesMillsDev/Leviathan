@@ -27,11 +27,11 @@ void Config::Reload()
 		iter->Call();
 }
 
-Config::Config(const string _filePath)
+Config::Config(const string& _filePath)
 {
 	Application::AddConfigReloadCallback(&Config::Reload, this);
 
-	m_filePath = _filePath;
+	m_filePath = "config\\" + _filePath;
 	Load(m_filePath);
 }
 
