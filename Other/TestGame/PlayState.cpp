@@ -57,10 +57,10 @@ void PlayState::Load()
 	TextureComponent* groundT = ground->AddComponent<TextureComponent>();
 	groundT->SetTexture("textures/test");
 
-	m_gameManagers->objectManager->Spawn(textured);
-	m_gameManagers->objectManager->Spawn(ground);
+	GetObjectManager()->Spawn(textured);
+	GetObjectManager()->Spawn(ground);
 
-	m_gameManagers->timerManager->Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
+	GetTimerManager()->Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
 }
 
 void PlayState::Tick()
@@ -92,8 +92,8 @@ void PlayState::Tick()
 
 void PlayState::Unload()
 {
-	m_gameManagers->objectManager->Destroy(textured);
-	m_gameManagers->objectManager->Destroy(ground);
+	GetObjectManager()->Destroy(textured);
+	GetObjectManager()->Destroy(ground);
 }
 
 void PlayState::DelayTest()

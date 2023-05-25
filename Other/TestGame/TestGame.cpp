@@ -8,7 +8,7 @@
 
 void TestGame::Load(GameManagers* _gameManagers)
 {
-	_gameManagers->stateManager->AddState(new PlayState(_gameManagers));
+	GetStateManager()->AddState(new PlayState(_gameManagers));
 
-	_gameManagers->stateManager->ActivateState("PLAY");
+	GetStateManager()->ActivateState("PLAY");
 }
