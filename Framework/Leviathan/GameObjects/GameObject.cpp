@@ -24,6 +24,26 @@ DLL TransformComponent* GameObject::Transform() const
     return m_transform;
 }
 
+void GameObject::SetName(string _name)
+{
+    m_name = _name;
+}
+
+const string& GameObject::GetName() const
+{
+    return m_name;
+}
+
+void GameObject::SetTag(string _tag)
+{
+    m_tag = _tag;
+}
+
+const string& GameObject::GetTag() const
+{
+    return m_tag;
+}
+
 const list<Component*> GameObject::GetAllComponents() const
 {
     return m_components;

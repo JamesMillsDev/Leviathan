@@ -147,6 +147,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -215,5 +221,11 @@
     <ClCompile Include="Core\GameManagers.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\IManagerReciever.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

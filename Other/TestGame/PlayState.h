@@ -7,7 +7,7 @@
 class PlayState final : public IGameState
 {
 public:
-    PlayState(class GameManagers* _gameManagers);
+    PlayState();
     virtual ~PlayState();
 
     void Load() override;

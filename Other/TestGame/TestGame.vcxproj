@@ -176,13 +176,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GroundObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="TestGame.cpp" />
+    <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GroundObject.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="TestGame.h" />
+    <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="assets\textures\test.png">

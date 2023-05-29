@@ -6,9 +6,9 @@
 
 #include "PlayState.h"
 
-void TestGame::Load(GameManagers* _gameManagers)
+void TestGame::Load()
 {
-	GetStateManager()->AddState(new PlayState(_gameManagers));
+	GetStateManager()->AddState(new PlayState());
 
 	GetStateManager()->ActivateState("PLAY");
 }

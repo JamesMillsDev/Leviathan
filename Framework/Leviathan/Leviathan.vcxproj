@@ -24,7 +24,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
@@ -56,6 +58,7 @@
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />
     <ClCompile Include="Core\GameManagers.cpp" />
+    <ClCompile Include="Core\IManagerReciever.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
@@ -75,6 +78,9 @@
     <ClCompile Include="Utils\Config.cpp" />
     <ClCompile Include="Utils\GameTimerManager.cpp" />
     <ClCompile Include="Utils\Gizmos.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -152,7 +158,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -184,7 +190,7 @@ if not exist "%path%" mkdir "%path%"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -216,7 +222,7 @@ if not exist "%path%" mkdir "%path%"</Command>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -248,7 +254,7 @@ if not exist "%path%" mkdir "%path%"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Core/Object.h>
 
 #include <Leviathan/GameObjects/Component.h>
 #include <Leviathan/GameObjects/TransformComponent.h>
@@ -20,7 +21,7 @@ using std::vector;
 typedef function<void()> ComponentUpdateAction;
 typedef function<void(Component*, bool, Component*)> ComponentAddRemoveFunction;
 
-class GameObject
+class GameObject : public Object
 {
 public:
 	DLL GameObject();
@@ -29,6 +30,12 @@ public:
 	DLL ~GameObject();
 
 	DLL TransformComponent* Transform() const;
+
+	DLL void SetName(string _name);
+	DLL const string& GetName() const;
+
+	DLL void SetTag(string _tag);
+	DLL const string& GetTag() const;
 
 	template<Derived<Component> COMPONENT>
 	COMPONENT* GetComponent();

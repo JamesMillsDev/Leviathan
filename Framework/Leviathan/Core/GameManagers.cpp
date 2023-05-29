@@ -62,18 +62,3 @@ void GameManagers::DrawGizmos()
 	if (m_objectManager != nullptr)
 		m_objectManager->DrawGizmos();
 }
-
-GameStateManager* GetStateManager()
-{
-	return GameManagers::m_stateManager;
-}
-
-GameObjectManager* GetObjectManager()
-{
-	return GameManagers::m_objectManager;
-}
-
-GameTimerManager* GetTimerManager()
-{
-	return GameManagers::m_timerManager;
-}

@@ -6,9 +6,7 @@ class GameManagers
 {
 private:
 	friend class Application;
-	friend class GameStateManager* GetStateManager();
-	friend class GameObjectManager* GetObjectManager();
-	friend class GameTimerManager* GetTimerManager();
+	friend class IManagerReciever;
 
 	DLL static class GameStateManager* m_stateManager;
 	DLL static class GameObjectManager* m_objectManager;
@@ -25,7 +23,3 @@ private:
 	DLL void DrawGizmos();
 
 };
-
-extern class GameStateManager* GetStateManager();
-extern class GameObjectManager* GetObjectManager();
-extern class GameTimerManager* GetTimerManager();

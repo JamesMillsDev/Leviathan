@@ -1,6 +1,8 @@
 #pragma once
 
-class Game
+#include <Leviathan/Core/Object.h>
+
+class Game : public Object
 {
 public:
 	virtual ~Game() = default;
@@ -8,8 +10,8 @@ public:
 protected:
 	friend class Application;
 
-	virtual void Load(class GameManagers* _gameManagers) = 0;
-	virtual void Unload(class GameManagers* _gameManagers) {}
+	virtual void Load() = 0;
+	virtual void Unload() {}
 
 	virtual void Tick() {}
 	virtual void Render() {}

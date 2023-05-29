@@ -95,7 +95,7 @@ void Application::Load()
     Gizmos::m_instance = new Gizmos();
     Gizmos::m_instance->Init();
 
-    m_game->Load(m_managers);
+    m_game->Load();
 }
 
 void Application::Process()
@@ -138,7 +138,7 @@ void Application::OnConfigReloaded(Config* _config)
 
 void Application::Unload()
 {
-    m_game->Unload(m_managers);
+    m_game->Unload();
 
     Resources::DestroyInstance();
     PhysicsManager::DestroyInstance();
