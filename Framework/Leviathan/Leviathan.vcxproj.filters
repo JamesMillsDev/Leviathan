@@ -49,6 +49,9 @@
     <Filter Include="Include\Third Party">
       <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\Collections">
+      <UniqueIdentifier>{f4701a88-b5f3-4008-ba21-2076f2127efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
       <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h">
+      <Filter>Include\Collections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

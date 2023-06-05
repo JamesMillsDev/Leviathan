@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
