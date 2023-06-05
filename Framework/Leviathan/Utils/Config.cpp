@@ -27,11 +27,11 @@ void Config::Reload()
 		iter->Call();
 }
 
-Config::Config(const string _filePath)
+Config::Config(const string& _filePath)
 {
 	Application::AddConfigReloadCallback(&Config::Reload, this);
 
-	m_filePath = _filePath;
+	m_filePath = "config\\" + _filePath;
 	Load(m_filePath);
 }
 
@@ -44,7 +44,7 @@ Config::~Config()
 
 	m_listeners.clear();
 
-	for (auto& group : m_data)
+	for (auto& group : m_configValues)
 	{
 		for (auto& set : group.second)
 		{
@@ -52,14 +52,14 @@ Config::~Config()
 		}
 	}
 
-	m_data.clear();
+	m_configValues.clear();
 }
 
 ConfigValue* Config::GetValue(const string _group, const string _id)
 {
-	if (m_data.contains(_group))
+	if (m_configValues.contains(_group))
 	{
-		auto& set = m_data[_group];
+		auto& set = m_configValues[_group];
 
 		if (set.contains(_id))
 		{
@@ -72,13 +72,13 @@ ConfigValue* Config::GetValue(const string _group, const string _id)
 
 void Config::Clear()
 {
-	for (auto& group : m_data | std::views::values)
+	for (auto& group : m_configValues | std::views::values)
 	{
 		for (auto iter = group.begin(); iter != group.end(); ++iter)
 			delete (*iter).second;
 	}
 
-	m_data.clear();
+	m_configValues.clear();
 }
 
 void Config::Load(string _filePath)
@@ -131,11 +131,11 @@ void Config::Load(string _filePath)
 
 				if (values.size() == 2)
 				{
-					m_data[lastGroup][id] = new ConfigValue(new vec2{ values[0], values[1] });
+					m_configValues[lastGroup][id] = new ConfigValue(new vec2{ values[0], values[1] });
 				}
 				else if (values.size() == 4)
 				{
-					m_data[lastGroup][id] = new ConfigValue(new Color32
+					m_configValues[lastGroup][id] = new ConfigValue(new Color32
 					{
 						(uint8_t)values[0],
 						(uint8_t)values[1],
@@ -148,24 +148,24 @@ void Config::Load(string _filePath)
 			{
 				if (val.find('.') != -1)
 				{
-					m_data[lastGroup][id] = new ConfigValue(new float((float)atof(val.c_str())));
+					m_configValues[lastGroup][id] = new ConfigValue(new float((float)atof(val.c_str())));
 					continue;
 				}
 
 				if (val == "false" || val == "true")
 				{
-					m_data[lastGroup][id] = new ConfigValue(new bool(val == "true"));
+					m_configValues[lastGroup][id] = new ConfigValue(new bool(val == "true"));
 				}
 				else
 				{
 					int ascii = val[0];
 					if (ascii >= 48 && ascii <= 57)
 					{
-						m_data[lastGroup][id] = new ConfigValue(new int(atoi(val.c_str())));
+						m_configValues[lastGroup][id] = new ConfigValue(new int(atoi(val.c_str())));
 					}
 					else
 					{
-						m_data[lastGroup][id] = new ConfigValue(new string(val));
+						m_configValues[lastGroup][id] = new ConfigValue(new string(val));
 					}
 				}
 			}

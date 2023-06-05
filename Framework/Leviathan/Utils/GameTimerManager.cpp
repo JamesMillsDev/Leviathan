@@ -38,10 +38,10 @@ void GameTimerManager::Timer::Tick()
 void GameTimerManager::Cancel(TimerHandle& _timer)
 {
 	TimerHandle* timer = &_timer;
-	if (m_instance->m_timers.contains(timer))
+	if (m_timers.contains(timer))
 	{
-		delete m_instance->m_timers[timer];
-		m_instance->m_timers.erase(timer);
+		delete m_timers[timer];
+		m_timers.erase(timer);
 		timer->m_handle = 0;
 	}
 }
@@ -49,7 +49,7 @@ void GameTimerManager::Cancel(TimerHandle& _timer)
 void GameTimerManager::Tick()
 {
 	vector<TimerHandle*> handles;
-	for (auto& iter : m_instance->m_timers)
+	for (auto& iter : m_timers)
 	{
 		iter.second->Tick();
 		if (iter.second->m_time >= iter.second->m_duration)
@@ -63,8 +63,8 @@ void GameTimerManager::Tick()
 	{
 		TimerHandle* handle = handles[handles.size() - 1];
 		handle->m_handle = 0;
-		delete m_instance->m_timers[handle];
-		m_instance->m_timers.erase(handle);
+		delete m_timers[handle];
+		m_timers.erase(handle);
 
 		handles.pop_back();
 	}
@@ -79,7 +79,7 @@ unsigned int GameTimerManager::FindValidHandle()
 	{
 		shouldRetry = false;
 
-		for (auto& timer : m_instance->m_timers)
+		for (auto& timer : m_timers)
 		{
 			if (timer.first->GetHandle() == randVal)
 			{
@@ -90,9 +90,4 @@ unsigned int GameTimerManager::FindValidHandle()
 	}
 
 	return randVal;
-}
-
-GameTimerManager* GameTimerManager::GetInstance()
-{
-	return m_instance;
 }

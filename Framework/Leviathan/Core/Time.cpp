@@ -1,6 +1,6 @@
 #include <Leviathan/Core/Time.h>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 float Time::timeScale = 1.f;
 float Time::deltaTime;

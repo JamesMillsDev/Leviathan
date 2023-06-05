@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 Window::Window()
     : m_width(0), m_height(0), m_fullscreenKey(0), m_config(nullptr)
@@ -25,10 +25,18 @@ void Window::Open()
     m_fullscreenKey = m_config->GetValue(WINDOW_CATEGORY, "toggleFullscreenKey")->Get<int>();
     m_config->ListenForReload(&Window::OnConfigReloaded, this);
 
+    if (m_config->GetValue(WINDOW_CATEGORY, "useFullscreen")->Get<bool>())
+    {
+        SetConfigFlags(FLAG_FULLSCREEN_MODE);
+        m_width = m_height = 0;
+    }
+    else
+    {
+        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    }
+
     InitWindow(m_width, m_height, m_title.c_str());
 
-    if(m_config->GetValue(WINDOW_CATEGORY, "useFullscreen")->Get<bool>())
-        ToggleFullscreen();
 }
 
 void Window::Close()

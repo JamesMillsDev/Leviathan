@@ -25,9 +25,6 @@
     <Filter Include="Include\Resources">
       <UniqueIdentifier>{fa1b4dc0-8755-4ffa-ba5e-7b851ac98ae7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Third Party">
-      <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Third Party">
       <UniqueIdentifier>{2e295d45-8957-4f90-ae9e-e2540c186ba5}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,15 @@
     </Filter>
     <Filter Include="Include\Utils">
       <UniqueIdentifier>{65a66085-299d-49b1-9072-efa6171f3668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Third Party">
+      <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Collections">
+      <UniqueIdentifier>{f4701a88-b5f3-4008-ba21-2076f2127efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Collections">
+      <UniqueIdentifier>{971206dd-d180-457e-b6b2-a41b89d8ba75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,13 +130,13 @@
       <Filter>Include\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h">
-      <Filter>Third Party</Filter>
+      <Filter>Include\Third Party</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugiconfig.hpp">
-      <Filter>Third Party</Filter>
+      <Filter>Include\Third Party</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugixml.hpp">
-      <Filter>Third Party</Filter>
+      <Filter>Include\Third Party</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\PolygonCollider.h">
       <Filter>Include\Physics</Filter>
@@ -143,6 +149,30 @@
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h">
       <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\HashTable.h">
+      <Filter>Include\Collections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,8 +239,17 @@
     <ClCompile Include="Core\Time.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\GameManagers.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\IManagerReciever.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Collections\HashTable.cpp">
+      <Filter>Source\Collections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

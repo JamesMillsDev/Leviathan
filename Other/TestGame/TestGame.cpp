@@ -1,12 +1,14 @@
 #include "TestGame.h"
 
+#include <Leviathan/Core/GameManagers.h>
 #include <Leviathan/GameStates/GameStateManager.h>
+#include <Leviathan/GameObjects/GameObjectManager.h>
 
 #include "PlayState.h"
 
 void TestGame::Load()
 {
-	GameStateManager::AddState(new PlayState());
+	GetStateManager()->AddState(new PlayState());
 
-	GameStateManager::ActivateState("PLAY");
+	GetStateManager()->ActivateState("PLAY");
 }

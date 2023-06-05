@@ -2,19 +2,16 @@
 
 #include <Leviathan/Core/Time.h>
 #include <Leviathan/Core/Window.h>
-
-#include <Leviathan/GameObjects/GameObjectManager.h>
-#include <Leviathan/GameStates/GameStateManager.h>
+#include <Leviathan/Core/GameManagers.h>
 
 #include <Leviathan/Physics/PhysicsManager.h>
 
 #include <Leviathan/Resources/Resources.h>
 
-#include <Leviathan/Utils/GameTimerManager.h>
 #include <Leviathan/Utils/ConfigValue.h>
 #include <Leviathan/Utils/Gizmos.h>
 
-#include <raylib.h>
+#include <raylib/raylib.h>
 
 Application* Application::m_instance = nullptr;
 
@@ -43,7 +40,8 @@ void Application::GetWindowSize(int& _width, int& _height)
 }
 
 Application::Application(Game* _game)
-    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), m_configReloadKey(0)
+    : m_game(_game), m_window(nullptr), m_applicationDir(nullptr), 
+    m_configReloadKey(0), m_managers(nullptr)
 {
 }
 
@@ -61,6 +59,12 @@ Application::~Application()
         m_window = nullptr;
     }
 
+    if (m_managers != nullptr)
+    {
+        delete m_managers;
+        m_managers = nullptr;
+    }
+
     for(auto& config : m_configs)
     {
         if(config.second != nullptr)
@@ -72,7 +76,7 @@ Application::~Application()
     m_configs.clear();
 }
 
-void Application::Init()
+void Application::Load()
 {
     m_configs[ConfigType::Application] = new Config("app.cfg");
     m_configs[ConfigType::Window] = new Config("window.cfg");
@@ -82,23 +86,21 @@ void Application::Init()
     m_configs[ConfigType::Debug]->ListenForReload(&Application::OnConfigReloaded, this);
 
     m_window = new Window();
-}
-
-void Application::Process()
-{
-    Init();
-
     m_window->Open();
-    
-    GameTimerManager::CreateInstance();
+
+    m_managers = new GameManagers();
+
     Resources::CreateInstance();
     PhysicsManager::CreateInstance();
-    GameStateManager::CreateInstance();
-    GameObjectManager::CreateInstance();
     Gizmos::m_instance = new Gizmos();
     Gizmos::m_instance->Init();
 
     m_game->Load();
+}
+
+void Application::Process()
+{
+    Load();
 
     while(!WindowShouldClose())
     {
@@ -108,45 +110,38 @@ void Application::Process()
         if(IsKeyPressed(m_configReloadKey))
         {
             for(auto& callback : m_onConfigReload)
-            {
-                std::invoke(callback.second, callback.first);
-            }
+                (callback.first->*callback.second)();
         }
 
-        GameTimerManager::Tick();
         m_game->Tick();
-
         PhysicsManager::Tick();
-        GameStateManager::Tick();
-        GameObjectManager::Tick();
+        m_managers->Tick();
 
         m_window->BeginFrame();
 
-        GameStateManager::Render();
-        GameObjectManager::Render();
-
         m_game->Render();
+        m_managers->Render();
 
         if(Gizmos::m_instance->m_shown)
-        {
-            GameObjectManager::DrawGizmos();
-        }
+            m_managers->DrawGizmos();
 
         m_window->EndFrame();
     }
 
-    m_game->Unload();
-
-    GameObjectManager::DestroyInstance();
-    GameStateManager::DestroyInstance();
-    Resources::DestroyInstance();
-    PhysicsManager::DestroyInstance();
-    GameTimerManager::DestroyInstance();
-
-    m_window->Close();
+    Unload();
 }
 
 void Application::OnConfigReloaded(Config* _config)
 {
     m_configReloadKey = m_configs[ConfigType::Debug]->GetValue("Config", "reloadConfigKey")->Get<int>();
+}
+
+void Application::Unload()
+{
+    m_game->Unload();
+
+    Resources::DestroyInstance();
+    PhysicsManager::DestroyInstance();
+
+    m_window->Close();
 }

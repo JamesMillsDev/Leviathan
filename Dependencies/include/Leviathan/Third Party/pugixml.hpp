@@ -17,6 +17,8 @@
 #	define PUGIXML_VERSION 1130 // 1.13
 #endif
 
+#include <Leviathan/Core/Leviathan.h>
+
 // Include user configuration file (this can define various configuration macros)
 #include "pugiconfig.hpp"
 
@@ -335,9 +337,9 @@ namespace pugi
 	{
 	public:
 		// Construct writer from a FILE* object; void* is used to avoid header dependencies on stdio
-		xml_writer_file(void* file);
+		DLL xml_writer_file(void* file);
 
-		virtual void write(const void* data, size_t size) PUGIXML_OVERRIDE;
+		DLL virtual void write(const void* data, size_t size) PUGIXML_OVERRIDE;
 
 	private:
 		void* file;
@@ -349,10 +351,10 @@ namespace pugi
 	{
 	public:
 		// Construct writer from an output stream object
-		xml_writer_stream(std::basic_ostream<char, std::char_traits<char> >& stream);
-		xml_writer_stream(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream);
+		DLL xml_writer_stream(std::basic_ostream<char, std::char_traits<char> >& stream);
+		DLL xml_writer_stream(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream);
 
-		virtual void write(const void* data, size_t size) PUGIXML_OVERRIDE;
+		DLL virtual void write(const void* data, size_t size) PUGIXML_OVERRIDE;
 
 	private:
 		std::basic_ostream<char, std::char_traits<char> >* narrow_stream;
@@ -373,94 +375,94 @@ namespace pugi
 
 	public:
 		// Default constructor. Constructs an empty attribute.
-		xml_attribute();
+		DLL xml_attribute();
 
 		// Constructs attribute from internal pointer
-		explicit xml_attribute(xml_attribute_struct* attr);
+		DLL explicit xml_attribute(xml_attribute_struct* attr);
 
 		// Safe bool conversion operator
-		operator unspecified_bool_type() const;
+		DLL operator unspecified_bool_type() const;
 
 		// Borland C++ workaround
-		bool operator!() const;
+		DLL bool operator!() const;
 
 		// Comparison operators (compares wrapped attribute pointers)
-		bool operator==(const xml_attribute& r) const;
-		bool operator!=(const xml_attribute& r) const;
-		bool operator<(const xml_attribute& r) const;
-		bool operator>(const xml_attribute& r) const;
-		bool operator<=(const xml_attribute& r) const;
-		bool operator>=(const xml_attribute& r) const;
+		DLL bool operator==(const xml_attribute& r) const;
+		DLL bool operator!=(const xml_attribute& r) const;
+		DLL bool operator<(const xml_attribute& r) const;
+		DLL bool operator>(const xml_attribute& r) const;
+		DLL bool operator<=(const xml_attribute& r) const;
+		DLL bool operator>=(const xml_attribute& r) const;
 
 		// Check if attribute is empty
-		bool empty() const;
+		DLL bool empty() const;
 
 		// Get attribute name/value, or "" if attribute is empty
-		const char_t* name() const;
-		const char_t* value() const;
+		DLL const char_t* name() const;
+		DLL const char_t* value() const;
 
 		// Get attribute value, or the default value if attribute is empty
-		const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
+		DLL const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
 
 		// Get attribute value as a number, or the default value if conversion did not succeed or attribute is empty
-		int as_int(int m_bodyDef = 0) const;
-		unsigned int as_uint(unsigned int m_bodyDef = 0) const;
-		double as_double(double m_bodyDef = 0) const;
-		float as_float(float m_bodyDef = 0) const;
+		DLL int as_int(int m_bodyDef = 0) const;
+		DLL unsigned int as_uint(unsigned int m_bodyDef = 0) const;
+		DLL double as_double(double m_bodyDef = 0) const;
+		DLL float as_float(float m_bodyDef = 0) const;
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		long long as_llong(long long m_bodyDef = 0) const;
-		unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
+		DLL long long as_llong(long long m_bodyDef = 0) const;
+		DLL unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
 	#endif
 
 		// Get attribute value as bool (returns true if first character is in '1tTyY' set), or the default value if attribute is empty
-		bool as_bool(bool m_bodyDef = false) const;
+		DLL bool as_bool(bool m_bodyDef = false) const;
 
 		// Set attribute name/value (returns false if attribute is empty or there is not enough memory)
-		bool set_name(const char_t* rhs);
-		bool set_value(const char_t* rhs, size_t sz);
-		bool set_value(const char_t* rhs);
+		DLL bool set_name(const char_t* rhs);
+		DLL bool set_value(const char_t* rhs, size_t sz);
+		DLL bool set_value(const char_t* rhs);
 
 		// Set attribute value with type conversion (numbers are converted to strings, boolean is converted to "true"/"false")
-		bool set_value(int rhs);
-		bool set_value(unsigned int rhs);
-		bool set_value(long rhs);
-		bool set_value(unsigned long rhs);
-		bool set_value(double rhs);
-		bool set_value(double rhs, int precision);
-		bool set_value(float rhs);
-		bool set_value(float rhs, int precision);
-		bool set_value(bool rhs);
+		DLL bool set_value(int rhs);
+		DLL bool set_value(unsigned int rhs);
+		DLL bool set_value(long rhs);
+		DLL bool set_value(unsigned long rhs);
+		DLL bool set_value(double rhs);
+		DLL bool set_value(double rhs, int precision);
+		DLL bool set_value(float rhs);
+		DLL bool set_value(float rhs, int precision);
+		DLL bool set_value(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		bool set_value(long long rhs);
-		bool set_value(unsigned long long rhs);
+		DLL bool set_value(long long rhs);
+		DLL bool set_value(unsigned long long rhs);
 	#endif
 
 		// Set attribute value (equivalent to set_value without error checking)
-		xml_attribute& operator=(const char_t* rhs);
-		xml_attribute& operator=(int rhs);
-		xml_attribute& operator=(unsigned int rhs);
-		xml_attribute& operator=(long rhs);
-		xml_attribute& operator=(unsigned long rhs);
-		xml_attribute& operator=(double rhs);
-		xml_attribute& operator=(float rhs);
-		xml_attribute& operator=(bool rhs);
+		DLL xml_attribute& operator=(const char_t* rhs);
+		DLL xml_attribute& operator=(int rhs);
+		DLL xml_attribute& operator=(unsigned int rhs);
+		DLL xml_attribute& operator=(long rhs);
+		DLL xml_attribute& operator=(unsigned long rhs);
+		DLL xml_attribute& operator=(double rhs);
+		DLL xml_attribute& operator=(float rhs);
+		DLL xml_attribute& operator=(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		xml_attribute& operator=(long long rhs);
-		xml_attribute& operator=(unsigned long long rhs);
+		DLL xml_attribute& operator=(long long rhs);
+		DLL xml_attribute& operator=(unsigned long long rhs);
 	#endif
 
 		// Get next/previous attribute in the attribute list of the parent node
-		xml_attribute next_attribute() const;
-		xml_attribute previous_attribute() const;
+		DLL xml_attribute next_attribute() const;
+		DLL xml_attribute previous_attribute() const;
 
 		// Get hash value (unique for handles to the same object)
-		size_t hash_value() const;
+		DLL size_t hash_value() const;
 
 		// Get internal pointer
-		xml_attribute_struct* internal_object() const;
+		DLL xml_attribute_struct* internal_object() const;
 	};
 
 #ifdef __BORLANDC__
@@ -483,133 +485,133 @@ namespace pugi
 
 	public:
 		// Default constructor. Constructs an empty node.
-		xml_node();
+		DLL xml_node();
 
 		// Constructs node from internal pointer
-		explicit xml_node(xml_node_struct* p);
+		DLL explicit xml_node(xml_node_struct* p);
 
 		// Safe bool conversion operator
-		operator unspecified_bool_type() const;
+		DLL operator unspecified_bool_type() const;
 
 		// Borland C++ workaround
-		bool operator!() const;
+		DLL bool operator!() const;
 
 		// Comparison operators (compares wrapped node pointers)
-		bool operator==(const xml_node& r) const;
-		bool operator!=(const xml_node& r) const;
-		bool operator<(const xml_node& r) const;
-		bool operator>(const xml_node& r) const;
-		bool operator<=(const xml_node& r) const;
-		bool operator>=(const xml_node& r) const;
+		DLL bool operator==(const xml_node& r) const;
+		DLL bool operator!=(const xml_node& r) const;
+		DLL bool operator<(const xml_node& r) const;
+		DLL bool operator>(const xml_node& r) const;
+		DLL bool operator<=(const xml_node& r) const;
+		DLL bool operator>=(const xml_node& r) const;
 
 		// Check if node is empty.
-		bool empty() const;
+		DLL bool empty() const;
 
 		// Get node type
-		xml_node_type type() const;
+		DLL xml_node_type type() const;
 
 		// Get node name, or "" if node is empty or it has no name
-		const char_t* name() const;
+		DLL const char_t* name() const;
 
 		// Get node value, or "" if node is empty or it has no value
 		// Note: For <node>text</node> node.value() does not return "text"! Use child_value() or text() methods to access text inside nodes.
-		const char_t* value() const;
+		DLL const char_t* value() const;
 
 		// Get attribute list
-		xml_attribute first_attribute() const;
-		xml_attribute last_attribute() const;
+		DLL xml_attribute first_attribute() const;
+		DLL xml_attribute last_attribute() const;
 
 		// Get children list
-		xml_node first_child() const;
-		xml_node last_child() const;
+		DLL xml_node first_child() const;
+		DLL xml_node last_child() const;
 
 		// Get next/previous sibling in the children list of the parent node
-		xml_node next_sibling() const;
-		xml_node previous_sibling() const;
+		DLL xml_node next_sibling() const;
+		DLL xml_node previous_sibling() const;
 
 		// Get parent node
-		xml_node parent() const;
+		DLL xml_node parent() const;
 
 		// Get root of DOM tree this node belongs to
-		xml_node root() const;
+		DLL xml_node root() const;
 
 		// Get text object for the current node
-		xml_text text() const;
+		DLL xml_text text() const;
 
 		// Get child, attribute or next/previous sibling with the specified name
-		xml_node child(const char_t* name) const;
-		xml_attribute attribute(const char_t* name) const;
-		xml_node next_sibling(const char_t* name) const;
-		xml_node previous_sibling(const char_t* name) const;
+		DLL xml_node child(const char_t* name) const;
+		DLL xml_attribute attribute(const char_t* name) const;
+		DLL xml_node next_sibling(const char_t* name) const;
+		DLL xml_node previous_sibling(const char_t* name) const;
 
 		// Get attribute, starting the search from a hint (and updating hint so that searching for a sequence of attributes is fast)
-		xml_attribute attribute(const char_t* name, xml_attribute& hint) const;
+		DLL xml_attribute attribute(const char_t* name, xml_attribute& hint) const;
 
 		// Get child value of current node; that is, value of the first child node of type PCDATA/CDATA
-		const char_t* child_value() const;
+		DLL const char_t* child_value() const;
 
 		// Get child value of child with specified name. Equivalent to child(name).child_value().
-		const char_t* child_value(const char_t* name) const;
+		DLL const char_t* child_value(const char_t* name) const;
 
 		// Set node name/value (returns false if node is empty, there is not enough memory, or node can not have name/value)
-		bool set_name(const char_t* rhs);
-		bool set_value(const char_t* rhs, size_t sz);
-		bool set_value(const char_t* rhs);
+		DLL bool set_name(const char_t* rhs);
+		DLL bool set_value(const char_t* rhs, size_t sz);
+		DLL bool set_value(const char_t* rhs);
 
 		// Add attribute with specified name. Returns added attribute, or empty attribute on errors.
-		xml_attribute append_attribute(const char_t* name);
-		xml_attribute prepend_attribute(const char_t* name);
-		xml_attribute insert_attribute_after(const char_t* name, const xml_attribute& attr);
-		xml_attribute insert_attribute_before(const char_t* name, const xml_attribute& attr);
+		DLL xml_attribute append_attribute(const char_t* name);
+		DLL xml_attribute prepend_attribute(const char_t* name);
+		DLL xml_attribute insert_attribute_after(const char_t* name, const xml_attribute& attr);
+		DLL xml_attribute insert_attribute_before(const char_t* name, const xml_attribute& attr);
 
 		// Add a copy of the specified attribute. Returns added attribute, or empty attribute on errors.
-		xml_attribute append_copy(const xml_attribute& proto);
-		xml_attribute prepend_copy(const xml_attribute& proto);
-		xml_attribute insert_copy_after(const xml_attribute& proto, const xml_attribute& attr);
-		xml_attribute insert_copy_before(const xml_attribute& proto, const xml_attribute& attr);
+		DLL xml_attribute append_copy(const xml_attribute& proto);
+		DLL xml_attribute prepend_copy(const xml_attribute& proto);
+		DLL xml_attribute insert_copy_after(const xml_attribute& proto, const xml_attribute& attr);
+		DLL xml_attribute insert_copy_before(const xml_attribute& proto, const xml_attribute& attr);
 
 		// Add child node with specified type. Returns added node, or empty node on errors.
-		xml_node append_child(xml_node_type type = node_element);
-		xml_node prepend_child(xml_node_type type = node_element);
-		xml_node insert_child_after(xml_node_type type, const xml_node& node);
-		xml_node insert_child_before(xml_node_type type, const xml_node& node);
+		DLL xml_node append_child(xml_node_type type = node_element);
+		DLL xml_node prepend_child(xml_node_type type = node_element);
+		DLL xml_node insert_child_after(xml_node_type type, const xml_node& node);
+		DLL xml_node insert_child_before(xml_node_type type, const xml_node& node);
 
 		// Add child element with specified name. Returns added node, or empty node on errors.
-		xml_node append_child(const char_t* name);
-		xml_node prepend_child(const char_t* name);
-		xml_node insert_child_after(const char_t* name, const xml_node& node);
-		xml_node insert_child_before(const char_t* name, const xml_node& node);
+		DLL xml_node append_child(const char_t* name);
+		DLL xml_node prepend_child(const char_t* name);
+		DLL xml_node insert_child_after(const char_t* name, const xml_node& node);
+		DLL xml_node insert_child_before(const char_t* name, const xml_node& node);
 
 		// Add a copy of the specified node as a child. Returns added node, or empty node on errors.
-		xml_node append_copy(const xml_node& proto);
-		xml_node prepend_copy(const xml_node& proto);
-		xml_node insert_copy_after(const xml_node& proto, const xml_node& node);
-		xml_node insert_copy_before(const xml_node& proto, const xml_node& node);
+		DLL xml_node append_copy(const xml_node& proto);
+		DLL xml_node prepend_copy(const xml_node& proto);
+		DLL xml_node insert_copy_after(const xml_node& proto, const xml_node& node);
+		DLL xml_node insert_copy_before(const xml_node& proto, const xml_node& node);
 
 		// Move the specified node to become a child of this node. Returns moved node, or empty node on errors.
-		xml_node append_move(const xml_node& moved);
-		xml_node prepend_move(const xml_node& moved);
-		xml_node insert_move_after(const xml_node& moved, const xml_node& node);
-		xml_node insert_move_before(const xml_node& moved, const xml_node& node);
+		DLL xml_node append_move(const xml_node& moved);
+		DLL xml_node prepend_move(const xml_node& moved);
+		DLL xml_node insert_move_after(const xml_node& moved, const xml_node& node);
+		DLL xml_node insert_move_before(const xml_node& moved, const xml_node& node);
 
 		// Remove specified attribute
-		bool remove_attribute(const xml_attribute& a);
-		bool remove_attribute(const char_t* name);
+		DLL bool remove_attribute(const xml_attribute& a);
+		DLL bool remove_attribute(const char_t* name);
 
 		// Remove all attributes
-		bool remove_attributes();
+		DLL bool remove_attributes();
 
 		// Remove specified child
-		bool remove_child(const xml_node& n);
-		bool remove_child(const char_t* name);
+		DLL bool remove_child(const xml_node& n);
+		DLL bool remove_child(const char_t* name);
 
 		// Remove all children
-		bool remove_children();
+		DLL bool remove_children();
 
 		// Parses buffer as an XML document fragment and appends all nodes as children of the current node.
 		// Copies/converts the buffer, so it may be deleted or changed after the function returns.
 		// Note: append_buffer allocates memory that has the lifetime of the owning document; removing the appended nodes does not immediately reclaim that memory.
-		xml_parse_result append_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result append_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
 		// Find attribute using predicate. Returns first attribute for which predicate returned true.
 		template <typename Predicate> xml_attribute find_attribute(Predicate pred) const
@@ -660,69 +662,69 @@ namespace pugi
 		}
 
 		// Find child node by attribute name/value
-		xml_node find_child_by_attribute(const char_t* name, const char_t* attr_name, const char_t* attr_value) const;
-		xml_node find_child_by_attribute(const char_t* attr_name, const char_t* attr_value) const;
+		DLL xml_node find_child_by_attribute(const char_t* name, const char_t* attr_name, const char_t* attr_value) const;
+		DLL xml_node find_child_by_attribute(const char_t* attr_name, const char_t* attr_value) const;
 
 	#ifndef PUGIXML_NO_STL
 		// Get the absolute node path from root as a text string.
-		string_t path(char_t delimiter = '/') const;
+		DLL string_t path(char_t delimiter = '/') const;
 	#endif
 
 		// Search for a node by path consisting of node names and . or .. elements.
-		xml_node first_element_by_path(const char_t* path, char_t delimiter = '/') const;
+		DLL xml_node first_element_by_path(const char_t* path, char_t delimiter = '/') const;
 
 		// Recursively traverse subtree with xml_tree_walker
-		bool traverse(xml_tree_walker& walker);
+		DLL bool traverse(xml_tree_walker& walker);
 
 	#ifndef PUGIXML_NO_XPATH
 		// Select single node by evaluating XPath query. Returns first node from the resulting node set.
-		xpath_node select_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
-		xpath_node select_node(const xpath_query& query) const;
+		DLL xpath_node select_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		DLL xpath_node select_node(const xpath_query& query) const;
 
 		// Select node set by evaluating XPath query
-		xpath_node_set select_nodes(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
-		xpath_node_set select_nodes(const xpath_query& query) const;
+		DLL xpath_node_set select_nodes(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		DLL xpath_node_set select_nodes(const xpath_query& query) const;
 
 		// (deprecated: use select_node instead) Select single node by evaluating XPath query.
-		PUGIXML_DEPRECATED xpath_node select_single_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
-		PUGIXML_DEPRECATED xpath_node select_single_node(const xpath_query& query) const;
+		DLL PUGIXML_DEPRECATED xpath_node select_single_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		DLL PUGIXML_DEPRECATED xpath_node select_single_node(const xpath_query& query) const;
 
 	#endif
 
 		// Print subtree using a writer object
-		void print(xml_writer& writer, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
+		DLL void print(xml_writer& writer, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
 
 	#ifndef PUGIXML_NO_STL
 		// Print subtree to stream
-		void print(std::basic_ostream<char, std::char_traits<char> >& os, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
-		void print(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& os, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, unsigned int depth = 0) const;
+		DLL void print(std::basic_ostream<char, std::char_traits<char> >& os, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
+		DLL void print(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& os, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, unsigned int depth = 0) const;
 	#endif
 
 		// Child nodes iterators
 		typedef xml_node_iterator iterator;
 
-		iterator begin() const;
-		iterator end() const;
+		DLL iterator begin() const;
+		DLL iterator end() const;
 
 		// Attribute iterators
 		typedef xml_attribute_iterator attribute_iterator;
 
-		attribute_iterator attributes_begin() const;
-		attribute_iterator attributes_end() const;
+		DLL attribute_iterator attributes_begin() const;
+		DLL attribute_iterator attributes_end() const;
 
 		// Range-based for support
-		xml_object_range<xml_node_iterator> children() const;
-		xml_object_range<xml_named_node_iterator> children(const char_t* name) const;
-		xml_object_range<xml_attribute_iterator> attributes() const;
+		DLL xml_object_range<xml_node_iterator> children() const;
+		DLL xml_object_range<xml_named_node_iterator> children(const char_t* name) const;
+		DLL xml_object_range<xml_attribute_iterator> attributes() const;
 
 		// Get node offset in parsed file/string (in char_t units) for debugging purposes
-		ptrdiff_t offset_debug() const;
+		DLL ptrdiff_t offset_debug() const;
 
 		// Get hash value (unique for handles to the same object)
-		size_t hash_value() const;
+		DLL size_t hash_value() const;
 
 		// Get internal pointer
-		xml_node_struct* internal_object() const;
+		DLL xml_node_struct* internal_object() const;
 	};
 
 #ifdef __BORLANDC__
@@ -740,81 +742,81 @@ namespace pugi
 
 		typedef void (*unspecified_bool_type)(xml_text***);
 
-		explicit xml_text(xml_node_struct* root);
+		DLL explicit xml_text(xml_node_struct* root);
 
-		xml_node_struct* _data_new();
-		xml_node_struct* _data() const;
+		DLL xml_node_struct* _data_new();
+		DLL xml_node_struct* _data() const;
 
 	public:
 		// Default constructor. Constructs an empty object.
-		xml_text();
+		DLL xml_text();
 
 		// Safe bool conversion operator
-		operator unspecified_bool_type() const;
+		DLL operator unspecified_bool_type() const;
 
 		// Borland C++ workaround
-		bool operator!() const;
+		DLL bool operator!() const;
 
 		// Check if text object is empty
-		bool empty() const;
+		DLL bool empty() const;
 
 		// Get text, or "" if object is empty
-		const char_t* get() const;
+		DLL const char_t* get() const;
 
 		// Get text, or the default value if object is empty
-		const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
+		DLL const char_t* as_string(const char_t* m_bodyDef = PUGIXML_TEXT("")) const;
 
 		// Get text as a number, or the default value if conversion did not succeed or object is empty
-		int as_int(int m_bodyDef = 0) const;
-		unsigned int as_uint(unsigned int m_bodyDef = 0) const;
-		double as_double(double m_bodyDef = 0) const;
-		float as_float(float m_bodyDef = 0) const;
+		DLL int as_int(int m_bodyDef = 0) const;
+		DLL unsigned int as_uint(unsigned int m_bodyDef = 0) const;
+		DLL double as_double(double m_bodyDef = 0) const;
+		DLL float as_float(float m_bodyDef = 0) const;
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		long long as_llong(long long m_bodyDef = 0) const;
-		unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
+		DLL long long as_llong(long long m_bodyDef = 0) const;
+		DLL unsigned long long as_ullong(unsigned long long m_bodyDef = 0) const;
 	#endif
 
 		// Get text as bool (returns true if first character is in '1tTyY' set), or the default value if object is empty
-		bool as_bool(bool m_bodyDef = false) const;
+		DLL bool as_bool(bool m_bodyDef = false) const;
 
 		// Set text (returns false if object is empty or there is not enough memory)
-		bool set(const char_t* rhs, size_t sz);
-		bool set(const char_t* rhs);
+		DLL bool set(const char_t* rhs, size_t sz);
+		DLL bool set(const char_t* rhs);
 
 		// Set text with type conversion (numbers are converted to strings, boolean is converted to "true"/"false")
-		bool set(int rhs);
-		bool set(unsigned int rhs);
-		bool set(long rhs);
-		bool set(unsigned long rhs);
-		bool set(double rhs);
-		bool set(double rhs, int precision);
-		bool set(float rhs);
-		bool set(float rhs, int precision);
-		bool set(bool rhs);
+		DLL bool set(int rhs);
+		DLL bool set(unsigned int rhs);
+		DLL bool set(long rhs);
+		DLL bool set(unsigned long rhs);
+		DLL bool set(double rhs);
+		DLL bool set(double rhs, int precision);
+		DLL bool set(float rhs);
+		DLL bool set(float rhs, int precision);
+		DLL bool set(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		bool set(long long rhs);
-		bool set(unsigned long long rhs);
+		DLL bool set(long long rhs);
+		DLL bool set(unsigned long long rhs);
 	#endif
 
 		// Set text (equivalent to set without error checking)
-		xml_text& operator=(const char_t* rhs);
-		xml_text& operator=(int rhs);
-		xml_text& operator=(unsigned int rhs);
-		xml_text& operator=(long rhs);
-		xml_text& operator=(unsigned long rhs);
-		xml_text& operator=(double rhs);
-		xml_text& operator=(float rhs);
-		xml_text& operator=(bool rhs);
+		DLL xml_text& operator=(const char_t* rhs);
+		DLL xml_text& operator=(int rhs);
+		DLL xml_text& operator=(unsigned int rhs);
+		DLL xml_text& operator=(long rhs);
+		DLL xml_text& operator=(unsigned long rhs);
+		DLL xml_text& operator=(double rhs);
+		DLL xml_text& operator=(float rhs);
+		DLL xml_text& operator=(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
-		xml_text& operator=(long long rhs);
-		xml_text& operator=(unsigned long long rhs);
+		DLL xml_text& operator=(long long rhs);
+		DLL xml_text& operator=(unsigned long long rhs);
 	#endif
 
 		// Get the data node (node_pcdata or node_cdata) for this object
-		xml_node data() const;
+		DLL xml_node data() const;
 	};
 
 #ifdef __BORLANDC__
@@ -832,7 +834,7 @@ namespace pugi
 		mutable xml_node _wrap;
 		xml_node _parent;
 
-		xml_node_iterator(xml_node_struct* ref, xml_node_struct* parent);
+		DLL xml_node_iterator(xml_node_struct* ref, xml_node_struct* parent);
 
 	public:
 		// Iterator traits
@@ -846,23 +848,23 @@ namespace pugi
 	#endif
 
 		// Default constructor
-		xml_node_iterator();
+		DLL xml_node_iterator();
 
 		// Construct an iterator which points to the specified node
-		xml_node_iterator(const xml_node& node);
+		DLL xml_node_iterator(const xml_node& node);
 
 		// Iterator operators
-		bool operator==(const xml_node_iterator& rhs) const;
-		bool operator!=(const xml_node_iterator& rhs) const;
+		DLL bool operator==(const xml_node_iterator& rhs) const;
+		DLL bool operator!=(const xml_node_iterator& rhs) const;
 
-		xml_node& operator*() const;
-		xml_node* operator->() const;
+		DLL xml_node& operator*() const;
+		DLL xml_node* operator->() const;
 
-		xml_node_iterator& operator++();
-		xml_node_iterator operator++(int);
+		DLL xml_node_iterator& operator++();
+		DLL xml_node_iterator operator++(int);
 
-		xml_node_iterator& operator--();
-		xml_node_iterator operator--(int);
+		DLL xml_node_iterator& operator--();
+		DLL xml_node_iterator operator--(int);
 	};
 
 	// Attribute iterator (a bidirectional iterator over a collection of xml_attribute)
@@ -874,7 +876,7 @@ namespace pugi
 		mutable xml_attribute _wrap;
 		xml_node _parent;
 
-		xml_attribute_iterator(xml_attribute_struct* ref, xml_node_struct* parent);
+		DLL xml_attribute_iterator(xml_attribute_struct* ref, xml_node_struct* parent);
 
 	public:
 		// Iterator traits
@@ -888,23 +890,23 @@ namespace pugi
 	#endif
 
 		// Default constructor
-		xml_attribute_iterator();
+		DLL xml_attribute_iterator();
 
 		// Construct an iterator which points to the specified attribute
-		xml_attribute_iterator(const xml_attribute& attr, const xml_node& parent);
+		DLL xml_attribute_iterator(const xml_attribute& attr, const xml_node& parent);
 
 		// Iterator operators
-		bool operator==(const xml_attribute_iterator& rhs) const;
-		bool operator!=(const xml_attribute_iterator& rhs) const;
+		DLL bool operator==(const xml_attribute_iterator& rhs) const;
+		DLL bool operator!=(const xml_attribute_iterator& rhs) const;
 
-		xml_attribute& operator*() const;
-		xml_attribute* operator->() const;
+		DLL xml_attribute& operator*() const;
+		DLL xml_attribute* operator->() const;
 
-		xml_attribute_iterator& operator++();
-		xml_attribute_iterator operator++(int);
+		DLL xml_attribute_iterator& operator++();
+		DLL xml_attribute_iterator operator++(int);
 
-		xml_attribute_iterator& operator--();
-		xml_attribute_iterator operator--(int);
+		DLL xml_attribute_iterator& operator--();
+		DLL xml_attribute_iterator operator--(int);
 	};
 
 	// Named node range helper
@@ -924,30 +926,30 @@ namespace pugi
 	#endif
 
 		// Default constructor
-		xml_named_node_iterator();
+		DLL xml_named_node_iterator();
 
 		// Construct an iterator which points to the specified node
-		xml_named_node_iterator(const xml_node& node, const char_t* name);
+		DLL xml_named_node_iterator(const xml_node& node, const char_t* name);
 
 		// Iterator operators
-		bool operator==(const xml_named_node_iterator& rhs) const;
-		bool operator!=(const xml_named_node_iterator& rhs) const;
+		DLL bool operator==(const xml_named_node_iterator& rhs) const;
+		DLL bool operator!=(const xml_named_node_iterator& rhs) const;
 
-		xml_node& operator*() const;
-		xml_node* operator->() const;
+		DLL xml_node& operator*() const;
+		DLL xml_node* operator->() const;
 
-		xml_named_node_iterator& operator++();
-		xml_named_node_iterator operator++(int);
+		DLL xml_named_node_iterator& operator++();
+		DLL xml_named_node_iterator operator++(int);
 
-		xml_named_node_iterator& operator--();
-		xml_named_node_iterator operator--(int);
+		DLL xml_named_node_iterator& operator--();
+		DLL xml_named_node_iterator operator--(int);
 
 	private:
 		mutable xml_node _wrap;
 		xml_node _parent;
 		const char_t* _name;
 
-		xml_named_node_iterator(xml_node_struct* ref, xml_node_struct* parent, const char_t* name);
+		DLL xml_named_node_iterator(xml_node_struct* ref, xml_node_struct* parent, const char_t* name);
 	};
 
 	// Abstract tree walker class (see xml_node::traverse)
@@ -960,20 +962,20 @@ namespace pugi
 
 	protected:
 		// Get current traversal depth
-		int depth() const;
+		DLL int depth() const;
 
 	public:
-		xml_tree_walker();
-		virtual ~xml_tree_walker();
+		DLL xml_tree_walker();
+		DLL virtual ~xml_tree_walker();
 
 		// Callback that is called when traversal begins
-		virtual bool begin(xml_node& node);
+		DLL virtual bool begin(xml_node& node);
 
 		// Callback that is called for each node traversed
-		virtual bool for_each(xml_node& node) = 0;
+		DLL virtual bool for_each(xml_node& node) = 0;
 
 		// Callback that is called when traversal ends
-		virtual bool end(xml_node& node);
+		DLL virtual bool end(xml_node& node);
 	};
 
 	// Parsing status, returned as part of xml_parse_result object
@@ -1016,13 +1018,13 @@ namespace pugi
 		xml_encoding encoding;
 
 		// Default constructor, initializes object to failed state
-		xml_parse_result();
+		DLL xml_parse_result();
 
 		// Cast to bool operator
-		operator bool() const;
+		DLL operator bool() const;
 
 		// Get error description
-		const char* description() const;
+		DLL const char* description() const;
 	};
 
 	// Document class (DOM tree root)
@@ -1034,74 +1036,74 @@ namespace pugi
 		char _memory[192];
 
 		// Non-copyable semantics
-		xml_document(const xml_document&);
-		xml_document& operator=(const xml_document&);
+		DLL xml_document(const xml_document&);
+		DLL xml_document& operator=(const xml_document&);
 
-		void _create();
-		void _destroy();
-		void _move(xml_document& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
+		DLL void _create();
+		DLL void _destroy();
+		DLL void _move(xml_document& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
 
 	public:
 		// Default constructor, makes empty document
-		xml_document();
+		DLL xml_document();
 
 		// Destructor, invalidates all node/attribute handles to this document
-		~xml_document();
+		DLL ~xml_document();
 
 	#ifdef PUGIXML_HAS_MOVE
 		// Move semantics support
-		xml_document(xml_document&& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
-		xml_document& operator=(xml_document&& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
+		DLL xml_document(xml_document&& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
+		DLL xml_document& operator=(xml_document&& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
 	#endif
 
 		// Removes all nodes, leaving the empty document
-		void reset();
+		DLL void reset();
 
 		// Removes all nodes, then copies the entire contents of the specified document
-		void reset(const xml_document& proto);
+		DLL void reset(const xml_document& proto);
 
 	#ifndef PUGIXML_NO_STL
 		// Load document from stream.
-		xml_parse_result load(std::basic_istream<char, std::char_traits<char> >& stream, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
-		xml_parse_result load(std::basic_istream<wchar_t, std::char_traits<wchar_t> >& stream, unsigned int options = parse_default);
+		DLL xml_parse_result load(std::basic_istream<char, std::char_traits<char> >& stream, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load(std::basic_istream<wchar_t, std::char_traits<wchar_t> >& stream, unsigned int options = parse_default);
 	#endif
 
 		// (deprecated: use load_string instead) Load document from zero-terminated string. No encoding conversions are applied.
-		PUGIXML_DEPRECATED xml_parse_result load(const char_t* contents, unsigned int options = parse_default);
+		DLL PUGIXML_DEPRECATED xml_parse_result load(const char_t* contents, unsigned int options = parse_default);
 
 		// Load document from zero-terminated string. No encoding conversions are applied.
-		xml_parse_result load_string(const char_t* contents, unsigned int options = parse_default);
+		DLL xml_parse_result load_string(const char_t* contents, unsigned int options = parse_default);
 
 		// Load document from file
-		xml_parse_result load_file(const char* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
-		xml_parse_result load_file(const wchar_t* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load_file(const char* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load_file(const wchar_t* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
 		// Load document from buffer. Copies/converts the buffer, so it may be deleted or changed after the function returns.
-		xml_parse_result load_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
 		// Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
 		// You should ensure that buffer data will persist throughout the document's lifetime, and free the buffer memory manually once document is destroyed.
-		xml_parse_result load_buffer_inplace(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load_buffer_inplace(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
 		// Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
 		// You should allocate the buffer with pugixml allocation function; document will free the buffer when it is no longer needed (you can't use it anymore).
-		xml_parse_result load_buffer_inplace_own(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		DLL xml_parse_result load_buffer_inplace_own(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
 		// Save XML document to writer (semantics is slightly different from xml_node::print, see documentation for details).
-		void save(xml_writer& writer, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		DLL void save(xml_writer& writer, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
 
 	#ifndef PUGIXML_NO_STL
 		// Save XML document to stream (semantics is slightly different from xml_node::print, see documentation for details).
-		void save(std::basic_ostream<char, std::char_traits<char> >& stream, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
-		void save(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default) const;
+		DLL void save(std::basic_ostream<char, std::char_traits<char> >& stream, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		DLL void save(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default) const;
 	#endif
 
 		// Save XML to file
-		bool save_file(const char* path, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
-		bool save_file(const wchar_t* path, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		DLL bool save_file(const char* path, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		DLL bool save_file(const wchar_t* path, const char_t* indent = PUGIXML_TEXT("\t"), unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
 
 		// Get document element
-		xml_node document_element() const;
+		DLL xml_node document_element() const;
 	};
 
 #ifndef PUGIXML_NO_XPATH
@@ -1125,13 +1127,13 @@ namespace pugi
 		ptrdiff_t offset;
 
 		// Default constructor, initializes object to failed state
-		xpath_parse_result();
+		DLL xpath_parse_result();
 
 		// Cast to bool operator
-		operator bool() const;
+		DLL operator bool() const;
 
 		// Get error description
-		const char* description() const;
+		DLL const char* description() const;
 	};
 
 	// A single XPath variable
@@ -1143,30 +1145,30 @@ namespace pugi
 		xpath_value_type _type;
 		xpath_variable* _next;
 
-		xpath_variable(xpath_value_type type);
+		DLL xpath_variable(xpath_value_type type);
 
 		// Non-copyable semantics
-		xpath_variable(const xpath_variable&);
-		xpath_variable& operator=(const xpath_variable&);
+		DLL xpath_variable(const xpath_variable&);
+		DLL xpath_variable& operator=(const xpath_variable&);
 
 	public:
 		// Get variable name
-		const char_t* name() const;
+		DLL const char_t* name() const;
 
 		// Get variable type
-		xpath_value_type type() const;
+		DLL xpath_value_type type() const;
 
 		// Get variable value; no type conversion is performed, default value (false, NaN, empty string, empty node set) is returned on type mismatch error
-		bool get_boolean() const;
-		double get_number() const;
-		const char_t* get_string() const;
-		const xpath_node_set& get_node_set() const;
+		DLL bool get_boolean() const;
+		DLL double get_number() const;
+		DLL const char_t* get_string() const;
+		DLL const xpath_node_set& get_node_set() const;
 
 		// Set variable value; no type conversion is performed, false is returned on type mismatch error
-		bool set(bool value);
-		bool set(double value);
-		bool set(const char_t* value);
-		bool set(const xpath_node_set& value);
+		DLL bool set(bool value);
+		DLL bool set(double value);
+		DLL bool set(const char_t* value);
+		DLL bool set(const xpath_node_set& value);
 	};
 
 	// A set of XPath variables
@@ -1175,41 +1177,41 @@ namespace pugi
 	private:
 		xpath_variable* _data[64];
 
-		void _assign(const xpath_variable_set& rhs);
-		void _swap(xpath_variable_set& rhs);
+		DLL void _assign(const xpath_variable_set& rhs);
+		DLL void _swap(xpath_variable_set& rhs);
 
-		xpath_variable* _find(const char_t* name) const;
+		DLL xpath_variable* _find(const char_t* name) const;
 
-		static bool _clone(xpath_variable* var, xpath_variable** out_result);
-		static void _destroy(xpath_variable* var);
+		DLL static bool _clone(xpath_variable* var, xpath_variable** out_result);
+		DLL static void _destroy(xpath_variable* var);
 
 	public:
 		// Default constructor/destructor
-		xpath_variable_set();
-		~xpath_variable_set();
+		DLL xpath_variable_set();
+		DLL ~xpath_variable_set();
 
 		// Copy constructor/assignment operator
-		xpath_variable_set(const xpath_variable_set& rhs);
-		xpath_variable_set& operator=(const xpath_variable_set& rhs);
+		DLL xpath_variable_set(const xpath_variable_set& rhs);
+		DLL xpath_variable_set& operator=(const xpath_variable_set& rhs);
 
 	#ifdef PUGIXML_HAS_MOVE
 		// Move semantics support
-		xpath_variable_set(xpath_variable_set&& rhs) PUGIXML_NOEXCEPT;
-		xpath_variable_set& operator=(xpath_variable_set&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_variable_set(xpath_variable_set&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_variable_set& operator=(xpath_variable_set&& rhs) PUGIXML_NOEXCEPT;
 	#endif
 
 		// Add a new variable or get the existing one, if the types match
-		xpath_variable* add(const char_t* name, xpath_value_type type);
+		DLL xpath_variable* add(const char_t* name, xpath_value_type type);
 
 		// Set value of an existing variable; no type conversion is performed, false is returned if there is no such variable or if types mismatch
-		bool set(const char_t* name, bool value);
-		bool set(const char_t* name, double value);
-		bool set(const char_t* name, const char_t* value);
-		bool set(const char_t* name, const xpath_node_set& value);
+		DLL bool set(const char_t* name, bool value);
+		DLL bool set(const char_t* name, double value);
+		DLL bool set(const char_t* name, const char_t* value);
+		DLL bool set(const char_t* name, const xpath_node_set& value);
 
 		// Get existing variable by name
-		xpath_variable* get(const char_t* name);
-		const xpath_variable* get(const char_t* name) const;
+		DLL xpath_variable* get(const char_t* name);
+		DLL const xpath_variable* get(const char_t* name) const;
 	};
 
 	// A compiled XPath query object
@@ -1222,68 +1224,68 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xpath_query***);
 
 		// Non-copyable semantics
-		xpath_query(const xpath_query&);
-		xpath_query& operator=(const xpath_query&);
+		DLL xpath_query(const xpath_query&);
+		DLL xpath_query& operator=(const xpath_query&);
 
 	public:
 		// Construct a compiled object from XPath expression.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on compilation errors.
-		explicit xpath_query(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL);
+		DLL explicit xpath_query(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL);
 
 		// Constructor
-		xpath_query();
+		DLL xpath_query();
 
 		// Destructor
-		~xpath_query();
+		DLL ~xpath_query();
 
 	#ifdef PUGIXML_HAS_MOVE
 		// Move semantics support
-		xpath_query(xpath_query&& rhs) PUGIXML_NOEXCEPT;
-		xpath_query& operator=(xpath_query&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_query(xpath_query&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_query& operator=(xpath_query&& rhs) PUGIXML_NOEXCEPT;
 	#endif
 
 		// Get query expression return type
-		xpath_value_type return_type() const;
+		DLL xpath_value_type return_type() const;
 
 		// Evaluate expression as boolean value in the specified context; performs type conversion if necessary.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws std::bad_alloc on out of memory errors.
-		bool evaluate_boolean(const xpath_node& n) const;
+		DLL bool evaluate_boolean(const xpath_node& n) const;
 
 		// Evaluate expression as double value in the specified context; performs type conversion if necessary.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws std::bad_alloc on out of memory errors.
-		double evaluate_number(const xpath_node& n) const;
+		DLL double evaluate_number(const xpath_node& n) const;
 
 	#ifndef PUGIXML_NO_STL
 		// Evaluate expression as string value in the specified context; performs type conversion if necessary.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws std::bad_alloc on out of memory errors.
-		string_t evaluate_string(const xpath_node& n) const;
+		DLL string_t evaluate_string(const xpath_node& n) const;
 	#endif
 
 		// Evaluate expression as string value in the specified context; performs type conversion if necessary.
 		// At most capacity characters are written to the destination buffer, full result size is returned (includes terminating zero).
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws std::bad_alloc on out of memory errors.
 		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty  set instead.
-		size_t evaluate_string(char_t* buffer, size_t capacity, const xpath_node& n) const;
+		DLL size_t evaluate_string(char_t* buffer, size_t capacity, const xpath_node& n) const;
 
 		// Evaluate expression as node set in the specified context.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on type mismatch and std::bad_alloc on out of memory errors.
 		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty node set instead.
-		xpath_node_set evaluate_node_set(const xpath_node& n) const;
+		DLL xpath_node_set evaluate_node_set(const xpath_node& n) const;
 
 		// Evaluate expression as node set in the specified context.
 		// Return first node in document order, or empty node if node set is empty.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on type mismatch and std::bad_alloc on out of memory errors.
 		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty node instead.
-		xpath_node evaluate_node(const xpath_node& n) const;
+		DLL xpath_node evaluate_node(const xpath_node& n) const;
 
 		// Get parsing result (used to get compilation errors in PUGIXML_NO_EXCEPTIONS mode)
-		const xpath_parse_result& result() const;
+		DLL const xpath_parse_result& result() const;
 
 		// Safe bool conversion operator
-		operator unspecified_bool_type() const;
+		DLL operator unspecified_bool_type() const;
 
 		// Borland C++ workaround
-		bool operator!() const;
+		DLL bool operator!() const;
 	};
 
 	#ifndef PUGIXML_NO_EXCEPTIONS
@@ -1301,13 +1303,13 @@ namespace pugi
 
 	public:
 		// Construct exception from parse result
-		explicit xpath_exception(const xpath_parse_result& result);
+		DLL explicit xpath_exception(const xpath_parse_result& result);
 
 		// Get error message
-		virtual const char* what() const throw() PUGIXML_OVERRIDE;
+		DLL virtual const char* what() const throw() PUGIXML_OVERRIDE;
 
 		// Get parse result
-		const xpath_parse_result& result() const;
+		DLL const xpath_parse_result& result() const;
 	};
         #if defined(_MSC_VER)
           #pragma warning(pop)
@@ -1325,28 +1327,28 @@ namespace pugi
 
 	public:
 		// Default constructor; constructs empty XPath node
-		xpath_node();
+		DLL xpath_node();
 
 		// Construct XPath node from XML node/attribute
-		xpath_node(const xml_node& node);
-		xpath_node(const xml_attribute& attribute, const xml_node& parent);
+		DLL xpath_node(const xml_node& node);
+		DLL xpath_node(const xml_attribute& attribute, const xml_node& parent);
 
 		// Get node/attribute, if any
-		xml_node node() const;
-		xml_attribute attribute() const;
+		DLL xml_node node() const;
+		DLL xml_attribute attribute() const;
 
 		// Get parent of contained node/attribute
-		xml_node parent() const;
+		DLL xml_node parent() const;
 
 		// Safe bool conversion operator
-		operator unspecified_bool_type() const;
+		DLL operator unspecified_bool_type() const;
 
 		// Borland C++ workaround
-		bool operator!() const;
+		DLL bool operator!() const;
 
 		// Comparison operators
-		bool operator==(const xpath_node& n) const;
-		bool operator!=(const xpath_node& n) const;
+		DLL bool operator==(const xpath_node& n) const;
+		DLL bool operator!=(const xpath_node& n) const;
 	};
 
 #ifdef __BORLANDC__
@@ -1374,45 +1376,45 @@ namespace pugi
 		typedef const xpath_node* iterator;
 
 		// Default constructor. Constructs empty set.
-		xpath_node_set();
+		DLL xpath_node_set();
 
 		// Constructs a set from iterator range; data is not checked for duplicates and is not sorted according to provided type, so be careful
-		xpath_node_set(const_iterator begin, const_iterator end, type_t type = type_unsorted);
+		DLL xpath_node_set(const_iterator begin, const_iterator end, type_t type = type_unsorted);
 
 		// Destructor
-		~xpath_node_set();
+		DLL ~xpath_node_set();
 
 		// Copy constructor/assignment operator
-		xpath_node_set(const xpath_node_set& ns);
-		xpath_node_set& operator=(const xpath_node_set& ns);
+		DLL xpath_node_set(const xpath_node_set& ns);
+		DLL xpath_node_set& operator=(const xpath_node_set& ns);
 
 	#ifdef PUGIXML_HAS_MOVE
 		// Move semantics support
-		xpath_node_set(xpath_node_set&& rhs) PUGIXML_NOEXCEPT;
-		xpath_node_set& operator=(xpath_node_set&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_node_set(xpath_node_set&& rhs) PUGIXML_NOEXCEPT;
+		DLL xpath_node_set& operator=(xpath_node_set&& rhs) PUGIXML_NOEXCEPT;
 	#endif
 
 		// Get collection type
-		type_t type() const;
+		DLL type_t type() const;
 
 		// Get collection size
-		size_t size() const;
+		DLL size_t size() const;
 
 		// Indexing operator
-		const xpath_node& operator[](size_t index) const;
+		DLL const xpath_node& operator[](size_t index) const;
 
 		// Collection iterators
-		const_iterator begin() const;
-		const_iterator end() const;
+		DLL const_iterator begin() const;
+		DLL const_iterator end() const;
 
 		// Sort the collection in ascending/descending order by document order
-		void sort(bool reverse = false);
+		DLL void sort(bool reverse = false);
 
 		// Get first node in the collection by document order
-		xpath_node first() const;
+		DLL xpath_node first() const;
 
 		// Check if collection is empty
-		bool empty() const;
+		DLL bool empty() const;
 
 	private:
 		type_t _type;
@@ -1422,19 +1424,19 @@ namespace pugi
 		xpath_node* _begin;
 		xpath_node* _end;
 
-		void _assign(const_iterator begin, const_iterator end, type_t type);
-		void _move(xpath_node_set& rhs) PUGIXML_NOEXCEPT;
+		DLL void _assign(const_iterator begin, const_iterator end, type_t type);
+		DLL void _move(xpath_node_set& rhs) PUGIXML_NOEXCEPT;
 	};
 #endif
 
 #ifndef PUGIXML_NO_STL
 	// Convert wide string to UTF8
-	std::basic_string<char, std::char_traits<char>, std::allocator<char> > PUGIXML_FUNCTION as_utf8(const wchar_t* str);
-	std::basic_string<char, std::char_traits<char>, std::allocator<char> > PUGIXML_FUNCTION as_utf8(const std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >& str);
+	DLL std::basic_string<char, std::char_traits<char>, std::allocator<char> > PUGIXML_FUNCTION as_utf8(const wchar_t* str);
+	DLL std::basic_string<char, std::char_traits<char>, std::allocator<char> > PUGIXML_FUNCTION as_utf8(const std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >& str);
 
 	// Convert UTF8 to wide string
-	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > PUGIXML_FUNCTION as_wide(const char* str);
-	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > PUGIXML_FUNCTION as_wide(const std::basic_string<char, std::char_traits<char>, std::allocator<char> >& str);
+	DLL std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > PUGIXML_FUNCTION as_wide(const char* str);
+	DLL std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > PUGIXML_FUNCTION as_wide(const std::basic_string<char, std::char_traits<char>, std::allocator<char> >& str);
 #endif
 
 	// Memory allocation function interface; returns pointer to allocated memory or NULL on failure
@@ -1444,20 +1446,20 @@ namespace pugi
 	typedef void (*deallocation_function)(void* ptr);
 
 	// Override default memory management functions. All subsequent allocations/deallocations will be performed via supplied functions.
-	void PUGIXML_FUNCTION set_memory_management_functions(allocation_function allocate, deallocation_function deallocate);
+	DLL void PUGIXML_FUNCTION set_memory_management_functions(allocation_function allocate, deallocation_function deallocate);
 
 	// Get current memory management functions
-	allocation_function PUGIXML_FUNCTION get_memory_allocation_function();
-	deallocation_function PUGIXML_FUNCTION get_memory_deallocation_function();
+	DLL allocation_function PUGIXML_FUNCTION get_memory_allocation_function();
+	DLL deallocation_function PUGIXML_FUNCTION get_memory_deallocation_function();
 }
 
 #if !defined(PUGIXML_NO_STL) && (defined(_MSC_VER) || defined(__ICC))
 namespace std
 {
 	// Workarounds for (non-standard) iterator category detection for older versions (MSVC7/IC8 and earlier)
-	std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_node_iterator&);
-	std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_attribute_iterator&);
-	std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_named_node_iterator&);
+	DLL std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_node_iterator&);
+	DLL std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_attribute_iterator&);
+	DLL std::bidirectional_iterator_tag PUGIXML_FUNCTION _Iter_cat(const pugi::xml_named_node_iterator&);
 }
 #endif
 

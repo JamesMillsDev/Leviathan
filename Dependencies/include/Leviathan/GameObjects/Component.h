@@ -1,11 +1,15 @@
 #pragma once
 
-class Component
+#include <Leviathan/Core/Object.h>
+
+class Component : public Object
 {
 public:
 	virtual ~Component() = default;
 	const bool& IsEnabled() const { return m_enabled; }
 	virtual void SetEnabled(const bool _enabled) { m_enabled = _enabled; }
+
+	const class GameObject* GetOwner() const { return m_owner; }
 
 protected:
 	friend class GameObject;

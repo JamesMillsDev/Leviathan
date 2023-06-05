@@ -1,6 +1,15 @@
 #pragma once
 
-class IGameState
+#include <Leviathan/Core/Leviathan.h>
+
+#include <Leviathan/Core/Object.h>
+#include <Leviathan/Core/GameManagers.h>
+
+#include <Leviathan/GameObjects/GameObject.h>
+#include <Leviathan/GameObjects/GameObjectManager.h>
+#include <Leviathan/GameObjects/TransformComponent.h>
+
+class IGameState : public Object
 {
 public:
 	virtual ~IGameState() = default;
@@ -10,11 +19,35 @@ public:
 	virtual void Unload() {}
 
 protected:
-	IGameState(const char* _id) : m_name(_id) {}
+	IGameState(const char* _id) : m_name(_id)
+	{
+		m_world = new GameObject(string(_id) + " - World");
+		GetObjectManager()->Spawn(m_world);
+	}
+
+	template<Derived<GameObject> GO>
+	GO* CreateObject(const char* _name);
 
 private:
 	friend class GameStateManager;
 
+	GameObject* m_world;
 	const char* m_name;
 
 };
+
+template<Derived<GameObject> GO>
+inline GO* IGameState::CreateObject(const char* _name)
+{
+	GO* newObj = new GO();
+	
+	if (GameObject* go = dynamic_cast<GameObject*>(newObj))
+	{
+		go->SetName(_name);
+
+		GetObjectManager()->Spawn(go);
+		go->Transform()->SetParent(m_world->Transform());
+	}
+
+	return newObj;
+}

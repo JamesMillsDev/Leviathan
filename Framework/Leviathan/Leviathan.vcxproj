@@ -19,11 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\HashTable.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
@@ -52,8 +60,11 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collections\HashTable.cpp" />
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />
+    <ClCompile Include="Core\GameManagers.cpp" />
+    <ClCompile Include="Core\IManagerReciever.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
@@ -75,7 +86,7 @@
     <ClCompile Include="Utils\Gizmos.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -153,7 +164,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -161,8 +172,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylibdll.lib;box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalDependencies>Leviamath.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;</AdditionalDependencies>
@@ -171,7 +182,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\Leviathan\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"</Command>
+      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"
+copy /Y "$(SolutionDir)Dependencies\lib\raylib\raylib.dll" "$(SolutionDir)Builds\raylib.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>SET path=$(SolutionDir)Builds
@@ -184,7 +196,7 @@ if not exist "%path%" mkdir "%path%"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -194,8 +206,8 @@ if not exist "%path%" mkdir "%path%"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylibdll.lib;box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalDependencies>Leviamath.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;</AdditionalDependencies>
@@ -204,7 +216,8 @@ if not exist "%path%" mkdir "%path%"</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\Leviathan\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"</Command>
+      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"
+copy /Y "$(SolutionDir)Dependencies\lib\raylib\raylib.dll" "$(SolutionDir)Builds\raylib.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>SET path=$(SolutionDir)Builds
@@ -215,7 +228,7 @@ if not exist "%path%" mkdir "%path%"</Command>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -223,8 +236,8 @@ if not exist "%path%" mkdir "%path%"</Command>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylibdll.lib;box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalDependencies>Leviamath.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;</AdditionalDependencies>
@@ -233,7 +246,8 @@ if not exist "%path%" mkdir "%path%"</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\Leviathan\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"</Command>
+      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"
+copy /Y "$(SolutionDir)Dependencies\lib\raylib\raylib.dll" "$(SolutionDir)Builds\raylib.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>SET path=$(SolutionDir)Builds
@@ -246,7 +260,7 @@ if not exist "%path%" mkdir "%path%"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DLL_EXPORT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_EXPORT;EXTERN_DLL_EXPORT;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include;</AdditionalIncludeDirectories>
@@ -256,8 +270,8 @@ if not exist "%path%" mkdir "%path%"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylibdll.lib;box2d.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\box2d\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalDependencies>Leviamath.lib;winmm.lib;kernel32.lib;opengl32.lib;gdi32.lib;</AdditionalDependencies>
@@ -266,7 +280,8 @@ if not exist "%path%" mkdir "%path%"</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\Leviathan\;$(SolutionDir)Dependencies\lib\raylib\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"</Command>
+      <Command>copy /Y "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Builds\$(ProjectName).dll"
+copy /Y "$(SolutionDir)Dependencies\lib\raylib\raylib.dll" "$(SolutionDir)Builds\raylib.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>SET path=$(SolutionDir)Builds
@@ -274,13 +289,5 @@ if not exist "%path%" mkdir "%path%"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\packages\raylib.4.5.0\build\native\raylib.targets" Condition="Exists('..\..\packages\raylib.4.5.0\build\native\raylib.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\raylib.4.5.0\build\native\raylib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\raylib.4.5.0\build\native\raylib.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

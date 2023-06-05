@@ -1,6 +1,8 @@
 #pragma once
 
-class Game
+#include <Leviathan/Core/Object.h>
+
+class Game : public Object
 {
 public:
 	virtual ~Game() = default;
