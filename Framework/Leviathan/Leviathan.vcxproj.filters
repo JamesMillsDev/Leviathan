@@ -49,12 +49,6 @@
     <Filter Include="Include\Third Party">
       <UniqueIdentifier>{c91528e2-afef-479f-ad7d-0213ce3cfdf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\Third Party\zlib">
-      <UniqueIdentifier>{6a6cdd58-bfc6-4c45-8568-e593f6e051e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Third Party\zlib">
-      <UniqueIdentifier>{e12c115a-4114-4fb2-a1cd-8f6a2469f62d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -159,39 +153,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\crc32.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\deflate.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\gzguts.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\inffast.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\inffixed.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\inflate.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\inftrees.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\trees.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\zconf.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\zlib.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\zlib\zutil.h">
-      <Filter>Include\Third Party\zlib</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -262,51 +223,6 @@
     </ClCompile>
     <ClCompile Include="Core\IManagerReciever.cpp">
       <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\adler32.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\compress.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\crc32.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\deflate.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\gzclose.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\gzlib.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\gzread.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\gzwrite.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\infback.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\inffast.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\inflate.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\inftrees.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\trees.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\uncompr.c">
-      <Filter>Source\Third Party\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="Third Party\zlib\zutil.c">
-      <Filter>Source\Third Party\zlib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
