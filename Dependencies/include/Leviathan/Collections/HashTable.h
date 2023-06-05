@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Leviathan/Core/Leviathan.h>
+
 #include <string>
 #include <vector>
 #include <assert.h>
@@ -8,7 +10,7 @@ using std::string;
 using std::vector;
 
 // Based on ELF Hash method
-extern unsigned int DefaultHash(const char* _str);
+DLL extern unsigned int DefaultHash(const char* _str);
 
 template<typename T, unsigned int GROW_SIZE = 100, unsigned int(*HASH_FUNC)(const char*) = DefaultHash>
 class HashTable
