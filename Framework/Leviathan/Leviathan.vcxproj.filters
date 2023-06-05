@@ -52,6 +52,9 @@
     <Filter Include="Include\Collections">
       <UniqueIdentifier>{f4701a88-b5f3-4008-ba21-2076f2127efc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Collections">
+      <UniqueIdentifier>{971206dd-d180-457e-b6b2-a41b89d8ba75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -159,6 +162,18 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h">
       <Filter>Include\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\HashTable.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -229,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="Core\IManagerReciever.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Collections\HashTable.cpp">
+      <Filter>Source\Collections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
