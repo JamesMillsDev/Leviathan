@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\AI\Blackboard.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
@@ -56,6 +60,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AI\Blackboard.cpp" />
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />
     <ClCompile Include="Core\GameManagers.cpp" />

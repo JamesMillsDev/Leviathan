@@ -52,6 +52,12 @@
     <Filter Include="Include\Collections">
       <UniqueIdentifier>{f4701a88-b5f3-4008-ba21-2076f2127efc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\AI">
+      <UniqueIdentifier>{8ea3fe54-c273-44d9-8558-b75c38d07b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AI">
+      <UniqueIdentifier>{fb16b317-3e51-4d53-a784-5410c5cbe27b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -159,6 +165,18 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h">
       <Filter>Include\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h">
+      <Filter>Include\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\AI\Blackboard.h">
+      <Filter>Include\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -229,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="Core\IManagerReciever.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\Blackboard.cpp">
+      <Filter>Source\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
