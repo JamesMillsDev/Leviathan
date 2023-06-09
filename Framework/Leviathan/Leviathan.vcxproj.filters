@@ -55,6 +55,12 @@
     <Filter Include="Source\Collections">
       <UniqueIdentifier>{971206dd-d180-457e-b6b2-a41b89d8ba75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include\UI">
+      <UniqueIdentifier>{7d4ef2ac-463b-4d40-8e5d-0aa7ae8f6afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{00929c89-20b9-4875-a244-29a8df28c7dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h">
@@ -174,6 +180,24 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\HashTable.h">
       <Filter>Include\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\UIManager.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\UIWidget.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\RectTransform.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ImageWidget.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\SliderWidget.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\VerticalLayout.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -247,6 +271,24 @@
     </ClCompile>
     <ClCompile Include="Collections\HashTable.cpp">
       <Filter>Source\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\RectTransform.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIWidget.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ImageWidget.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\SliderWidget.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\VerticalLayout.cpp">
+      <Filter>Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

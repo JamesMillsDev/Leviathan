@@ -57,8 +57,8 @@ void TextureComponent::Render()
             
             const Rectangle dst
             {
-                transform->Position().x,
-                transform->Position().y,
+                transform->AnchoredPosition().x,
+                transform->AnchoredPosition().y,
                 transform->Scale().x,
                 transform->Scale().y
             };

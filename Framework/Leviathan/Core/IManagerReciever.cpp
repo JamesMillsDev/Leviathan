@@ -16,3 +16,8 @@ GameTimerManager* IManagerReciever::GetTimerManager()
 {
     return GameManagers::m_timerManager;
 }
+
+UIManager* IManagerReciever::GetUIManager()
+{
+    return GameManagers::m_uiManager;
+}

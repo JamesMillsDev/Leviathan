@@ -41,5 +41,5 @@ void CircleCollider::OnDrawGizmos()
 {
     const TransformComponent* transform = m_owner->Transform();
 
-    Gizmos::DrawWireCircle(transform->Position() + m_center, m_radius);
+    Gizmos::DrawWireCircle(transform->AnchoredPosition() + m_center, m_radius);
 }

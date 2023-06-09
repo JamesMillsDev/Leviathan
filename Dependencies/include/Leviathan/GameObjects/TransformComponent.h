@@ -29,17 +29,17 @@ public:
 
     DLL void UpdateRotation(const float& _amount);
 
-    DLL void Position(float& _x, float& _y) const;
-    DLL vec2 Position() const;
+    DLL void AnchoredPosition(float& _x, float& _y) const;
+    DLL vec2 AnchoredPosition() const;
 
     DLL void LocalPosition(float& _x, float& _y) const;
     DLL vec2 LocalPosition() const;
 
-    DLL void SetPosition(const vec2& _newPosition);
-    DLL void SetPosition(const float& _newX, const float& _newY);
+    DLL void SetAnchoredPosition(const vec2& _newPosition);
+    DLL void SetAnchoredPosition(const float& _newX, const float& _newY);
 
-    DLL void UpdatePosition(const vec2& _amount);
-    DLL void UpdatePosition(const float& _x, const float& _y);
+    DLL void UpdateAnchoredPosition(const vec2& _amount);
+    DLL void UpdateAnchoredPosition(const float& _x, const float& _y);
 
     DLL void Scale(float& _x, float& _y) const;
     DLL vec2 Scale() const;

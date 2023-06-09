@@ -8,6 +8,7 @@ protected:
 	DLL class GameStateManager* GetStateManager();
 	DLL class GameObjectManager* GetObjectManager();
 	DLL class GameTimerManager* GetTimerManager();
+	DLL class UIManager* GetUIManager();
 
 };
 

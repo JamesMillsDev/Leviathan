@@ -84,14 +84,14 @@ void TransformComponent::UpdateRotation(const float& _amount)
     m_transform = m_transform * toMat4(angleAxis(_amount * DEG2RAD, vec3(0, 0, 1.f)));
 }
 
-void TransformComponent::Position(float& _x, float& _y) const
+void TransformComponent::AnchoredPosition(float& _x, float& _y) const
 {
-    const vec2 pos = Position();
+    const vec2 pos = AnchoredPosition();
     _x = pos.x;
     _y = pos.y;
 }
 
-vec2 TransformComponent::Position() const
+vec2 TransformComponent::AnchoredPosition() const
 {
     vec3 scale;
     quat rot;
@@ -124,7 +124,7 @@ vec2 TransformComponent::LocalPosition() const
     return trans;
 }
 
-void TransformComponent::SetPosition(const vec2& _newPosition)
+void TransformComponent::SetAnchoredPosition(const vec2& _newPosition)
 {
     vec3 scale;
     quat rot;
@@ -139,19 +139,19 @@ void TransformComponent::SetPosition(const vec2& _newPosition)
         glm::scale(mat4(1.f), scale);
 }
 
-void TransformComponent::SetPosition(const float& _newX, const float& _newY)
+void TransformComponent::SetAnchoredPosition(const float& _newX, const float& _newY)
 {
-    SetPosition({ _newX, _newY });
+    SetAnchoredPosition({ _newX, _newY });
 }
 
-void TransformComponent::UpdatePosition(const vec2& _amount)
+void TransformComponent::UpdateAnchoredPosition(const vec2& _amount)
 {
     m_transform = glm::translate(m_transform, vec3(_amount, 0.f));
 }
 
-void TransformComponent::UpdatePosition(const float& _x, const float& _y)
+void TransformComponent::UpdateAnchoredPosition(const float& _x, const float& _y)
 {
-    UpdatePosition({ _x, _y });
+    UpdateAnchoredPosition({ _x, _y });
 }
 
 void TransformComponent::Scale(float& _x, float& _y) const
@@ -226,7 +226,7 @@ void TransformComponent::UpdateScale(const float& _x, const float& _y)
 
 void TransformComponent::TRS(const vec2& _pos, const float& _angle, const vec2& _scale)
 {
-    SetPosition(_pos);
+    SetAnchoredPosition(_pos);
     SetScale(_scale);
     SetRotation(_angle);
 }
