@@ -1,6 +1,9 @@
 #include <Leviathan/Core/Object.h>
 
 #include <Leviathan/GameStates/GameStateManager.h>
+#include <Leviathan/GameObjects/GameObjectManager.h>
+#include <Leviathan/Utils/GameTimerManager.h>
+#include <Leviathan/UI/UIManager.h>
 #include <Leviathan/Core/GameManagers.h>
 
 namespace Leviathan
@@ -12,16 +15,16 @@ namespace Leviathan
 
 	GameObjectManager* Object::GetObjectManager()
 	{
-		return nullptr;
+		return GameManagers::m_objectManager;
 	}
 
 	GameTimerManager* Object::GetTimerManager()
 	{
-		return nullptr;
+		return GameManagers::m_timerManager;
 	}
 
 	UIManager* Object::GetUIManager()
 	{
-		return nullptr;
+		return GameManagers::m_uiManager;
 	}
 }
