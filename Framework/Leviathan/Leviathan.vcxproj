@@ -53,6 +53,12 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugiconfig.hpp" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugixml.hpp" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ImageWidget.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\RectTransform.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\SliderWidget.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\UIManager.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\UIWidget.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\VerticalLayout.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Config.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\ConfigValue.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\GameTimerManager.h" />
@@ -81,6 +87,12 @@
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\TextureResource.cpp" />
     <ClCompile Include="Third Party\pugixml.cpp" />
+    <ClCompile Include="UI\ImageWidget.cpp" />
+    <ClCompile Include="UI\RectTransform.cpp" />
+    <ClCompile Include="UI\SliderWidget.cpp" />
+    <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\UIWidget.cpp" />
+    <ClCompile Include="UI\VerticalLayout.cpp" />
     <ClCompile Include="Utils\Config.cpp" />
     <ClCompile Include="Utils\GameTimerManager.cpp" />
     <ClCompile Include="Utils\Gizmos.cpp" />

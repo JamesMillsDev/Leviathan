@@ -1,8 +1,13 @@
 #include "PlayState.h"
 
 #include <Leviathan/Core/GameManagers.h>
+
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
+
+#include <Leviathan/UI/UIManager.h>
+#include <Leviathan/UI/VerticalLayout.h>
+#include <Leviathan/UI/SliderWidget.h>
 
 #include <raylib/raylib.h>
 #include <iostream>
@@ -27,6 +32,21 @@ void PlayState::Load()
 	ground = CreateObject<GroundObject>("ground");
 
 	GetTimerManager()->Set(m_timerHandle, &PlayState::DelayTest, this, 2.f);
+
+	SliderWidget* widget = new SliderWidget();
+	SliderWidget* widgetb = new SliderWidget();
+	
+	VerticalLayout* layout = new VerticalLayout();
+	layout->Transform()->anchorMin = { .25f, .25f };
+	layout->Transform()->anchorMax = { .75f, .75f };
+	layout->spacing = .25f;
+
+	layout->AddElement(widget);
+	layout->AddElement(widgetb);
+
+	GetUIManager()->AddWidget(widget);
+	GetUIManager()->AddWidget(widgetb);
+	GetUIManager()->AddWidget(layout);
 }
 
 void PlayState::Tick()

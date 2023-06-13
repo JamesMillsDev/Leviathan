@@ -11,6 +11,7 @@ private:
 	DLL static class GameStateManager* m_stateManager;
 	DLL static class GameObjectManager* m_objectManager;
 	DLL static class GameTimerManager* m_timerManager;
+	DLL static class UIManager* m_uiManager;
 
 private:
 	DLL GameManagers();

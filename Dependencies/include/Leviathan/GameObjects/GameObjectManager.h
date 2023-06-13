@@ -2,8 +2,6 @@
 
 #include <Leviathan/Core/Leviathan.h>
 
-#include <Leviathan/Utils/Singleton.h>
-
 #include <functional>
 #include <list>
 #include <vector>

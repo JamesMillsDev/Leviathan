@@ -16,6 +16,46 @@ template<typename T, unsigned int GROW_SIZE = 100, unsigned int(*HASH_FUNC)(cons
 class HashTable
 {
 public:
+	// A Key-Value pair for a linked-list
+	class Entry
+	{
+	public:
+		string key;
+		T value;
+		Entry* next = nullptr;
+
+	public:
+		Entry(const char* _key, const T& _value);
+
+	};
+
+	struct Iterator
+	{
+	public:
+		Entry* entry = nullptr;
+
+	public:
+		Iterator() : entry(nullptr) {}
+		Iterator(Entry* _entry) : entry(_entry) {}
+
+		Iterator& Next();
+
+	public:
+		// Increment operators
+		Iterator& operator++() { return Next(); }
+		Iterator& operator+(const int _shiftAmount);
+
+		// Equality operators
+		bool operator==(const Iterator& _rhs) { return entry == _rhs.entry; }
+		bool operator!=(const Iterator& _rhs) { return entry != _rhs.entry; }
+
+		// Dereference operators
+		T& operator*() { return entry->value; }
+		T* operator->() { return &entry->value; }
+
+	};
+
+public:
 	HashTable();
 	~HashTable();
 
@@ -56,20 +96,6 @@ public:
 
 	// Return the value with the matching key (must exist)
 	const T& operator[](const char* _key) const;
-
-private:
-	// A Key-Value pair for a linked-list
-	class Entry
-	{
-	public:
-		string key;
-		T value;
-		Entry* next = nullptr;
-
-	public:
-		Entry(const char* _key, const T& _value);
-	
-	};
 
 private:
 	// can't be a template parameter unfortunately because of non-integer
@@ -249,4 +275,27 @@ template<typename T, unsigned int GROW_SIZE, unsigned int(*HASH_FUNC)(const char
 inline HashTable<T, GROW_SIZE, HASH_FUNC>::Entry::Entry(const char* _key, const T& _value)
 	: key(_key), value(_value)
 {
+}
+
+template<typename T, unsigned int GROW_SIZE, unsigned int(*HASH_FUNC)(const char*)>
+inline HashTable<T, GROW_SIZE, HASH_FUNC>::Iterator& HashTable<T, GROW_SIZE, HASH_FUNC>::Iterator::Next()
+{
+	if (entry != nullptr)
+		entry = entry->next;
+
+	return *this;
+}
+
+template<typename T, unsigned int GROW_SIZE, unsigned int(*HASH_FUNC)(const char*)>
+inline HashTable<T, GROW_SIZE, HASH_FUNC>::Iterator& HashTable<T, GROW_SIZE, HASH_FUNC>::Iterator::operator+(const int _shiftAmount)
+{
+	Iterator iter = *this;
+
+	for (int i = 0; i < _shiftAmount; i++)
+	{
+		if (iter.entry->next != nullptr)
+			iter = iter.Next();
+	}
+
+	return iter;
 }

@@ -49,5 +49,5 @@ void BoxCollider::OnDrawGizmos()
 {
     const TransformComponent* transform = m_owner->Transform();
 
-    Gizmos::DrawWireRect(transform->Position() + m_center, m_extents, transform->Rotation());
+    Gizmos::DrawWireRect(transform->AnchoredPosition() + m_center, m_extents, transform->Rotation());
 }
