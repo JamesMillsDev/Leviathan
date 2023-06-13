@@ -1,8 +1,17 @@
 #pragma once
 
-#include <Leviathan/Core/IManagerReciever.h>
+#include <Leviathan/Core/Leviathan.h>
 
-class Object : public IManagerReciever
+namespace Leviathan
 {
-};
+	class Object
+	{
+	protected:
+		DLL class GameStateManager* GetStateManager();
+		DLL class GameObjectManager* GetObjectManager();
+		DLL class GameTimerManager* GetTimerManager();
+		DLL class UIManager* GetUIManager();
+
+	};
+}
 

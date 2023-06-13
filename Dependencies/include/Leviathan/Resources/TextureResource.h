@@ -6,9 +6,12 @@
 
 #include <Leviathan/Resources/Resource.h>
 
-class TextureResource : public Resource<Texture2D>
+namespace Leviathan
 {
-public:
-	DLL TextureResource(string _path);
+	class TextureResource : public Resource<Texture2D>
+	{
+	public:
+		DLL TextureResource(string _path);
 
-};
+	};
+}

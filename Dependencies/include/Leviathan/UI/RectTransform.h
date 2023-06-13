@@ -14,41 +14,44 @@ using std::list;
 using std::function;
 using std::pair;
 
-class RectTransform
+namespace Leviathan
 {
-public:
-	vec2 anchorMin;
-	vec2 anchorMax;
+	class RectTransform
+	{
+	public:
+		vec2 anchorMin;
+		vec2 anchorMax;
 
-	vec2 anchoredPos;
+		vec2 anchoredPos;
 
-	vec2 offsetMin;
-	vec2 offsetMax;
+		vec2 offsetMin;
+		vec2 offsetMax;
 
-public:
-	DLL RectTransform();
+	public:
+		DLL RectTransform();
 
-	DLL operator Rectangle();
+		DLL operator Rectangle();
 
-	DLL RectTransform*& Parent();
-	DLL void SetParent(RectTransform* _parent);
+		DLL RectTransform*& Parent();
+		DLL void SetParent(RectTransform* _parent);
 
-private:
-	DLL vec2 CalculateSize(vec2* _asMin, vec2* _asMax);
-	DLL vec2 CalculatePosition(vec2* _asMin, vec2* _asMax);
+	private:
+		DLL vec2 CalculateSize(vec2* _asMin, vec2* _asMax);
+		DLL vec2 CalculatePosition(vec2* _asMin, vec2* _asMax);
 
-	DLL void CalculateAnchorLocations(vec2* _aMin, vec2* _aMax);
+		DLL void CalculateAnchorLocations(vec2* _aMin, vec2* _aMax);
 
-	DLL void AddChild(RectTransform* _child);
-	DLL void RemoveChild(RectTransform* _child);
+		DLL void AddChild(RectTransform* _child);
+		DLL void RemoveChild(RectTransform* _child);
 
-	DLL void Tick();
+		DLL void Tick();
 
-private:
-	friend class UIManager;
+	private:
+		friend class UIManager;
 
-	RectTransform* m_parent;
-	list<RectTransform*> m_children;
-	list<pair<function<void(RectTransform*)>, RectTransform*>> m_listUpdates;
+		RectTransform* m_parent;
+		list<RectTransform*> m_children;
+		list<pair<function<void(RectTransform*)>, RectTransform*>> m_listUpdates;
 
-};
+	};
+}

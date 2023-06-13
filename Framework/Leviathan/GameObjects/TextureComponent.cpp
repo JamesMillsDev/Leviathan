@@ -11,65 +11,68 @@
 
 using std::exception;
 
-TextureComponent::TextureComponent(GameObject* _owner)
-    : Component(_owner), m_texture(nullptr), m_id(nullptr)
+namespace Leviathan
 {
-}
-
-TextureComponent::~TextureComponent()
-{
-    if(m_texture != nullptr)
+    TextureComponent::TextureComponent(GameObject* _owner)
+        : Component(_owner), m_texture(nullptr), m_id(nullptr)
     {
-        m_texture->Dispose();
-        m_texture = nullptr;
     }
-}
 
-void TextureComponent::Load()
-{
-    if(m_id != nullptr)
+    TextureComponent::~TextureComponent()
     {
-        try
+        if (m_texture != nullptr)
         {
-            m_texture = Resources::Find<Texture2D, TextureResource>(m_id);
-        }
-        catch(exception& ex)
-        {
-            std::cout << ex.what() << std::endl;
+            m_texture->Dispose();
+            m_texture = nullptr;
         }
     }
-}
 
-void TextureComponent::Render()
-{
-    if(m_texture != nullptr)
+    void TextureComponent::Load()
     {
-        TransformComponent* transform = m_owner->Transform();
-        if(transform != nullptr)
+        if (m_id != nullptr)
         {
-            const Rectangle src
+            try
             {
-                0,
-                0,
-                (float) m_texture->Get().width,
-                (float) m_texture->Get().height,
-            };
-            
-            const Rectangle dst
+                m_texture = Resources::Find<Texture2D, TextureResource>(m_id);
+            }
+            catch (exception& ex)
             {
-                transform->AnchoredPosition().x,
-                transform->AnchoredPosition().y,
-                transform->Scale().x,
-                transform->Scale().y
-            };
+                std::cout << ex.what() << std::endl;
+            }
+        }
+    }
 
-            const vec2 center =
+    void TextureComponent::Render()
+    {
+        if (m_texture != nullptr)
+        {
+            TransformComponent* transform = m_owner->Transform();
+            if (transform != nullptr)
             {
-                transform->Scale().x / 2,
-                transform->Scale().y / 2
-            };
+                const Rectangle src
+                {
+                    0,
+                    0,
+                    (float)m_texture->Get().width,
+                    (float)m_texture->Get().height,
+                };
 
-            DrawTexturePro(*m_texture, src, dst, { center.x, center.y }, transform->Rotation(), WHITE);
+                const Rectangle dst
+                {
+                    transform->AnchoredPosition().x,
+                    transform->AnchoredPosition().y,
+                    transform->Scale().x,
+                    transform->Scale().y
+                };
+
+                const vec2 center =
+                {
+                    transform->Scale().x / 2,
+                    transform->Scale().y / 2
+                };
+
+                DrawTexturePro(*m_texture, src, dst, { center.x, center.y }, transform->Rotation(), WHITE);
+            }
         }
     }
 }

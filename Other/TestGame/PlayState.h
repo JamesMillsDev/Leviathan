@@ -4,6 +4,9 @@
 
 #include <Leviathan/Utils/GameTimerManager.h>
 
+using Leviathan::IGameState;
+using Leviathan::TimerHandle;
+
 class PlayState final : public IGameState
 {
 public:

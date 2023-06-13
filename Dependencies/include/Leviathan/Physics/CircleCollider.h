@@ -7,23 +7,27 @@
 
 using glm::vec2;
 
-class CircleCollider final : public Collider
+namespace Leviathan
 {
-public:
-	DLL CircleCollider(class GameObject* _owner);
+	class CircleCollider final : public Collider
+	{
+	public:
+		DLL CircleCollider(class GameObject* _owner);
 
-	DLL void SetRadius(const float& _radius);
+		DLL void SetRadius(const float& _radius);
 
-	DLL const float& GetRadius() const;
+		DLL const float& GetRadius() const;
 
-protected:
-	float m_radius;
+	protected:
+		float m_radius;
 
-protected:
-	DLL class b2Shape* BuildShape() override;
-	DLL float GetVolume() override;
+	protected:
+		DLL class b2Shape* BuildShape() override;
+		DLL float GetVolume() override;
 
-	DLL void OnDrawGizmos() override;
+		DLL void OnDrawGizmos() override;
 
-};
+	};
 
+
+}

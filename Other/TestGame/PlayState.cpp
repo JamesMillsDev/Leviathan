@@ -18,6 +18,12 @@
 TestObject* textured = nullptr;
 GroundObject* ground = nullptr;
 
+using Leviathan::SliderWidget;
+using Leviathan::VerticalLayout;
+using Leviathan::Rigidbody;
+using Leviathan::ForceMode;
+using Leviathan::Constraints;
+
 PlayState::PlayState() : IGameState("PLAY")
 {
 }

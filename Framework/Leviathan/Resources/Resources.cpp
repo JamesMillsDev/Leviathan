@@ -10,60 +10,63 @@ using std::filesystem::recursive_directory_iterator;
 using std::filesystem::is_directory;
 using std::filesystem::exists;
 
-string Resources::PathFromID(const string& _id)
+namespace Leviathan
 {
-	if (m_instance->m_paths.contains(_id))
-		return m_instance->m_paths[_id];
-
-	return "";
-}
-
-void Resources::OnCreate()
-{
-	LocateFiles("textures", ".png");
-	LocateFiles("textures", ".jpg");
-	LocateFiles("images", ".png");
-	LocateFiles("sounds", ".wav");
-	LocateFiles("sounds", ".ogg");
-	LocateFiles("fonts", ".ttf");
-}
-
-void Resources::OnDestroy()
-{
-	for (auto iter = m_resources.begin(); iter != m_resources.end(); ++iter)
-		delete (*iter).second;
-
-	m_resources.clear();
-}
-
-void Resources::LocateFiles(const string _path, const string _extension)
-{
-	const path dir = path(string(Application::GetApplicationDirectory()) + "\\assets\\" + _path);
-	if (!exists(dir))
-		return;
-
-	for (recursive_directory_iterator i(dir), end; i != end; ++i)
+	string Resources::PathFromID(const string& _id)
 	{
-		if (!is_directory(i->path()))
+		if (m_instance->m_paths.contains(_id))
+			return m_instance->m_paths[_id];
+
+		return "";
+	}
+
+	void Resources::OnCreate()
+	{
+		LocateFiles("textures", ".png");
+		LocateFiles("textures", ".jpg");
+		LocateFiles("images", ".png");
+		LocateFiles("sounds", ".wav");
+		LocateFiles("sounds", ".ogg");
+		LocateFiles("fonts", ".ttf");
+	}
+
+	void Resources::OnDestroy()
+	{
+		for (auto iter = m_resources.begin(); iter != m_resources.end(); ++iter)
+			delete (*iter).second;
+
+		m_resources.clear();
+	}
+
+	void Resources::LocateFiles(const string _path, const string _extension)
+	{
+		const path dir = path(string(Application::GetApplicationDirectory()) + "\\assets\\" + _path);
+		if (!exists(dir))
+			return;
+
+		for (recursive_directory_iterator i(dir), end; i != end; ++i)
 		{
-			if (i->path().extension() == _extension)
+			if (!is_directory(i->path()))
 			{
-				string fileName = i->path().filename().string();
+				if (i->path().extension() == _extension)
+				{
+					string fileName = i->path().filename().string();
 
-				string id = _path + "/" + fileName.substr(0, fileName.find_last_of('.'));
+					string id = _path + "/" + fileName.substr(0, fileName.find_last_of('.'));
 
-				m_paths[id] = i->path().string();
+					m_paths[id] = i->path().string();
+				}
 			}
 		}
 	}
-}
 
-bool Resources::HasResource(const string& _id) const
-{
-	return m_resources.contains(_id);
-}
+	bool Resources::HasResource(const string& _id) const
+	{
+		return m_resources.contains(_id);
+	}
 
-Resources* Resources::GetInstance()
-{
-	return m_instance;
+	Resources* Resources::GetInstance()
+	{
+		return m_instance;
+	}
 }

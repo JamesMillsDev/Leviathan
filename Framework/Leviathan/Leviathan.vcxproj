@@ -29,10 +29,10 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\TObjectPtr.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />
@@ -70,7 +70,7 @@
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />
     <ClCompile Include="Core\GameManagers.cpp" />
-    <ClCompile Include="Core\IManagerReciever.cpp" />
+    <ClCompile Include="Core\Object.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />

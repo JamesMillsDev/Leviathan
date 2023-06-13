@@ -2,6 +2,8 @@
 
 #include <Leviathan/Core/Game.h>
 
+using Leviathan::Game;
+
 class TestGame : public Game
 {
 protected:

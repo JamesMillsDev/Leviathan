@@ -4,23 +4,26 @@
 
 #include <Leviathan/UI/RectTransform.h>
 
-class UIWidget : public Object
+namespace Leviathan
 {
-public:
-	DLL UIWidget();
-	DLL virtual ~UIWidget();
+	class UIWidget : public Object
+	{
+	public:
+		DLL UIWidget();
+		DLL virtual ~UIWidget();
 
-	DLL RectTransform* Transform() const;
+		DLL RectTransform* Transform() const;
 
-protected:
-	friend class UIManager;
+	protected:
+		friend class UIManager;
 
-	RectTransform* m_transform;
+		RectTransform* m_transform;
 
-private:
-	virtual void Load() {}
-	virtual void Tick() {}
-	virtual void Render() {}
-	virtual void Unload() {}
+	private:
+		virtual void Load() {}
+		virtual void Tick() {}
+		virtual void Render() {}
+		virtual void Unload() {}
 
-};
+	};
+}

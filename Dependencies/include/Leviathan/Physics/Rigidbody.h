@@ -8,87 +8,93 @@
 
 using glm::vec2;
 
-enum class ForceMode
+class b2Body;
+struct b2BodyDef;
+
+namespace Leviathan
 {
-	Impulse,
-	Force
-};
+	enum class ForceMode
+	{
+		Impulse,
+		Force
+	};
 
-enum class Constraints
-{
-	None = 0x01,
-	FreezeX = 0x01 << 1,
-	FreezeY = 0x01 << 2,
-	FreezeRotation = 0x01 << 3,
-	FreezePosition = FreezeX | FreezeY,
-	FreezeAll = FreezeRotation | FreezePosition
-};
+	enum class Constraints
+	{
+		None = 0x01,
+		FreezeX = 0x01 << 1,
+		FreezeY = 0x01 << 2,
+		FreezeRotation = 0x01 << 3,
+		FreezePosition = FreezeX | FreezeY,
+		FreezeAll = FreezeRotation | FreezePosition
+	};
 
-class Rigidbody final : public Component
-{
-public:
-	DLL const vec2& GetVelocity() const;
-	DLL const float& GetAngularVelocity() const;
-	
-	DLL const float& GetGravityScale() const;
-	DLL const float& GetMass() const;
-	DLL const float& GetFriction() const;
+	class Rigidbody final : public Component
+	{
+	public:
+		DLL const vec2& GetVelocity() const;
+		DLL const float& GetAngularVelocity() const;
 
-	DLL const bool& IsKinematic() const;
-	DLL const bool& IsStatic() const;
+		DLL const float& GetGravityScale() const;
+		DLL const float& GetMass() const;
+		DLL const float& GetFriction() const;
 
-	DLL void SetVelocity(vec2& _velocity);
-	DLL void SetAngularVelocity(float _velocity);
+		DLL const bool& IsKinematic() const;
+		DLL const bool& IsStatic() const;
 
-	DLL void SetGravityScale(float _scale);
-	DLL void SetMass(float _mass);
-	DLL void SetFriction(float _friction);
+		DLL void SetVelocity(vec2& _velocity);
+		DLL void SetAngularVelocity(float _velocity);
 
-	DLL void ToggleConstraint(Constraints _constraints);
-	DLL Constraints GetConstraints() const;
+		DLL void SetGravityScale(float _scale);
+		DLL void SetMass(float _mass);
+		DLL void SetFriction(float _friction);
 
-	DLL void SetKinematic(bool _isKinematic);
-	DLL void SetStatic(bool _isStatic);
+		DLL void ToggleConstraint(Constraints _constraints);
+		DLL Constraints GetConstraints() const;
 
-	DLL void SetEnabled(bool _enabled) override;
+		DLL void SetKinematic(bool _isKinematic);
+		DLL void SetStatic(bool _isStatic);
 
-	DLL void ApplyForce(const vec2& _force, ForceMode _mode = ForceMode::Force);
-	DLL void ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode = ForceMode::Force);
+		DLL void SetEnabled(bool _enabled) override;
 
-protected:
-	friend class GameObject;
-	friend class PhysicsManager;
+		DLL void ApplyForce(const vec2& _force, ForceMode _mode = ForceMode::Force);
+		DLL void ApplyForceAtPoint(const vec2& _force, const vec2& _point, ForceMode _mode = ForceMode::Force);
 
-	vec2 m_velocity;
-	float m_angularVelocity;
+	protected:
+		friend class GameObject;
+		friend class PhysicsManager;
 
-	float m_gravityScale;
-	float m_mass;
-	float m_friction;
-	
-	bool m_isKinematic;
-	bool m_isStatic;
+		vec2 m_velocity;
+		float m_angularVelocity;
 
-	Constraints m_constraints;
+		float m_gravityScale;
+		float m_mass;
+		float m_friction;
 
-protected:
+		bool m_isKinematic;
+		bool m_isStatic;
 
-	DLL Rigidbody(class GameObject* _owner);
-	DLL ~Rigidbody() override;
+		Constraints m_constraints;
 
-	DLL void Load() override;
-	DLL void Tick() override;
-	DLL void Unload() override;
+	protected:
 
-	DLL bool HasConstraint(Constraints _constraint);
-	DLL void TryConstrainVelocity();
+		DLL Rigidbody(class GameObject* _owner);
+		DLL ~Rigidbody() override;
 
-private:
-	class b2Body* m_body;
-	struct b2BodyDef* m_bodyDef;
-	int m_fixtureCount;
+		DLL void Load() override;
+		DLL void Tick() override;
+		DLL void Unload() override;
 
-private:
-	DLL static void OnAddRemoveComponent(Component* _component, bool _added, Component* _caller);
+		DLL bool HasConstraint(Constraints _constraint);
+		DLL void TryConstrainVelocity();
 
-};
+	private:
+		b2Body* m_body;
+		b2BodyDef* m_bodyDef;
+		int m_fixtureCount;
+
+	private:
+		DLL static void OnAddRemoveComponent(Component* _component, bool _added, Component* _caller);
+
+	};
+}
