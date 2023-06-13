@@ -8,22 +8,25 @@
 
 using glm::vec2;
 
-class BoxCollider final : public Collider
+namespace Leviathan
 {
-public:
-	DLL BoxCollider(class GameObject* _owner);
+	class BoxCollider final : public Collider
+	{
+	public:
+		DLL BoxCollider(class GameObject* _owner);
 
-	DLL void SetExtents(const vec2& _extents);
+		DLL void SetExtents(const vec2& _extents);
 
-	DLL const vec2& GetExtents() const;
+		DLL const vec2& GetExtents() const;
 
-protected:
-	vec2 m_extents;
+	protected:
+		vec2 m_extents;
 
-protected:
-	DLL class b2Shape* BuildShape() override;
-	DLL float GetVolume() override;
+	protected:
+		DLL class b2Shape* BuildShape() override;
+		DLL float GetVolume() override;
 
-	DLL void OnDrawGizmos() override;
+		DLL void OnDrawGizmos() override;
 
-};
+	};
+}

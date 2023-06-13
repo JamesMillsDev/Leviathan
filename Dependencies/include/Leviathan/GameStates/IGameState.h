@@ -9,45 +9,49 @@
 #include <Leviathan/GameObjects/GameObjectManager.h>
 #include <Leviathan/GameObjects/TransformComponent.h>
 
-class IGameState : public Object
+namespace Leviathan
 {
-public:
-	virtual ~IGameState() = default;
-	virtual void Load() = 0;
-	virtual void Tick() {}
-	virtual void Render() {}
-	virtual void Unload() {}
-
-protected:
-	IGameState(const char* _id) : m_name(_id)
+	class IGameState : public Object
 	{
-		m_world = new GameObject(string(_id) + " - World");
-		GetObjectManager()->Spawn(m_world);
-	}
+	public:
+		virtual ~IGameState() = default;
+		virtual void Load() = 0;
+		virtual void Tick() {}
+		virtual void Render() {}
+		virtual void Unload() {}
+
+	protected:
+		IGameState(const char* _id) : m_name(_id)
+		{
+			m_world = new GameObject(string(_id) + " - World");
+			GetObjectManager()->Spawn(m_world);
+		}
+
+		template<Derived<GameObject> GO>
+		GO* CreateObject(const char* _name);
+
+	private:
+		friend class GameStateManager;
+
+		GameObject* m_world;
+		const char* m_name;
+
+	};
 
 	template<Derived<GameObject> GO>
-	GO* CreateObject(const char* _name);
-
-private:
-	friend class GameStateManager;
-
-	GameObject* m_world;
-	const char* m_name;
-
-};
-
-template<Derived<GameObject> GO>
-inline GO* IGameState::CreateObject(const char* _name)
-{
-	GO* newObj = new GO();
-	
-	if (GameObject* go = dynamic_cast<GameObject*>(newObj))
+	inline GO* IGameState::CreateObject(const char* _name)
 	{
-		go->SetName(_name);
+		GO* newObj = new GO();
 
-		GetObjectManager()->Spawn(go);
-		go->Transform()->SetParent(m_world->Transform());
+		if (GameObject* go = dynamic_cast<GameObject*>(newObj))
+		{
+			go->SetName(_name);
+
+			GetObjectManager()->Spawn(go);
+			go->Transform()->SetParent(m_world->Transform());
+		}
+
+		return newObj;
 	}
 
-	return newObj;
 }

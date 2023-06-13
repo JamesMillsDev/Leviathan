@@ -1,6 +1,6 @@
 #pragma once
 
-#include "QuadTreeData.h"
+#include <Leviathan/Collections/QuadTreeData.h>
 
 #include <vector>
 #include <queue>
@@ -11,371 +11,374 @@
 using std::vector;
 using std::queue;
 
+namespace Leviathan
+{
 #define QUAD_TREE_LEAFS 4
 
-template<typename DATA>
-class QuadTreeNode
-{
-public:
-	static int maxDepth;
-	static int maxObjectsPerNode;
-
-	vector<QuadTreeNode<DATA>*> children;
-	vector<QuadTreeData<DATA>*> contents;
-	int currentDepth;
-	Rectangle bounds;
-
-public:
-	QuadTreeNode(const Rectangle& _bounds);
-	~QuadTreeNode();
-
-	bool IsLeaf();
-	int NumObjects();
-
-	void Insert(QuadTreeData<DATA>* _data);
-	void Remove(QuadTreeData<DATA>* _data);
-	void Update(QuadTreeData<DATA>* _data);
-
-	void Draw();
-
-	vector<QuadTreeData<DATA>*> Query(const Rectangle& _area);
-
-private:
-	void Shake();
-	void Split();
-	void Reset();
-
-	Vector2 GetMin(Rectangle _rect);
-	Vector2 GetMax(Rectangle _rect);
-	Rectangle FromMinMax(Vector2 _min, Vector2 _max);
-
-};
-
-template<typename DATA>
-int QuadTreeNode<DATA>::maxDepth = 5;
-template<typename DATA>
-int QuadTreeNode<DATA>::maxObjectsPerNode = 15;
-
-template<typename DATA>
-inline QuadTreeNode<DATA>::QuadTreeNode(const Rectangle& _bounds)
-	: bounds(_bounds), currentDepth(0)
-{
-}
-
-template<typename DATA>
-inline QuadTreeNode<DATA>::~QuadTreeNode()
-{
-	for (auto& child : children)
-		delete child;
-
-	for (auto& data : contents)
-		delete data;
-
-	children.clear();
-	contents.clear();
-}
-
-template<typename DATA>
-inline bool QuadTreeNode<DATA>::IsLeaf()
-{
-	return children.empty();
-}
-
-template<typename DATA>
-inline int QuadTreeNode<DATA>::NumObjects()
-{
-	Reset();
-
-	int objectCount = contents.size();
-
-	for (auto& data : contents)
-		data->flag = true;
-
-	queue<QuadTreeNode<DATA>*> toProcess;
-	toProcess.push(this);
-
-	while (!toProcess.empty())
+	template<typename DATA>
+	class QuadTreeNode
 	{
-		// Get the item at the back of the queue
-		QuadTreeNode<DATA>* processing = toProcess.front();
+	public:
+		static int maxDepth;
+		static int maxObjectsPerNode;
 
-		// Check if this node is a branch
-		if (!processing->IsLeaf())
+		vector<QuadTreeNode<DATA>*> children;
+		vector<QuadTreeData<DATA>*> contents;
+		int currentDepth;
+		Rectangle bounds;
+
+	public:
+		QuadTreeNode(const Rectangle& _bounds);
+		~QuadTreeNode();
+
+		bool IsLeaf();
+		int NumObjects();
+
+		void Insert(QuadTreeData<DATA>* _data);
+		void Remove(QuadTreeData<DATA>* _data);
+		void Update(QuadTreeData<DATA>* _data);
+
+		void Draw();
+
+		vector<QuadTreeData<DATA>*> Query(const Rectangle& _area);
+
+	private:
+		void Shake();
+		void Split();
+		void Reset();
+
+		Vector2 GetMin(Rectangle _rect);
+		Vector2 GetMax(Rectangle _rect);
+		Rectangle FromMinMax(Vector2 _min, Vector2 _max);
+
+	};
+
+	template<typename DATA>
+	int QuadTreeNode<DATA>::maxDepth = 5;
+	template<typename DATA>
+	int QuadTreeNode<DATA>::maxObjectsPerNode = 15;
+
+	template<typename DATA>
+	inline QuadTreeNode<DATA>::QuadTreeNode(const Rectangle& _bounds)
+		: bounds(_bounds), currentDepth(0)
+	{
+	}
+
+	template<typename DATA>
+	inline QuadTreeNode<DATA>::~QuadTreeNode()
+	{
+		for (auto& child : children)
+			delete child;
+
+		for (auto& data : contents)
+			delete data;
+
+		children.clear();
+		contents.clear();
+	}
+
+	template<typename DATA>
+	inline bool QuadTreeNode<DATA>::IsLeaf()
+	{
+		return children.empty();
+	}
+
+	template<typename DATA>
+	inline int QuadTreeNode<DATA>::NumObjects()
+	{
+		Reset();
+
+		int objectCount = contents.size();
+
+		for (auto& data : contents)
+			data->flag = true;
+
+		queue<QuadTreeNode<DATA>*> toProcess;
+		toProcess.push(this);
+
+		while (!toProcess.empty())
 		{
-			// Add all child nodes to the queue
-			for (auto& child : processing->children)
-				toProcess.push(child);
+			// Get the item at the back of the queue
+			QuadTreeNode<DATA>* processing = toProcess.front();
+
+			// Check if this node is a branch
+			if (!processing->IsLeaf())
+			{
+				// Add all child nodes to the queue
+				for (auto& child : processing->children)
+					toProcess.push(child);
+			}
+			else
+			{
+				// This is a leaf node, so process the data and count the items
+				for (auto& data : processing->contents)
+				{
+					if (!data->flag)
+					{
+						objectCount++;
+						data->flag = true;
+					}
+				}
+			}
+			// Remove the currently processing node
+			toProcess.pop();
+		}
+
+		// Reset all flags for safety
+		Reset();
+		return objectCount;
+	}
+
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Insert(QuadTreeData<DATA>* _data)
+	{
+		// Make sure this node would actually encapsulate the data
+		if (!CheckCollisionRecs(_data->bounds, bounds))
+			return;
+
+		// If this is a leaf node and adding this data would push its contents
+		// cap over the limit, split
+		if (IsLeaf() && contents.size() + 1 > maxObjectsPerNode)
+			Split();
+
+		if (IsLeaf())
+		{
+			// This is a leaf node so it can contain the data
+			contents.push_back(_data);
 		}
 		else
 		{
-			// This is a leaf node, so process the data and count the items
-			for (auto& data : processing->contents)
+			// Recursively attempt to insert data into the quad tree
+			for (auto& child : children)
+				child->Insert(_data);
+		}
+	}
+
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Remove(QuadTreeData<DATA>* _data)
+	{
+		// Check if this is a leaf as only leaf'es can contain data
+		if (IsLeaf())
+		{
+			int removeIndex = -1;
+
+			for (int i = 0; i < contents.size(); ++i)
 			{
-				if (!data->flag)
+				// Is this the data we want to remove
+				if (contents[i]->data == _data->data)
 				{
-					objectCount++;
-					data->flag = true;
+					// It is so store the index and break out of the loop
+					removeIndex = i;
+					break;
+				}
+			}
+
+			// Did we find the item in the list?
+			if (removeIndex != -1)
+			{
+				// Remove it from the list
+				contents.erase(contents.begin() + removeIndex);
+			}
+		}
+		else
+		{
+			// We are a branch so try to remove from children
+			for (auto& child : children)
+				child->Remove(_data);
+		}
+
+		// Shake to balance the tree
+		Shake();
+	}
+
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Update(QuadTreeData<DATA>* _data)
+	{
+		Remove(_data);
+		Insert(_data);
+	}
+
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Draw()
+	{
+		// Drawing the node itself
+		DrawRectangleLinesEx(bounds, 2.f, RED);
+
+		for (auto& data : contents)
+		{
+			//Attempt to cast the data to a vector
+			if (Vector2* vec = dynamic_cast<Vector2*>(data->data))
+			{
+				DrawCircleV(*vec, 5.f, BLUE);
+			}
+		}
+
+		// Draw the child nodes
+		for (auto& child : children)
+			child->Draw();
+	}
+
+	template<typename DATA>
+	inline vector<QuadTreeData<DATA>*> QuadTreeNode<DATA>::Query(const Rectangle& _area)
+	{
+		vector<QuadTreeData<DATA>*> result;
+
+		// If the area being queried isn't inside the bounds of this node
+		// return an empty vector
+		if (!CheckCollisionRecs(_area, bounds))
+			return result;
+
+		if (IsLeaf())
+		{
+			// Check if this data is inside the desired area
+			for (auto& data : contents)
+			{
+				if (CheckCollisionRecs(data->bounds, _area))
+				{
+					// add this data to the result
+					result.push_back(data);
 				}
 			}
 		}
-		// Remove the currently processing node
-		toProcess.pop();
-	}
-
-	// Reset all flags for safety
-	Reset();
-	return objectCount;
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Insert(QuadTreeData<DATA>* _data)
-{
-	// Make sure this node would actually encapsulate the data
-	if (!CheckCollisionRecs(_data->bounds, bounds))
-		return;
-
-	// If this is a leaf node and adding this data would push its contents
-	// cap over the limit, split
-	if (IsLeaf() && contents.size() + 1 > maxObjectsPerNode)
-		Split();
-
-	if (IsLeaf())
-	{
-		// This is a leaf node so it can contain the data
-		contents.push_back(_data);
-	}
-	else
-	{
-		// Recursively attempt to insert data into the quad tree
-		for (auto& child : children)
-			child->Insert(_data);
-	}
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Remove(QuadTreeData<DATA>* _data)
-{
-	// Check if this is a leaf as only leaf'es can contain data
-	if (IsLeaf())
-	{
-		int removeIndex = -1;
-
-		for (int i = 0; i < contents.size(); ++i)
+		else
 		{
-			// Is this the data we want to remove
-			if (contents[i]->data == _data->data)
+			// Query children
+			for (auto& child : children)
 			{
-				// It is so store the index and break out of the loop
-				removeIndex = i;
-				break;
+				vector<QuadTreeData<DATA>*> childData = child->Query(_area);
+				// If the children did have data, add it to the result
+				if (childData.size() > 0)
+				{
+					result.insert(result.end(), childData.begin(), childData.end());
+				}
 			}
 		}
 
-		// Did we find the item in the list?
-		if (removeIndex != -1)
-		{
-			// Remove it from the list
-			contents.erase(contents.begin() + removeIndex);
-		}
-	}
-	else
-	{
-		// We are a branch so try to remove from children
-		for (auto& child : children)
-			child->Remove(_data);
-	}
-
-	// Shake to balance the tree
-	Shake();
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Update(QuadTreeData<DATA>* _data)
-{
-	Remove(_data);
-	Insert(_data);
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Draw()
-{
-	// Drawing the node itself
-	DrawRectangleLinesEx(bounds, 2.f, RED);
-
-	for (auto& data : contents)
-	{
-		//Attempt to cast the data to a vector
-		if (Vector2* vec = dynamic_cast<Vector2*>(data->data))
-		{
-			DrawCircleV(*vec, 5.f, BLUE);
-		}
-	}
-
-	// Draw the child nodes
-	for (auto& child : children)
-		child->Draw();
-}
-
-template<typename DATA>
-inline vector<QuadTreeData<DATA>*> QuadTreeNode<DATA>::Query(const Rectangle& _area)
-{
-	vector<QuadTreeData<DATA>*> result;
-
-	// If the area being queried isn't inside the bounds of this node
-	// return an empty vector
-	if (!CheckCollisionRecs(_area, bounds))
+		// Return all found data
 		return result;
-
-	if (IsLeaf())
-	{
-		// Check if this data is inside the desired area
-		for (auto& data : contents)
-		{
-			if (CheckCollisionRecs(data->bounds, _area))
-			{
-				// add this data to the result
-				result.push_back(data);
-			}
-		}
-	}
-	else
-	{
-		// Query children
-		for (auto& child : children)
-		{
-			vector<QuadTreeData<DATA>*> childData = child->Query(_area);
-			// If the children did have data, add it to the result
-			if (childData.size() > 0)
-			{
-				result.insert(result.end(), childData.begin(), childData.end());
-			}
-		}
 	}
 
-	// Return all found data
-	return result;
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Shake()
-{
-	if (!IsLeaf())
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Shake()
 	{
-		int numObjects = NumObjects();
-		if (numObjects == 0)
+		if (!IsLeaf())
 		{
-			// We have no objects in the tree, so clear all children
-			for (auto& child : children)
-				delete child;
-
-			children.clear();
-		}
-		else if (numObjects < maxObjectsPerNode)
-		{
-			queue<QuadTreeNode<DATA>*> toProcess;
-			toProcess.push(this);
-
-			// Iterate through all child nodes and branches
-			while (!toProcess.empty())
+			int numObjects = NumObjects();
+			if (numObjects == 0)
 			{
-				QuadTreeNode<DATA>* processing = toProcess.front();
-				if (!processing->IsLeaf())
+				// We have no objects in the tree, so clear all children
+				for (auto& child : children)
+					delete child;
+
+				children.clear();
+			}
+			else if (numObjects < maxObjectsPerNode)
+			{
+				queue<QuadTreeNode<DATA>*> toProcess;
+				toProcess.push(this);
+
+				// Iterate through all child nodes and branches
+				while (!toProcess.empty())
 				{
-					// We are a branch, so add the children to be processed
-					for (auto& child : children)
-						toProcess.push(child);
-				}
-				else
-				{
-					contents.insert(contents.end(), processing->contents.begin(), processing->contents.end());
+					QuadTreeNode<DATA>* processing = toProcess.front();
+					if (!processing->IsLeaf())
+					{
+						// We are a branch, so add the children to be processed
+						for (auto& child : children)
+							toProcess.push(child);
+					}
+					else
+					{
+						contents.insert(contents.end(), processing->contents.begin(), processing->contents.end());
+					}
+
+					toProcess.pop();
 				}
 
-				toProcess.pop();
+				// Remove the children from this node
+				for (auto& child : children)
+					delete child;
+
+				children.clear();
 			}
-
-			// Remove the children from this node
-			for (auto& child : children)
-				delete child;
-
-			children.clear();
 		}
 	}
-}
 
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Split()
-{
-	if (currentDepth + 1 >= maxDepth)
-		return;
-
-	Vector2 min = GetMin(bounds);
-	Vector2 max = GetMax(bounds);
-
-	Vector2 center = Vector2Add(min, Vector2Scale(Vector2Subtract(max, min), 0.5f));
-
-	Rectangle childBounds[]
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Split()
 	{
-		FromMinMax({ min.x, min.y }, { center.x, center.y }),
-		FromMinMax({ center.x, min.y }, { max.x, center.y }),
-		FromMinMax({ center.x, center.y }, { max.x, max.y }),
-		FromMinMax({ min.x, center.y }, { center.x, max.y })
-	};
+		if (currentDepth + 1 >= maxDepth)
+			return;
 
-	for (auto& bound : childBounds)
-	{
-		QuadTreeNode<DATA>* child = new QuadTreeNode<DATA>(bound);
-		child->currentDepth = currentDepth + 1;
-		children.push_back(child);
-	}
+		Vector2 min = GetMin(bounds);
+		Vector2 max = GetMax(bounds);
 
-	vector<QuadTreeData<DATA>*> data = contents;
+		Vector2 center = Vector2Add(min, Vector2Scale(Vector2Subtract(max, min), 0.5f));
 
-	while (data.size() > 0)
-	{
-		for (auto& child : children)
+		Rectangle childBounds[]
 		{
-			if (CheckCollisionRecs(child->bounds, (*data.begin())->bounds))
-			{
-				child->Insert(*data.begin());
-				break;
-			}
+			FromMinMax({ min.x, min.y }, { center.x, center.y }),
+			FromMinMax({ center.x, min.y }, { max.x, center.y }),
+			FromMinMax({ center.x, center.y }, { max.x, max.y }),
+			FromMinMax({ min.x, center.y }, { center.x, max.y })
+		};
+
+		for (auto& bound : childBounds)
+		{
+			QuadTreeNode<DATA>* child = new QuadTreeNode<DATA>(bound);
+			child->currentDepth = currentDepth + 1;
+			children.push_back(child);
 		}
 
-		data.erase(data.begin());
+		vector<QuadTreeData<DATA>*> data = contents;
+
+		while (data.size() > 0)
+		{
+			for (auto& child : children)
+			{
+				if (CheckCollisionRecs(child->bounds, (*data.begin())->bounds))
+				{
+					child->Insert(*data.begin());
+					break;
+				}
+			}
+
+			data.erase(data.begin());
+		}
+
+		contents.clear();
 	}
 
-	contents.clear();
-}
-
-template<typename DATA>
-inline void QuadTreeNode<DATA>::Reset()
-{
-	if (IsLeaf())
+	template<typename DATA>
+	inline void QuadTreeNode<DATA>::Reset()
 	{
-		for (auto& data : contents)
-			data->flag = false;
+		if (IsLeaf())
+		{
+			for (auto& data : contents)
+				data->flag = false;
+		}
+		else
+		{
+			for (auto& child : children)
+				child->Reset();
+		}
 	}
-	else
+
+	template<typename DATA>
+	inline Vector2 QuadTreeNode<DATA>::GetMin(Rectangle _rect)
 	{
-		for (auto& child : children)
-			child->Reset();
+		return { _rect.x, _rect.y };
 	}
-}
 
-template<typename DATA>
-inline Vector2 QuadTreeNode<DATA>::GetMin(Rectangle _rect)
-{
-	return { _rect.x, _rect.y };
-}
+	template<typename DATA>
+	inline Vector2 QuadTreeNode<DATA>::GetMax(Rectangle _rect)
+	{
+		return { _rect.x + _rect.width, _rect.y + _rect.height };
+	}
 
-template<typename DATA>
-inline Vector2 QuadTreeNode<DATA>::GetMax(Rectangle _rect)
-{
-	return { _rect.x + _rect.width, _rect.y + _rect.height };
-}
-
-template<typename DATA>
-inline Rectangle QuadTreeNode<DATA>::FromMinMax(Vector2 _min, Vector2 _max)
-{
-	return { _min.x, _min.y, _max.x - _min.x, _max.y - _min.y };
+	template<typename DATA>
+	inline Rectangle QuadTreeNode<DATA>::FromMinMax(Vector2 _min, Vector2 _max)
+	{
+		return { _min.x, _min.y, _max.x - _min.x, _max.y - _min.y };
+	}
 }

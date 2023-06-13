@@ -11,26 +11,29 @@ using std::list;
 using std::pair;
 using std::vector;
 
-class GameObjectManager
+namespace Leviathan
 {
-public:
-	GameObjectManager() = default;
-	GameObjectManager(GameObjectManager&) = delete;
-	DLL ~GameObjectManager();
+	class GameObjectManager
+	{
+	public:
+		GameObjectManager() = default;
+		GameObjectManager(GameObjectManager&) = delete;
+		DLL ~GameObjectManager();
 
-	DLL void Spawn(class GameObject* _go);
-	DLL void Destroy(class GameObject* _go);
+		DLL void Spawn(class GameObject* _go);
+		DLL void Destroy(class GameObject* _go);
 
-private:
-	friend class GameManagers;
+	private:
+		friend class GameManagers;
 
-	vector<pair<function<void(class GameObject*)>, class GameObject*>> m_listUpdates;
-	list<class GameObject*> m_objects;
+		vector<pair<function<void(class GameObject*)>, class GameObject*>> m_listUpdates;
+		list<class GameObject*> m_objects;
 
-private:
-	DLL void Tick();
-	DLL void Render();
+	private:
+		DLL void Tick();
+		DLL void Render();
 
-	DLL void DrawGizmos();
+		DLL void DrawGizmos();
 
-};
+	};
+}

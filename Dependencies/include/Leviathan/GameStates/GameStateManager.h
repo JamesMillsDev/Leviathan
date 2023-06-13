@@ -13,30 +13,34 @@ using std::vector;
 using std::list;
 using std::map;
 
-typedef function<void()> UpdateAction;
-
-class GameStateManager
+namespace Leviathan
 {
-public:
-	GameStateManager() = default;
-	GameStateManager(GameStateManager&) = delete;
-	DLL ~GameStateManager();
+	typedef function<void()> UpdateAction;
 
-	DLL void AddState(class IGameState* _state);
-	DLL void RemoveState(const class IGameState* _state);
-	DLL void ActivateState(const char* _id);
-	DLL void DeactivateState(const char* _id);
+	class GameStateManager
+	{
+	public:
+		GameStateManager() = default;
+		GameStateManager(GameStateManager&) = delete;
+		DLL ~GameStateManager();
 
-private:
-	friend class GameManagers;
+		DLL void AddState(class IGameState* _state);
+		DLL void RemoveState(const class IGameState* _state);
+		DLL void ActivateState(const char* _id);
+		DLL void DeactivateState(const char* _id);
 
-	vector<UpdateAction> m_listUpdates;
-	list<class IGameState*> m_activeStates;
-	map<const char*, class IGameState*> m_states;
+	private:
+		friend class GameManagers;
 
-private:
-	DLL void Tick();
-	DLL void Render();
+		vector<UpdateAction> m_listUpdates;
+		list<class IGameState*> m_activeStates;
+		map<const char*, class IGameState*> m_states;
 
-};
+	private:
+		DLL void Tick();
+		DLL void Render();
 
+	};
+
+
+}

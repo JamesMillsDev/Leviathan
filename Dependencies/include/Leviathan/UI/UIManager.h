@@ -11,25 +11,28 @@ using std::list;
 using std::pair;
 using std::vector;
 
-class UIManager
+namespace Leviathan
 {
-public:
-	DLL void AddWidget(class UIWidget* _widget);
-	DLL void RemoveWidget(class UIWidget* _widget);
+	class UIManager
+	{
+	public:
+		DLL void AddWidget(class UIWidget* _widget);
+		DLL void RemoveWidget(class UIWidget* _widget);
 
-private:
-	friend class GameManagers;
+	private:
+		friend class GameManagers;
 
-	vector<pair<function<void(class UIWidget*)>, class UIWidget*>> m_listUpdates;
-	list<class UIWidget*> m_widgets;
+		vector<pair<function<void(class UIWidget*)>, class UIWidget*>> m_listUpdates;
+		list<class UIWidget*> m_widgets;
 
-private:
-	UIManager() = default;
-	UIManager(UIManager&) = delete;
-	UIManager(UIManager&&) = delete;
-	DLL ~UIManager();
+	private:
+		UIManager() = default;
+		UIManager(UIManager&) = delete;
+		UIManager(UIManager&&) = delete;
+		DLL ~UIManager();
 
-	DLL void Tick();
-	DLL void Render();
+		DLL void Tick();
+		DLL void Render();
 
-};
+	};
+}

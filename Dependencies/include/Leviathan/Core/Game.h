@@ -2,18 +2,21 @@
 
 #include <Leviathan/Core/Object.h>
 
-class Game : public Object
+namespace Leviathan
 {
-public:
-	virtual ~Game() = default;
+	class Game : public Object
+	{
+	public:
+		virtual ~Game() = default;
 
-protected:
-	friend class Application;
+	protected:
+		friend class Application;
 
-	virtual void Load() = 0;
-	virtual void Unload() {}
+		virtual void Load() = 0;
+		virtual void Unload() {}
 
-	virtual void Tick() {}
-	virtual void Render() {}
+		virtual void Tick() {}
+		virtual void Render() {}
 
-};
+	};
+}

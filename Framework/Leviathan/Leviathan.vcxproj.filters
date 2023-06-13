@@ -159,9 +159,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\IManagerReciever.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
@@ -197,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\VerticalLayout.h">
       <Filter>Include\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\TObjectPtr.h">
+      <Filter>Include\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,9 +266,6 @@
     <ClCompile Include="Core\GameManagers.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\IManagerReciever.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Collections\HashTable.cpp">
       <Filter>Source\Collections</Filter>
     </ClCompile>
@@ -289,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="UI\VerticalLayout.cpp">
       <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Object.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,21 +6,23 @@
 
 using std::string;
 
-class SliderWidget : public UIWidget
+namespace Leviathan
 {
-public:
-	float value;
-	float min;
-	float max;
-	
-	string leftLabel;
-	string rightLabel;
+	class SliderWidget : public UIWidget
+	{
+	public:
+		float value;
+		float min;
+		float max;
 
-public:
-	DLL SliderWidget();
+		string leftLabel;
+		string rightLabel;
 
-	DLL virtual void Load() override;
-	DLL virtual void Render() override;
+	public:
+		DLL SliderWidget();
 
-};
+		DLL virtual void Load() override;
+		DLL virtual void Render() override;
 
+	};
+}

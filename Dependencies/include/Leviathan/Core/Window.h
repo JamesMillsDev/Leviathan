@@ -8,29 +8,32 @@
 
 using std::string;
 
-struct Window
+namespace Leviathan
 {
-private:
-	friend class Application;
+	struct Window
+	{
+	private:
+		friend class Application;
 
-	int m_width;
-	int m_height;
-	int m_fullscreenKey;
-	string m_title;
-	Color32 m_clearColor;
-	class Config* m_config;
+		int m_width;
+		int m_height;
+		int m_fullscreenKey;
+		string m_title;
+		Color32 m_clearColor;
+		class Config* m_config;
 
-private:
-	DLL Window();
-	Window(Window&) = delete;
-	~Window() = default;
+	private:
+		DLL Window();
+		Window(Window&) = delete;
+		~Window() = default;
 
-	DLL void Open();
-	DLL void Close();
+		DLL void Open();
+		DLL void Close();
 
-	DLL void BeginFrame();
-	DLL void EndFrame();
-	DLL void TryToggleFullscreen();
-	DLL void OnConfigReloaded(class Config* _config);
+		DLL void BeginFrame();
+		DLL void EndFrame();
+		DLL void TryToggleFullscreen();
+		DLL void OnConfigReloaded(class Config* _config);
 
-};
+	};
+}

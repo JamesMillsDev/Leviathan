@@ -5,6 +5,10 @@
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/BoxCollider.h>
 
+using Leviathan::TextureComponent;
+using Leviathan::Rigidbody;
+using Leviathan::BoxCollider;
+
 TestObject::TestObject()
 {
 	Transform()->TRS({ 250, 250 }, 35.f, { 100.f, 100.f });

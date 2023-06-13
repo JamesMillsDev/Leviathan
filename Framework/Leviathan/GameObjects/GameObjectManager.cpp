@@ -2,62 +2,65 @@
 
 #include <Leviathan/GameObjects/GameObject.h>
 
-void GameObjectManager::Spawn(GameObject* _go)
+namespace Leviathan
 {
-    m_listUpdates.emplace_back([&](GameObject* _g)
+    void GameObjectManager::Spawn(GameObject* _go)
     {
-        const list<GameObject*>::iterator iter = std::find(m_objects.end(), m_objects.end(), _g);
+        m_listUpdates.emplace_back([&](GameObject* _g)
+            {
+                const list<GameObject*>::iterator iter = std::find(m_objects.end(), m_objects.end(), _g);
 
-        if(iter == m_objects.end())
-        {
-            _g->Load();
-            m_objects.push_back(_g);
-        }
-    }, _go);
-}
+                if (iter == m_objects.end())
+                {
+                    _g->Load();
+                    m_objects.push_back(_g);
+                }
+            }, _go);
+    }
 
-void GameObjectManager::Destroy(GameObject* _go)
-{
-    m_listUpdates.emplace_back([&](GameObject* _g)
+    void GameObjectManager::Destroy(GameObject* _go)
     {
-        const list<GameObject*>::iterator iter = std::find(m_objects.end(), m_objects.end(), _g);
+        m_listUpdates.emplace_back([&](GameObject* _g)
+            {
+                const list<GameObject*>::iterator iter = std::find(m_objects.end(), m_objects.end(), _g);
 
-        if(iter != m_objects.end())
-        {
-            _g->Unload();
-            m_objects.erase(iter);
-            delete _g;
-        }
-    }, _go);
-}
+                if (iter != m_objects.end())
+                {
+                    _g->Unload();
+                    m_objects.erase(iter);
+                    delete _g;
+                }
+            }, _go);
+    }
 
-GameObjectManager::~GameObjectManager()
-{
-    for(auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
-        delete*iter;
+    GameObjectManager::~GameObjectManager()
+    {
+        for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
+            delete* iter;
 
-    m_objects.clear();
-}
+        m_objects.clear();
+    }
 
-void GameObjectManager::Tick()
-{
-    for(auto iter = m_listUpdates.begin(); iter != m_listUpdates.end(); ++iter)
-        (*iter).first((*iter).second);
+    void GameObjectManager::Tick()
+    {
+        for (auto iter = m_listUpdates.begin(); iter != m_listUpdates.end(); ++iter)
+            (*iter).first((*iter).second);
 
-    m_listUpdates.clear();
+        m_listUpdates.clear();
 
-    for(auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
-        (*iter)->Tick();
-}
+        for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
+            (*iter)->Tick();
+    }
 
-void GameObjectManager::Render()
-{
-    for(auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
-        (*iter)->Render();
-}
+    void GameObjectManager::Render()
+    {
+        for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
+            (*iter)->Render();
+    }
 
-void GameObjectManager::DrawGizmos()
-{
-    for(auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
-        (*iter)->OnDrawGizmos();
+    void GameObjectManager::DrawGizmos()
+    {
+        for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
+            (*iter)->OnDrawGizmos();
+    }
 }

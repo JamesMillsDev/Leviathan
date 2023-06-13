@@ -7,6 +7,11 @@
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/BoxCollider.h>
 
+using Leviathan::Application;
+using Leviathan::Rigidbody;
+using Leviathan::BoxCollider;
+using Leviathan::TextureComponent;
+
 GroundObject::GroundObject()
 {
 	int w = 0, h = 0;

@@ -9,45 +9,48 @@
 
 #include <raylib/raylib.h>
 
-BoxCollider::BoxCollider(GameObject* _owner)
-    : Collider(_owner), m_extents(vec2(10.f))
+namespace Leviathan
 {
-}
-
-void BoxCollider::SetExtents(const vec2& _extents)
-{
-    m_extents = _extents;
-}
-
-const vec2& BoxCollider::GetExtents() const
-{
-    return m_extents;
-}
-
-b2Shape* BoxCollider::BuildShape()
-{
-    const b2Vec2 points[4]
+    BoxCollider::BoxCollider(GameObject* _owner)
+        : Collider(_owner), m_extents(vec2(10.f))
     {
-        { m_center.x - m_extents.x, m_center.y - m_extents.y },
-        { m_center.x + m_extents.x, m_center.y - m_extents.y },
-        { m_center.x + m_extents.x, m_center.y + m_extents.y },
-        { m_center.x - m_extents.x, m_center.y + m_extents.y }
-    };
+    }
 
-    b2PolygonShape* polygon = new b2PolygonShape();
-    polygon->Set(points, 4);
+    void BoxCollider::SetExtents(const vec2& _extents)
+    {
+        m_extents = _extents;
+    }
 
-    return polygon;
-}
+    const vec2& BoxCollider::GetExtents() const
+    {
+        return m_extents;
+    }
 
-float BoxCollider::GetVolume()
-{
-    return (m_extents.x * 2.f) + (m_extents.y * 2.f);
-}
+    b2Shape* BoxCollider::BuildShape()
+    {
+        const b2Vec2 points[4]
+        {
+            { m_center.x - m_extents.x, m_center.y - m_extents.y },
+            { m_center.x + m_extents.x, m_center.y - m_extents.y },
+            { m_center.x + m_extents.x, m_center.y + m_extents.y },
+            { m_center.x - m_extents.x, m_center.y + m_extents.y }
+        };
 
-void BoxCollider::OnDrawGizmos()
-{
-    const TransformComponent* transform = m_owner->Transform();
+        b2PolygonShape* polygon = new b2PolygonShape();
+        polygon->Set(points, 4);
 
-    Gizmos::DrawWireRect(transform->AnchoredPosition() + m_center, m_extents, transform->Rotation());
+        return polygon;
+    }
+
+    float BoxCollider::GetVolume()
+    {
+        return (m_extents.x * 2.f) + (m_extents.y * 2.f);
+    }
+
+    void BoxCollider::OnDrawGizmos()
+    {
+        const TransformComponent* transform = m_owner->Transform();
+
+        Gizmos::DrawWireRect(transform->AnchoredPosition() + m_center, m_extents, transform->Rotation());
+    }
 }

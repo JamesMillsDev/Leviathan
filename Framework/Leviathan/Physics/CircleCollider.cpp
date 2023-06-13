@@ -8,38 +8,41 @@
 #include <box2d/b2_circle_shape.h>
 #include <box2d/b2_fixture.h>
 
-CircleCollider::CircleCollider(GameObject* _owner)
-    : Collider(_owner), m_radius(10.f)
+namespace Leviathan
 {
-}
+    CircleCollider::CircleCollider(GameObject* _owner)
+        : Collider(_owner), m_radius(10.f)
+    {
+    }
 
-void CircleCollider::SetRadius(const float& _radius)
-{
-    m_radius = _radius;
-}
+    void CircleCollider::SetRadius(const float& _radius)
+    {
+        m_radius = _radius;
+    }
 
-const float& CircleCollider::GetRadius() const
-{
-    return m_radius;
-}
+    const float& CircleCollider::GetRadius() const
+    {
+        return m_radius;
+    }
 
-DLL b2Shape* CircleCollider::BuildShape()
-{
-    b2CircleShape* circle = new b2CircleShape();
-    circle->m_radius = m_radius;
-    circle->m_p = { m_center.x, m_center.y };
+    DLL b2Shape* CircleCollider::BuildShape()
+    {
+        b2CircleShape* circle = new b2CircleShape();
+        circle->m_radius = m_radius;
+        circle->m_p = { m_center.x, m_center.y };
 
-    return circle;
-}
+        return circle;
+    }
 
-float CircleCollider::GetVolume()
-{
-    return PI * m_radius * m_radius;
-}
+    float CircleCollider::GetVolume()
+    {
+        return PI * m_radius * m_radius;
+    }
 
-void CircleCollider::OnDrawGizmos()
-{
-    const TransformComponent* transform = m_owner->Transform();
+    void CircleCollider::OnDrawGizmos()
+    {
+        const TransformComponent* transform = m_owner->Transform();
 
-    Gizmos::DrawWireCircle(transform->AnchoredPosition() + m_center, m_radius);
+        Gizmos::DrawWireCircle(transform->AnchoredPosition() + m_center, m_radius);
+    }
 }

@@ -4,22 +4,25 @@
 
 #include <Leviathan/GameObjects/Component.h>
 
-class TextureComponent final : public Component
+namespace Leviathan
 {
-public:
-	DLL TextureComponent(class GameObject* _owner);
-	DLL ~TextureComponent() override;
+	class TextureComponent final : public Component
+	{
+	public:
+		DLL TextureComponent(class GameObject* _owner);
+		DLL ~TextureComponent() override;
 
-	void SetTexture(const char* _id) { m_id = _id; }
+		void SetTexture(const char* _id) { m_id = _id; }
 
-protected:
-	DLL void Load() override;
-	DLL void Render() override;
+	protected:
+		DLL void Load() override;
+		DLL void Render() override;
 
-private:
-	friend class GameObject;
+	private:
+		friend class GameObject;
 
-	class TextureResource* m_texture;
-	const char* m_id;
+		class TextureResource* m_texture;
+		const char* m_id;
 
-};
+	};
+}
