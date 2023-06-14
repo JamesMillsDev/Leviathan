@@ -56,7 +56,7 @@ namespace Leviathan
 	private:
 		friend class GameObjectManager;
 
-		TransformComponent* m_transform;
+		TObjectPtr<TransformComponent> m_transform;
 
 		vector<ComponentUpdateAction> m_listUpdates;
 		map<Component*, ComponentAddRemoveFunction> m_addRemoveUpdates;

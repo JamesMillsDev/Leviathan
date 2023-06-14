@@ -17,7 +17,7 @@ namespace Leviathan
 	protected:
 		friend class GameObject;
 
-		TObjectPtr<class GameObject> m_owner;
+		class GameObject* m_owner;
 
 		bool m_enabled;
 

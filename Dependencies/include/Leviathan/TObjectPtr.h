@@ -12,6 +12,7 @@ namespace Leviathan
 		TObjectPtr(T* _data);
 		TObjectPtr(const TObjectPtr& _other);
 		TObjectPtr(const TObjectPtr&& _other);
+		~TObjectPtr();
 
 		T* Get();
 		bool IsValid();
@@ -23,7 +24,7 @@ namespace Leviathan
 		TObjectPtr<T> operator=(T* _other);
 
 		void* operator new(size_t _data);
-		void operator delete(void* _data);
+		static void operator delete(void* _data);
 
 	private:
 		T* m_owned;
@@ -54,6 +55,15 @@ namespace Leviathan
 	inline TObjectPtr<T>::TObjectPtr(const TObjectPtr&& _other)
 		: m_owned(_other.m_owned), m_copied(true)
 	{
+	}
+
+	template<typename T>
+	inline TObjectPtr<T>::~TObjectPtr()
+	{
+		if (m_owned != nullptr && !m_copied)
+		{
+			delete m_owned;
+		}
 	}
 
 	template<typename T>

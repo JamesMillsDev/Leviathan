@@ -8,22 +8,22 @@
 
 namespace Leviathan
 {
-	TObjectPtr<GameStateManager> Object::GetStateManager()
+	TObjectPtr<GameStateManager>& Object::GetStateManager()
 	{
 		return GameManagers::m_stateManager;
 	}
 
-	TObjectPtr<GameObjectManager> Object::GetObjectManager()
+	TObjectPtr<GameObjectManager>& Object::GetObjectManager()
 	{
 		return GameManagers::m_objectManager;
 	}
 
-	TObjectPtr<GameTimerManager> Object::GetTimerManager()
+	TObjectPtr<GameTimerManager>& Object::GetTimerManager()
 	{
 		return GameManagers::m_timerManager;
 	}
 
-	TObjectPtr<UIManager> Object::GetUIManager()
+	TObjectPtr<UIManager>& Object::GetUIManager()
 	{
 		return GameManagers::m_uiManager;
 	}

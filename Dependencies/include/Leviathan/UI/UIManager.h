@@ -21,6 +21,8 @@ namespace Leviathan
 
 	private:
 		friend class GameManagers;
+		template<typename T>
+		friend class TObjectPtr;
 
 		vector<pair<function<void(class UIWidget*)>, class UIWidget*>> m_listUpdates;
 		list<class UIWidget*> m_widgets;
