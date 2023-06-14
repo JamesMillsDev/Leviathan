@@ -41,6 +41,7 @@ void PlayState::Load()
 
 	SliderWidget* widget = new SliderWidget();
 	SliderWidget* widgetb = new SliderWidget();
+	SliderWidget* widgetc = new SliderWidget();
 	
 	VerticalLayout* layout = new VerticalLayout();
 	layout->Transform()->anchorMin = { .25f, .25f };
@@ -49,9 +50,11 @@ void PlayState::Load()
 
 	layout->AddElement(widget);
 	layout->AddElement(widgetb);
+	layout->AddElement(widgetc);
 
 	GetUIManager()->AddWidget(widget);
 	GetUIManager()->AddWidget(widgetb);
+	GetUIManager()->AddWidget(widgetc);
 	GetUIManager()->AddWidget(layout);
 }
 

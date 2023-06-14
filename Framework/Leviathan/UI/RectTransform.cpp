@@ -47,8 +47,13 @@ namespace Leviathan
 			vec2 pMax = { 0.f, 0.f };
 			m_parent->CalculateAnchorLocations(&pMin, &pMax);
 
-			min = (pMin * anchorMin) + pMin;
-			max = (pMin * anchorMax) + pMin;
+			vec2 lPMax = pMax - pMin;
+
+			vec2 cMin = lPMax * anchorMin;
+			vec2 cMax = lPMax * anchorMax;
+
+			min = cMin + pMin;
+			max = cMax + pMin;
 		}
 		else
 		{

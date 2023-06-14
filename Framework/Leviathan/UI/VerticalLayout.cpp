@@ -43,8 +43,10 @@ namespace Leviathan
 
 	void VerticalLayout::Layout()
 	{
-		float totalSpacing = spacing * (m_children.size() - 1);
-		float elementHeight = ((1.f / m_children.size()) - (padding.y * 2.f)) - totalSpacing;
+		float totalPadding = padding.y * 2.f;
+		float childTotal = 1.f / m_children.size();
+
+		float elementHeight = childTotal - totalPadding - spacing;
 		float elementWidth = 1.f - (padding.x * 2.f);
 
 		float x = padding.x;
