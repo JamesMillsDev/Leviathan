@@ -49,7 +49,7 @@ namespace Leviathan
 
     void BoxCollider::OnDrawGizmos()
     {
-        const TransformComponent* transform = m_owner->Transform();
+        TObjectPtr<TransformComponent> transform = m_owner->Transform();
 
         Gizmos::DrawWireRect(transform->AnchoredPosition() + m_center, m_extents, transform->Rotation());
     }

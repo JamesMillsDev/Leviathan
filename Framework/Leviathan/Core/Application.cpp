@@ -1,8 +1,8 @@
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
-#include <Leviathan/Core/Time.h>
-#include <Leviathan/Core/Window.h>
-#include <Leviathan/Core/GameManagers.h>
+#include <Leviathan/Time.h>
+#include <Leviathan/Window.h>
+#include <Leviathan/GameManagers.h>
 
 #include <Leviathan/Physics/PhysicsManager.h>
 
@@ -141,6 +141,12 @@ namespace Leviathan
     void Application::Unload()
     {
         m_game->Unload();
+
+        if (m_managers != nullptr)
+        {
+            delete m_managers;
+            m_managers = nullptr;
+        }
 
         Resources::DestroyInstance();
         PhysicsManager::DestroyInstance();

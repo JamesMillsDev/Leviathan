@@ -1,6 +1,6 @@
 #include <Leviathan/UI/RectTransform.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 namespace Leviathan
 {

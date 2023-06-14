@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Leviathan/Core/Object.h>
+#include <Leviathan/Object.h>
 
 #include <Leviathan/UI/RectTransform.h>
 

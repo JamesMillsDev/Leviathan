@@ -1,6 +1,6 @@
 #include <Leviathan/Physics/Collider.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <Leviathan/GameObjects/GameObject.h>
 

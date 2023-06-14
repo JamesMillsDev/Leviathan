@@ -1,7 +1,7 @@
 #include <Leviathan/Utils/Config.h>
 
-#include <Leviathan/Core/Application.h>
-#include <Leviathan/Core/Color32.h>
+#include <Leviathan/Application.h>
+#include <Leviathan/Color32.h>
 
 #include <Leviathan/Utils/ConfigValue.h>
 

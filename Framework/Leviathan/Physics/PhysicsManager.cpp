@@ -7,7 +7,7 @@
 #include <box2d/b2_world.h>
 #include <box2d/b2_fixture.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/Physics/Collider.h>

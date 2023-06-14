@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Leviathan/Core/Game.h>
+#include <Leviathan/Game.h>
 
 using Leviathan::Game;
 

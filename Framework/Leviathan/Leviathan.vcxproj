@@ -19,21 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Callback.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\HashTable.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTree.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeData.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\QuadTreeNode.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\TObjectPtr.h" />
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameManagers.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObjectManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\GameObject.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.h" />
@@ -41,6 +36,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameObjects\TransformComponent.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\GameStateManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\GameStates\IGameState.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Object.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\BoxCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\CircleCollider.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Physics\Collider.h" />
@@ -53,6 +50,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugiconfig.hpp" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\pugixml.hpp" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Time.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\TObjectPtr.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ImageWidget.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\RectTransform.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\SliderWidget.h" />
@@ -64,6 +63,8 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\GameTimerManager.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Gizmos.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\WinFix.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collections\HashTable.cpp" />

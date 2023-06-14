@@ -10,15 +10,17 @@ namespace Leviathan
 	public:
 		TObjectPtr();
 		TObjectPtr(T* _data);
-		TObjectPtr(TObjectPtr& _other);
-		TObjectPtr(TObjectPtr&& _other);
+		TObjectPtr(const TObjectPtr& _other);
+		TObjectPtr(const TObjectPtr&& _other);
 
 		T* Get();
 		bool IsValid();
 
 	public:
-		T& operator->();
+		T* operator->();
 		T& operator*();
+		operator T*();
+		TObjectPtr<T> operator=(T* _other);
 
 		void* operator new(size_t _data);
 		void operator delete(void* _data);
@@ -43,14 +45,14 @@ namespace Leviathan
 	}
 
 	template<typename T>
-	inline TObjectPtr<T>::TObjectPtr(TObjectPtr& _other)
-		: m_owned(_other->m_owned), m_copied(true)
+	inline TObjectPtr<T>::TObjectPtr(const TObjectPtr& _other)
+		: m_owned(_other.m_owned), m_copied(true)
 	{
 	}
 
 	template<typename T>
-	inline TObjectPtr<T>::TObjectPtr(TObjectPtr&& _other)
-		: m_owned(_other->m_owned), m_copied(true)
+	inline TObjectPtr<T>::TObjectPtr(const TObjectPtr&& _other)
+		: m_owned(_other.m_owned), m_copied(true)
 	{
 	}
 
@@ -67,15 +69,29 @@ namespace Leviathan
 	}
 
 	template<typename T>
-	T& TObjectPtr<T>::operator->()
+	T* TObjectPtr<T>::operator->()
+	{
+		return m_owned;
+	}
+
+	template<typename T>
+	T& TObjectPtr<T>::operator*()
 	{
 		return *m_owned;
 	}
 
 	template<typename T>
-	T&  TObjectPtr<T>::operator*()
+	TObjectPtr<T>::operator T*()
 	{
-		return *m_owned;
+		return m_owned;
+	}
+
+	template<typename T>
+	inline TObjectPtr<T> TObjectPtr<T>::operator=(T* _other)
+	{
+		this->m_owned = _other;
+
+		return *this;
 	}
 
 	template<typename T>

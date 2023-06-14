@@ -1,6 +1,6 @@
 #include "GroundObject.h"
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <Leviathan/GameObjects/TextureComponent.h>
 

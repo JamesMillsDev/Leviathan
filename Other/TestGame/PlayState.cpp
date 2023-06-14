@@ -1,6 +1,6 @@
 #include "PlayState.h"
 
-#include <Leviathan/Core/GameManagers.h>
+#include <Leviathan/GameManagers.h>
 
 #include <Leviathan/Physics/Rigidbody.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>

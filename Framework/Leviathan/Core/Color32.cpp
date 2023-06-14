@@ -1,4 +1,4 @@
-#include <Leviathan/Core/Color32.h>
+#include <Leviathan/Color32.h>
 
 namespace Leviathan
 {

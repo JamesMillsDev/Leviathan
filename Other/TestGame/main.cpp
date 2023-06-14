@@ -1,4 +1,4 @@
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 #include "TestGame.h"
 
 using Leviathan::Application;

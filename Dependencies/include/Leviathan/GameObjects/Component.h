@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Leviathan/Core/Object.h>
+#include <Leviathan/Object.h>
+#include <Leviathan/TObjectPtr.h>
 
 namespace Leviathan
 {
@@ -11,12 +12,12 @@ namespace Leviathan
 		const bool& IsEnabled() const { return m_enabled; }
 		virtual void SetEnabled(const bool _enabled) { m_enabled = _enabled; }
 
-		const class GameObject* GetOwner() const { return m_owner; }
+		const TObjectPtr<class GameObject> GetOwner() const { return m_owner; }
 
 	protected:
 		friend class GameObject;
 
-		class GameObject* m_owner;
+		TObjectPtr<class GameObject> m_owner;
 
 		bool m_enabled;
 

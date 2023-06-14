@@ -17,7 +17,7 @@
 #	define PUGIXML_VERSION 1130 // 1.13
 #endif
 
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Leviathan.h>
 
 // Include user configuration file (this can define various configuration macros)
 #include "pugiconfig.hpp"

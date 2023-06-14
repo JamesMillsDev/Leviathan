@@ -1,6 +1,6 @@
-#include <Leviathan/Core/Window.h>
+#include <Leviathan/Window.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <Leviathan/Utils/Config.h>
 #include <Leviathan/Utils/ConfigValue.h>

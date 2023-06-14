@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Leviathan/Core/Leviathan.h>
-#include <Leviathan/Core/Object.h>
+#include <Leviathan/Leviathan.h>
+#include <Leviathan/Object.h>
 
 #include <Leviathan/GameObjects/Component.h>
 #include <Leviathan/GameObjects/TransformComponent.h>
@@ -31,7 +31,7 @@ namespace Leviathan
 		GameObject(GameObject&) = delete;
 		DLL ~GameObject();
 
-		DLL TransformComponent* Transform() const;
+		DLL TObjectPtr<TransformComponent> Transform() const;
 
 		DLL void SetName(string _name);
 		DLL const string& GetName() const;
