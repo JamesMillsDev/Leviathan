@@ -1,4 +1,4 @@
-#include <Leviathan/Core/GameManagers.h>
+#include <Leviathan/GameManagers.h>
 
 #include <Leviathan/GameObjects/GameObjectManager.h>
 #include <Leviathan/GameStates/GameStateManager.h>
@@ -7,10 +7,10 @@
 
 namespace Leviathan
 {
-	GameStateManager* GameManagers::m_stateManager = nullptr;
-	GameObjectManager* GameManagers::m_objectManager = nullptr;
-	GameTimerManager* GameManagers::m_timerManager = nullptr;
-	UIManager* GameManagers::m_uiManager = nullptr;
+	TObjectPtr<GameStateManager> GameManagers::m_stateManager = nullptr;
+	TObjectPtr<GameObjectManager> GameManagers::m_objectManager = nullptr;
+	TObjectPtr<GameTimerManager> GameManagers::m_timerManager = nullptr;
+	TObjectPtr<UIManager> GameManagers::m_uiManager = nullptr;
 
 	GameManagers::GameManagers()
 	{

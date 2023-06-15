@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Leviathan.h>
 
-#include <Leviathan/Core/Object.h>
-#include <Leviathan/Core/GameManagers.h>
+#include <Leviathan/Object.h>
+#include <Leviathan/GameManagers.h>
 
 #include <Leviathan/GameObjects/GameObject.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>

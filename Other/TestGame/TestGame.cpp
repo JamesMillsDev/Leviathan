@@ -1,6 +1,6 @@
 #include "TestGame.h"
 
-#include <Leviathan/Core/GameManagers.h>
+#include <Leviathan/GameManagers.h>
 #include <Leviathan/GameStates/GameStateManager.h>
 #include <Leviathan/GameObjects/GameObjectManager.h>
 

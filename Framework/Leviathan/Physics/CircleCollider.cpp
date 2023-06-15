@@ -41,7 +41,7 @@ namespace Leviathan
 
     void CircleCollider::OnDrawGizmos()
     {
-        const TransformComponent* transform = m_owner->Transform();
+        TObjectPtr<TransformComponent> transform = m_owner->Transform();
 
         Gizmos::DrawWireCircle(transform->AnchoredPosition() + m_center, m_radius);
     }

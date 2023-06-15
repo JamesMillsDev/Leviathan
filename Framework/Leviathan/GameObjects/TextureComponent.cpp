@@ -46,7 +46,7 @@ namespace Leviathan
     {
         if (m_texture != nullptr)
         {
-            TransformComponent* transform = m_owner->Transform();
+            TObjectPtr<TransformComponent> transform = m_owner->Transform();
             if (transform != nullptr)
             {
                 const Rectangle src

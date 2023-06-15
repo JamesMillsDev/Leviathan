@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Leviathan/Core/Game.h>
+#include <Leviathan/Game.h>
 
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Leviathan.h>
 #include <Leviathan/Utils/Config.h>
 
 #include <map>

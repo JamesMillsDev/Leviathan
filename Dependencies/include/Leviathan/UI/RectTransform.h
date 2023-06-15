@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Leviathan.h>
 
 #include <raylib/raylib.h>
 #include <glm/vec2.hpp>

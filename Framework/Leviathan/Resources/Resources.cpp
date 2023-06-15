@@ -1,6 +1,6 @@
 #include <Leviathan/Resources/Resources.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <filesystem>
 #include <iostream>

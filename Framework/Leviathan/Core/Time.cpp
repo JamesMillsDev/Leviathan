@@ -1,4 +1,4 @@
-#include <Leviathan/Core/Time.h>
+#include <Leviathan/Time.h>
 
 #include <raylib/raylib.h>
 

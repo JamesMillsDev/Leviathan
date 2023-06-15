@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Leviathan/Core/Color32.h>
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Color32.h>
+#include <Leviathan/Leviathan.h>
 
 #include <glm/vec2.hpp>
 

@@ -120,21 +120,6 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\Singleton.h">
       <Filter>Include\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Application.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Color32.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Game.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Leviathan.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Window.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h">
       <Filter>Include\Third Party</Filter>
     </ClInclude>
@@ -149,18 +134,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Utils\GameTimerManager.h">
       <Filter>Include\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Time.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Callback.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\GameManagers.h">
-      <Filter>Include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\Object.h">
-      <Filter>Include\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Collections\DoubleLinkedList.h">
       <Filter>Include\Collections</Filter>
@@ -195,11 +168,38 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\VerticalLayout.h">
       <Filter>Include\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\TObjectPtr.h">
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Application.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ButtonWidget.h">
-      <Filter>Include\UI</Filter>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Callback.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Color32.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Game.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\GameManagers.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Leviathan.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Object.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Time.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\TObjectPtr.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\Window.h">
+      <Filter>Include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\WinFix.h">
+      <Filter>Include\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,15 +242,6 @@
     <ClCompile Include="Physics\CircleCollider.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Application.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Color32.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Window.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Utils\Config.cpp">
       <Filter>Source\Utils</Filter>
     </ClCompile>
@@ -262,12 +253,6 @@
     </ClCompile>
     <ClCompile Include="Utils\GameTimerManager.cpp">
       <Filter>Source\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Time.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\GameManagers.cpp">
-      <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="Collections\HashTable.cpp">
       <Filter>Source\Collections</Filter>
@@ -290,11 +275,23 @@
     <ClCompile Include="UI\VerticalLayout.cpp">
       <Filter>Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Application.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Color32.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameManagers.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
     <ClCompile Include="Core\Object.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="UI\ButtonWidget.cpp">
-      <Filter>Source\UI</Filter>
+    <ClCompile Include="Core\Time.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Window.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

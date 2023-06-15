@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Leviathan/Core/Leviathan.h>
+#include <Leviathan/Leviathan.h>
+#include <Leviathan/TObjectPtr.h>
 
 namespace Leviathan
 {
@@ -10,10 +11,10 @@ namespace Leviathan
 		friend class Application;
 		friend class Object;
 
-		DLL static class GameStateManager* m_stateManager;
-		DLL static class GameObjectManager* m_objectManager;
-		DLL static class GameTimerManager* m_timerManager;
-		DLL static class UIManager* m_uiManager;
+		DLL static TObjectPtr<class GameStateManager> m_stateManager;
+		DLL static TObjectPtr<class GameObjectManager> m_objectManager;
+		DLL static TObjectPtr<class GameTimerManager> m_timerManager;
+		DLL static TObjectPtr<class UIManager> m_uiManager;
 
 	private:
 		DLL GameManagers();

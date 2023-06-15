@@ -4,8 +4,8 @@
 #define WINDOW_CATEGORY "Window"
 #define DEBUG_CATEGORY "Debug"
 
-#include <Leviathan/Core/Leviathan.h>
-#include <Leviathan/Core/Callback.h>
+#include <Leviathan/Leviathan.h>
+#include <Leviathan/Callback.h>
 
 #include <functional>
 #include <map>

@@ -1,6 +1,6 @@
 #include <Leviathan/Utils/Gizmos.h>
 
-#include <Leviathan/Core/Application.h>
+#include <Leviathan/Application.h>
 
 #include <Leviathan/Utils/Config.h>
 #include <Leviathan/Utils/ConfigValue.h>

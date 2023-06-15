@@ -21,7 +21,7 @@ namespace Leviathan
         }
     }
 
-    DLL TransformComponent* GameObject::Transform() const
+    TObjectPtr<TransformComponent> GameObject::Transform() const
     {
         return m_transform;
     }
