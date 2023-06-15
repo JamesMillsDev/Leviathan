@@ -19,6 +19,8 @@ public:
     void Unload() override;
 
     void DelayTest();
+    void ClickTest();
+    void ClickTest2();
 
     TimerHandle m_timerHandle;
 

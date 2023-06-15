@@ -198,6 +198,9 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Core\TObjectPtr.h">
       <Filter>Include\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ButtonWidget.h">
+      <Filter>Include\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\GameObjectManager.cpp">
@@ -289,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="Core\Object.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ButtonWidget.cpp">
+      <Filter>Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

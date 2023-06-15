@@ -8,6 +8,7 @@
 #include <Leviathan/UI/UIManager.h>
 #include <Leviathan/UI/VerticalLayout.h>
 #include <Leviathan/UI/SliderWidget.h>
+#include <Leviathan/UI/ButtonWidget.h>
 
 #include <raylib/raylib.h>
 #include <iostream>
@@ -20,9 +21,15 @@ GroundObject* ground = nullptr;
 
 using Leviathan::SliderWidget;
 using Leviathan::VerticalLayout;
+using Leviathan::ButtonWidget;
 using Leviathan::Rigidbody;
 using Leviathan::ForceMode;
 using Leviathan::Constraints;
+using Leviathan::Callback;
+
+ButtonWidget* widgetd = nullptr;
+list<Callback*>::iterator pos;
+list<Callback*>::iterator pos1;
 
 PlayState::PlayState() : IGameState("PLAY")
 {
@@ -42,19 +49,26 @@ void PlayState::Load()
 	SliderWidget* widget = new SliderWidget();
 	SliderWidget* widgetb = new SliderWidget();
 	SliderWidget* widgetc = new SliderWidget();
+	widgetd = new ButtonWidget();
+	widgetd->label = "hello child";
+
+	pos = widgetd->AddListener(&PlayState::ClickTest, this);
+	pos1 = widgetd->AddListener(&PlayState::ClickTest2, this);
 	
 	VerticalLayout* layout = new VerticalLayout();
 	layout->Transform()->anchorMin = { .25f, .25f };
 	layout->Transform()->anchorMax = { .75f, .75f };
-	layout->spacing = .25f;
+	//layout->spacing = .15f;
 
 	layout->AddElement(widget);
 	layout->AddElement(widgetb);
 	layout->AddElement(widgetc);
+	layout->AddElement(widgetd);
 
 	GetUIManager()->AddWidget(widget);
 	GetUIManager()->AddWidget(widgetb);
 	GetUIManager()->AddWidget(widgetc);
+	GetUIManager()->AddWidget(widgetd);
 	GetUIManager()->AddWidget(layout);
 }
 
@@ -94,4 +108,16 @@ void PlayState::Unload()
 void PlayState::DelayTest()
 {
 	std::cout << "Delay call" << std::endl;
+}
+
+void PlayState::ClickTest()
+{
+	std::cout << "On Click!" << std::endl;
+	widgetd->RemoveListener(pos);
+}
+
+void PlayState::ClickTest2()
+{
+	std::cout << "On Click! 2" << std::endl;
+	widgetd->RemoveListener(pos1);
 }
