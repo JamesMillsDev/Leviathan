@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Leviathan/Core/Callback.h>
+#include <Leviathan/Callback.h>
 #include <Leviathan/UI/UIWidget.h>
 
 #include <string>

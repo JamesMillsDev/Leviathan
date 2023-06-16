@@ -88,6 +88,7 @@
     <ClCompile Include="Resources\Resources.cpp" />
     <ClCompile Include="Resources\TextureResource.cpp" />
     <ClCompile Include="Third Party\pugixml.cpp" />
+    <ClCompile Include="UI\ButtonWidget.cpp" />
     <ClCompile Include="UI\ImageWidget.cpp" />
     <ClCompile Include="UI\RectTransform.cpp" />
     <ClCompile Include="UI\SliderWidget.cpp" />

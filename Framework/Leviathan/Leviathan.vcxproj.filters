@@ -293,6 +293,9 @@
     <ClCompile Include="Core\Window.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="UI\ButtonWidget.cpp">
+      <Filter>Source\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
