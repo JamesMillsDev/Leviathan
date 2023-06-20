@@ -34,6 +34,8 @@ namespace Leviathan
 		DLL static void AddConfigReloadCallback(void(Config::* _callback)(), Config* _config);
 		DLL static void GetWindowSize(int& _width, int& _height);
 
+		DLL static void Quit();
+
 	private:
 		DLL static Application* m_instance;
 
@@ -43,6 +45,7 @@ namespace Leviathan
 
 		Game* m_game;
 		const char* m_applicationDir;
+		bool m_running;
 
 		int m_configReloadKey;
 		class GameManagers* m_managers;

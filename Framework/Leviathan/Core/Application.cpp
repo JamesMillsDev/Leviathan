@@ -41,9 +41,14 @@ namespace Leviathan
         _height = m_instance->m_window->m_height;
     }
 
+    void Application::Quit()
+    {
+        m_instance->m_running = false;
+    }
+
     Application::Application(Game* _game)
         : m_game(_game), m_window(nullptr), m_applicationDir(nullptr),
-        m_configReloadKey(0), m_managers(nullptr)
+        m_configReloadKey(0), m_managers(nullptr), m_running(true)
     {
     }
 
@@ -104,7 +109,7 @@ namespace Leviathan
     {
         Load();
 
-        while (!WindowShouldClose())
+        while (m_running)
         {
             Time::Tick();
             Gizmos::m_instance->Tick();
@@ -128,6 +133,9 @@ namespace Leviathan
                 m_managers->DrawGizmos();
 
             m_window->EndFrame();
+
+            if (WindowShouldClose())
+                m_running = false;
         }
 
         Unload();

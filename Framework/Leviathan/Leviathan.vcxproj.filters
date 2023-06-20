@@ -296,6 +296,7 @@
     <ClCompile Include="UI\ButtonWidget.cpp">
       <Filter>Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

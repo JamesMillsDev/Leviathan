@@ -12,7 +12,7 @@ namespace Leviathan
 		const bool& IsEnabled() const { return m_enabled; }
 		virtual void SetEnabled(const bool _enabled) { m_enabled = _enabled; }
 
-		const TObjectPtr<class GameObject> GetOwner() const { return m_owner; }
+		const TObjectPtr<class GameObject> GetOwner() const;
 
 	protected:
 		friend class GameObject;

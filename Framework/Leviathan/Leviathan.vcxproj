@@ -67,6 +67,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\WinFix.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Dependencies\include\Leviathan\GameObjects\Component.cpp" />
     <ClCompile Include="Collections\HashTable.cpp" />
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color32.cpp" />

@@ -16,6 +16,7 @@ namespace Leviathan
 
 		T* Get();
 		bool IsValid();
+		void SetCopied(bool _copied);
 
 	public:
 		T* operator->();
@@ -76,6 +77,12 @@ namespace Leviathan
 	inline bool TObjectPtr<T>::IsValid()
 	{
 		return m_owned != nullptr;
+	}
+
+	template<typename T>
+	inline void TObjectPtr<T>::SetCopied(bool _copied)
+	{
+		m_copied = _copied;
 	}
 
 	template<typename T>
