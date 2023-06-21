@@ -52,6 +52,7 @@
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Third Party\raygui.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\Time.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\TObjectPtr.h" />
+    <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ButtonWidget.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\ImageWidget.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\RectTransform.h" />
     <ClInclude Include="..\..\Dependencies\include\Leviathan\UI\SliderWidget.h" />

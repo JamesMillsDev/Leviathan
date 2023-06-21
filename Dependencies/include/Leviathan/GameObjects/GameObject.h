@@ -31,7 +31,7 @@ namespace Leviathan
 		GameObject(GameObject&) = delete;
 		DLL ~GameObject();
 
-		DLL TObjectPtr<TransformComponent> Transform() const;
+		DLL TObjectPtr<TransformComponent> Transform();
 
 		DLL void SetName(string _name);
 		DLL const string& GetName() const;

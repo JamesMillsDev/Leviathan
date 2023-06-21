@@ -43,6 +43,6 @@ namespace Leviathan
     {
         TObjectPtr<TransformComponent> transform = m_owner->Transform();
 
-        Gizmos::DrawWireCircle(transform->AnchoredPosition() + m_center, m_radius);
+        Gizmos::DrawWireCircle(transform->Position() + m_center, m_radius);
     }
 }

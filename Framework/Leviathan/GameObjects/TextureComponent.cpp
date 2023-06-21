@@ -59,8 +59,8 @@ namespace Leviathan
 
                 const Rectangle dst
                 {
-                    transform->AnchoredPosition().x,
-                    transform->AnchoredPosition().y,
+                    transform->Position().x,
+                    transform->Position().y,
                     transform->Scale().x,
                     transform->Scale().y
                 };

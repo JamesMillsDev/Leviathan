@@ -38,7 +38,7 @@ namespace Leviathan
 		DLL Config(const string& _filePath);
 		DLL ~Config();
 
-		class ConfigValue* GetValue(string _group, string _id);
+		DLL class ConfigValue* GetValue(string _group, string _id);
 
 		template<typename T>
 		void ListenForReload(void(T::* _callback)(Config*), T* _owner);

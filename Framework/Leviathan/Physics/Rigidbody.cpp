@@ -180,7 +180,7 @@ namespace Leviathan
 	{
 		if (m_bodyDef == nullptr)
 			m_bodyDef = new b2BodyDef();
-		vec2 pos = m_owner->Transform()->AnchoredPosition();
+		vec2 pos = m_owner->Transform()->Position();
 		float rot = m_owner->Transform()->Rotation();
 
 		m_bodyDef->position.Set(pos.x, pos.y);
@@ -204,7 +204,7 @@ namespace Leviathan
 
 		b2Vec2 pos = m_body->GetPosition();
 		float rotation = m_body->GetAngle() * RAD2DEG;
-		m_owner->Transform()->SetAnchoredPosition(pos.x, pos.y);
+		m_owner->Transform()->SetPosition(pos.x, pos.y);
 		m_owner->Transform()->SetRotation(rotation);
 
 		TryConstrainVelocity();

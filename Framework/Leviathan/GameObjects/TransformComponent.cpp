@@ -86,14 +86,14 @@ namespace Leviathan
         m_transform = m_transform * toMat4(angleAxis(_amount * DEG2RAD, vec3(0, 0, 1.f)));
     }
 
-    void TransformComponent::AnchoredPosition(float& _x, float& _y) const
+    void TransformComponent::Position(float& _x, float& _y) const
     {
-        const vec2 pos = AnchoredPosition();
+        const vec2 pos = Position();
         _x = pos.x;
         _y = pos.y;
     }
 
-    vec2 TransformComponent::AnchoredPosition() const
+    vec2 TransformComponent::Position() const
     {
         vec3 scale;
         quat rot;
@@ -126,7 +126,7 @@ namespace Leviathan
         return trans;
     }
 
-    void TransformComponent::SetAnchoredPosition(const vec2& _newPosition)
+    void TransformComponent::SetPosition(const vec2& _newPosition)
     {
         vec3 scale;
         quat rot;
@@ -141,19 +141,19 @@ namespace Leviathan
             glm::scale(mat4(1.f), scale);
     }
 
-    void TransformComponent::SetAnchoredPosition(const float& _newX, const float& _newY)
+    void TransformComponent::SetPosition(const float& _newX, const float& _newY)
     {
-        SetAnchoredPosition({ _newX, _newY });
+        SetPosition({ _newX, _newY });
     }
 
-    void TransformComponent::UpdateAnchoredPosition(const vec2& _amount)
+    void TransformComponent::UpdatePosition(const vec2& _amount)
     {
         m_transform = glm::translate(m_transform, vec3(_amount, 0.f));
     }
 
-    void TransformComponent::UpdateAnchoredPosition(const float& _x, const float& _y)
+    void TransformComponent::UpdatePosition(const float& _x, const float& _y)
     {
-        UpdateAnchoredPosition({ _x, _y });
+        UpdatePosition({ _x, _y });
     }
 
     void TransformComponent::Scale(float& _x, float& _y) const
@@ -228,9 +228,14 @@ namespace Leviathan
 
     void TransformComponent::TRS(const vec2& _pos, const float& _angle, const vec2& _scale)
     {
-        SetAnchoredPosition(_pos);
+        SetPosition(_pos);
         SetScale(_scale);
         SetRotation(_angle);
+    }
+
+    mat4 TransformComponent::Matrix()
+    {
+        return GlobalTransform();
     }
 
     mat4 TransformComponent::GlobalTransform() const

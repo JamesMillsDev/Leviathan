@@ -4,11 +4,11 @@
 
 namespace Leviathan
 {
-	const TObjectPtr<GameObject> Component::GetOwner() const
+	TObjectPtr<GameObject> Component::GetOwner()
 	{
 		TObjectPtr<GameObject> ptr = TObjectPtr<GameObject>(m_owner);
 		ptr.SetCopied(true);
 
-		return ptr;
+		return TObjectPtr<GameObject>(ptr);
 	}
 }

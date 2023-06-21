@@ -21,9 +21,9 @@ namespace Leviathan
         }
     }
 
-    TObjectPtr<TransformComponent> GameObject::Transform() const
+    TObjectPtr<TransformComponent> GameObject::Transform()
     {
-        return m_transform;
+        return TObjectPtr<TransformComponent>(m_transform);
     }
 
     void GameObject::SetName(string _name)
